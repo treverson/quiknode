@@ -1,0 +1,746 @@
+<div class="message-modal">
+  <div class="w-container">
+    <div class="w-row">
+      <div class="w-col w-col-1">
+        <p class="icon large centered"></p>
+      </div>
+      <div class="w-col w-col-11">
+        <h4 class="modal-msg-text">Cannot delete instance: Access denied</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="particles-back" class="particles-back"></div>
+<div class="w-form">
+  <form id="email-form" name="email-form" data-name="Email Form">
+    <app-header></app-header>
+    <div class="modal-overlay">
+      <div id="my_account" class="modal-content w-clearfix">
+        <a href="#" title="Delete" class="button btn-round btn-m float-right close-btn w-button"></a>
+        <h2 class="modal-header">My account</h2>
+        <div class="w-container">
+          <div class="w-row">
+            <div class="w-col w-col-6">
+              <div class="icon-input w-row">
+                <div class="w-col w-col-1">
+                  <div class="icon icon-lg"></div>
+                </div>
+                <div class="w-col w-col-11">
+                  <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Newman"  required="">
+                </div>
+              </div>
+              <div class="icon-input w-row">
+                <div class="w-col w-col-1">
+                  <div class="icon icon-lg mt10"></div>
+                </div>
+                <div class="w-col w-col-11">
+                  <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="mail@usps.com" required="">
+                </div>
+              </div>
+            </div>
+            <div class="w-col w-col-6">
+              <a href="#" class="button icon-btn w-inline-block">
+                <div class="w-row">
+                  <div class="w-col w-col-3">
+                    <div class="icon"></div>
+                  </div>
+                  <div class="w-col w-col-9">
+                    <div class="btn-label">Reset password</div>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="button icon-btn ml-10 w-inline-block">
+                <div class="w-row">
+                  <div class="w-col w-col-3">
+                    <div class="icon"></div>
+                  </div>
+                  <div class="w-col w-col-9">
+                    <div class="btn-label">Generate OTP</div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <h4 class="modal-header">API keys</h4>
+        <div class="w-container">
+          <div class="w-row">
+            <div class="w-col w-col-4">
+              <h6 class="modal-header">key</h6>
+            </div>
+            <div class="w-col w-col-4">
+              <h6 class="modal-header">secret</h6>
+            </div>
+            <div class="w-col w-col-4">
+              <h6 class="modal-header">description</h6>
+            </div>
+          </div>
+          <div class="w-row">
+            <div class="w-col w-col-4">
+              <input type="text" class="w-input" maxlength="256" name="field-5" data-name="Field 5" placeholder="Example Text"  required="">
+            </div>
+            <div class="w-col w-col-4">
+              <input type="text" class="w-input" maxlength="256" name="field-5" data-name="Field 5" placeholder="Example Text"  required="">
+            </div>
+            <div class="w-col w-col-3">
+              <textarea name="field-6" placeholder="Example Text" maxlength="5000" class="w-input"></textarea>
+            </div>
+            <div class="w-col w-col-1">
+              <a href="#" title="Delete" class="button btn-round btn-m flush-top ml-10 float-right w-button"></a>
+            </div>
+          </div>
+          <div class="w-row">
+            <div class="w-col w-col-4">
+              <h6 class="text">04cf5e00-d8eb-4307-99a1-c81991bb7c93</h6>
+            </div>
+            <div class="w-col w-col-4">
+              <input type="text" class="w-input" maxlength="256" name="field-5" data-name="Field 5" placeholder="NJn6Tatlh0uMa2bfRxXxhTZkBV2ZcF3Ew-84OqJLpfc3ynNFSwsu6bP04XRbzaT3bTkNkhROkz8I38ITyBFzLIV" id="field-5" required="">
+            </div>
+            <div class="w-col w-col-3">
+              <textarea id="field-6" name="field-6" maxlength="5000" placeholder="Team API access token" class="w-input"></textarea>
+            </div>
+            <div class="w-col w-col-1">
+              <a href="#" title="Delete" class="button btn-round btn-m flush-top ml-10 float-right w-button"></a>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="button icon-btn float-right mt10 w-inline-block">
+          <div class="w-row">
+            <div class="w-col w-col-3">
+              <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+              <div class="btn-label">SAVE </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div id="suspend_user" class="modal-content w-clearfix">
+        <a href="#" title="Delete" class="button btn-round btn-m float-right close-btn w-button"></a>
+        <h2 class="modal-header">Suspend user?</h2>
+        <div class="w-container">
+          <div class="w-row">
+            <div class="w-col w-col-1">
+              <div class="icon icon-xl"></div>
+            </div>
+            <div class="w-col w-col-11">
+              <p>This action will suspend ALL of this user&#x27;s credentials until re-activated. <br>Are you sure you want to continue?</p>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="button icon-btn float-right mt10 w-inline-block">
+          <div class="w-row">
+            <div class="w-col w-col-3">
+              <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+              <div class="btn-label">CONTINUE</div>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="button icon-btn float-right mt10 mr10 w-inline-block">
+          <div class="w-row">
+            <div class="w-col w-col-3">
+              <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+              <div class="btn-label">CANCEL</div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div id="delete_user" class="modal-content w-clearfix">
+        <a href="#" title="Delete" class="button btn-round btn-m float-right close-btn w-button"></a>
+        <h2 class="modal-header">delete user?</h2>
+        <div class="w-container">
+          <div class="w-row">
+            <div class="w-col w-col-1">
+              <div class="icon icon-xl"></div>
+            </div>
+            <div class="w-col w-col-11">
+              <p>This action will permanently delete this user. This cannot be undone. <br>Are you sure you wish to continue?</p>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="button icon-btn float-right mt10 w-inline-block">
+          <div class="w-row">
+            <div class="w-col w-col-3">
+              <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+              <div class="btn-label">CONTINUE</div>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="button icon-btn float-right mt10 mr10 w-inline-block">
+          <div class="w-row">
+            <div class="w-col w-col-3">
+              <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+              <div class="btn-label">CANCEL</div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div id="suspend_instance" class="modal-content w-clearfix">
+        <a href="#" title="Delete" class="button btn-round btn-m float-right close-btn w-button"></a>
+        <h2 class="modal-header">suspend instance?</h2>
+        <div class="w-container">
+          <div class="w-row">
+            <div class="w-col w-col-1">
+              <div class="icon icon-xl"></div>
+            </div>
+            <div class="w-col w-col-11">
+              <p>This action will make this instance unavailable for all users. <br>All configurations settings will be saved.<br>Are you sure you wish to continue?</p>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="button icon-btn float-right mt10 w-inline-block">
+          <div class="w-row">
+            <div class="w-col w-col-3">
+              <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+              <div class="btn-label">CONTINUE</div>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="button icon-btn float-right mt10 mr10 w-inline-block">
+          <div class="w-row">
+            <div class="w-col w-col-3">
+              <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+              <div class="btn-label">CANCEL</div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div id="add_user" class="modal-content w-clearfix">
+        <a href="#" title="Delete" class="button btn-round btn-m float-right close-btn w-button"></a>
+        <h2 class="modal-header">add user</h2>
+        <div class="w-container">
+          <div class="btm10 w-row">
+            <div class="w-col w-col-6">
+              <div class="icon-input w-row">
+                <div class="w-col w-col-1">
+                  <div class="icon icon-lg"></div>
+                </div>
+                <div class="w-col w-col-11">
+                  <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Newman" required="">
+                </div>
+              </div>
+              <div class="icon-input w-row">
+                <div class="w-col w-col-1">
+                  <div class="icon icon-lg mt10"></div>
+                </div>
+                <div class="w-col w-col-11">
+                  <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="mail@usps.com" required="">
+                </div>
+              </div>
+            </div>
+            <div class="w-clearfix w-col w-col-6">
+              <div class="icon-input w-row">
+                <div class="w-col w-col-1">
+                  <div class="icon icon-lg mt10"></div>
+                </div>
+                <div class="w-col w-col-11">
+                  <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Password" required="">
+                </div>
+              </div>
+              <div class="icon-input w-row">
+                <div class="w-col w-col-1">
+                  <div class="icon icon-lg mt10"></div>
+                </div>
+                <div class="w-col w-col-11">
+                  <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Repeat password" required="">
+                </div>
+              </div>
+              <a href="#" class="button icon-btn float-left w-inline-block">
+                <div class="w-row">
+                  <div class="w-col w-col-3">
+                    <div class="icon"></div>
+                  </div>
+                  <div class="w-col w-col-9">
+                    <div class="btn-label">Reset password</div>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="button icon-btn w-inline-block">
+                <div class="w-row">
+                  <div class="w-col w-col-3">
+                    <div class="icon"></div>
+                  </div>
+                  <div class="w-col w-col-9">
+                    <div class="btn-label">Generate OTP</div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="w-row">
+            <div class="w-col w-col-6">
+              <h4 class="modal-header">user&#x27;s instances</h4>
+              <select name="field-3" class="w-select">
+                <option value="">Select one...</option>
+                <option value="First">First Choice</option>
+                <option value="Second">Second Choice</option>
+                <option value="Third">Third Choice</option>
+              </select>
+            </div>
+            <div class="w-col w-col-6">
+              <h4 class="modal-header">permissions</h4>
+              <div class="checkbox w-checkbox">
+                <input type="checkbox" name="checkbox-8" data-name="Checkbox 8" class="checkbox-field w-checkbox-input">
+                <label class="checkbox-label w-form-label">add users</label>
+              </div>
+              <div class="checkbox w-checkbox">
+                <input type="checkbox" name="checkbox-7" data-name="Checkbox 7" class="checkbox-field w-checkbox-input">
+                <label class="checkbox-label w-form-label">delete instances</label>
+              </div>
+              <div class="checkbox w-checkbox">
+                <input type="checkbox" name="checkbox-6" data-name="Checkbox 6" class="checkbox-field w-checkbox-input">
+                <label class="checkbox-label w-form-label">create instances</label>
+              </div>
+              <div class="checkbox w-checkbox">
+                <input type="checkbox" name="checkbox-5" data-name="Checkbox 5" class="checkbox-field w-checkbox-input">
+                <label class="checkbox-label w-form-label">delete users</label>
+              </div>
+              <div class="checkbox w-checkbox">
+                <input type="checkbox" name="checkbox-4" data-name="Checkbox 4" class="checkbox-field w-checkbox-input">
+                <label class="checkbox-label w-form-label">list users</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="button icon-btn float-right w-inline-block">
+          <div class="w-row">
+            <div class="w-col w-col-3">
+              <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+              <div class="btn-label">SAVE </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div id="edit_user" class="modal-content w-clearfix">
+        <a href="#" title="Delete" class="button btn-round btn-m float-right close-btn w-button"></a>
+        <h2 class="modal-header">edit user</h2>
+        <div class="w-container">
+          <div class="btm10 w-row">
+            <div class="w-col w-col-6">
+              <div class="icon-input w-row">
+                <div class="w-col w-col-1">
+                  <div class="icon icon-lg"></div>
+                </div>
+                <div class="w-col w-col-11">
+                  <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Newman" required="">
+                </div>
+              </div>
+              <div class="icon-input w-row">
+                <div class="w-col w-col-1">
+                  <div class="icon icon-lg mt10"></div>
+                </div>
+                <div class="w-col w-col-11">
+                  <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="mail@usps.com" required="">
+                </div>
+              </div>
+            </div>
+            <div class="w-clearfix w-col w-col-6">
+              <div class="icon-input w-row">
+                <div class="w-col w-col-1">
+                  <div class="icon icon-lg mt10"></div>
+                </div>
+                <div class="w-col w-col-11">
+                  <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Password" required="">
+                </div>
+              </div>
+              <div class="icon-input w-row">
+                <div class="w-col w-col-1">
+                  <div class="icon icon-lg mt10"></div>
+                </div>
+                <div class="w-col w-col-11">
+                  <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Repeat password" required="">
+                </div>
+              </div>
+              <a href="#" class="button icon-btn float-left w-inline-block">
+                <div class="w-row">
+                  <div class="w-col w-col-3">
+                    <div class="icon"></div>
+                  </div>
+                  <div class="w-col w-col-9">
+                    <div class="btn-label">Reset password</div>
+                  </div>
+                </div>
+              </a>
+              <a href="#" class="button icon-btn w-inline-block">
+                <div class="w-row">
+                  <div class="w-col w-col-3">
+                    <div class="icon"></div>
+                  </div>
+                  <div class="w-col w-col-9">
+                    <div class="btn-label">Generate OTP</div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="w-row">
+            <div class="w-col w-col-6">
+              <h4 class="modal-header">user&#x27;s instances</h4>
+              <select name="field-3" class="w-select">
+                <option value="">Select one...</option>
+                <option value="First">First Choice</option>
+                <option value="Second">Second Choice</option>
+                <option value="Third">Third Choice</option>
+              </select>
+            </div>
+            <div class="w-col w-col-6">
+              <h4 class="modal-header">permissions</h4>
+              <div class="checkbox w-checkbox">
+                <input type="checkbox" name="checkbox-8" data-name="Checkbox 8" class="checkbox-field w-checkbox-input">
+                <label class="checkbox-label w-form-label">add users</label>
+              </div>
+              <div class="checkbox w-checkbox">
+                <input type="checkbox" name="checkbox-7" data-name="Checkbox 7" class="checkbox-field w-checkbox-input">
+                <label class="checkbox-label w-form-label">delete instances</label>
+              </div>
+              <div class="checkbox w-checkbox">
+                <input type="checkbox" name="checkbox-6" data-name="Checkbox 6" class="checkbox-field w-checkbox-input">
+                <label class="checkbox-label w-form-label">create instances</label>
+              </div>
+              <div class="checkbox w-checkbox">
+                <input type="checkbox" name="checkbox-5" data-name="Checkbox 5" class="checkbox-field w-checkbox-input">
+                <label class="checkbox-label w-form-label">delete users</label>
+              </div>
+              <div class="checkbox w-checkbox">
+                <input type="checkbox" name="checkbox-4" data-name="Checkbox 4" class="checkbox-field w-checkbox-input">
+                <label class="checkbox-label w-form-label">list users</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="button icon-btn float-right w-inline-block">
+          <div class="w-row">
+            <div class="w-col w-col-3">
+              <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+              <div class="btn-label">SAVE </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div id="add_instance" class="modal-content w-clearfix">
+        <a href="#" title="Delete" class="button btn-round btn-m float-right close-btn w-button"></a>
+        <h2 class="modal-header">create instance</h2>
+        <div class="w-container">
+          <div class="btm10 w-row">
+            <div class="w-col w-col-6">
+              <h4 class="modal-header">info</h4>
+              <div class="icon-input w-row">
+                <div class="w-col w-col-1">
+                  <div class="icon icon-lg mt10"></div>
+                </div>
+                <div class="w-col w-col-11">
+                  <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Name" required="">
+                </div>
+              </div>
+              <div class="icon-input w-row">
+                <div class="w-col w-col-1">
+                  <div class="icon icon-lg"></div>
+                </div>
+                <div class="w-col w-col-11">
+                  <textarea id="field-4" name="field-4" placeholder="Description" maxlength="5000" class="w-input"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="w-col w-col-6">
+              <h4 class="modal-header">Validators</h4>
+              <select id="field-3" name="field-3" class="w-select">
+                <option value="">Add New...</option>
+                <option value="First">First Choice</option>
+                <option value="Second">Second Choice</option>
+                <option value="Third">Third Choice</option>
+              </select>
+              <div class="input-block">
+                <label class="name-label">http request referer</label>
+                <div class="icon-input w-row">
+                  <div class="w-col w-col-1">
+                    <div class="icon icon-lg mt10"></div>
+                  </div>
+                  <div class="w-col w-col-9">
+                    <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Referrer" required="">
+                  </div>
+                  <div class="w-col w-col-2">
+                    <a href="#" title="Delete" class="button btn-round btn-m flush-top ml-10 float-right w-button"></a>
+                  </div>
+                </div>
+              </div>
+              <div class="input-block">
+                <label class="name-label">http token validation</label>
+                <div class="icon-input w-row">
+                  <div class="w-col w-col-1">
+                    <div class="icon icon-lg mt10"></div>
+                  </div>
+                  <div class="w-col w-col-9">
+                    <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Token" required="">
+                  </div>
+                  <div class="w-col w-col-2">
+                    <a href="#" title="Delete" class="button btn-round btn-m flush-top ml-10 float-right w-button"></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="button icon-btn float-right w-inline-block">
+          <div class="w-row">
+            <div class="w-col w-col-3">
+              <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+              <div class="btn-label">LAUNCH!</div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div id="edit_instance" class="modal-content w-clearfix">
+        <a href="#" title="Delete" class="button btn-round btn-m float-right close-btn w-button"></a>
+        <h2 class="modal-header">edit instance</h2>
+        <div class="w-container">
+          <div class="btm10 w-row">
+            <div class="w-col w-col-6">
+              <h4 class="modal-header">info</h4>
+              <div class="icon-input w-row">
+                <div class="w-col w-col-1">
+                  <div class="icon icon-lg mt10"></div>
+                </div>
+                <div class="w-col w-col-11">
+                  <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Name" required="">
+                </div>
+              </div>
+              <div class="icon-input w-row">
+                <div class="w-col w-col-1">
+                  <div class="icon icon-lg"></div>
+                </div>
+                <div class="w-col w-col-11">
+                  <textarea name="field-4" placeholder="Description" maxlength="5000" class="w-input"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="w-col w-col-6">
+              <h4 class="modal-header">Validators</h4>
+              <select name="field-3" class="w-select">
+                <option value="">Add New...</option>
+                <option value="First">First Choice</option>
+                <option value="Second">Second Choice</option>
+                <option value="Third">Third Choice</option>
+              </select>
+              <div class="input-block">
+                <label class="name-label">http request referer</label>
+                <div class="icon-input w-row">
+                  <div class="w-col w-col-1">
+                    <div class="icon icon-lg mt10"></div>
+                  </div>
+                  <div class="w-col w-col-9">
+                    <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Referrer" required="">
+                  </div>
+                  <div class="w-col w-col-2">
+                    <a href="#" title="Delete" class="button btn-round btn-m flush-top ml-10 float-right w-button"></a>
+                  </div>
+                </div>
+              </div>
+              <div class="input-block">
+                <label class="name-label">http token validation</label>
+                <div class="icon-input w-row">
+                  <div class="w-col w-col-1">
+                    <div class="icon icon-lg mt10"></div>
+                  </div>
+                  <div class="w-col w-col-9">
+                    <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Token" id="field-2" required="">
+                  </div>
+                  <div class="w-col w-col-2">
+                    <a href="#" title="Delete" class="button btn-round btn-m flush-top ml-10 float-right w-button"></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="button icon-btn float-right w-inline-block">
+          <div class="w-row">
+            <div class="w-col w-col-3">
+              <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+              <div class="btn-label">SAVE </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="search-box">
+      <div class="icon field-icon"></div>
+    </div>
+    <div class="row w-row">
+      <div class="sortable w-col w-col-8">
+        <div class="my-account-dashboard">
+          <div class="w-row">
+            <div class="w-col w-col-6">
+              <h2 class="card-heading">Optimus prime</h2>
+              <a href="#" data-target="my_account" class="button btn-flat w-inline-block">
+                <div data-targe="my_account" class="icon"></div>
+              </a>
+              <div class="max-width w-row">
+                <div class="w-col w-col-1 w-col-small-1 w-col-tiny-1">
+                  <div class="icon grey-text centered"></div>
+                </div>
+                <div class="w-col w-col-11 w-col-small-11 w-col-tiny-11">
+                  <div class="grey-text underline w-clearfix">Account Balance
+                    <span class="float-right bold">ETH 0.03</span>
+                  </div>
+                </div>
+              </div>
+              <div class="max-width w-row">
+                <div class="w-col w-col-1 w-col-small-1 w-col-tiny-1">
+                  <div class="icon grey-text centered"></div>
+                </div>
+                <div class="w-col w-col-11 w-col-small-11 w-col-tiny-11">
+                  <div class="grey-text underline w-clearfix">Running Instances
+                    <span class="float-right bold">13</span>
+                  </div>
+                </div>
+              </div>
+              <div class="max-width w-row">
+                <div class="w-col w-col-1 w-col-small-1 w-col-tiny-1">
+                  <div class="icon grey-text centered"></div>
+                </div>
+                <div class="w-col w-col-11 w-col-small-11 w-col-tiny-11">
+                  <div class="grey-text underline w-clearfix">Active Users
+                    <span class="float-right bold">2</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="padded-col pad w-col w-col-6">
+              <h2 class="card-heading">System uPDATES</h2>
+              <div class="mb-10 w-row">
+                <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
+                  <div class="icon grey-text centered"></div>
+                </div>
+                <div class="w-col w-col-10 w-col-small-10 w-col-tiny-10">
+                  <div class="grey-text small-text">Network maintenance will be performed on Tue, Jul 23 at 04:00am. Please note, all Instances will be <strong>temporarily</strong> <strong>suspended</strong>. Thank you for your patience!</div>
+                </div>
+              </div>
+              <div class="w-row">
+                <div class="w-col w-col-2 w-col-small-2 w-col-tiny-2">
+                  <div class="icon grey-text centered"></div>
+                </div>
+                <div class="w-col w-col-10 w-col-small-10 w-col-tiny-10">
+                  <div class="grey-text small-text">We are expanding our server capacity. Stay tuned for significant performance improvements!</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="instances-dashboard">
+          <h2 class="card-heading">Instances</h2>
+          <a href="#" data-target="add_instance" class="button icon-btn small w-inline-block">
+            <div class="icon"></div>
+          </a>
+          <div class="card">
+            <div class="info-row shadow"  *ngFor="let ins of instances">
+              <div class="name-label bold">{{ins.name}}</div>
+              <div class="grey-text">Used for testing purposes. Do not suspend.</div>
+              <div class="stat-block">
+                <p>Online since: {{ins.created}}</p>
+              </div>
+              <div class="hover-menu">
+                <a href="#" title="Start / Stop" data-target="suspend_instance" class="button btn-round btn-m w-button"></a>
+                <a href="#" title="Settings" data-target="edit_instance" class="button btn-round btn-m w-button"></a>
+              </div>
+              <img src="assets/images/mini-chart.JPG" class="microchart">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sortable w-col w-col-4">
+        <div class="analytics">
+          <h2 class="card-heading">Analytics</h2>
+          <a href="#" data-target="my_account" class="button btn-flat w-inline-block">
+            <div class="icon"></div>
+          </a>
+          <div class="w-row">
+            <div class="w-col w-col-4">
+              <select id="Select-instance" name="Select-instance" data-name="Select instance" class="w-select">
+                <option value="">Instance ...</option>
+                <option value="First">First Choice</option>
+                <option value="Second">Second Choice</option>
+                <option value="Third">Third Choice</option>
+              </select>
+            </div>
+            <div class="w-col w-col-4">
+              <select id="select-metric-2" name="select-metric" data-name="select-metric" class="w-select">
+                <option value="">Metric ...</option>
+                <option value="First">First Choice</option>
+                <option value="Second">Second Choice</option>
+                <option value="Third">Third Choice</option>
+              </select>
+            </div>
+            <div class="w-col w-col-4">
+              <select id="field" name="field" class="w-select">
+                <option value="">Period</option>
+                <option value="First">First Choice</option>
+                <option value="Second">Second Choice</option>
+                <option value="Third">Third Choice</option>
+              </select>
+            </div>
+          </div>
+          <div id="chart" class="shadow chart"></div>
+        </div>
+        <div class="users-dashboard">
+          <h2 class="card-heading">users</h2>
+          <a href="#" data-target="add_user" class="button icon-btn small w-inline-block">
+            <div class="icon"></div>
+          </a>
+          <div class="card flex">
+            <div class="info-row shadow">
+              <img src="assets/images/Optimus_Prime_Helmet.png" class="userpic">
+              <div class="name-label bold">Optimus Prime Jr</div>
+              <div class="small-pill">
+                <div class="text-block">admin</div>
+              </div>
+              <div class="grey-text">iamprime@gmail.com</div>
+              <p class="stat-block">Last login: Today</p>
+              <div class="hover-menu">
+                <a href="#" title="Delete user" data-target="delete_user" class="button btn-round btn-m w-button"></a>
+                <a href="#" title="Suspend user" data_target="suspend_user" class="button btn-round btn-m w-button"></a>
+                <a href="#" title="Settings" data-target="edit_user" class="button btn-round btn-m w-button"></a>
+              </div>
+            </div>
+            <div class="info-row shadow">
+              <img src="assets/images/Silver_Iron_Man_Mask.png" srcset="assets/images/Silver_Iron_Man_Mask-p-500.png 500w, assets/images/Silver_Iron_Man_Mask.png 512w" sizes="50px" class="userpic">
+              <div class="name-label bold">Silver surfer thompson</div>
+              <div class="grey-text">ssthom@gmail.com</div>
+              <p class="stat-block">Last login: 12-12-2018</p>
+              <div class="hover-menu">
+                <a href="#" title="Delete user" data-target="delete_user" class="button btn-round btn-m w-button"></a>
+                <a href="#" title="Suspend user" data_target="suspend_user" class="button btn-round btn-m w-button"></a>
+                <a href="#" title="Settings" data-target="edit_user" class="button btn-round btn-m w-button"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="w-form-done">
+    <div>Thank you! Your submission has been received!</div>
+  </div>
+  <div class="w-form-fail">
+    <div>Oops! Something went wrong while submitting the form.</div>
+  </div>
+</div>
