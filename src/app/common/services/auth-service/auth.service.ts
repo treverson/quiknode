@@ -9,15 +9,8 @@ export class AuthService {
 
     constructor(private _http: HttpClient) {
         if (localStorage.getItem('AUTH_TOKEN')) {
-            this._token = this._fnParseJWT(localStorage.getItem('AUTH_TOKEN'));
+            this._token = localStorage.getItem('AUTH_TOKEN');
         }
-    }
-
-    /**
-     * Parse token
-     * */
-    private _fnParseJWT(str: any) {
-        return JSON.parse(str);
     }
 
     /**
@@ -37,11 +30,11 @@ export class AuthService {
             const requestObj = {
                 email: obj.username,
                 password: obj.password,
-            }
+            };
             this._http
                 .post('api/v1/session', requestObj)
                 .subscribe((response: any) => {
-                    if (response && response.accountId) {
+                    if (response && response.secret) {
                         localStorage.setItem('AUTH_TOKEN', basicAuth);
                         this._token = basicAuth;
                     }
