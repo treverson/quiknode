@@ -33,8 +33,6 @@ export class LoginComponent implements OnInit {
                 this._router.navigate(['dashboard']);
             })
             .catch((error) => {
-                // Fixme: remove this once api starts working
-                this._router.navigate(['dashboard']);
             });
     }
 

@@ -34,10 +34,12 @@ export class AuthService {
     fnSignIn(obj: any) {
         return new Promise((resolve, reject) => {
             const basicAuth = btoa(`${obj.username}:${obj.password}`);
+            const requestObj = {
+                email: obj.username,
+                password: obj.password,
+            }
             this._http
-                .get(Constant.API_URL + 'account/account', {
-                    headers: new HttpHeaders().set('Authorization', `basic ${basicAuth}`),
-                })
+                .post('api/v1/session', requestObj)
                 .subscribe((response: any) => {
                     if (response && response.accountId) {
                         localStorage.setItem('AUTH_TOKEN', basicAuth);
