@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
                 this._router.navigate(['dashboard']);
             })
             .catch((error) => {
-                console.log("test cache")
                 this._toastr.fnWarning('Login failed.');
             });
     }

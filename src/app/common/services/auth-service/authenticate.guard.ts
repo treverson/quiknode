@@ -20,7 +20,6 @@ export class AuthenticateGuard implements CanActivate {
      */
     private fnCheckAuthenticate(url: string): boolean {
         if (this._auth.fnGetToken()) {
-            console.log(url)
             if (url.indexOf('login') > -1 || url === '/') {
                 this._router.navigate(['/dashboard']);
             }
