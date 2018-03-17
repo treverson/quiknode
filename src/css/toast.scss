@@ -1,0 +1,13 @@
+.toast-position {
+    right: 0;
+    top: 100px;
+
+}
+
+@media (max-width: 768px) {
+    .toast-position {
+        right: 12px;
+        top: 12px;
+
+    }
+}

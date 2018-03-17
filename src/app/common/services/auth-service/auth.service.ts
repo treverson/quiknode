@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Constant} from '../../constant';
+import {environment} from '../../../../environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -32,7 +33,7 @@ export class AuthService {
                 password: obj.password,
             };
             this._http
-                .post('api/v1/session', requestObj)
+                .post(environment.api + 'api/v1/session', requestObj)
                 .subscribe((response: any) => {
                     if (response && response.secret) {
                         localStorage.setItem('AUTH_TOKEN', basicAuth);

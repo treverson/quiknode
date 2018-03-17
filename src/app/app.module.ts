@@ -13,6 +13,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AuthService } from './common/services/auth-service/auth.service';
 import {AuthenticateGuard} from './common/services/auth-service/authenticate.guard';
 import {NotAuthenticateGuard} from './common/services/auth-service/not.authenticate.guard';
+import {ToastrService} from './common/services/toastr.service';
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import {NotAuthenticateGuard} from './common/services/auth-service/not.authentic
         {provide: HTTP_INTERCEPTORS, useClass: InterceptorProvider, multi: true},
         AuthService,
         AuthenticateGuard,
-        NotAuthenticateGuard
+        NotAuthenticateGuard,
+        ToastrService
     ],
     bootstrap: [AppComponent]
 })
