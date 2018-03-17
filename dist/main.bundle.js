@@ -57,7 +57,7 @@ var AppRoutingModule = /** @class */ (function () {
     }
     AppRoutingModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forRoot(routes)],
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forRoot(routes, { useHash: true })],
             exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]],
             declarations: []
         })
@@ -378,7 +378,6 @@ var AuthenticateGuard = /** @class */ (function () {
      */
     AuthenticateGuard.prototype.fnCheckAuthenticate = function (url) {
         if (this._auth.fnGetToken()) {
-            console.log(url);
             if (url.indexOf('login') > -1 || url === '/') {
                 this._router.navigate(['/dashboard']);
             }
@@ -718,7 +717,6 @@ var LoginComponent = /** @class */ (function () {
             _this._router.navigate(['dashboard']);
         })
             .catch(function (error) {
-            console.log("test cache");
             _this._toastr.fnWarning('Login failed.');
         });
     };
