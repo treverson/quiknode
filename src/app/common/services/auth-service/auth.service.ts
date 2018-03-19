@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Constant} from '../../constant';
 import {environment} from '../../../../environments/environment';
 
 @Injectable()
@@ -57,5 +56,11 @@ export class AuthService {
         });
     }
 
+    /**
+     * Get user is logged in or not
+     * */
+    fnIsLoggedIn(): any {
+        return this._token;
+    }
 
 }

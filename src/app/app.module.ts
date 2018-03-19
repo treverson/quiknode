@@ -14,13 +14,16 @@ import { AuthService } from './common/services/auth-service/auth.service';
 import {AuthenticateGuard} from './common/services/auth-service/authenticate.guard';
 import {NotAuthenticateGuard} from './common/services/auth-service/not.authenticate.guard';
 import {ToastrService} from './common/services/toastr.service';
+import { InstanceComponent } from './dashboard/instance/instance.component';
+import {InstanceService} from './common/services/instance-service/instance.service';
 
 @NgModule({
     declarations: [
         AppComponent,
         LoginComponent,
         DashboardComponent,
-        HeaderComponent
+        HeaderComponent,
+        InstanceComponent
     ],
     imports: [
         BrowserModule,
@@ -33,7 +36,8 @@ import {ToastrService} from './common/services/toastr.service';
         AuthService,
         AuthenticateGuard,
         NotAuthenticateGuard,
-        ToastrService
+        ToastrService,
+        InstanceService
     ],
     bootstrap: [AppComponent]
 })

@@ -1,3 +1,3 @@
 export class Constant {
-    public static API_URL = 'https://quiknode.pro/api/v1/';
+    public static API_URL = 'api/v1/';
 }

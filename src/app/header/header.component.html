@@ -7,6 +7,7 @@
     <a href="#" class="nav-link w-nav-link">Instances</a>
     <a href="#" class="nav-link w-nav-link">Users</a>
     <a href="#" class="nav-link w-nav-link">Help</a>
+    <a href="#" class="nav-link w-nav-link" *ngIf="isLoggedIn" (click)="fnLogOut()">Logout</a>
   </nav>
   <div class="w-nav-button">
     <div class="w-icon-nav-menu"></div>
