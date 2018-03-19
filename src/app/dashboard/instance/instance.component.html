@@ -1,0 +1,22 @@
+<div class="instances-dashboard">
+    <h2 class="card-heading">Instances</h2>
+    <a href="#" data-target="add_instance" class="button icon-btn small w-inline-block">
+        <div class="icon"></div>
+    </a>
+    <div class="card">
+        <div class="info-row shadow" *ngFor="let ins of instances">
+            <div class="name-label bold">{{ins.name}}</div>
+            <div class="grey-text">Used for testing purposes. Do not suspend.</div>
+            <div class="stat-block">
+                <p>Online since: {{ins.created}}</p>
+            </div>
+            <div class="hover-menu">
+                <a href="#" title="Start / Stop" data-target="suspend_instance"
+                   class="button btn-round btn-m w-button"></a>
+                <a href="#" title="Settings" data-target="edit_instance"
+                   class="button btn-round btn-m w-button"></a>
+            </div>
+            <img src="assets/images/mini-chart.JPG" class="microchart">
+        </div>
+    </div>
+</div>
