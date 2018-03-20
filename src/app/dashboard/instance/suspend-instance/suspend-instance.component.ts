@@ -8,7 +8,7 @@ import {ToastrService} from '../../../common/services/toastr.service';
     styleUrls: ['./suspend-instance.component.css']
 })
 export class SuspendInstanceComponent implements OnInit {
-    @Output() onHideModal = new EventEmitter<any>();
+    @Output() fnHideModal = new EventEmitter<any>();
 
     constructor(private _instance: InstanceService, private _toastr: ToastrService) {
     }
@@ -19,15 +19,15 @@ export class SuspendInstanceComponent implements OnInit {
     suspendInstance() {
         this._instance.suspendInstance().then((response: any) => {
             this._toastr.fnSuccess('Instance suspended successfully!');
-            this.onHideModal.next();
+            this.fnHideModal.next();
         }, (reject: any) => {
             this._toastr.fnError(reject.error);
-            this.onHideModal.next();
+            this.fnHideModal.next();
         });
     }
 
     hideModal() {
-        this.onHideModal.next();
+        this.fnHideModal.next();
     }
 
 }
