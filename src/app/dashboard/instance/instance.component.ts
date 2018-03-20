@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {InstanceService} from '../../common/services/instance-service/instance.service';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-instance',
@@ -16,9 +17,16 @@ export class InstanceComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.fnGetInstances();
+    }
+
+    fnGetInstances() {
         this._instance.fnGetInstances().then((response: any) => {
             if (response && !_.isEmpty(response.instances)) {
-                this.instances = response.instances;
+                this.instances = _.map(response.instances, instance => {
+                    instance.created =  moment(instance.created).format('MM-DD-YYYY');
+                    return instance;
+                });
             }
         });
     }
@@ -27,7 +35,10 @@ export class InstanceComponent implements OnInit {
         this.showModal = true;
     }
 
-    hideCreateModal() {
+    hideCreateModal(created?: boolean) {
+        if (created) {
+            this.fnGetInstances();
+        }
         this.showModal = false;
     }
 

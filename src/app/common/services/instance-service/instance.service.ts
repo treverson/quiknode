@@ -20,4 +20,16 @@ export class InstanceService {
         });
     }
 
+    fnCreateInstance(obj: any) {
+        return new Promise((resolve, reject) => {
+            this._http
+                .post(Constant.API_URL + 'account/instance', obj)
+                .subscribe((response: any) => {
+                    resolve(response);
+                }, (error) => {
+                    reject(error);
+                });
+        });
+    }
+
 }

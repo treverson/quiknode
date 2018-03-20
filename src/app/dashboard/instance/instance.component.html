@@ -22,7 +22,7 @@
         </div>
     </div>
     <app-modal-wrapper [showModal]="showModal"
-                       (onHideModal)="hideCreateModal($event)">
-        <app-create-update-instance></app-create-update-instance>
+                       (fnHideModal)="hideCreateModal($event)">
+        <app-create-update-instance (fnHideModal)="hideCreateModal($event)"></app-create-update-instance>
     </app-modal-wrapper>
 </div>

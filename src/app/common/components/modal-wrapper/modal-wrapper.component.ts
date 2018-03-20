@@ -7,7 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class ModalWrapperComponent implements OnInit {
     @Input() showModal: string;
-    @Output() onHideModal = new EventEmitter<any>();
+    @Output() fnHideModal = new EventEmitter<any>();
 
     constructor() {
     }
@@ -15,8 +15,8 @@ export class ModalWrapperComponent implements OnInit {
     ngOnInit() {
     }
 
-    hideModal() {
-        this.onHideModal.next();
+    onHideModal() {
+        this.fnHideModal.next();
     }
 
 }
