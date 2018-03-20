@@ -32,4 +32,16 @@ export class InstanceService {
         });
     }
 
+    suspendInstance() {
+        return new Promise((resolve, reject) => {
+            this._http
+                .get(Constant.API_URL + '')
+                .subscribe((response: any) => {
+                    resolve(response);
+                }, (error) => {
+                    reject(error);
+                });
+        });
+    }
+
 }

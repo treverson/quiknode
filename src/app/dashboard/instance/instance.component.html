@@ -6,15 +6,15 @@
         <div class="icon"></div>
     </a>
     <div class="card">
-        <div class="info-row shadow" *ngFor="let ins of instances">
+        <div class="info-row shadow" *ngFor="let ins of instances; let i = index" (mouseenter) ="fadeInFadeOut(i)" (mouseleave)="fadeInFadeOut(i)">
             <div class="name-label bold">{{ins.name}}</div>
             <div class="grey-text">Used for testing purposes. Do not suspend.</div>
             <div class="stat-block">
                 <p>Online since: {{ins.created}}</p>
             </div>
-            <div class="hover-menu">
+            <div class="hover-menu" [@visibilityChanged]="visibleIndex === i && visiblityState">
                 <a href="#" title="Start / Stop" data-target="suspend_instance"
-                   class="button btn-round btn-m w-button"></a>
+                   class="button btn-round btn-m w-button" (click)="showSuspendModal()"></a>
                 <a href="#" title="Settings" data-target="edit_instance"
                    class="button btn-round btn-m w-button"></a>
             </div>
@@ -24,5 +24,9 @@
     <app-modal-wrapper [showModal]="showModal"
                        (fnHideModal)="hideCreateModal($event)">
         <app-create-update-instance (fnHideModal)="hideCreateModal($event)"></app-create-update-instance>
+    </app-modal-wrapper>
+    <app-modal-wrapper [showModal]="suspendModal"
+                       (onHideModal)="hideSuspendModal($event)">
+        <app-suspend-instance (onHideModal)="hideSuspendModal($event)"></app-suspend-instance>
     </app-modal-wrapper>
 </div>
