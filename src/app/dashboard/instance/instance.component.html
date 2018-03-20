@@ -2,7 +2,7 @@
     <h2 class="card-heading">Instances</h2>
     <a  href="#" data-target="add_instance"
         class="button icon-btn small w-inline-block"
-        (click)="showCreateModal()">
+        (click)="fnShowCreateModal()">
         <div class="icon"></div>
     </a>
     <div class="card">
@@ -12,23 +12,23 @@
             <div class="stat-block">
                 <p>Online since: {{ins.created}}</p>
             </div>
-            <div class="hover-menu" [@visibilityChanged]="visibleIndex === i && visiblityState">
+            <div class="hover-menu" [@visibilityChanged]="visibleIndex === i && visibilityState">
                 <a href="#" title="Start / Stop" data-target="suspend_instance"
-                   class="button btn-round btn-m w-button" (click)="showSuspendModal()"></a>
+                   class="button btn-round btn-m w-button" (click)="fnShowSuspendModal()"></a>
                 <a href="#" title="Settings" data-target="edit_instance"
                    class="button btn-round btn-m w-button"></a>
             </div>
             <img src="assets/images/mini-chart.JPG" class="microchart">
         </div>
     </div>
-    <app-modal-wrapper [showModal]="showModal"
-                       *ngIf="showModal"
-                       (fnHideModal)="hideCreateModal($event)">
-        <app-create-update-instance (fnHideModal)="hideCreateModal($event)"></app-create-update-instance>
+    <app-modal-wrapper [showModal]="showInstanceCreateModal"
+                       *ngIf="showInstanceCreateModal"
+                       (fnHideModal)="fnHideCreateModal($event)">
+        <app-create-update-instance (fnHideModal)="fnHideCreateModal($event)"></app-create-update-instance>
     </app-modal-wrapper>
-    <app-modal-wrapper [showModal]="suspendModal"
-                       *ngIf="suspendModal"
-                       (fnHideModal)="hideSuspendModal($event)">
-        <app-suspend-instance (fnHideModal)="hideSuspendModal($event)"></app-suspend-instance>
+    <app-modal-wrapper [showModal]="showSuspendModal"
+                       *ngIf="showSuspendModal"
+                       (fnHideModal)="fnHideSuspendModal($event)">
+        <app-suspend-instance (fnHideModal)="fnHideSuspendModal($event)"></app-suspend-instance>
     </app-modal-wrapper>
 </div>

@@ -19,14 +19,14 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
 })
 export class InstanceComponent implements OnInit {
     instances: any[];
-    showModal: boolean;
-    suspendModal: boolean;
-    visiblityState: String = 'hidden';
+    showInstanceCreateModal: boolean;
+    showSuspendModal: boolean;
+    visibilityState: String = 'hidden';
     visibleIndex: number;
 
     constructor(private _instance: InstanceService) {
-        this.showModal = false;
-        this.suspendModal = false;
+        this.showInstanceCreateModal = false;
+        this.showSuspendModal = false;
     }
 
     ngOnInit() {
@@ -44,31 +44,31 @@ export class InstanceComponent implements OnInit {
         });
     }
 
-    showCreateModal() {
-        this.showModal = true;
+    fnShowCreateModal() {
+        this.showInstanceCreateModal = true;
     }
 
-    hideCreateModal(created?: boolean) {
+    fnHideCreateModal(created?: boolean) {
         if (created) {
             this.fnGetInstances();
         }
-        this.showModal = false;
+        this.showInstanceCreateModal = false;
     }
 
-    showSuspendModal() {
-        this.suspendModal = true;
+    fnShowSuspendModal() {
+        this.showSuspendModal = true;
     }
 
-    hideSuspendModal() {
-        this.suspendModal = false;
+    fnHideSuspendModal() {
+        this.showSuspendModal = false;
     }
 
     fadeInFadeOut(index: number) {
         this.visibleIndex = index;
-        if (this.visiblityState === 'hidden') {
-            this.visiblityState = 'shown';
+        if (this.visibilityState === 'hidden') {
+            this.visibilityState = 'shown';
         } else {
-            this.visiblityState = 'hidden';
+            this.visibilityState = 'hidden';
         }
     }
 
