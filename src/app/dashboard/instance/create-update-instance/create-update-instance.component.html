@@ -9,8 +9,13 @@
                         <div class="icon icon-lg mt10"></div>
                     </div>
                     <div class="w-col w-col-11">
-                        <input type="text" class="w-input" maxlength="256" name="field-2"
+                        <input type="text" class="w-input" maxlength="256" name="field-2" #name="ngModel"
                                data-name="Field 2" placeholder="Name" required="" [(ngModel)]="instanceObj.name">
+                        <div *ngIf="(instanceForm.submitted || name.touched) && !name.valid">
+                            <small class="text-danger" *ngIf="name.errors['required']">
+                                Name is required.
+                            </small>
+                        </div>
                     </div>
                 </div>
                 <div class="icon-input w-row">
@@ -39,7 +44,7 @@
                         </div>
                         <div class="w-col w-col-9">
                             <input type="text" class="w-input" maxlength="256" name="field-2"
-                                   data-name="Field 2" placeholder="Referrer" required="">
+                                   data-name="Field 2" placeholder="Referrer">
                         </div>
                         <div class="w-col w-col-2">
                             <a href="#" title="Delete"
@@ -55,7 +60,7 @@
                         </div>
                         <div class="w-col w-col-9">
                             <input type="text" class="w-input" maxlength="256" name="field-2"
-                                   data-name="Field 2" placeholder="Token" required="">
+                                   data-name="Field 2" placeholder="Token">
                         </div>
                         <div class="w-col w-col-2">
                             <a href="#" title="Delete"
@@ -66,7 +71,9 @@
             </div>
         </div>
     </div>
-    <a href="#" class="button icon-btn float-right w-inline-block" (click)="fnCreateInstanceClick(instanceObj, instanceForm)">
+    <button class="button icon-btn float-right w-inline-block"
+       (click)="instanceForm.valid  && fnCreateInstanceClick(instanceObj, instanceForm)"
+    >
         <div class="w-row">
             <div class="w-col w-col-3">
                 <div class="icon"></div>
@@ -75,5 +82,5 @@
                 <div class="btn-label">LAUNCH!</div>
             </div>
         </div>
-    </a>
+    </button>
 </form>
