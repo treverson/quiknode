@@ -9,8 +9,10 @@ import * as _ from 'lodash';
 })
 export class InstanceComponent implements OnInit {
     instances: any[];
+    showModal: boolean;
 
     constructor(private _instance: InstanceService) {
+        this.showModal = false;
     }
 
     ngOnInit() {
@@ -19,6 +21,14 @@ export class InstanceComponent implements OnInit {
                 this.instances = response.instances;
             }
         });
+    }
+
+    showCreateModal() {
+        this.showModal = true;
+    }
+
+    hideCreateModal() {
+        this.showModal = false;
     }
 
 }

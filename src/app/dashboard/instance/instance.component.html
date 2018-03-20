@@ -1,6 +1,8 @@
 <div class="instances-dashboard">
     <h2 class="card-heading">Instances</h2>
-    <a href="#" data-target="add_instance" class="button icon-btn small w-inline-block">
+    <a  href="#" data-target="add_instance"
+        class="button icon-btn small w-inline-block"
+        (click)="showCreateModal()">
         <div class="icon"></div>
     </a>
     <div class="card">
@@ -19,4 +21,8 @@
             <img src="assets/images/mini-chart.JPG" class="microchart">
         </div>
     </div>
+    <app-modal-wrapper [showModal]="showModal"
+                       (onHideModal)="hideCreateModal($event)">
+        <app-create-update-instance></app-create-update-instance>
+    </app-modal-wrapper>
 </div>

@@ -16,6 +16,8 @@ import {NotAuthenticateGuard} from './common/services/auth-service/not.authentic
 import {ToastrService} from './common/services/toastr.service';
 import { InstanceComponent } from './dashboard/instance/instance.component';
 import {InstanceService} from './common/services/instance-service/instance.service';
+import { CreateUpdateInstanceComponent } from './dashboard/instance/create-update-instance/create-update-instance.component';
+import { ModalWrapperComponent } from './common/components/modal-wrapper/modal-wrapper.component';
 
 @NgModule({
     declarations: [
@@ -23,7 +25,9 @@ import {InstanceService} from './common/services/instance-service/instance.servi
         LoginComponent,
         DashboardComponent,
         HeaderComponent,
-        InstanceComponent
+        InstanceComponent,
+        CreateUpdateInstanceComponent,
+        ModalWrapperComponent
     ],
     imports: [
         BrowserModule,
