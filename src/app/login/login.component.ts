@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../common/services/auth-service/auth.service';
 import {Router} from '@angular/router';
 import {ToastrService} from '../common/services/toastr.service';
+import {Title} from '@angular/platform-browser';
 
 interface LogIn {
     username: string;
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
 
     logInObject: LogIn;
 
-    constructor(private _auth: AuthService, private _router: Router,  private _toastr: ToastrService) {
+    constructor(private _auth: AuthService, private _router: Router,  private _toastr: ToastrService, private titleService: Title) {
         this.logInObject = {
             username: '',
             password: '',
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.titleService.setTitle('QuikNode - Login');
     }
 
     // call API on login button
