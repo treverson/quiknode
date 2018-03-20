@@ -22,10 +22,12 @@
         </div>
     </div>
     <app-modal-wrapper [showModal]="showModal"
+                       *ngIf="showModal"
                        (fnHideModal)="hideCreateModal($event)">
         <app-create-update-instance (fnHideModal)="hideCreateModal($event)"></app-create-update-instance>
     </app-modal-wrapper>
     <app-modal-wrapper [showModal]="suspendModal"
+                       *ngIf="suspendModal"
                        (fnHideModal)="hideSuspendModal($event)">
         <app-suspend-instance (fnHideModal)="hideSuspendModal($event)"></app-suspend-instance>
     </app-modal-wrapper>
