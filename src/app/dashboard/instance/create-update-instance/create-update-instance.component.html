@@ -1,4 +1,4 @@
-<h2 class="modal-header">create instance</h2>
+<h2 class="modal-header">{{editInstanceObject ? "edit " : "create "}}instance</h2>
 <form #instanceForm="ngForm" id="instance-form" name="instance-form" data-name="Instance Form">
     <div class="w-container">
         <div class="btm10 w-row container-row">
@@ -32,7 +32,7 @@
                 <h4 class="modal-header">Validators</h4>
                 <select id="field-3" name="field-3" class="w-select" [(ngModel)]="validatorType">
                     <option value="validateToken">Validate Token</option>
-                    <option value="validateReferer">Validate Referrer</option>
+                    <option value="validateReferer">Validate Referer</option>
                 </select>
                 <div class="input-block" *ngIf="validatorType === 'validateReferer'">
                     <label class="name-label">http request referer</label>
@@ -41,9 +41,9 @@
                             <div class="icon icon-lg mt10"></div>
                         </div>
                         <div class="w-col w-col-9">
-                            <input type="text" class="w-input" maxlength="256" name="field-2"
-                                   [(ngModel)]="validateReferrer"
-                                   data-name="Field 2" placeholder="Referrer">
+                            <input type="text" class="w-input" maxlength="256" name="validateReferrer"
+                                   [(ngModel)]="validateReferer"
+                                   data-name="validate Referrer" placeholder="Referrer">
                         </div>
                         <div class="w-col w-col-2">
                             <a href="#" title="Delete"
@@ -59,9 +59,9 @@
                             <div class="icon icon-lg mt10"></div>
                         </div>
                         <div class="w-col w-col-9">
-                            <input type="text" class="w-input" maxlength="256" name="field-2"
+                            <input type="text" class="w-input" maxlength="256" name="validateToken"
                                    [(ngModel)]="validateToken"
-                                   data-name="Field 2" placeholder="Token">
+                                   data-name="Validate Token" placeholder="Token">
                         </div>
                         <div class="w-col w-col-2">
                             <a href="#" title="Delete"
@@ -76,12 +76,20 @@
     <button class="button icon-btn float-right w-inline-block"
        (click)="instanceForm.valid  && fnCreateInstanceClick(instanceObj, instanceForm)"
     >
-        <div class="w-row">
+        <div class="w-row" *ngIf="!editInstanceObject">
             <div class="w-col w-col-3">
                 <div class="icon"></div>
             </div>
             <div class="w-col w-col-9">
                 <div class="btn-label">LAUNCH!</div>
+            </div>
+        </div>
+        <div class="w-row" *ngIf="editInstanceObject">
+            <div class="w-col w-col-3">
+                <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+                <div class="btn-label">SAVE </div>
             </div>
         </div>
     </button>

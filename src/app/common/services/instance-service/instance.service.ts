@@ -32,6 +32,18 @@ export class InstanceService {
         });
     }
 
+    fnUpdateInstance(obj: any) {
+        return new Promise((resolve, reject) => {
+            this._http
+                .put(Constant.API_URL + `account/instance/${obj['instance-id']}`, obj)
+                .subscribe((response: any) => {
+                    resolve(response);
+                }, (error) => {
+                    reject(error);
+                });
+        });
+    }
+
     suspendInstance() {
         return new Promise((resolve, reject) => {
             this._http

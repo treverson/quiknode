@@ -23,6 +23,7 @@ export class InstanceComponent implements OnInit {
     showSuspendModal: boolean;
     visibilityState: String = 'hidden';
     visibleIndex: number;
+    instanceObject;
 
     constructor(private _instance: InstanceService) {
         this.showInstanceCreateModal = false;
@@ -44,7 +45,9 @@ export class InstanceComponent implements OnInit {
         });
     }
 
-    fnShowCreateModal() {
+    fnShowCreateModal(e, obj) {
+        e.preventDefault();
+        this.instanceObject = obj;
         this.showInstanceCreateModal = true;
     }
 
