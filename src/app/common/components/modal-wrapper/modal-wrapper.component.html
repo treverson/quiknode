@@ -1,9 +1,10 @@
 <div class="modal-overlay" [ngClass]="showModal ? 'show' : 'hide'">
-    <div id="add_instance" class="modal-content w-clearfix" [ngClass]="showModal ? 'show' : 'hide'">
+    <div id="add_instance" class="modal-content w-clearfix"
+         [ngClass]="showModal ? 'show' : 'hide'">
         <a href="#"
-           title="Delete"
+           title="Close"
            class="button btn-round btn-m float-right close-btn w-button"
-           (click)="onHideModal()">
+           (click)="onHideModal($event)">
             
         </a>
         <ng-content></ng-content>

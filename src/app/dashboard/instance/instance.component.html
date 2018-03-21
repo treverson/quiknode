@@ -14,7 +14,7 @@
             </div>
             <div class="hover-menu" [@visibilityChanged]="visibleIndex === i && visibilityState">
                 <a href="#" title="Start / Stop" data-target="suspend_instance"
-                   class="button btn-round btn-m w-button" (click)="fnShowSuspendModal()"></a>
+                   class="button btn-round btn-m w-button" (click)="fnShowSuspendModal($event)"></a>
                 <a href="#" title="Settings" data-target="edit_instance"
                    (click)="fnShowCreateModal($event, ins)"
                    class="button btn-round btn-m w-button"></a>

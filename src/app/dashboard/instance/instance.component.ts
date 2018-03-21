@@ -58,7 +58,8 @@ export class InstanceComponent implements OnInit {
         this.showInstanceCreateModal = false;
     }
 
-    fnShowSuspendModal() {
+    fnShowSuspendModal(e) {
+        e.preventDefault();
         this.showSuspendModal = true;
     }
 

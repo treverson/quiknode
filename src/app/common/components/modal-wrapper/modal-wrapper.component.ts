@@ -15,7 +15,8 @@ export class ModalWrapperComponent implements OnInit {
     ngOnInit() {
     }
 
-    onHideModal() {
+    onHideModal(e) {
+        e.preventDefault();
         this.fnHideModal.next();
     }
 
