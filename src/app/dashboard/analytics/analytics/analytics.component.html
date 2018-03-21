@@ -1,0 +1,33 @@
+<div class="analytics">
+    <h2 class="card-heading">Analytics</h2>
+    <a href="#" data-target="my_account" class="button btn-flat w-inline-block">
+        <div class="icon"></div>
+    </a>
+    <div class="w-row">
+        <div class="w-col w-col-4">
+            <select id="Select-instance" name="Select-instance" data-name="Select instance"
+                    class="w-select">
+                <option value="">Instance ...</option>
+                <option value="First" *ngFor="let instance of instanceList" [value]="instance['instance-id']">
+                    {{instance.name}}
+                </option>
+            </select>
+        </div>
+        <div class="w-col w-col-4">
+            <select id="select-metric-2" name="select-metric" data-name="select-metric"
+                    class="w-select" [(ngModel)]="selectedMetric">
+                <option value="">Metric ...</option>
+                <option value="" *ngFor="let metric of metricList" [value]="metric">{{metric}}</option>
+            </select>
+        </div>
+        <div class="w-col w-col-4">
+            <select id="field" name="field" class="w-select">
+                <option value="">Period</option>
+                <option value="First">First Choice</option>
+                <option value="Second">Second Choice</option>
+                <option value="Third">Third Choice</option>
+            </select>
+        </div>
+    </div>
+    <div id="chart" class="shadow chart"></div>
+</div>

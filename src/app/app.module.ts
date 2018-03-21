@@ -20,6 +20,7 @@ import {InstanceService} from './common/services/instance-service/instance.servi
 import { CreateUpdateInstanceComponent } from './dashboard/instance/create-update-instance/create-update-instance.component';
 import { ModalWrapperComponent } from './common/components/modal-wrapper/modal-wrapper.component';
 import { SuspendInstanceComponent } from './dashboard/instance/suspend-instance/suspend-instance.component';
+import { AnalyticsComponent } from './dashboard/analytics/analytics/analytics.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { SuspendInstanceComponent } from './dashboard/instance/suspend-instance/
         InstanceComponent,
         CreateUpdateInstanceComponent,
         ModalWrapperComponent,
-        SuspendInstanceComponent
+        SuspendInstanceComponent,
+        AnalyticsComponent
     ],
     imports: [
         BrowserModule,
