@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {InstanceService} from '../../../common/services/instance-service/instance.service';
 import {ToastrService} from '../../../common/services/toastr.service';
 
@@ -9,17 +9,12 @@ interface Instance {
         validators: {
             http: {
                 request?: [
-                    {
-                        'instance-validate-http-request-referer'?: {
+                        {
                             type?: string;
                             referers?: string[];
                             permitNullReferer?: boolean;
-                        }
-                        'instance-validate-http-request-token'?: {
-                            type?: string;
                             token?: string;
-                        }
-                    }]
+                        }]
             }
         }
     };
@@ -33,6 +28,10 @@ interface Instance {
 export class CreateUpdateInstanceComponent implements OnInit {
     instanceObj: Instance;
     @Output() fnHideModal = new EventEmitter<any>();
+    @Input() instanceObject;
+    validatorType: string;
+    validateReferrer: string;
+    validateToken: string;
     constructor(private _instance: InstanceService, private _toastr: ToastrService) {
         this.instanceObj = {
             name: '',
@@ -45,12 +44,28 @@ export class CreateUpdateInstanceComponent implements OnInit {
                 }
             }
         };
+        this.validatorType = 'validateToken';
     }
 
     ngOnInit() {
     }
 
     fnCreateInstanceClick(instanceObject: Instance, myForm) {
+        if (this.validatorType  === 'validateToken' && this.validateToken) {
+            instanceObject.configuration.validators.http.request = [
+                {
+                    token: this.validateToken,
+                    type: `validateToken`
+                }
+            ];
+        } else if (this.validatorType === 'validateReferrer' && this.validateReferrer) {
+            instanceObject.configuration.validators.http.request = [
+                {
+                    token: this.validateReferrer,
+                    type: `validateReferer`
+                }
+            ];
+        }
         this._instance.fnCreateInstance(instanceObject)
             .then((response: any) => {
                 this._toastr.fnSuccess('Instance created.');
@@ -59,6 +74,13 @@ export class CreateUpdateInstanceComponent implements OnInit {
             .catch(() => {
                 this._toastr.fnWarning('Instance creation failed.');
             });
+    }
+
+    clearValidatorText(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        this.validateToken = '';
+        this.validateReferrer = '';
     }
 
 }
