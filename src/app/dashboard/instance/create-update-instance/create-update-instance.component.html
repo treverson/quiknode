@@ -36,19 +36,23 @@
                 </select>
                 <div class="input-block" *ngIf="validatorType === 'validateReferer'">
                     <label class="name-label">http request referer</label>
-                    <div class="icon-input w-row">
+                    <div class="icon-input w-row" *ngFor="let ref of validateReferer;trackBy: trackByIndex; let i = index;">
                         <div class="w-col w-col-1">
                             <div class="icon icon-lg mt10"></div>
                         </div>
-                        <div class="w-col w-col-9">
+                        <div class="w-col w-col-8">
                             <input type="text" class="w-input" maxlength="256" name="validateReferrer"
-                                   [(ngModel)]="validateReferer"
-                                   data-name="validate Referrer" placeholder="Referrer">
+                                   [(ngModel)]="validateReferer[i]"
+                                   data-name="validate Referrer{{i}}" placeholder="Referrer">
                         </div>
-                        <div class="w-col w-col-2">
+                        <div class="w-col w-col-3">
                             <a href="#" title="Delete"
-                               (click)="clearValidatorText($event)"
-                               class="button btn-round btn-m flush-top ml-10 float-right w-button"></a>
+                               (click)="clearValidatorReferer($event, i)"
+                               class="button btn-round btn-m flush-top ml-10 w-button"></a>
+                            <a href="#" title="Add"
+                               *ngIf="i === validateReferer.length - 1"
+                               (click)="addReferer($event)"
+                               class="button btn-round btn-m flush-top ml-10 w-button"></a>
                         </div>
                     </div>
                 </div>

@@ -32,7 +32,7 @@ export class CreateUpdateInstanceComponent implements OnInit {
     @Output() fnHideModal = new EventEmitter<any>();
     @Input() editInstanceObject;
     validatorType: string;
-    validateReferer: string;
+    validateReferer: string[];
     validateToken: string;
     constructor(private _instance: InstanceService, private _toastr: ToastrService) {
         this.instanceObj = {
@@ -47,7 +47,7 @@ export class CreateUpdateInstanceComponent implements OnInit {
             }
         };
         this.validatorType = 'validateToken';
-        this.validateReferer = '';
+        this.validateReferer = [];
         this.validateToken = '';
     }
 
@@ -68,7 +68,7 @@ export class CreateUpdateInstanceComponent implements OnInit {
                         }
                         if (validateReferer) {
                             this.validatorType = validateReferer.type;
-                            this.validateReferer = validateReferer.referers.join(',');
+                            this.validateReferer = validateReferer.referers;
                         }
                     }
                 }
@@ -77,6 +77,7 @@ export class CreateUpdateInstanceComponent implements OnInit {
     }
 
     fnCreateInstanceClick(instanceObject: Instance, myForm) {
+        const validateReferer = _.filter(this.validateReferer, ref => !!ref);
         if (this.validatorType  === 'validateToken' && this.validateToken) {
             instanceObject.configuration.validators.http.request = [
                 {
@@ -84,10 +85,10 @@ export class CreateUpdateInstanceComponent implements OnInit {
                     type: `validateToken`
                 }
             ];
-        } else if (this.validatorType === 'validateReferer' && this.validateReferer) {
+        } else if (this.validatorType === 'validateReferer' && !_.isEmpty(validateReferer)) {
             instanceObject.configuration.validators.http.request = [
                 {
-                    referers: this.validateReferer.split(','),
+                    referers: validateReferer,
                     type: `validateReferer`
                 }
             ];
@@ -120,7 +121,22 @@ export class CreateUpdateInstanceComponent implements OnInit {
         event.stopPropagation();
         event.preventDefault();
         this.validateToken = '';
-        this.validateReferer = '';
+    }
+
+    clearValidatorReferer(event, index) {
+        event.stopPropagation();
+        event.preventDefault();
+        this.validateReferer.splice(index, 1);
+    }
+
+    addReferer(event) {
+        event.stopPropagation();
+        event.preventDefault();
+        this.validateReferer.push('');
+    }
+
+    trackByIndex(index: number, value: number) {
+        return index;
     }
 
 }
