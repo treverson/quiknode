@@ -20,6 +20,7 @@ export class AnalyticsComponent implements OnInit  {
     public selctedInstance: any;
     public getMetricObj: any;
     public isMetric: boolean;
+    public isLoding: boolean;
 
     constructor(private _instance: InstanceService) {
         this.metricList = [];
@@ -109,9 +110,11 @@ export class AnalyticsComponent implements OnInit  {
     }
 
     fnGetMetric() {
+        this.isLoding = true;
         this.getMetricObj['instance-id'] = this.selctedInstance;
         this.getMetricObj['metrics-type'] = this.selectedMetric;
         this._instance.fnGetMetric(this.getMetricObj).then((response: any) => {
+            this.isLoding = false;
             if (response.values) {
                 this.isMetric = true;
                 setTimeout(() => {
