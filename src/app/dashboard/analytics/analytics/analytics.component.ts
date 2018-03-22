@@ -2,7 +2,7 @@ import {AfterViewInit, Component, OnInit, ViewChild, ElementRef} from '@angular/
 import {InstanceService} from '../../../common/services/instance-service/instance.service';
 import { chart } from 'highcharts';
 import * as Highcharts from 'highcharts';
-import HC_exporting = require('highcharts/modules/exporting');
+import * as HC_exporting from 'highcharts/modules/exporting';
 HC_exporting(Highcharts);
 
 @Component({
