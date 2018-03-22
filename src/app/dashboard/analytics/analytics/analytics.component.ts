@@ -46,20 +46,26 @@ export class AnalyticsComponent implements OnInit  {
         });
     }
 
-    fuDisplayMetrics(columns, values) {
+    fnDisplayMetrics(columns, values) {
         const options: Highcharts.Options = {
             chart: {
                 zoomType: 'x'
             },
             title: {
-                text: 'WebSockets inbound data'
+                text: columns[1] + ' inbound data'
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
                     'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
             },
             xAxis: {
-                type: 'datetime'
+                type: 'datetime',
+                labels: {
+                    formatter: function () {
+                        return Highcharts.dateFormat('%b\'%d', this.value);
+                    }
+                },
+                tickPixelInterval: 200
             },
             yAxis: {
                 title: {
@@ -100,7 +106,7 @@ export class AnalyticsComponent implements OnInit  {
             },
             series: [{
                 type: 'area',
-                name: 'WebSockets IN',
+                name: columns[1],
                 data: values
             }]
         };
@@ -115,7 +121,7 @@ export class AnalyticsComponent implements OnInit  {
             if (response.values) {
                 this.isMetric = true;
                 setTimeout(() => {
-                    this.fuDisplayMetrics(response.columns, response.values);
+                    this.fnDisplayMetrics(response.columns, response.values);
                 }, 0);
             } else {
                 this.isMetric = false;
