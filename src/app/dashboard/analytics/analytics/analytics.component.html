@@ -30,6 +30,7 @@
             </select>
         </div>
     </div>
-    <div *ngIf="isMetric == true" id="chart" class="shadow chart" #chartTarget></div>
-    <div *ngIf="isMetric == false" class="no-result">No Results Found</div>
+    <div *ngIf="isMetric == true && isLoding == false" id="chart" class="shadow chart" #chartTarget></div>
+    <div *ngIf="isMetric == false && isLoding == false" class="no-result">No Results Found</div>
+    <img *ngIf="isLoding == true" src="assets/images/loader.gif" class="loader">
 </div>
