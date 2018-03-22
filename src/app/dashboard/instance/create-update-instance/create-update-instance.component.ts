@@ -47,7 +47,7 @@ export class CreateUpdateInstanceComponent implements OnInit {
             }
         };
         this.validatorType = 'validateToken';
-        this.validateReferer = [];
+        this.validateReferer = [""];
         this.validateToken = '';
     }
 
