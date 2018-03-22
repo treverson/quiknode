@@ -44,7 +44,7 @@ export class InstanceService {
         });
     }
 
-    suspendInstance() {
+    fnSuspendInstance() {
         return new Promise((resolve, reject) => {
             this._http
                 .delete(Constant.API_URL + '')
@@ -56,4 +56,15 @@ export class InstanceService {
         });
     }
 
+    fnGetMetric(obj: any) {
+        return new Promise((resolve, reject) => {
+            this._http
+                .get(Constant.API_URL + `account/instance/${obj['instance-id']}/metrics/${obj['metrics-type']}`)
+                .subscribe((response: any) => {
+                    resolve(response);
+                }, (error) => {
+                    reject(error);
+                });
+        });
+    }
 }

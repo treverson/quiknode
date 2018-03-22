@@ -10,18 +10,24 @@ HC_exporting(Highcharts);
     templateUrl: './analytics.component.html',
     styleUrls: ['./analytics.component.css']
 })
-export class AnalyticsComponent implements OnInit, AfterViewInit  {
+export class AnalyticsComponent implements OnInit  {
     @ViewChild('chartTarget') chartTarget: ElementRef;
     chart: Highcharts.ChartObject;
 
     public metricList: string[];
     public instanceList: any;
     public selectedMetric: string;
+    public selctedInstance: any;
+    public getMetricObj: any;
+    public isMetric: boolean;
 
     constructor(private _instance: InstanceService) {
         this.metricList = [];
         this.instanceList = [];
-        this.selectedMetric = '';
+        this.getMetricObj = {
+            'instance-id': '',
+            'metrics-type': '',
+        };
     }
 
     ngOnInit() {
@@ -32,12 +38,15 @@ export class AnalyticsComponent implements OnInit, AfterViewInit  {
             'websocket-messages-in',
             'websocket-messages-out'
         ];
+        this.selectedMetric = this.metricList[0];
         this._instance.fnGetInstances().then((response: any) => {
             this.instanceList = response.instances;
+            this.selctedInstance = this.instanceList[0]['instance-id'];
+            this.fnGetMetric();
         });
     }
 
-    ngAfterViewInit() {
+    fuDisplayMetrics(columns, values) {
         const options: Highcharts.Options = {
             chart: {
                 zoomType: 'x'
@@ -92,35 +101,26 @@ export class AnalyticsComponent implements OnInit, AfterViewInit  {
             series: [{
                 type: 'area',
                 name: 'WebSockets IN',
-                data: [
-                    [
-                        1370131200000,
-                        0.7695
-                    ],
-                    [
-                        1370217600000,
-                        0.7648
-                    ],
-                    [
-                        1370304000000,
-                        0.7645
-                    ],
-                    [
-                        1370390400000,
-                        0.7638
-                    ],
-                    [
-                        1370476800000,
-                        0.7549
-                    ],
-                    [
-                        1370563200000,
-                        0.7562
-                    ]]
+                data: values
             }]
         };
 
         this.chart = chart(this.chartTarget.nativeElement, options);
+    }
+
+    fnGetMetric() {
+        this.getMetricObj['instance-id'] = this.selctedInstance;
+        this.getMetricObj['metrics-type'] = this.selectedMetric;
+        this._instance.fnGetMetric(this.getMetricObj).then((response: any) => {
+            if (response.values) {
+                this.isMetric = true;
+                setTimeout(() => {
+                    this.fuDisplayMetrics(response.columns, response.values);
+                }, 0);
+            } else {
+                this.isMetric = false;
+            }
+        });
     }
 
 }

@@ -6,17 +6,18 @@
     <div class="w-row">
         <div class="w-col w-col-4">
             <select id="Select-instance" name="Select-instance" data-name="Select instance"
-                    class="w-select">
-                <option value="">Instance ...</option>
-                <option value="First" *ngFor="let instance of instanceList" [value]="instance['instance-id']">
+                    class="w-select" [(ngModel)]="selctedInstance" (change)="fnGetMetric()">
+                <!-- <option value="">Instance ...</option>-->
+                <option value="First" *ngFor="let instance of instanceList; let i =index"
+                        [value]="instance['instance-id']">
                     {{instance.name}}
                 </option>
             </select>
         </div>
         <div class="w-col w-col-4">
             <select id="select-metric-2" name="select-metric" data-name="select-metric"
-                    class="w-select" [(ngModel)]="selectedMetric">
-                <option value="">Metric ...</option>
+                    class="w-select" [(ngModel)]="selectedMetric" (change)="fnGetMetric()">
+                <!-- <option value="">Metric ...</option>-->
                 <option value="" *ngFor="let metric of metricList" [value]="metric">{{metric}}</option>
             </select>
         </div>
@@ -29,5 +30,6 @@
             </select>
         </div>
     </div>
-    <div id="chart" class="shadow chart" #chartTarget></div>
+    <div *ngIf="isMetric == true" id="chart" class="shadow chart" #chartTarget></div>
+    <div *ngIf="isMetric == false" class="no-result">No Results Found</div>
 </div>
