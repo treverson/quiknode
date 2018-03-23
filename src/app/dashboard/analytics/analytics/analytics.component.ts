@@ -29,6 +29,7 @@ export class AnalyticsComponent implements OnInit  {
             'instance-id': '',
             'metrics-type': '',
         };
+        this.isMetric = false;
     }
 
     ngOnInit() {
@@ -132,6 +133,9 @@ export class AnalyticsComponent implements OnInit  {
             } else {
                 this.isMetric = false;
             }
+        }).catch((error) => {
+            this.isMetric = false;
+            this.isLoding = false;
         });
     }
 
