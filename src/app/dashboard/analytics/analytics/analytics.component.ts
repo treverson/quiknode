@@ -45,6 +45,9 @@ export class AnalyticsComponent implements OnInit  {
             this.selctedInstance = this.instanceList[0]['instance-id'];
             this.fnGetMetric();
         });
+        this._instance.instances.subscribe((instances) => {
+            this.instanceList = instances;
+        });
     }
 
     fnDisplayMetrics(columns, values) {

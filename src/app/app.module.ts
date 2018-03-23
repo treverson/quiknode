@@ -21,6 +21,7 @@ import { CreateUpdateInstanceComponent } from './dashboard/instance/create-updat
 import { ModalWrapperComponent } from './common/components/modal-wrapper/modal-wrapper.component';
 import { SuspendInstanceComponent } from './dashboard/instance/suspend-instance/suspend-instance.component';
 import { AnalyticsComponent } from './dashboard/analytics/analytics/analytics.component';
+import { SingleInstanceComponent } from './dashboard/instance/single-instance/single-instance.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { AnalyticsComponent } from './dashboard/analytics/analytics/analytics.co
         CreateUpdateInstanceComponent,
         ModalWrapperComponent,
         SuspendInstanceComponent,
-        AnalyticsComponent
+        AnalyticsComponent,
+        SingleInstanceComponent
     ],
     imports: [
         BrowserModule,

@@ -8,21 +8,11 @@ import { trigger, state, transition, style, animate } from '@angular/animations'
     selector: 'app-instance',
     templateUrl: './instance.component.html',
     styleUrls: ['./instance.component.css'],
-    animations: [
-        trigger('visibilityChanged', [
-            state('shown', style({display: 'block'})),
-            state('hidden', style({display: 'none'})),
-            transition('shown => hidden', animate('0.3s 600ms ease-out')),
-            transition('hidden => shown', animate('0.1s 100ms ease-in')),
-        ])
-    ]
 })
 export class InstanceComponent implements OnInit {
     instances: any[];
     showInstanceCreateModal: boolean;
     showSuspendModal: boolean;
-    visibilityState: String = 'hidden';
-    visibleIndex: number;
     instanceObject;
 
     constructor(private _instance: InstanceService) {
@@ -41,12 +31,12 @@ export class InstanceComponent implements OnInit {
                     instance.created =  moment(instance.created).format('MM-DD-YYYY');
                     return instance;
                 });
+                this._instance.instances.next(this.instances);
             }
         });
     }
 
-    fnShowCreateModal(e, obj) {
-        e.preventDefault();
+    fnShowCreateModal(obj) {
         this.instanceObject = obj;
         this.showInstanceCreateModal = true;
     }
@@ -58,22 +48,12 @@ export class InstanceComponent implements OnInit {
         this.showInstanceCreateModal = false;
     }
 
-    fnShowSuspendModal(e) {
-        e.preventDefault();
+    fnShowSuspendModal() {
         this.showSuspendModal = true;
     }
 
     fnHideSuspendModal() {
         this.showSuspendModal = false;
-    }
-
-    fadeInFadeOut(index: number) {
-        this.visibleIndex = index;
-        if (this.visibilityState === 'hidden') {
-            this.visibilityState = 'shown';
-        } else {
-            this.visibilityState = 'hidden';
-        }
     }
 
 }

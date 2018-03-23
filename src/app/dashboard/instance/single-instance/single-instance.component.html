@@ -1,0 +1,15 @@
+<div class="info-row shadow" (mouseenter)="fadeInFadeOut()" (mouseleave)="fadeInFadeOut()">
+    <div class="name-label bold">{{instance.name}}</div>
+    <div class="grey-text">Used for testing purposes. Do not suspend.</div>
+    <div class="stat-block">
+        <p>Online since: {{instance.created}}</p>
+    </div>
+    <div class="hover-menu" [@visibilityChanged]="visibilityState">
+        <a href="#" title="Start / Stop" data-target="suspend_instance"
+           class="button btn-round btn-m w-button" (click)="showSuspendModal($event)"></a>
+        <a href="#" title="Settings" data-target="edit_instance"
+           (click)="showCreateModal($event)"
+           class="button btn-round btn-m w-button"></a>
+    </div>
+    <img src="assets/images/mini-chart.JPG" class="microchart">
+</div>
