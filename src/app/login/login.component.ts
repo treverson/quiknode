@@ -37,7 +37,9 @@ export class LoginComponent implements OnInit {
                 this._router.navigate(['dashboard']);
             })
             .catch((error) => {
-                this._toastr.fnWarning('Login failed.');
+                if (error.status !== 401 && error.status !== 502) {
+                    this._toastr.fnWarning('Login failed.');
+                }
             });
     }
 

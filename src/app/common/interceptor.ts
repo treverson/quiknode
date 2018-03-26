@@ -13,10 +13,11 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import {ToastrService} from './services/toastr.service';
 
 @Injectable()
 export class InterceptorProvider implements HttpInterceptor {
-    constructor() {
+    constructor(private _toastr: ToastrService) {
 
     }
 
@@ -39,6 +40,11 @@ export class InterceptorProvider implements HttpInterceptor {
                     switch (error.status) {
                         case 401:
                             localStorage.removeItem('AUTH_TOKEN');
+                            this._toastr.fnWarning(error.error || error.message || 'Something went wrong.');
+                            console.log(error.error);
+                            break;
+                        case 502:
+                            this._toastr.fnWarning('Internal server error.');
                             console.log(error.error);
                             break;
                         default:

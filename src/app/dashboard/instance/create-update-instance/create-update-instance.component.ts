@@ -111,8 +111,10 @@ export class CreateUpdateInstanceComponent implements OnInit {
                     this._toastr.fnSuccess('Instance created successfully.');
                     this.fnHideModal.next(true);
                 })
-                .catch(() => {
-                    this._toastr.fnWarning('Instance creation failed.');
+                .catch((err) => {
+                    if (err.status !== 401 && err.status !== 502) {
+                        this._toastr.fnWarning('Instance creation failed.');
+                    }
                 });
         }
     }

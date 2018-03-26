@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {InstanceService} from '../../common/services/instance-service/instance.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import { trigger, state, transition, style, animate } from '@angular/animations';
 
 @Component({
     selector: 'app-instance',

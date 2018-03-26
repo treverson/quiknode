@@ -41,13 +41,10 @@ export class AnalyticsComponent implements OnInit  {
             'websocket-messages-out'
         ];
         this.selectedMetric = this.metricList[0];
-        this._instance.fnGetInstances().then((response: any) => {
-            this.instanceList = response.instances;
-            this.selctedInstance = this.instanceList[0]['instance-id'];
-            this.fnGetMetric();
-        });
         this._instance.instances.subscribe((instances) => {
             this.instanceList = instances;
+            this.selctedInstance = this.instanceList[0]['instance-id'];
+            this.fnGetMetric();
         });
     }
 
