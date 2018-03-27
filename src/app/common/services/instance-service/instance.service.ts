@@ -5,6 +5,7 @@ import {Constant} from '../../constant';
 @Injectable()
 export class InstanceService {
     public instances: EventEmitter<any> = new EventEmitter();
+    public selectedInstanceAnalytics: EventEmitter<any> = new EventEmitter();
 
     constructor(private _http: HttpClient) {
     }

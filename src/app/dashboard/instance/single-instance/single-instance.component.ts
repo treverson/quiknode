@@ -62,13 +62,13 @@ export class SingleInstanceComponent implements OnInit {
     fnGetMetric() {
         this.getMetricObj['instance-id'] = this.instance['instance-id'];
         this.getMetricObj['metrics-type'] = 'http-requests';
-        this._instance.fnGetMetric(this.getMetricObj).then((response: any) => {
+        /*this._instance.fnGetMetric(this.getMetricObj).then((response: any) => {
             if (response.values) {
                 setTimeout(() => {
                     this.fnDisplayMetrics(response.columns, response.values);
                 }, 0);
             }
-        });
+        });*/
     }
 
     fnDisplayMetrics(columns, values) {
@@ -139,6 +139,10 @@ export class SingleInstanceComponent implements OnInit {
         };
 
         this.chart = chart(this.chartTarget.nativeElement, options);
+    }
+
+    populateChart() {
+        this._instance.selectedInstanceAnalytics.next(this.instance['instance-id']);
     }
 
 }

@@ -5,4 +5,5 @@
 .microchart {
     height: 38px;
     width: 80px;
+    cursor: pointer;
 }
