@@ -47,7 +47,7 @@ export class CreateUpdateInstanceComponent implements OnInit {
             }
         };
         this.validatorType = 'validateToken';
-        this.validateReferer = [""];
+        this.validateReferer = [''];
         this.validateToken = '';
     }
 
@@ -128,7 +128,11 @@ export class CreateUpdateInstanceComponent implements OnInit {
     clearValidatorReferer(event, index) {
         event.stopPropagation();
         event.preventDefault();
-        this.validateReferer.splice(index, 1);
+        if (this.validateReferer.length > 1) {
+            this.validateReferer.splice(index, 1);
+        } else {
+            this.validateReferer = [''];
+        }
     }
 
     addReferer(event) {
