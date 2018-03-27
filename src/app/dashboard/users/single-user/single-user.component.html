@@ -1,33 +1,17 @@
-<div class="info-row shadow">
+<div class="info-row shadow" (mouseenter)="fadeInFadeOut()" (mouseleave)="fadeInFadeOut()">
     <img src="assets/images/Optimus_Prime_Helmet.png" class="userpic">
-    <div class="name-label bold">Optimus Prime Jr</div>
+    <div class="name-label bold">{{user.name}}</div>
     <div class="small-pill">
         <div class="text-block">admin</div>
     </div>
-    <div class="grey-text">iamprime@gmail.com</div>
+    <div class="grey-text">{{user.email}}</div>
     <p class="stat-block">Last login: Today</p>
-    <div class="hover-menu">
-        <a href="#" title="Delete user" data-target="delete_user"
-           class="button btn-round btn-m w-button"></a>
-        <a href="#" title="Suspend user" data_target="suspend_user"
-           class="button btn-round btn-m w-button"></a>
-        <a href="#" title="Settings" data-target="edit_user"
-           class="button btn-round btn-m w-button"></a>
-    </div>
-</div>
-<div class="info-row shadow">
-    <img src="assets/images/Silver_Iron_Man_Mask.png"
-         srcset="assets/images/Silver_Iron_Man_Mask-p-500.png 500w, assets/images/Silver_Iron_Man_Mask.png 512w"
-         sizes="50px" class="userpic">
-    <div class="name-label bold">Silver surfer thompson</div>
-    <div class="grey-text">ssthom@gmail.com</div>
-    <p class="stat-block">Last login: 12-12-2018</p>
-    <div class="hover-menu">
-        <a href="#" title="Delete user" data-target="delete_user"
-           class="button btn-round btn-m w-button"></a>
-        <a href="#" title="Suspend user" data_target="suspend_user"
-           class="button btn-round btn-m w-button"></a>
-        <a href="#" title="Settings" data-target="edit_user"
-           class="button btn-round btn-m w-button"></a>
+    <div class="hover-menu" [@visibilityChanged]="visibilityState">
+        <button title="Delete user" data-target="delete_user"
+                class="button btn-round btn-m w-button"></button>
+        <button href="#" title="Suspend user" data_target="suspend_user"
+           class="button btn-round btn-m w-button"></button>
+        <button href="#" title="Settings" data-target="edit_user"
+           class="button btn-round btn-m w-button"></button>
     </div>
 </div>

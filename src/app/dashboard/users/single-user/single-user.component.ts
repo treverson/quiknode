@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
@@ -15,8 +15,11 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     ]
 })
 export class SingleUserComponent implements OnInit {
+    @Input() user: any;
     visibilityState: String;
+
     constructor() {
+        this.visibilityState = 'hidden';
     }
 
     ngOnInit() {

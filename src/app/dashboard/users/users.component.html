@@ -4,8 +4,8 @@
         <div class="icon"></div>
     </button>
     <div class="card flex">
-        <div>
-            <app-single-user>
+        <div *ngFor="let user of users; let i = index">
+            <app-single-user [user]="user">
             </app-single-user>
         </div>
 

@@ -25,6 +25,7 @@ import { SingleInstanceComponent } from './dashboard/instance/single-instance/si
 import { UsersComponent } from './dashboard/users/users.component';
 import { CreateUpdateUserComponent } from './dashboard/users/create-update-user/create-update-user.component';
 import { SingleUserComponent } from './dashboard/users/single-user/single-user.component';
+import { UserService } from './common/services/user-service/user.service';
 
 @NgModule({
     declarations: [
@@ -55,7 +56,8 @@ import { SingleUserComponent } from './dashboard/users/single-user/single-user.c
         AuthenticateGuard,
         NotAuthenticateGuard,
         ToastrService,
-        InstanceService
+        InstanceService,
+        UserService
     ],
     bootstrap: [AppComponent]
 })
