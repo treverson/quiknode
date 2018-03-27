@@ -99,7 +99,7 @@ export class CreateUpdateInstanceComponent implements OnInit {
             this._instance.fnUpdateInstance(instanceObject)
                 .then((response: any) => {
                     this._toastr.fnSuccess('Instance updated successfully.');
-                    this.fnHideModal.next(true);
+                    this.fnHideModal.next();
                 })
                 .catch(() => {
                     this._toastr.fnWarning('Update instance failed.');
