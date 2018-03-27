@@ -14,6 +14,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {ToastrService} from './services/toastr.service';
+import * as _ from 'lodash';
 
 @Injectable()
 export class InterceptorProvider implements HttpInterceptor {
@@ -37,14 +38,21 @@ export class InterceptorProvider implements HttpInterceptor {
                 }
             }, (error: any) => {
                 if (error instanceof HttpErrorResponse) {
+                    let message = '';
+                    if (_.isObject(error.error)) {
+                        message = error.error.message;
+                    } else {
+                        message = error.error || error.message || 'Something went wrong. Internal server error.';
+                    }
                     switch (error.status) {
                         case 401:
                             localStorage.removeItem('AUTH_TOKEN');
-                            this._toastr.fnWarning(error.error || error.message || 'Something went wrong.');
+                            this._toastr.fnWarning(message);
                             console.log(error.error);
                             break;
                         case 502:
-                            this._toastr.fnWarning('Internal server error.');
+                        case 404:
+                            this._toastr.fnWarning(message);
                             console.log(error.error);
                             break;
                         default:
