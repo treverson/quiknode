@@ -6,7 +6,7 @@
     <div class="w-row">
         <div class="w-col w-col-4">
             <select id="Select-instance" name="Select-instance" data-name="Select instance"
-                    class="w-select" [(ngModel)]="selctedInstance" (change)="fnGetMetric()">
+                    class="w-select" [(ngModel)]="selectedInstance" (change)="fnGetMetric()">
                 <!-- <option value="">Instance ...</option>-->
                 <option value="First" *ngFor="let instance of instanceList; let i =index"
                         [value]="instance['instance-id']">
@@ -30,7 +30,7 @@
             </select>
         </div>
     </div>
-    <div *ngIf="isMetric && !isLoding" id="chart" class="shadow chart" #chartTarget></div>
-    <div *ngIf="!isMetric && !isLoding" class="no-result">No Results Found</div>
-    <img *ngIf="isLoding" src="assets/images/loader.gif" class="loader">
+    <div *ngIf="isMetric && !isLoading" id="chart" class="shadow chart" #chartTarget></div>
+    <div *ngIf="!isMetric && !isLoading" class="no-result">No Results Found</div>
+    <img *ngIf="isLoading" src="assets/images/loader.gif" class="loader">
 </div>

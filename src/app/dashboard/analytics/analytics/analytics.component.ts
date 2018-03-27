@@ -17,18 +17,13 @@ export class AnalyticsComponent implements OnInit  {
     public metricList: string[];
     public instanceList: any;
     public selectedMetric: string;
-    public selctedInstance: any;
-    public getMetricObj: any;
+    public selectedInstance: any;
     public isMetric: boolean;
-    public isLoding: boolean;
+    public isLoading: boolean;
 
     constructor(private _instance: InstanceService) {
         this.metricList = [];
         this.instanceList = [];
-        this.getMetricObj = {
-            'instance-id': '',
-            'metrics-type': '',
-        };
         this.isMetric = false;
     }
 
@@ -43,15 +38,15 @@ export class AnalyticsComponent implements OnInit  {
         this.selectedMetric = this.metricList[0];
         this._instance.instances.subscribe((instances) => {
             this.instanceList = instances;
-            if (!this.selctedInstance) {
-                this.selctedInstance = this.instanceList[0]['instance-id'];
+            if (!this.selectedInstance) {
+                this.selectedInstance = this.instanceList[0]['instance-id'];
                 this.fnGetMetric();
             }
         });
 
         this._instance.selectedInstanceAnalytics.subscribe((instanceId) => {
             if (instanceId) {
-                this.selctedInstance = instanceId;
+                this.selectedInstance = instanceId;
                 this.fnGetMetric();
             }
         });
@@ -126,11 +121,13 @@ export class AnalyticsComponent implements OnInit  {
     }
 
     fnGetMetric() {
-        this.isLoding = true;
-        this.getMetricObj['instance-id'] = this.selctedInstance;
-        this.getMetricObj['metrics-type'] = this.selectedMetric;
-        this._instance.fnGetMetric(this.getMetricObj).then((response: any) => {
-            this.isLoding = false;
+        this.isLoading = true;
+        const getMetricObj = {
+            'instance-id': this.selectedInstance,
+            'metrics-type':  this.selectedMetric,
+        };
+        this._instance.fnGetMetric(getMetricObj).then((response: any) => {
+            this.isLoading = false;
             if (response.values) {
                 this.isMetric = true;
                 setTimeout(() => {
@@ -141,7 +138,7 @@ export class AnalyticsComponent implements OnInit  {
             }
         }).catch((error) => {
             this.isMetric = false;
-            this.isLoding = false;
+            this.isLoading = false;
         });
     }
 
