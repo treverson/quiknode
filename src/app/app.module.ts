@@ -22,6 +22,9 @@ import { ModalWrapperComponent } from './common/components/modal-wrapper/modal-w
 import { SuspendInstanceComponent } from './dashboard/instance/suspend-instance/suspend-instance.component';
 import { AnalyticsComponent } from './dashboard/analytics/analytics/analytics.component';
 import { SingleInstanceComponent } from './dashboard/instance/single-instance/single-instance.component';
+import { UsersComponent } from './dashboard/users/users.component';
+import { CreateUpdateUserComponent } from './dashboard/users/create-update-user/create-update-user.component';
+import { SingleUserComponent } from './dashboard/users/single-user/single-user.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +37,10 @@ import { SingleInstanceComponent } from './dashboard/instance/single-instance/si
         ModalWrapperComponent,
         SuspendInstanceComponent,
         AnalyticsComponent,
-        SingleInstanceComponent
+        SingleInstanceComponent,
+        UsersComponent,
+        CreateUpdateUserComponent,
+        SingleUserComponent
     ],
     imports: [
         BrowserModule,
