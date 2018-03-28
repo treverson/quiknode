@@ -32,4 +32,16 @@ export class UserService {
         });
     }
 
+    fnGetPermissions() {
+        return new Promise((resolve, reject) => {
+            this._http
+                .get(Constant.API_URL + 'account/permissions')
+                .subscribe((response: any) => {
+                    resolve(response);
+                }, (error) => {
+                    reject(error);
+                });
+        });
+    }
+
 }

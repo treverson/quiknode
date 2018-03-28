@@ -113,30 +113,12 @@
             </div>
             <div class="w-col w-col-6 p-r-10 p-l-10">
                 <h4 class="modal-header">permissions</h4>
-                <div class="checkbox w-checkbox">
+                <div class="checkbox w-checkbox" *ngFor="let per of permissions">
                     <input type="checkbox" name="checkbox-8" data-name="Checkbox 8"
+                           [value]="per['permission-id']"
+                           id="permission-id[i]"
                            class="checkbox-field w-checkbox-input">
-                    <label class="checkbox-label w-form-label">add users</label>
-                </div>
-                <div class="checkbox w-checkbox">
-                    <input type="checkbox" name="checkbox-7" data-name="Checkbox 7"
-                           class="checkbox-field w-checkbox-input">
-                    <label class="checkbox-label w-form-label">delete instances</label>
-                </div>
-                <div class="checkbox w-checkbox">
-                    <input type="checkbox" name="checkbox-6" data-name="Checkbox 6"
-                           class="checkbox-field w-checkbox-input">
-                    <label class="checkbox-label w-form-label">create instances</label>
-                </div>
-                <div class="checkbox w-checkbox">
-                    <input type="checkbox" name="checkbox-5" data-name="Checkbox 5"
-                           class="checkbox-field w-checkbox-input">
-                    <label class="checkbox-label w-form-label">delete users</label>
-                </div>
-                <div class="checkbox w-checkbox">
-                    <input type="checkbox" name="checkbox-4" data-name="Checkbox 4"
-                           class="checkbox-field w-checkbox-input">
-                    <label class="checkbox-label w-form-label">list users</label>
+                    <label class="checkbox-label w-form-label" for="permission-id[i]">{{per.name}}</label>
                 </div>
             </div>
         </div>

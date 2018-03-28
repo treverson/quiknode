@@ -10,6 +10,7 @@ import {ToastrService} from '../../../common/services/toastr.service';
 })
 export class CreateUpdateUserComponent implements OnInit {
     userObj: any;
+    permissions: any;
     isPasswordMatching: boolean;
     @Output() fnHideModal = new EventEmitter<any>();
     public emailRegEx: any = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
@@ -21,9 +22,13 @@ export class CreateUpdateUserComponent implements OnInit {
             password: '',
             confirmPassword: '',
         };
+        this.permissions = [];
     }
 
     ngOnInit() {
+        this._user.fnGetPermissions().then((response) => {
+            this.permissions = response['permission'];
+        });
     }
 
     fnCreateUserClick(userObj, userForm) {
