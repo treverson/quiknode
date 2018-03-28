@@ -13,8 +13,6 @@ app.all("/api/*", function (req, res) {
         method: req.method,
         timeout: 30000
     }, function (error, response, body) {
-        console.log("response ==========> ", response);
-        console.log("body ==========> ", body);
         if (error) {
             console.log('ERROR ===========> ', error);
             if (error.code === "ECONNRESET" || error.code === "ECONNREFUSED" || error.code === "ESOCKETTIMEDOUT") {
