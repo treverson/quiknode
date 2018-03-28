@@ -35,7 +35,10 @@ export class UsersComponent implements OnInit {
         this.showUserCreateModal = true;
     }
 
-    fnHideCreateModal() {
+    fnHideCreateModal(created) {
+        if (created) {
+            this.fnGetUsers();
+        }
         this.showUserCreateModal = false;
     }
 

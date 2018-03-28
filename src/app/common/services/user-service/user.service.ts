@@ -20,4 +20,16 @@ export class UserService {
         });
     }
 
+    fnCreateUser(obj: any) {
+        return new Promise((resolve, reject) => {
+            this._http
+                .post(Constant.API_URL + 'account/user', obj)
+                .subscribe((response: any) => {
+                    resolve(response);
+                }, (error) => {
+                    reject(error);
+                });
+        });
+    }
+
 }
