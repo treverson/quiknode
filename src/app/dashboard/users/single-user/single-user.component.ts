@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
@@ -16,6 +16,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class SingleUserComponent implements OnInit {
     @Input() user: any;
+    @Output() fnShowUserModal =  new EventEmitter<any>();
     visibilityState: String;
 
     constructor() {
@@ -31,6 +32,11 @@ export class SingleUserComponent implements OnInit {
         } else {
             this.visibilityState = 'hidden';
         }
+    }
+
+    showUserModal(e) {
+        e.preventDefault();
+        this.fnShowUserModal.next(this.user);
     }
 
 }

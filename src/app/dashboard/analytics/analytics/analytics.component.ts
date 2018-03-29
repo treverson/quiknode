@@ -117,7 +117,9 @@ export class AnalyticsComponent implements OnInit  {
             }]
         };
 
-        this.chart = chart(this.chartTarget.nativeElement, options);
+        if (this.chartTarget) {
+            this.chart = chart(this.chartTarget.nativeElement, options);
+        }
     }
 
     fnGetMetric() {

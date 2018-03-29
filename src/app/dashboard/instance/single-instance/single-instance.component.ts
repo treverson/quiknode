@@ -56,7 +56,6 @@ export class SingleInstanceComponent implements OnInit {
     showCreateModal(e) {
         e.preventDefault();
         this.fnShowCreateModal.next(this.instance);
-
     }
 
     fnGetMetric() {
@@ -142,6 +141,7 @@ export class SingleInstanceComponent implements OnInit {
     }
 
     populateChart() {
+        window.scroll(0, 0);
         this._instance.selectedInstanceAnalytics.next(this.instance['instance-id']);
     }
 

@@ -32,6 +32,18 @@ export class UserService {
         });
     }
 
+    fnUpdateUser(obj: any, userId: string) {
+        return new Promise((resolve, reject) => {
+            this._http
+                .put(Constant.API_URL + `account/user/${userId}`, obj)
+                .subscribe((response: any) => {
+                    resolve(response);
+                }, (error) => {
+                    reject(error);
+                });
+        });
+    }
+
     fnGetPermissions() {
         return new Promise((resolve, reject) => {
             this._http

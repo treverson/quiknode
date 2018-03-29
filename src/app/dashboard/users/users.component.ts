@@ -11,6 +11,7 @@ import * as _ from  'lodash';
 export class UsersComponent implements OnInit {
     showUserCreateModal: boolean;
     users?: any[];
+    userObject?: any;
 
     constructor(private _user: UserService) {
         this.showUserCreateModal = false;
@@ -31,7 +32,8 @@ export class UsersComponent implements OnInit {
         });
     }
 
-    fnShowCreateModal() {
+    fnShowCreateModal(obj) {
+        this.userObject = obj;
         this.showUserCreateModal = true;
     }
 

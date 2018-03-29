@@ -1,4 +1,4 @@
-<h2 class="modal-header">add user</h2>
+<h2 class="modal-header">{{editUserObject ? "edit " : "add "}}user</h2>
 <form #userForm="ngForm" id="user-form" name="user-form" data-name="User Form">
     <div class="w-container">
         <div class="btm10 w-row container-row">
@@ -75,7 +75,7 @@
                         </small>
                     </div>
 
-                    <small class="text-danger" *ngIf="!isPasswordMatching && confirmPassword.dirty">
+                    <small class="text-danger" *ngIf="!isPasswordMatching && (confirmPassword.dirty || password.dirty)">
                         Passwords do not match.
                     </small>
                 </div>
@@ -113,10 +113,13 @@
             </div>
             <div class="w-col w-col-6 p-r-10 p-l-10">
                 <h4 class="modal-header">permissions</h4>
-                <div class="checkbox w-checkbox" *ngFor="let per of permissions">
-                    <input type="checkbox" name="checkbox-8" data-name="Checkbox 8"
+                <div class="checkbox w-checkbox" *ngFor="let per of permissions; let i = index">
+                    <input type="checkbox" data-name="Checkbox 8"
                            [value]="per['permission-id']"
+                           name="{{per['permission-id']}}"
                            id="permission-id[i]"
+                           [checked]="selectedPermissions.indexOf(per['permission-id']) > -1"
+                           (change) ="fnUpdateSelectedPermissions($event)"
                            class="checkbox-field w-checkbox-input">
                     <label class="checkbox-label w-form-label" for="permission-id[i]">{{per.name}}</label>
                 </div>
@@ -124,7 +127,7 @@
         </div>
     </div>
     <button href="#" class="button icon-btn float-right w-inline-block"
-            (click)="userForm.valid  && fnCreateUserClick(userObj, userForm)"
+            (click)="(userForm.valid && isPasswordMatching) && fnCreateUserClick(userObj, userForm)"
     >
         <div class="w-row">
             <div class="w-col w-col-3">
