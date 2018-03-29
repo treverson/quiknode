@@ -118,7 +118,7 @@
                            [value]="per['permission-id']"
                            name="{{per['permission-id']}}"
                            id="permission-id[i]"
-                           [checked]="selectedPermissions.indexOf(per['permission-id']) > -1"
+                           [checked]="fnCheckPermission(per)"
                            (change) ="fnUpdateSelectedPermissions($event)"
                            class="checkbox-field w-checkbox-input">
                     <label class="checkbox-label w-form-label" for="permission-id[i]">{{per.name}}</label>

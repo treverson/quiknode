@@ -40,7 +40,7 @@ export class InterceptorProvider implements HttpInterceptor {
                 if (error instanceof HttpErrorResponse) {
                     let message = '';
                     if (_.isObject(error.error)) {
-                        message = error.error.message;
+                        message = error.error.message || 'Something went wrong. Internal server error.';
                     } else {
                         message = error.error || error.message || 'Something went wrong. Internal server error.';
                     }

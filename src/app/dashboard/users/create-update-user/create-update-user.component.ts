@@ -30,6 +30,14 @@ export class CreateUpdateUserComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (this.editUserObject) {
+            this._user.fnGetUserPermissions(this.editUserObject['user-id'])
+                .then(res => {
+                    if (!_.isEmpty(res['user-permissions'])) {
+                        this.selectedPermissions = res['user-permissions'];
+                    }
+                });
+        }
         this._user.fnGetPermissions().then((response) => {
             this.permissions = response['permission'];
         });
@@ -52,13 +60,20 @@ export class CreateUpdateUserComponent implements OnInit {
             email: userObj.email,
             'otp-enabled': false,
         };
+        const permissionObject = {
+            'user-permissions': this.selectedPermissions
+        };
+
         if (this.userObj.password !== 'PASSWORD') {
             userObject.password = hashedPassword;
         }
         if (this.editUserObject) {
-             this._user.fnUpdateUser(userObject, this.editUserObject['user-id'])
+                this._user.fnUpdateUser(userObject, this.editUserObject['user-id'])
                 .then((response: any) => {
-                    this._toastr.fnSuccess('User updated successfully.');
+                    this._user.fnUpdateUserPermissions(permissionObject, this.editUserObject['user-id'])
+                        .then(res => {
+                            this._toastr.fnSuccess('User updated successfully.');
+                        });
                     this.fnHideModal.next(true);
                 })
                 .catch((err) => {
@@ -71,6 +86,7 @@ export class CreateUpdateUserComponent implements OnInit {
                  .then((response: any) => {
                      this._toastr.fnSuccess('User created successfully.');
                      this.fnHideModal.next(true);
+                     this._user.fnUpdateUserPermissions(permissionObject, response['user-id']);
                  })
                  .catch((err) => {
                      if (err.status !== 401 && err.status !== 502 && err.status !== 404) {
@@ -104,5 +120,9 @@ export class CreateUpdateUserComponent implements OnInit {
                 );
             }
         }
+    }
+
+    fnCheckPermission(permission) {
+        return _.findIndex(this.selectedPermissions, per => per['permission-id'] === permission['permission-id']) > -1;
     }
 }

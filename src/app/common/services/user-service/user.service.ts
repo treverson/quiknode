@@ -56,4 +56,28 @@ export class UserService {
         });
     }
 
+    fnGetUserPermissions(userId) {
+        return new Promise((resolve, reject) => {
+            this._http
+                .get(Constant.API_URL + `account/user/${userId}/permissions`)
+                .subscribe((response: any) => {
+                    resolve(response);
+                }, (error) => {
+                    reject(error);
+                });
+        });
+    }
+
+    fnUpdateUserPermissions(obj, userId) {
+        return new Promise((resolve, reject) => {
+            this._http
+                .put(Constant.API_URL + `account/user/${userId}/permissions`, obj)
+                .subscribe((response: any) => {
+                    resolve(response);
+                }, (error) => {
+                    reject(error);
+                });
+        });
+    }
+
 }
