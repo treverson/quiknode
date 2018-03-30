@@ -4,6 +4,9 @@ import {LoginComponent} from './login/login.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {AuthenticateGuard} from './common/services/auth-service/authenticate.guard';
 import {NotAuthenticateGuard} from './common/services/auth-service/not.authenticate.guard';
+import {MainComponent} from './main/main.component';
+import {UsersComponent} from './dashboard/users/users.component';
+import {InstanceComponent} from './dashboard/instance/instance.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -12,9 +15,14 @@ const routes: Routes = [
         component: LoginComponent,
         canActivate: [NotAuthenticateGuard]
     }, {
-        path: 'dashboard',
-        component: DashboardComponent,
-        canActivate: [AuthenticateGuard]
+        path: '',
+        component: MainComponent,
+        canActivate: [AuthenticateGuard],
+        children: [
+            {path: 'dashboard', component: DashboardComponent},
+            {path: 'users', component: UsersComponent},
+            {path: 'instances', component: InstanceComponent},
+        ]
     }
 ];
 
