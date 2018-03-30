@@ -17,6 +17,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class SingleUserComponent implements OnInit {
     @Input() user: any;
     @Output() fnShowUserModal =  new EventEmitter<any>();
+    @Output() fnShowDeleteModal =  new EventEmitter<any>();
     visibilityState: String;
 
     constructor() {
@@ -37,6 +38,11 @@ export class SingleUserComponent implements OnInit {
     showUserModal(e) {
         e.preventDefault();
         this.fnShowUserModal.next(this.user);
+    }
+
+    showDeleteModal(e) {
+        e.preventDefault();
+        this.fnShowDeleteModal.next(this.user);
     }
 
 }

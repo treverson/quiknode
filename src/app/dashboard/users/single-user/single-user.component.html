@@ -8,6 +8,7 @@
     <p class="stat-block">Last login: Today</p>
     <div class="hover-menu" [@visibilityChanged]="visibilityState">
         <a title="Delete user" data-target="delete_user"
+           (click)="showDeleteModal($event)"
                 class="button btn-round btn-m w-button"></a>
         <a title="Suspend user" data-target="suspend_user"
            class="button btn-round btn-m w-button"></a>

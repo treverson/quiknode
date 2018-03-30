@@ -12,9 +12,12 @@ export class UsersComponent implements OnInit {
     showUserCreateModal: boolean;
     users?: any[];
     userObject?: any;
+    showDeleteModal?: boolean;
+    deleteUser?: any;
 
     constructor(private _user: UserService) {
         this.showUserCreateModal = false;
+        this.showDeleteModal = false;
     }
 
     ngOnInit() {
@@ -44,4 +47,13 @@ export class UsersComponent implements OnInit {
         this.showUserCreateModal = false;
     }
 
+    fnShowDeleteModal(user) {
+        this.deleteUser = user;
+        this.showDeleteModal = true;
+    }
+
+    fnHideDeleteModal() {
+        this.deleteUser = null;
+        this.showDeleteModal = false;
+    }
 }

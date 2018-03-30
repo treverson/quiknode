@@ -80,4 +80,16 @@ export class UserService {
         });
     }
 
+    fnDeleteUser(userId) {
+        return new Promise((resolve, reject) => {
+            this._http
+                .delete(Constant.API_URL + `account/user/${userId}`)
+                .subscribe((response: any) => {
+                    resolve(response);
+                }, (error) => {
+                    reject(error);
+                });
+        });
+    }
+
 }
