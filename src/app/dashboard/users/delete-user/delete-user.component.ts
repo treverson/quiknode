@@ -17,7 +17,9 @@ export class DeleteUserComponent implements OnInit {
     ngOnInit() {
     }
 
-    fnDeleteUser() {
+    fnDeleteUser(e) {
+        e.stopPropagation();
+        e.preventDefault();
         this._user.fnDeleteUser(this.user['user-id']).then((response: any) => {
             this._toastr.fnSuccess('User deleted successfully!');
             this.fnHideModal.next();
@@ -29,7 +31,9 @@ export class DeleteUserComponent implements OnInit {
         });
     }
 
-    hideModal() {
+    hideModal(e) {
+        e.stopPropagation();
+        e.preventDefault();
         this.fnHideModal.next();
     }
 

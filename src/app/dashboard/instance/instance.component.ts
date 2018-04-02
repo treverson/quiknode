@@ -39,6 +39,7 @@ export class InstanceComponent implements OnInit {
                 });
                 this.originalInstances = _.clone(this.instances);
                 this._instance.instances.next(this.instances);
+                this.fnOnSearchTextChange();
             }
         });
     }
@@ -91,7 +92,6 @@ export class InstanceComponent implements OnInit {
         if (this.sortBy !== 'none') {
             this.fnOnSortChange();
         }
-
     }
 
 }

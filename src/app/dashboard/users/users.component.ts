@@ -11,13 +11,20 @@ import * as _ from  'lodash';
 export class UsersComponent implements OnInit {
     showUserCreateModal: boolean;
     users?: any[];
+    originalUsers: any[];
     userObject?: any;
     showDeleteModal?: boolean;
     deleteUser?: any;
+    sortBy: string;
+    sortType: string;
+    searchText: string;
 
     constructor(private _user: UserService) {
         this.showUserCreateModal = false;
         this.showDeleteModal = false;
+        this.sortBy = 'none';
+        this.sortType = 'asc';
+        this.searchText = '';
     }
 
     ngOnInit() {
@@ -31,6 +38,8 @@ export class UsersComponent implements OnInit {
                     user.created =  moment(user.created).format('MM-DD-YYYY');
                     return user;
                 });
+                this.originalUsers = _.clone(this.users);
+                this.fnOnSearchTextChange();
             }
         });
     }
@@ -56,4 +65,37 @@ export class UsersComponent implements OnInit {
         this.deleteUser = null;
         this.showDeleteModal = false;
     }
+
+    fnOnSortChange() {
+        switch (this.sortBy) {
+            case 'name':
+                this.users = _.orderBy(this.users, [user => user.name.toLowerCase()], [this.sortType]);
+                break;
+            case 'date':
+                this.users = _.orderBy(this.users, ['created'], [this.sortType]);
+                break;
+            case 'none':
+            default:
+                this.users =  this.originalUsers;
+                break;
+        }
+    }
+
+    fnOnSortTypeChange(event, sortType) {
+        event.stopPropagation();
+        event.preventDefault();
+        this.sortType = sortType;
+        this.fnOnSortChange();
+    }
+
+    fnOnSearchTextChange() {
+        this.users = _.filter(this.originalUsers,
+            user => user.name.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1 ||
+                user.email.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1);
+        if (this.sortBy !== 'none') {
+            this.fnOnSortChange();
+        }
+
+    }
+
 }
