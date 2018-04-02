@@ -16,12 +16,14 @@ export class InstanceComponent implements OnInit {
     instanceObject;
     sortBy: string;
     sortType: string;
+    searchText: string;
 
     constructor(private _instance: InstanceService) {
         this.showInstanceCreateModal = false;
         this.showSuspendModal = false;
         this.sortBy = 'none';
         this.sortType = 'asc';
+        this.searchText = '';
     }
 
     ngOnInit() {
@@ -64,10 +66,10 @@ export class InstanceComponent implements OnInit {
     fnOnSortChange() {
         switch (this.sortBy) {
             case 'name':
-                this.instances = _.orderBy(this.originalInstances, [instance => instance.name.toLowerCase()], [this.sortType]);
+                this.instances = _.orderBy(this.instances, [instance => instance.name.toLowerCase()], [this.sortType]);
                 break;
             case 'date':
-                this.instances = _.orderBy(this.originalInstances, ['created'], [this.sortType]);
+                this.instances = _.orderBy(this.instances, ['created'], [this.sortType]);
                 break;
             case 'none':
             default:
@@ -81,6 +83,15 @@ export class InstanceComponent implements OnInit {
         event.preventDefault();
         this.sortType = sortType;
         this.fnOnSortChange();
+    }
+
+    fnOnSearchTextChange() {
+        this.instances = _.filter(this.originalInstances,
+                instance => instance.name.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1);
+        if (this.sortBy !== 'none') {
+            this.fnOnSortChange();
+        }
+
     }
 
 }

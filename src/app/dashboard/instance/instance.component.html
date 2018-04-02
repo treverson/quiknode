@@ -24,6 +24,8 @@
        (click)="fnOnSortTypeChange($event, 'asc')">
         <div data-targe="my_account" class="icon"></div>
     </a>
+    <input type="text" class="w-input" maxlength="256" name="field-8" data-name="Field 8"
+           placeholder="Search Instances" id="field-8" [(ngModel)]="searchText" (ngModelChange)="fnOnSearchTextChange()">
     <div class="card">
         <div *ngFor="let ins of instances; let i = index">
             <app-single-instance [instance]="ins"
