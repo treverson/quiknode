@@ -1,3 +1,9 @@
 .name-label {
     display: block;
 }
+
+.input-field.inline-flat {
+    display: inline-block;
+    width: auto;
+    margin-top: -6px;
+}

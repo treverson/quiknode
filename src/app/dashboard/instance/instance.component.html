@@ -5,6 +5,25 @@
         (click)="fnShowCreateModal(null)">
         <div class="icon"></div>
     </button>
+    <select id="field-7" name="field-7" class="input-field inline-flat w-select"
+            [(ngModel)]="sortBy"
+            (ngModelChange)="fnOnSortChange()"
+    >
+        <option value="none">Sort By...</option>
+        <option value="date">Creation Date</option>
+        <option value="name">Name</option>
+    </select>
+    <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
+        *ngIf="this.sortType === 'asc' && this.sortBy !== 'none'"
+        (click)="fnOnSortTypeChange($event, 'desc')"
+    >
+        <div data-targe="my_account" class="icon"></div>
+    </a>
+    <a href="#" data-target="my_account" class="button btn-flat no-border hidden w-inline-block"
+       *ngIf="this.sortType === 'desc' && this.sortBy !== 'none'"
+       (click)="fnOnSortTypeChange($event, 'asc')">
+        <div data-targe="my_account" class="icon"></div>
+    </a>
     <div class="card">
         <div *ngFor="let ins of instances; let i = index">
             <app-single-instance [instance]="ins"

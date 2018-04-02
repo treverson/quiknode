@@ -10,13 +10,18 @@ import * as moment from 'moment';
 })
 export class InstanceComponent implements OnInit {
     instances: any[];
+    originalInstances: any[];
     showInstanceCreateModal: boolean;
     showSuspendModal: boolean;
     instanceObject;
+    sortBy: string;
+    sortType: string;
 
     constructor(private _instance: InstanceService) {
         this.showInstanceCreateModal = false;
         this.showSuspendModal = false;
+        this.sortBy = 'none';
+        this.sortType = 'asc';
     }
 
     ngOnInit() {
@@ -30,6 +35,7 @@ export class InstanceComponent implements OnInit {
                     instance.created =  moment(instance.created).format('MM-DD-YYYY');
                     return instance;
                 });
+                this.originalInstances = _.clone(this.instances);
                 this._instance.instances.next(this.instances);
             }
         });
@@ -53,6 +59,28 @@ export class InstanceComponent implements OnInit {
 
     fnHideSuspendModal() {
         this.showSuspendModal = false;
+    }
+
+    fnOnSortChange() {
+        switch (this.sortBy) {
+            case 'name':
+                this.instances = _.orderBy(this.originalInstances, [instance => instance.name.toLowerCase()], [this.sortType]);
+                break;
+            case 'date':
+                this.instances = _.orderBy(this.originalInstances, ['created'], [this.sortType]);
+                break;
+            case 'none':
+            default:
+                this.instances =  this.originalInstances;
+                break;
+        }
+    }
+
+    fnOnSortTypeChange(event, sortType) {
+        event.stopPropagation();
+        event.preventDefault();
+        this.sortType = sortType;
+        this.fnOnSortChange();
     }
 
 }
