@@ -14,3 +14,9 @@
     <!--<div id="chart1" class="microchart" #chartTarget1></div>-->
     <img src="assets/images/mini-chart.JPG" class="microchart" (click)="populateChart()">
 </div>
+
+<app-modal-wrapper [showModal]="showAnalyticsModal"
+                   *ngIf="showAnalyticsModal"
+                   (fnHideModal)="fnHideAnalyticsModal($event)">
+    <app-analytics [instances]="instances"></app-analytics>
+</app-modal-wrapper>

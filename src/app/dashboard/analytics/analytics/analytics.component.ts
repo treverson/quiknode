@@ -1,5 +1,6 @@
-import {AfterViewInit, Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild, ElementRef, Input} from '@angular/core';
 import {InstanceService} from '../../../common/services/instance-service/instance.service';
+import * as _ from 'lodash';
 import { chart } from 'highcharts';
 import * as Highcharts from 'highcharts';
 import * as HC_exporting from 'highcharts/modules/exporting';
@@ -12,6 +13,7 @@ HC_exporting(Highcharts);
 })
 export class AnalyticsComponent implements OnInit  {
     @ViewChild('chartTarget') chartTarget: ElementRef;
+    @Input() instances?: any[];
     chart: Highcharts.ChartObject;
 
     public metricList: string[];
@@ -47,6 +49,9 @@ export class AnalyticsComponent implements OnInit  {
         this._instance.selectedInstanceAnalytics.subscribe((instanceId) => {
             if (instanceId) {
                 this.selectedInstance = instanceId;
+                if (this.instances && !_.isEmpty(this.instances)) {
+                    this.instanceList = this.instances;
+                }
                 this.fnGetMetric();
             }
         });
@@ -142,6 +147,10 @@ export class AnalyticsComponent implements OnInit  {
             this.isMetric = false;
             this.isLoading = false;
         });
+    }
+
+    fnNotImplemented(e) {
+       this._instance.fnNotImplemented(e);
     }
 
 }

@@ -3,6 +3,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import * as HCs from 'highcharts';
 import {chart} from 'highcharts';
 import {InstanceService} from '../../../common/services/instance-service/instance.service';
+import {Location} from '@angular/common';
 
 @Component({
     selector: 'app-single-instance',
@@ -21,13 +22,16 @@ export class SingleInstanceComponent implements OnInit {
     @ViewChild('chartTarget1') chartTarget: ElementRef;
     chart: HCs.ChartObject;
     @Input() instance: any;
+    @Input() instances: any[];
     @Output() fnShowCreateModal =  new EventEmitter<any>();
     @Output() fnShowSuspendModal =  new EventEmitter<any>();
     visibilityState: String;
+    showAnalyticsModal: boolean;
     public getMetricObj: any;
 
-    constructor(private _instance: InstanceService) {
+    constructor(private _instance: InstanceService, private _location: Location) {
         this.visibilityState = 'hidden';
+        this.showAnalyticsModal = false;
         this.getMetricObj = {
             'instance-id': '',
             'metrics-type': '',
@@ -142,7 +146,15 @@ export class SingleInstanceComponent implements OnInit {
 
     populateChart() {
         window.scroll(0, 0);
-        this._instance.selectedInstanceAnalytics.next(this.instance['instance-id']);
+        if (!this._location.path().includes('dashboard')) {
+            this.showAnalyticsModal = true;
+        }
+        setTimeout(() => {
+            this._instance.selectedInstanceAnalytics.next(this.instance['instance-id']);
+        }, 0);
     }
 
+    fnHideAnalyticsModal() {
+        this.showAnalyticsModal = false;
+    }
 }

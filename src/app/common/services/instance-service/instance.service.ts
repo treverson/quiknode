@@ -69,4 +69,10 @@ export class InstanceService {
                 });
         });
     }
+
+    fnNotImplemented(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        alert('Not yet implemented!');
+    }
 }
