@@ -16,7 +16,9 @@ export class SuspendInstanceComponent implements OnInit {
     ngOnInit() {
     }
 
-    fnSuspendInstance() {
+    fnSuspendInstance(e) {
+        e.stopPropagation();
+        e.preventDefault();
         this._instance.fnSuspendInstance().then((response: any) => {
             this._toastr.fnSuccess('Instance suspended successfully!');
             this.fnHideModal.next();
@@ -26,7 +28,9 @@ export class SuspendInstanceComponent implements OnInit {
         });
     }
 
-    hideModal() {
+    hideModal(e) {
+        e.stopPropagation();
+        e.preventDefault();
         this.fnHideModal.next();
     }
 

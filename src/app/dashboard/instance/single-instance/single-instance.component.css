@@ -4,8 +4,15 @@
 
 .microchart.list {
     width: 75%;
+    height: 50px;
 }
 
 .p-20 {
     padding: 20px;
+}
+
+.microchart {
+    height: 38px;
+    width: 80px;
+    cursor: pointer;
 }
