@@ -17,6 +17,7 @@ export class InstanceComponent implements OnInit {
     sortBy: string;
     sortType: string;
     searchText: string;
+    viewType: string;
 
     constructor(private _instance: InstanceService) {
         this.showInstanceCreateModal = false;
@@ -24,6 +25,7 @@ export class InstanceComponent implements OnInit {
         this.sortBy = 'none';
         this.sortType = 'asc';
         this.searchText = '';
+        this.viewType = 'grid';
     }
 
     ngOnInit() {
@@ -92,6 +94,12 @@ export class InstanceComponent implements OnInit {
         if (this.sortBy !== 'none') {
             this.fnOnSortChange();
         }
+    }
+
+    changeView(e, viewType) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.viewType = viewType;
     }
 
 }

@@ -2,8 +2,10 @@
     display: block;
 }
 
-.microchart {
-    height: 38px;
-    width: 80px;
-    cursor: pointer;
+.microchart.list {
+    width: 75%;
+}
+
+.p-20 {
+    padding: 20px;
 }

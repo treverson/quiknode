@@ -22,6 +22,7 @@ export class SingleInstanceComponent implements OnInit {
     @ViewChild('chartTarget1') chartTarget: ElementRef;
     chart: HCs.ChartObject;
     @Input() instance: any;
+    @Input() viewType: any;
     @Input() instances: any[];
     @Output() fnShowCreateModal =  new EventEmitter<any>();
     @Output() fnShowSuspendModal =  new EventEmitter<any>();

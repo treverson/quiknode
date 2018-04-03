@@ -1,3 +1,7 @@
 .name-label {
     display: block;
 }
+
+.p-0 {
+    padding: 0px;
+}

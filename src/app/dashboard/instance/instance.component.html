@@ -5,10 +5,14 @@
                 (click)="fnShowCreateModal(null)">
             <div class="icon"></div>
         </button>
-        <a href="#" data-target="my_account" class="button btn-flat no-border hidden w-inline-block">
+        <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
+           *ngIf="viewType === 'list'"
+           (click)="changeView($event, 'grid')">
             <div data-targe="my_account" class="icon"></div>
         </a>
-        <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block">
+        <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
+           *ngIf="viewType === 'grid'"
+           (click)="changeView($event, 'list')">
             <div data-targe="my_account" class="icon"></div>
         </a>
         <a href="#" data-target="my_account" class="button btn-flat no-border float-right w-inline-block">
@@ -37,67 +41,26 @@
                placeholder="Search Instances" id="field-8" [(ngModel)]="searchText" (ngModelChange)="fnOnSearchTextChange()">
     </div>
     <div class="instances-dashboard">
-        <div class="card box-view">
-            <div class="info-row shadow" *ngFor="let ins of instances; let i = index">
+        <div class="card box-view" *ngIf="viewType === 'grid'">
+            <div class="info-row shadow p-0" *ngFor="let ins of instances; let i = index">
                 <app-single-instance [instance]="ins"
                                      (fnShowSuspendModal)="fnShowSuspendModal($event)"
                                      (fnShowCreateModal)="fnShowCreateModal($event)"
-                                     [instances]="instances">
+                                     [instances]="instances"
+                                     viewType="grid"
+                >
                 </app-single-instance>
             </div>
         </div>
-        <div class="card list">
-            <div class="info-row list">
-                <div class="row-2 w-row">
-                    <div class="w-col w-col-7">
-                        <div class="name-label bold">seriously-peaceful-meerkat</div>
-                        <div class="grey-text">Used for testing purposes. Do not suspend.</div>
-                        <div class="stat-block">
-                            <p>Online since: 10-12-2018</p>
-                        </div>
-                    </div>
-                    <div class="w-col w-col-5">
-                        <div class="hover-menu"><a href="#" title="Start / Stop" data-target="suspend_instance" class="button btn-round btn-m w-button"></a><a href="#" title="Settings" data-target="edit_instance" class="button btn-round btn-m w-button"></a></div><img src="images/mini-chart.JPG" data-target="show_metrics" title="Display Analytics" class="button microchart list"></div>
-                </div>
-            </div>
-            <div class="info-row list">
-                <div class="row-2 w-row">
-                    <div class="w-col w-col-7">
-                        <div class="name-label bold">seriously-peaceful-meerkat</div>
-                        <div class="grey-text">Used for testing purposes. Do not suspend.</div>
-                        <div class="stat-block">
-                            <p>Online since: 10-12-2018</p>
-                        </div>
-                    </div>
-                    <div class="w-col w-col-5">
-                        <div class="hover-menu"><a href="#" title="Start / Stop" data-target="suspend_instance" class="button btn-round btn-m w-button"></a><a href="#" title="Settings" data-target="edit_instance" class="button btn-round btn-m w-button"></a></div><img src="images/mini-chart.JPG" data-target="show_metrics" title="Display Analytics" class="button microchart list"></div>
-                </div>
-            </div>
-            <div class="info-row list">
-                <div class="row-2 w-row">
-                    <div class="w-col w-col-7">
-                        <div class="name-label bold">seriously-peaceful-meerkat</div>
-                        <div class="grey-text">Used for testing purposes. Do not suspend.</div>
-                        <div class="stat-block">
-                            <p>Online since: 10-12-2018</p>
-                        </div>
-                    </div>
-                    <div class="w-col w-col-5">
-                        <div class="hover-menu"><a href="#" title="Start / Stop" data-target="suspend_instance" class="button btn-round btn-m w-button"></a><a href="#" title="Settings" data-target="edit_instance" class="button btn-round btn-m w-button"></a></div><img src="images/mini-chart.JPG" data-target="show_metrics" title="Display Analytics" class="button microchart list"></div>
-                </div>
-            </div>
-            <div class="info-row list">
-                <div class="row-2 w-row">
-                    <div class="w-col w-col-7">
-                        <div class="name-label bold">seriously-peaceful-meerkat</div>
-                        <div class="grey-text">Used for testing purposes. Do not suspend.</div>
-                        <div class="stat-block">
-                            <p>Online since: 10-12-2018</p>
-                        </div>
-                    </div>
-                    <div class="w-col w-col-5">
-                        <div class="hover-menu"><a href="#" title="Start / Stop" data-target="suspend_instance" class="button btn-round btn-m w-button"></a><a href="#" title="Settings" data-target="edit_instance" class="button btn-round btn-m w-button"></a></div><img src="images/mini-chart.JPG" data-target="show_metrics" title="Display Analytics" class="button microchart list"></div>
-                </div>
+        <div class="card list"  *ngIf="viewType === 'list'">
+            <div class="info-row list" *ngFor="let ins of instances; let i = index">
+                <app-single-instance [instance]="ins"
+                                     (fnShowSuspendModal)="fnShowSuspendModal($event)"
+                                     (fnShowCreateModal)="fnShowCreateModal($event)"
+                                     [instances]="instances"
+                                     viewType="list"
+                >
+                </app-single-instance>
             </div>
         </div>
     </div>
