@@ -28,10 +28,10 @@
         </div>
     </div>
     <div *ngIf="isMetric && !isLoading" id="chart" class="shadow chart" #chartTarget></div>
-    <div *ngIf="!isMetric && !isLoading" class="chart">
+    <div *ngIf="!isMetric && !isLoading" class="container-div chart">
         <div>No Results Found</div>
     </div>
-    <div class="chart" *ngIf="isLoading">
+    <div class="chart container-div" *ngIf="isLoading">
         <img src="assets/images/loader.gif" class="loader">
     </div>
 </div>
