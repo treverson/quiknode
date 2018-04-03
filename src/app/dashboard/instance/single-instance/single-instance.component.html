@@ -1,4 +1,4 @@
-<div class="info-row shadow" (mouseenter)="fadeInFadeOut()" (mouseleave)="fadeInFadeOut()">
+<div (mouseenter)="fadeInFadeOut()" (mouseleave)="fadeInFadeOut()">
     <div class="name-label bold">{{instance.name}}</div>
     <div class="grey-text">Used for testing purposes. Do not suspend.</div>
     <div class="stat-block">
@@ -12,7 +12,7 @@
            class="button btn-round btn-m w-button"></a>
     </div>
     <!--<div id="chart1" class="microchart" #chartTarget1></div>-->
-    <img src="assets/images/mini-chart.JPG" class="microchart" (click)="populateChart()">
+    <img src="assets/images/mini-chart.JPG" class="button microchart" (click)="populateChart()">
 </div>
 
 <app-modal-wrapper [showModal]="showAnalyticsModal"
