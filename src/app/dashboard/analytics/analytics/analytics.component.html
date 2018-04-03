@@ -1,10 +1,6 @@
 <div class="analytics">
-    <h2 class="card-heading">Analytics</h2>
-    <a href="#" (click)="fnNotImplemented($event)" data-target="my_account" class="button btn-flat w-inline-block">
-        <div class="icon"></div>
-    </a>
-    <div class="w-row">
-        <div class="w-col w-col-4">
+    <div class="container-box w-row">
+        <div class="column-2 w-col w-col-4 w-col-small-4">
             <select id="Select-instance" name="Select-instance" data-name="Select instance"
                     class="w-select" [(ngModel)]="selectedInstance" (change)="fnGetMetric()">
                 <!-- <option value="">Instance ...</option>-->
@@ -14,14 +10,14 @@
                 </option>
             </select>
         </div>
-        <div class="w-col w-col-4">
+        <div class="w-col w-col-4 w-col-small-4">
             <select id="select-metric-2" name="select-metric" data-name="select-metric"
                     class="w-select" [(ngModel)]="selectedMetric" (change)="fnGetMetric()">
                 <!-- <option value="">Metric ...</option>-->
                 <option value="" *ngFor="let metric of metricList" [value]="metric">{{metric}}</option>
             </select>
         </div>
-        <div class="w-col w-col-4">
+        <div class="column-3 w-col w-col-4 w-col-small-4">
             <select id="field" name="field" class="w-select">
                 <option value="">Period</option>
                 <option value="First">First Choice</option>
@@ -31,6 +27,10 @@
         </div>
     </div>
     <div *ngIf="isMetric && !isLoading" id="chart" class="shadow chart" #chartTarget></div>
-    <div *ngIf="!isMetric && !isLoading" class="no-result">No Results Found</div>
-    <img *ngIf="isLoading" src="assets/images/loader.gif" class="loader">
+    <div *ngIf="!isMetric && !isLoading" class="chart">
+        <div>No Results Found</div>
+    </div>
+    <div class="chart" *ngIf="isLoading">
+        <img src="assets/images/loader.gif" class="loader">
+    </div>
 </div>

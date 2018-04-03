@@ -21,6 +21,11 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         this.currentPath = this._location.path();
+        this._router.events.subscribe(path => {
+            if (path && path['url']) {
+                this.currentPath = path['url'];
+            }
+        });
     }
 
     fnLogOut() {
