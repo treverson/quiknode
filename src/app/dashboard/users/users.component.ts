@@ -18,6 +18,7 @@ export class UsersComponent implements OnInit {
     sortBy: string;
     sortType: string;
     searchText: string;
+    viewType: string;
 
     constructor(private _user: UserService) {
         this.showUserCreateModal = false;
@@ -25,6 +26,17 @@ export class UsersComponent implements OnInit {
         this.sortBy = 'none';
         this.sortType = 'asc';
         this.searchText = '';
+        this.users = [{
+            'user-id' : '00000',
+            'name': 'test',
+            'email': 'test@gmail.com'
+        },
+            {
+                'user-id' : '000001',
+                'name': 'test1',
+                'email': 'test1@gmail.com'
+            }];
+        this.viewType = 'grid';
     }
 
     ngOnInit() {
@@ -96,6 +108,12 @@ export class UsersComponent implements OnInit {
             this.fnOnSortChange();
         }
 
+    }
+
+    changeView(e, viewType) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.viewType = viewType;
     }
 
 }

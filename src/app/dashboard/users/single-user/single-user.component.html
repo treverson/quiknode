@@ -1,4 +1,4 @@
-<div class="info-row shadow w-auto" (mouseenter)="fadeInFadeOut()" (mouseleave)="fadeInFadeOut()">
+<div (mouseenter)="fadeInFadeOut()" (mouseleave)="fadeInFadeOut()" class="p-20">
     <img src="assets/images/Optimus_Prime_Helmet.png" class="userpic">
     <div class="name-label bold">{{user.name}}</div>
     <div class="small-pill">
@@ -7,12 +7,11 @@
     <div class="grey-text">{{user.email}}</div>
     <p class="stat-block">Last login: Today</p>
     <div class="hover-menu" [@visibilityChanged]="visibilityState">
-        <a title="Delete user" data-target="delete_user"
+        <a href="#" title="Delete user" data-target="delete_user"
            (click)="showDeleteModal($event)"
-                class="button btn-round btn-m w-button"></a>
-        <a title="Suspend user" data-target="suspend_user"
-           class="button btn-round btn-m w-button"></a>
-        <a title="Settings" data-target="edit_user"
+           class="button btn-round btn-m w-button"></a>
+        <a href="#" title="Suspend user" data_target="suspend_user" class="button btn-round btn-m w-button"></a>
+        <a href="#" title="Settings" data-target="edit_user"
            (click)="showUserModal($event)"
            class="button btn-round btn-m w-button"></a>
     </div>

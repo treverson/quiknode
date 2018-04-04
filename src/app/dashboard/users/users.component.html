@@ -1,50 +1,83 @@
-<div class="users-dashboard">
-    <h2 class="card-heading">users</h2>
-    <button href="#" data-target="add_user" class="button icon-btn small w-inline-block"
-            (click)="fnShowCreateModal(null)">
-        <div class="icon"></div>
-    </button>
-    <select id="field-7" name="field-7" class="input-field inline-flat w-select"
-            [(ngModel)]="sortBy"
-            (ngModelChange)="fnOnSortChange()"
-    >
-        <option value="none">Sort By...</option>
-        <option value="date">Creation Date</option>
-        <option value="name">Name</option>
-    </select>
-    <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
-       *ngIf="this.sortType === 'asc' && this.sortBy !== 'none'"
-       (click)="fnOnSortTypeChange($event, 'desc')"
-    >
-        <div data-targe="my_account" class="icon"></div>
-    </a>
-    <a href="#" data-target="my_account" class="button btn-flat no-border hidden w-inline-block"
-       *ngIf="this.sortType === 'desc' && this.sortBy !== 'none'"
-       (click)="fnOnSortTypeChange($event, 'asc')">
-        <div data-targe="my_account" class="icon"></div>
-    </a>
-    <input type="text" class="w-input" maxlength="256" name="field-8" data-name="Field 8"
-           placeholder="Search Users" id="field-8" [(ngModel)]="searchText" (ngModelChange)="fnOnSearchTextChange()">
-    <div class="card flex">
-        <div *ngFor="let user of users; let i = index">
-            <app-single-user [user]="user"
-                             (fnShowUserModal)="fnShowCreateModal($event)"
-                             (fnShowDeleteModal)="fnShowDeleteModal($event)"
-            >
-            </app-single-user>
+<div class="container-box">
+    <div class="padded-block">
+        <h2 class="card-heading">users</h2>
+        <button data-target="add_user" class="button icon-btn small w-inline-block" (click)="fnShowCreateModal(null)">
+            <div class="icon"></div>
+        </button>
+        <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
+           *ngIf="viewType === 'list'"
+           (click)="changeView($event, 'grid')">
+            <div data-targe="my_account" class="icon"></div>
+        </a>
+        <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
+           *ngIf="viewType === 'grid'"
+           (click)="changeView($event, 'list')">
+            <div data-targe="my_account" class="icon"></div>
+        </a>
+        <select id="field-7" name="field-7" class="input-field inline-flat w-select"
+                [(ngModel)]="sortBy"
+                (ngModelChange)="fnOnSortChange()"
+        >
+            <option value="none">Sort By...</option>
+            <option value="date">Creation Date</option>
+            <option value="name">Name</option>
+        </select>
+        <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
+           *ngIf="this.sortType === 'asc' && this.sortBy !== 'none'"
+           (click)="fnOnSortTypeChange($event, 'desc')"
+        >
+            <div data-targe="my_account" class="icon"></div>
+        </a>
+        <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
+           *ngIf="this.sortType === 'desc' && this.sortBy !== 'none'"
+           (click)="fnOnSortTypeChange($event, 'asc')">
+            <div data-targe="my_account" class="icon"></div>
+        </a>
+        <input type="text" class="w-input" maxlength="256" name="field-8" data-name="Field 8"
+               placeholder="Search Users" id="field-8" [(ngModel)]="searchText" (ngModelChange)="fnOnSearchTextChange()">
+    </div>
+    <div class="users-dashboard">
+        <div class="card flex">
+            <div  class="info-row shadow p-0" *ngFor="let user of users; let i = index">
+                <app-single-user [user]="user"
+                                 (fnShowUserModal)="fnShowCreateModal($event)"
+                                 (fnShowDeleteModal)="fnShowDeleteModal($event)"
+                >
+                </app-single-user>
+            </div>
+        </div>
+        <div class="card list">
+            <div class="info-row list">
+                <div class="w-row">
+                    <div class="w-col w-col-1"><img src="assets/images/Optimus_Prime_Helmet.png" class="userpic inline">
+                        <div class="small-pill">
+                            <div class="text-block">admin</div>
+                        </div>
+                    </div>
+                    <div class="w-col w-col-4">
+                        <div class="name-label inline bold">Optimus Prime Jr</div>
+                    </div>
+                    <div class="w-col w-col-3">
+                        <div class="grey-text">iamprime@gmail.com</div>
+                    </div>
+                    <div class="w-col w-col-4">
+                        <p class="grey-text">Last login: Today</p>
+                        <div class="hover-menu list"><a href="#" title="Delete user" data-target="delete_user" class="button btn-round btn-m w-button"></a><a href="#" title="Suspend user" data_target="suspend_user" class="button btn-round btn-m w-button"></a><a href="#" title="Settings" data-target="edit_user" class="button btn-round btn-m w-button"></a></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <app-modal-wrapper [showModal]="showUserCreateModal"
-                       *ngIf="showUserCreateModal"
-                       (fnHideModal)="fnHideCreateModal($event)">
-        <app-create-update-user (fnHideModal)="fnHideCreateModal($event)" [editUserObject]="userObject">
-        </app-create-update-user>
-    </app-modal-wrapper>
-
-    <app-modal-wrapper [showModal]="showDeleteModal"
-                       *ngIf="showDeleteModal"
-                       (fnHideModal)="fnHideDeleteModal($event)">
-        <app-delete-user (fnHideModal)="fnHideDeleteModal($event)" [user]="deleteUser"></app-delete-user>
-    </app-modal-wrapper>
 </div>
+<app-modal-wrapper [showModal]="showUserCreateModal"
+                   *ngIf="showUserCreateModal"
+                   (fnHideModal)="fnHideCreateModal($event)">
+    <app-create-update-user (fnHideModal)="fnHideCreateModal($event)" [editUserObject]="userObject">
+    </app-create-update-user>
+</app-modal-wrapper>
+
+<app-modal-wrapper [showModal]="showDeleteModal"
+                   *ngIf="showDeleteModal"
+                   (fnHideModal)="fnHideDeleteModal($event)">
+    <app-delete-user (fnHideModal)="fnHideDeleteModal($event)" [user]="deleteUser"></app-delete-user>
+</app-modal-wrapper>
