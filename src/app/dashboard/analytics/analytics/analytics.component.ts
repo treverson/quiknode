@@ -20,13 +20,11 @@ export class AnalyticsComponent implements OnInit  {
     public instanceList: any;
     public selectedMetric: string;
     public selectedInstance: any;
-    public isMetric: boolean;
     public isLoading: boolean;
 
     constructor(private _instance: InstanceService) {
         this.metricList = [];
         this.instanceList = [];
-        this.isMetric = false;
     }
 
     ngOnInit() {
@@ -41,8 +39,8 @@ export class AnalyticsComponent implements OnInit  {
         if (!this.instances || _.isEmpty(this.instances)) {
             this._instance.fnGetInstances().then((response: any) => {
                 this.instanceList = response.instances;
-                const utilizedInstance = _.find(this.instanceList, metric => metric['instance-id'] === '61cbc9b4-0f83-427b-abd1-a14ae18cc884');
-                this.selectedInstance = utilizedInstance ? utilizedInstance['instance-id'] : this.instanceList[0]['instance-id'];
+                this.instanceList = _.orderBy(this.instanceList, [instance => instance.name.toLowerCase()]);
+                this.selectedInstance = this.instanceList[0]['instance-id'];
                 this.fnGetMetric();
             });
         }
@@ -59,12 +57,16 @@ export class AnalyticsComponent implements OnInit  {
     }
 
     fnDisplayMetrics(columns, values) {
+        let dataValues = values;
+        if (!values) {
+            dataValues = [[new Date().getTime(), 0]];
+        }
         const options: Highcharts.Options = {
             chart: {
                 zoomType: 'x'
             },
             title: {
-                text: columns[1] + ' inbound data'
+                text: columns ? columns[1] : this.selectedMetric + ' inbound data'
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
@@ -118,8 +120,8 @@ export class AnalyticsComponent implements OnInit  {
             },
             series: [{
                 type: 'area',
-                name: columns[1],
-                data: values
+                name: columns ? columns[1] : this.selectedMetric,
+                data: dataValues
             }]
         };
 
@@ -136,16 +138,10 @@ export class AnalyticsComponent implements OnInit  {
         };
         this._instance.fnGetMetric(getMetricObj).then((response: any) => {
             this.isLoading = false;
-            if (response.values) {
-                this.isMetric = true;
-                setTimeout(() => {
-                    this.fnDisplayMetrics(response.columns, response.values);
-                }, 0);
-            } else {
-                this.isMetric = false;
-            }
+            setTimeout(() => {
+                this.fnDisplayMetrics(response.columns, response.values);
+            }, 0);
         }).catch((error) => {
-            this.isMetric = false;
             this.isLoading = false;
         });
     }
