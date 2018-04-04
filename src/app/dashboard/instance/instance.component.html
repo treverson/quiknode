@@ -41,24 +41,15 @@
                placeholder="Search Instances" id="field-8" [(ngModel)]="searchText" (ngModelChange)="fnOnSearchTextChange()">
     </div>
     <div class="instances-dashboard">
-        <div class="card box-view" *ngIf="viewType === 'grid'">
-            <div class="info-row shadow p-0" *ngFor="let ins of instances; let i = index">
+        <div class="card" [ngClass]="viewType === 'grid' ? 'box-view' : 'list'">
+            <div class="info-row"
+                 [ngClass]="viewType === 'grid' ? 'shadow p-0' : 'list'"
+                 *ngFor="let ins of instances; let i = index">
                 <app-single-instance [instance]="ins"
                                      (fnShowSuspendModal)="fnShowSuspendModal($event)"
                                      (fnShowCreateModal)="fnShowCreateModal($event)"
                                      [instances]="instances"
-                                     viewType="grid"
-                >
-                </app-single-instance>
-            </div>
-        </div>
-        <div class="card list"  *ngIf="viewType === 'list'">
-            <div class="info-row list" *ngFor="let ins of instances; let i = index">
-                <app-single-instance [instance]="ins"
-                                     (fnShowSuspendModal)="fnShowSuspendModal($event)"
-                                     (fnShowCreateModal)="fnShowCreateModal($event)"
-                                     [instances]="instances"
-                                     viewType="list"
+                                     [viewType]="viewType"
                 >
                 </app-single-instance>
             </div>
