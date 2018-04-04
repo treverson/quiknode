@@ -41,7 +41,8 @@ export class AnalyticsComponent implements OnInit  {
         if (!this.instances || _.isEmpty(this.instances)) {
             this._instance.fnGetInstances().then((response: any) => {
                 this.instanceList = response.instances;
-                this.selectedInstance = this.instanceList[0]['instance-id'];
+                const utilizedInstance = _.find(this.instanceList, metric => metric['instance-id'] === '61cbc9b4-0f83-427b-abd1-a14ae18cc884');
+                this.selectedInstance = utilizedInstance ? utilizedInstance['instance-id'] : this.instanceList[0]['instance-id'];
                 this.fnGetMetric();
             });
         }
