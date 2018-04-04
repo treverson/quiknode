@@ -37,34 +37,15 @@
                placeholder="Search Users" id="field-8" [(ngModel)]="searchText" (ngModelChange)="fnOnSearchTextChange()">
     </div>
     <div class="users-dashboard">
-        <div class="card flex">
-            <div  class="info-row shadow p-0" *ngFor="let user of users; let i = index">
+        <div class="card " [ngClass]="viewType === 'grid' ? 'flex' : 'list'">
+            <div  class="info-row " [ngClass]="viewType === 'grid' ? 'shadow p-0' : 'list'"
+                  *ngFor="let user of users; let i = index">
                 <app-single-user [user]="user"
                                  (fnShowUserModal)="fnShowCreateModal($event)"
                                  (fnShowDeleteModal)="fnShowDeleteModal($event)"
+                                 [viewType]="viewType"
                 >
                 </app-single-user>
-            </div>
-        </div>
-        <div class="card list">
-            <div class="info-row list">
-                <div class="w-row">
-                    <div class="w-col w-col-1"><img src="assets/images/Optimus_Prime_Helmet.png" class="userpic inline">
-                        <div class="small-pill">
-                            <div class="text-block">admin</div>
-                        </div>
-                    </div>
-                    <div class="w-col w-col-4">
-                        <div class="name-label inline bold">Optimus Prime Jr</div>
-                    </div>
-                    <div class="w-col w-col-3">
-                        <div class="grey-text">iamprime@gmail.com</div>
-                    </div>
-                    <div class="w-col w-col-4">
-                        <p class="grey-text">Last login: Today</p>
-                        <div class="hover-menu list"><a href="#" title="Delete user" data-target="delete_user" class="button btn-round btn-m w-button"></a><a href="#" title="Suspend user" data_target="suspend_user" class="button btn-round btn-m w-button"></a><a href="#" title="Settings" data-target="edit_user" class="button btn-round btn-m w-button"></a></div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

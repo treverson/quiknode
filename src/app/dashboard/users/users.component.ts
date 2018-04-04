@@ -26,16 +26,6 @@ export class UsersComponent implements OnInit {
         this.sortBy = 'none';
         this.sortType = 'asc';
         this.searchText = '';
-        this.users = [{
-            'user-id' : '00000',
-            'name': 'test',
-            'email': 'test@gmail.com'
-        },
-            {
-                'user-id' : '000001',
-                'name': 'test1',
-                'email': 'test1@gmail.com'
-            }];
         this.viewType = 'grid';
     }
 

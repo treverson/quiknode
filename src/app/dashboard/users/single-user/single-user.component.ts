@@ -16,6 +16,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class SingleUserComponent implements OnInit {
     @Input() user: any;
+    @Input() viewType: any;
     @Output() fnShowUserModal =  new EventEmitter<any>();
     @Output() fnShowDeleteModal =  new EventEmitter<any>();
     visibilityState: String;
