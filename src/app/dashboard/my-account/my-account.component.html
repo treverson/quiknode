@@ -1,6 +1,6 @@
 <div>
     <h2 class="modal-header">My account</h2>
-    <form #userForm="ngForm" id="account-form" name="account-form" data-name="Account Form">
+    <form #accountForm="ngForm" id="account-form" name="account-form" data-name="Account Form">
         <div class="w-container">
             <div class="w-row">
                 <div class="w-col w-col-6">
@@ -13,7 +13,7 @@
                                    [(ngModel)]="userObject.name"
                                    #name="ngModel"
                                    placeholder="Newman" id="field-1" required="">
-                            <div *ngIf="(userForm.submitted || name.touched) && !name.valid">
+                            <div *ngIf="(accountForm.submitted || name.touched) && !name.valid">
                                 <small class="text-danger" *ngIf="name.errors['required']">
                                     Name is required.
                                 </small>
@@ -31,7 +31,7 @@
                                    [pattern]="emailRegEx"
                                    data-name="Field 2" placeholder="mail@usps.com" id="field-2"
                                    required="">
-                            <div *ngIf="(userForm.submitted || email.touched) && !email.valid">
+                            <div *ngIf="(accountForm.submitted || email.touched) && !email.valid">
                                 <small class="text-danger" *ngIf="email.errors['required']">
                                     Email is required.
                                 </small>
@@ -67,7 +67,7 @@
             </div>
         </div>
         <a href="#" class="button icon-btn float-right mt10 w-inline-block"
-           (click)="userForm.valid && this.fnSaveAccount($event, userObject)">
+           (click)="accountForm.valid && this.fnSaveAccount($event, userObject)">
             <div class="w-row">
                 <div class="w-col w-col-3">
                     <div class="icon"></div>

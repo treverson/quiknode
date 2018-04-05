@@ -29,6 +29,8 @@ import { UserService } from './common/services/user-service/user.service';
 import { DeleteUserComponent } from './dashboard/users/delete-user/delete-user.component';
 import { MainComponent } from './main/main.component';
 import { MyAccountComponent } from './dashboard/my-account/my-account.component';
+import { AddApiKeyComponent } from './security/api-key/add-api-key/add-api-key.component';
+import { ApiKeyService } from './common/services/api-key-service/api-key.service';
 
 @NgModule({
     declarations: [
@@ -47,7 +49,8 @@ import { MyAccountComponent } from './dashboard/my-account/my-account.component'
         SingleUserComponent,
         DeleteUserComponent,
         MainComponent,
-        MyAccountComponent
+        MyAccountComponent,
+        AddApiKeyComponent
     ],
     imports: [
         BrowserModule,
@@ -63,7 +66,8 @@ import { MyAccountComponent } from './dashboard/my-account/my-account.component'
         NotAuthenticateGuard,
         ToastrService,
         InstanceService,
-        UserService
+        UserService,
+        ApiKeyService
     ],
     bootstrap: [AppComponent]
 })

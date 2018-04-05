@@ -36,7 +36,9 @@
                 <div class="icon"></div>
                 <div class="icon-btn-label">new user</div>
             </a>
-            <a href="#" data-target="add_api" class="button icon-btn mr-10 w-inline-block">
+            <a href="#" data-target="add_api" class="button icon-btn mr-10 w-inline-block"
+               (click)="fnShowCreateModal($event, 'apiKey')"
+            >
                 <div class="icon"></div>
                 <div class="icon-btn-label">new api key</div>
             </a>
@@ -64,6 +66,11 @@
 <app-modal-wrapper [showModal]="showAccountModal"
                    *ngIf="showAccountModal"
                    (fnHideModal)="fnHideCreateModal($event)">
-    <app-my-account>
-    </app-my-account>
+    <app-my-account (fnHideModal)="fnHideCreateModal($event)"></app-my-account>
+</app-modal-wrapper>
+
+<app-modal-wrapper [showModal]="showApiKeyModal"
+                   *ngIf="showApiKeyModal"
+                   (fnHideModal)="fnHideCreateModal($event)">
+    <app-add-api-key (fnHideModal)="fnHideCreateModal($event)"></app-add-api-key>
 </app-modal-wrapper>

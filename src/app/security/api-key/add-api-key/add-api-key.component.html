@@ -1,0 +1,46 @@
+<h2 class="modal-header">Add api key</h2>
+<form #apiForm="ngForm" id="api-form" name="api-form" data-name="Api Key Form">
+    <div>
+        <div class="w-row">
+            <div class="w-col w-col-4">
+                <h6 class="text">04cf5e00-d8eb-4307-99a1-c81991bb7c93</h6>
+            </div>
+            <div class="w-col w-col-4">
+                <input type="text" class="w-input" maxlength="256" name="field-5"
+                       data-name="Field 5" placeholder="Secret"
+                       [(ngModel)]="apiKeyObject.secret"
+                       #secret="ngModel"
+                       id="field-5" required="">
+                <div *ngIf="(apiForm.submitted || secret.touched) && !secret.valid">
+                    <small class="text-danger" *ngIf="secret.errors['required']">
+                        Secret is required.
+                    </small>
+                </div>
+            </div>
+            <div class="column-4 w-col w-col-4">
+                <textarea id="field-6" name="field-6" placeholder="Description"
+                          [(ngModel)]="apiKeyObject.description"
+                          #description="ngModel"
+                          required=""
+                          maxlength="5000" class="w-input">
+                </textarea>
+                <div *ngIf="(apiForm.submitted || description.touched) && !description.valid">
+                    <small class="text-danger" *ngIf="description.errors['required']">
+                        Description is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="button icon-btn float-right mt10 w-inline-block"
+        (click)="apiForm.valid && fnAddApiKey($event, apiKeyObject)">
+        <div class="w-row">
+            <div class="w-col w-col-3">
+                <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+                <div class="btn-label">SAVE </div>
+            </div>
+        </div>
+    </a>
+</form>

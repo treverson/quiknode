@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {UserService} from '../../common/services/user-service/user.service';
 import {ToastrService} from '../../common/services/toastr.service';
 
@@ -9,6 +9,7 @@ import {ToastrService} from '../../common/services/toastr.service';
 })
 export class MyAccountComponent implements OnInit {
     userObject: any;
+    @Output() fnHideModal = new EventEmitter<any>();
     public emailRegEx: any = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
 
     constructor(private _user: UserService, private _toastr: ToastrService) {
@@ -30,6 +31,7 @@ export class MyAccountComponent implements OnInit {
         e.stopPropagation();
         this._user.fnUpdateUser(userObject, userObject['user-id'])
             .then(response => {
+                this.fnHideModal.next();
                 this._toastr.fnSuccess('Account updated successfully.');
             });
     }

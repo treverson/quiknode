@@ -23,7 +23,6 @@ export class SuspendInstanceComponent implements OnInit {
             this._toastr.fnSuccess('Instance suspended successfully!');
             this.fnHideModal.next();
         }, (reject: any) => {
-            this._toastr.fnError(reject.error);
             this.fnHideModal.next();
         });
     }
