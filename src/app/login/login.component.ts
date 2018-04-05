@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.titleService.setTitle('QuikNode - Login');
+        this.titleService.setTitle('Login');
     }
 
     // call API on login button

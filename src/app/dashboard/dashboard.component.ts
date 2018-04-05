@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.titleService.setTitle('QuikNode - Dashboard');
+        this.titleService.setTitle('New Dashboard');
     }
 
     fnHideCreateModal() {

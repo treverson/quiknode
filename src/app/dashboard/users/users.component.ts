@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import {UserService} from '../../common/services/user-service/user.service';
-import * as _ from  'lodash';
+import * as _ from 'lodash';
+import {Title} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-users',
@@ -20,7 +21,7 @@ export class UsersComponent implements OnInit {
     searchText: string;
     viewType: string;
 
-    constructor(private _user: UserService) {
+    constructor(private _user: UserService, private titleService: Title) {
         this.showUserCreateModal = false;
         this.showDeleteModal = false;
         this.sortBy = 'none';
@@ -31,6 +32,7 @@ export class UsersComponent implements OnInit {
 
     ngOnInit() {
         this.fnGetUsers();
+        this.titleService.setTitle('Users');
     }
 
     fnGetUsers() {

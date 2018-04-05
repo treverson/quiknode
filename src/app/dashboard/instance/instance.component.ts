@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {InstanceService} from '../../common/services/instance-service/instance.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import {Title} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-instance',
@@ -19,7 +20,7 @@ export class InstanceComponent implements OnInit {
     searchText: string;
     viewType: string;
 
-    constructor(private _instance: InstanceService) {
+    constructor(private _instance: InstanceService, private titleService: Title) {
         this.showInstanceCreateModal = false;
         this.showSuspendModal = false;
         this.sortBy = 'none';
@@ -30,6 +31,7 @@ export class InstanceComponent implements OnInit {
 
     ngOnInit() {
         this.fnGetInstances();
+        this.titleService.setTitle('Instances');
     }
 
     fnGetInstances() {
