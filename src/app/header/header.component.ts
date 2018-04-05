@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
         this.currentPath = this._location.path();
         this._router.events.subscribe(path => {
             if (path && path['url']) {
-                this.currentPath = path['url'];
+                this.currentPath = this._router.url;
             }
         });
     }
