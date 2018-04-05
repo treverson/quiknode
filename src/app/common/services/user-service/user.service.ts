@@ -92,4 +92,16 @@ export class UserService {
         });
     }
 
+    fnGetUser() {
+        return new Promise((resolve, reject) => {
+            this._http
+                .get(Constant.API_URL + 'account/user')
+                .subscribe((response: any) => {
+                    resolve(response);
+                }, (error) => {
+                    reject(error);
+                });
+        });
+    }
+
 }

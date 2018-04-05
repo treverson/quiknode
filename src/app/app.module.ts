@@ -28,6 +28,7 @@ import { SingleUserComponent } from './dashboard/users/single-user/single-user.c
 import { UserService } from './common/services/user-service/user.service';
 import { DeleteUserComponent } from './dashboard/users/delete-user/delete-user.component';
 import { MainComponent } from './main/main.component';
+import { MyAccountComponent } from './dashboard/my-account/my-account.component';
 
 @NgModule({
     declarations: [
@@ -45,7 +46,8 @@ import { MainComponent } from './main/main.component';
         CreateUpdateUserComponent,
         SingleUserComponent,
         DeleteUserComponent,
-        MainComponent
+        MainComponent,
+        MyAccountComponent
     ],
     imports: [
         BrowserModule,

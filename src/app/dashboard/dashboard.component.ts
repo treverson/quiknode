@@ -10,10 +10,12 @@ export class DashboardComponent implements OnInit {
     instances: any[];
     showInstanceCreateModal?: boolean;
     showUserCreateModal?: boolean;
+    showAccountModal?: boolean;
 
     constructor(private titleService: Title) {
         this.showInstanceCreateModal = false;
         this.showUserCreateModal = false;
+        this.showAccountModal = false;
     }
 
     ngOnInit() {
@@ -23,6 +25,7 @@ export class DashboardComponent implements OnInit {
     fnHideCreateModal() {
         this.showInstanceCreateModal = false;
         this.showUserCreateModal = false;
+        this.showAccountModal = false;
     }
 
     fnShowCreateModal(e, type) {
@@ -32,6 +35,8 @@ export class DashboardComponent implements OnInit {
             this.showInstanceCreateModal = true;
         } else if (type === 'user') {
             this.showUserCreateModal = true;
+        } else if (type === 'account') {
+            this.showAccountModal = true;
         }
     }
 }
