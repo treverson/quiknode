@@ -20,6 +20,14 @@ import {Location} from '@angular/common';
 })
 export class SingleInstanceComponent implements OnInit {
     @ViewChild('chartTarget1') chartTarget: ElementRef;
+    @ViewChild('chartTarget1') set content(content: ElementRef) {
+        this.chartTarget = content;
+        if (this.chart) {
+            this.chart.destroy();
+            this.fnDisplayMetrics(this.columns, this.values);
+        }
+    }
+
     chart: HCs.ChartObject;
     @Input() instance: any;
     @Input() viewType: any;
@@ -29,6 +37,8 @@ export class SingleInstanceComponent implements OnInit {
     visibilityState: String;
     showAnalyticsModal: boolean;
     public getMetricObj: any;
+    public columns: any;
+    public values: any;
 
     constructor(private _instance: InstanceService, private _location: Location) {
         this.visibilityState = 'hidden';
@@ -66,13 +76,15 @@ export class SingleInstanceComponent implements OnInit {
     fnGetMetric() {
         this.getMetricObj['instance-id'] = this.instance['instance-id'];
         this.getMetricObj['metrics-type'] = 'http-requests';
-        /*this._instance.fnGetMetric(this.getMetricObj).then((response: any) => {
+        this._instance.fnGetMetric(this.getMetricObj).then((response: any) => {
+            this.columns = response.columns;
+            this.values = response.values;
             if (response.values) {
                 setTimeout(() => {
                     this.fnDisplayMetrics(response.columns, response.values);
                 }, 0);
             }
-        });*/
+        });
     }
 
     fnDisplayMetrics(columns, values) {

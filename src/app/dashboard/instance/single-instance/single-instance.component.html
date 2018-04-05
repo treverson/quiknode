@@ -11,8 +11,8 @@
            (click)="showCreateModal($event)"
            class="button btn-round btn-m w-button"></a>
     </div>
-    <!--<div id="chart1" class="microchart" #chartTarget1 (click)="populateChart()"></div>-->
-    <img src="assets/images/mini-chart.JPG" class="button microchart" (click)="populateChart()">
+    <div id="chart1" class="microchart" #chartTarget1 (click)="populateChart()"></div>
+    <!--<img src="assets/images/mini-chart.JPG" class="button microchart" (click)="populateChart()">-->
 </div>
 
 <div class="row-2 w-row"  *ngIf="viewType === 'list'" (mouseenter)="fadeInFadeOut()" (mouseleave)="fadeInFadeOut()">
@@ -31,10 +31,10 @@
                (click)="showCreateModal($event)"
                class="button btn-round btn-m w-button"></a>
         </div>
-        <!--<div id="chart1" class="microchart list" #chartTarget1 (click)="populateChart()"></div>-->
-        <img src="assets/images/mini-chart.JPG" data-target="show_metrics" title="Display Analytics"
+        <div id="chart1" class="microchart list" #chartTarget1 (click)="populateChart()"></div>
+        <!--<img src="assets/images/mini-chart.JPG" data-target="show_metrics" title="Display Analytics"
              (click)="populateChart()"
-             class="button microchart list">
+             class="button microchart list">-->
     </div>
 </div>
 
