@@ -41,6 +41,7 @@ export class AnalyticsComponent implements OnInit  {
                 this.instanceList = response.instances;
                 this.instanceList = _.orderBy(this.instanceList, [instance => instance.name.toLowerCase()]);
                 this.selectedInstance = this.instanceList[0]['instance-id'];
+                this._instance.instances.next(this.instanceList);
                 this.fnGetMetric();
             });
         }

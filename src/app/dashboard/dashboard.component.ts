@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
+import {InstanceService} from '../common/services/instance-service/instance.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -13,7 +14,7 @@ export class DashboardComponent implements OnInit {
     showAccountModal?: boolean;
     showApiKeyModal?: boolean;
 
-    constructor(private titleService: Title) {
+    constructor(private titleService: Title, private _instance: InstanceService) {
         this.showInstanceCreateModal = false;
         this.showUserCreateModal = false;
         this.showAccountModal = false;
@@ -22,6 +23,9 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         this.titleService.setTitle('New Dashboard');
+        this._instance.instances.subscribe((instances) => {
+            this.instances = instances;
+        });
     }
 
     fnHideCreateModal() {

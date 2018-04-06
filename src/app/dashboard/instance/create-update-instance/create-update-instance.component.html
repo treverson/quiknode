@@ -1,7 +1,7 @@
 <h2 class="modal-header">{{editInstanceObject ? "edit " : "create "}}instance</h2>
 <form #instanceForm="ngForm" id="instance-form" name="instance-form" data-name="Instance Form">
     <div class="centered" *ngIf="editInstanceObject">
-        <a href="#" title="Temporarily turn off" class="button icon-btn mr-10 w-inline-block"
+        <button title="Temporarily turn off" class="button icon-btn mr-10 w-inline-block"
            (click)="showSuspendModal($event)">
             <div class="w-row">
                 <div class="w-col w-col-3">
@@ -11,8 +11,8 @@
                     <div class="btn-label">suspend</div>
                 </div>
             </div>
-        </a>
-        <a href="#" title="Delete permanently" class="button icon-btn mr-10 w-inline-block">
+        </button>
+        <button title="Delete permanently" class="button icon-btn mr-10 w-inline-block">
             <div class="w-row">
                 <div class="w-col w-col-3">
                     <div class="icon"></div>
@@ -21,8 +21,8 @@
                     <div class="btn-label">delete</div>
                 </div>
             </div>
-        </a>
-        <a href="#" title="Create new identical instance" class="button icon-btn mr-10 w-inline-block">
+        </button>
+        <button title="Create new identical instance" class="button icon-btn mr-10 w-inline-block">
             <div class="w-row">
                 <div class="w-col w-col-3">
                     <div class="icon"></div>
@@ -31,7 +31,7 @@
                     <div class="btn-label">clone</div>
                 </div>
             </div>
-        </a>
+        </button>
     </div>
     <div class="w-container">
         <div class="btm10 w-row container-row">
