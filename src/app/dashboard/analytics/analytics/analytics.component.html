@@ -1,6 +1,6 @@
 <h2 class="modal-header" *ngIf="instances && instances.length">instance metrics</h2>
 <div class="analytics">
-    <div class="container-box w-row">
+    <div class="container-box w-row" *ngIf="!instances">
         <div class="column-2 w-col w-col-4 w-col-small-4">
             <select id="Select-instance" name="Select-instance" data-name="Select instance"
                     class="w-select" [(ngModel)]="selectedInstance" (change)="fnGetMetric()">
@@ -26,6 +26,21 @@
                 <option value="Third">Third Choice</option>
             </select>
         </div>
+    </div>
+
+    <div class="centered" *ngIf="instances && instances.length">
+        <select id="select-metric" name="select-metric" data-name="Select Metric"
+                class="input-field inline mr-10 w-select"
+                [(ngModel)]="selectedMetric" (change)="fnGetMetric()"
+        >
+            <option value="" *ngFor="let metric of metricList" [value]="metric">{{metric}}</option>
+        </select>
+        <select id="field-9" name="field-9" data-name="Field 9" class="input-field inline w-select">
+            <option value="">Period</option>
+            <option value="First">First Choice</option>
+            <option value="Second">Second Choice</option>
+            <option value="Third">Third Choice</option>
+        </select>
     </div>
     <div *ngIf="!isLoading" id="chart" class="shadow chart" #chartTarget></div>
     <div class="chart" *ngIf="isLoading">
