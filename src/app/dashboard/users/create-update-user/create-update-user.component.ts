@@ -16,6 +16,7 @@ export class CreateUpdateUserComponent implements OnInit {
     isPasswordMatching: boolean;
     @Input() editUserObject;
     @Output() fnHideModal = new EventEmitter<any>();
+    @Output() fnShowDeleteModal = new EventEmitter<any>();
     public emailRegEx: any = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
 
     constructor(private _user: UserService, private _toastr: ToastrService) {
@@ -124,5 +125,10 @@ export class CreateUpdateUserComponent implements OnInit {
 
     fnCheckPermission(permission) {
         return _.findIndex(this.selectedPermissions, per => per['permission-id'] === permission['permission-id']) > -1;
+    }
+
+    showDeleteModal(e) {
+        e.preventDefault();
+        this.fnShowDeleteModal.next(this.userObj);
     }
 }

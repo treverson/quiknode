@@ -1,4 +1,5 @@
-<div (mouseenter)="fadeInFadeOut()" (mouseleave)="fadeInFadeOut()" class="p-20" *ngIf="viewType === 'grid'">
+<div class="p-20" *ngIf="viewType === 'grid'"
+     (click)="showUserModal($event)">
     <img src="assets/images/Optimus_Prime_Helmet.png" class="userpic">
     <div class="name-label bold">{{user.name}}</div>
     <div class="small-pill">
@@ -6,19 +7,12 @@
     </div>
     <div class="grey-text">{{user.email}}</div>
     <p class="stat-block">Last login: Today</p>
-    <div class="hover-menu" [@visibilityChanged]="visibilityState">
-        <a href="#" title="Delete user" data-target="delete_user"
-           (click)="showDeleteModal($event)"
-           class="button btn-round btn-m w-button"></a>
-        <a href="#" title="Suspend user" data_target="suspend_user" class="button btn-round btn-m w-button"></a>
-        <a href="#" title="Settings" data-target="edit_user"
-           (click)="showUserModal($event)"
-           class="button btn-round btn-m w-button"></a>
-    </div>
 </div>
 
-<div class="w-row" *ngIf="viewType === 'list'" (mouseenter)="fadeInFadeOut()" (mouseleave)="fadeInFadeOut()">
-    <div class="w-col w-col-1"><img src="assets/images/Optimus_Prime_Helmet.png" class="userpic inline">
+<div class="w-row" *ngIf="viewType === 'list'"
+     (click)="showUserModal($event)">
+    <div class="w-col w-col-1">
+        <img src="assets/images/Optimus_Prime_Helmet.png" class="userpic inline">
         <div class="small-pill">
             <div class="text-block">admin</div>
         </div>
@@ -31,13 +25,5 @@
     </div>
     <div class="w-col w-col-4">
         <p class="grey-text">Last login: Today</p>
-        <div class="hover-menu list" [@visibilityChanged]="visibilityState">
-            <a href="#" title="Delete user" data-target="delete_user"
-               (click)="showDeleteModal($event)"
-               class="button btn-round btn-m w-button"></a>
-            <a href="#" title="Suspend user" data_target="suspend_user" class="button btn-round btn-m w-button"></a>
-            <a href="#" title="Settings" data-target="edit_user"
-               (click)="showUserModal($event)"
-               class="button btn-round btn-m w-button"></a></div>
     </div>
 </div>

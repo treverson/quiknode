@@ -1,4 +1,47 @@
 <h2 class="modal-header">{{editUserObject ? "edit " : "add "}}user</h2>
+<div class="centered" *ngIf="editUserObject">
+    <button href="#" title="Temporarily disable" class="button icon-btn mr-10 w-inline-block">
+        <div class="w-row">
+            <div class="w-col w-col-3">
+                <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+                <div class="btn-label">suspend</div>
+            </div>
+        </div>
+    </button>
+    <button href="#" title="Delete permanently" class="button icon-btn mr-10 w-inline-block"
+       (click)="showDeleteModal($event)">
+        <div class="w-row">
+            <div class="w-col w-col-3">
+                <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+                <div class="btn-label">delete</div>
+            </div>
+        </div>
+    </button>
+    <button href="#" title="Create new user with same permissions" class="button icon-btn mr-10 w-inline-block">
+        <div class="w-row">
+            <div class="w-col w-col-3">
+                <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+                <div class="btn-label">clone</div>
+            </div>
+        </div>
+    </button>
+    <button class="button icon-btn w-inline-block">
+        <div class="w-row">
+            <div class="w-col w-col-3">
+                <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+                <div class="btn-label">Generate OTP</div>
+            </div>
+        </div>
+    </button>
+</div>
 <form #userForm="ngForm" id="user-form" name="user-form" data-name="User Form">
     <div class="w-container">
         <div class="btm10 w-row container-row">
@@ -119,7 +162,7 @@
                            name="{{per['permission-id']}}"
                            id="permission-id[i]"
                            [checked]="fnCheckPermission(per)"
-                           (change) ="fnUpdateSelectedPermissions($event)"
+                           (change)="fnUpdateSelectedPermissions($event)"
                            class="checkbox-field w-checkbox-input">
                     <label class="checkbox-label w-form-label" for="permission-id[i]">{{per.name}}</label>
                 </div>
