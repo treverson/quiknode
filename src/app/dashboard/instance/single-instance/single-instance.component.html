@@ -1,21 +1,14 @@
-<div (mouseenter)="fadeInFadeOut()" (mouseleave)="fadeInFadeOut()" *ngIf="viewType === 'grid'" class="p-20">
+<div *ngIf="viewType === 'grid'" class="p-20" (click)="showCreateModal($event)">
     <div class="name-label bold">{{instance.name}}</div>
     <div class="grey-text">Used for testing purposes. Do not suspend.</div>
     <div class="stat-block">
         <p>Online since: {{instance.created}}</p>
     </div>
-    <div class="hover-menu" [@visibilityChanged]="visibilityState">
-        <a href="#" title="Start / Stop" data-target="suspend_instance"
-           class="button btn-round btn-m w-button" (click)="showSuspendModal($event)"></a>
-        <a href="#" title="Settings" data-target="edit_instance"
-           (click)="showCreateModal($event)"
-           class="button btn-round btn-m w-button"></a>
-    </div>
-    <div id="chart1" class="microchart" #chartTarget1 (click)="populateChart()"></div>
+    <div id="chart1" class="microchart" #chartTarget1 (click)="populateChart($event)"></div>
     <!--<img src="assets/images/mini-chart.JPG" class="button microchart" (click)="populateChart()">-->
 </div>
 
-<div class="row-2 w-row"  *ngIf="viewType === 'list'" (mouseenter)="fadeInFadeOut()" (mouseleave)="fadeInFadeOut()">
+<div class="row-2 w-row"  *ngIf="viewType === 'list'" (click)="showCreateModal($event)">
     <div class="w-col w-col-7">
         <div class="name-label bold">{{instance.name}}</div>
         <div class="grey-text">Used for testing purposes. Do not suspend.</div>
@@ -24,22 +17,9 @@
         </div>
     </div>
     <div class="w-col w-col-5">
-        <div class="hover-menu" [@visibilityChanged]="visibilityState">
-            <a href="#" title="Start / Stop" data-target="suspend_instance"
-               class="button btn-round btn-m w-button" (click)="showSuspendModal($event)"></a>
-            <a href="#" title="Settings" data-target="edit_instance"
-               (click)="showCreateModal($event)"
-               class="button btn-round btn-m w-button"></a>
-        </div>
-        <div id="chart1" class="microchart list" #chartTarget1 (click)="populateChart()"></div>
+        <div id="chart1" class="microchart list" #chartTarget1 (click)="populateChart($event)"></div>
         <!--<img src="assets/images/mini-chart.JPG" data-target="show_metrics" title="Display Analytics"
              (click)="populateChart()"
              class="button microchart list">-->
     </div>
 </div>
-
-<app-modal-wrapper [showModal]="showAnalyticsModal"
-                   *ngIf="showAnalyticsModal"
-                   (fnHideModal)="fnHideAnalyticsModal($event)">
-    <app-analytics [instances]="instances"></app-analytics>
-</app-modal-wrapper>

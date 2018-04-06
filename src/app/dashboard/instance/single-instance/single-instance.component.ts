@@ -9,14 +9,6 @@ import {Location} from '@angular/common';
     selector: 'app-single-instance',
     templateUrl: './single-instance.component.html',
     styleUrls: ['./single-instance.component.css'],
-    animations: [
-        trigger('visibilityChanged', [
-            state('shown', style({display: 'block'})),
-            state('hidden', style({display: 'none'})),
-            transition('shown => hidden', animate('0.3s 600ms ease-out')),
-            transition('hidden => shown', animate('0.1s 100ms ease-in')),
-        ])
-    ]
 })
 export class SingleInstanceComponent implements OnInit {
     @ViewChild('chartTarget1') chartTarget: ElementRef;
@@ -33,16 +25,12 @@ export class SingleInstanceComponent implements OnInit {
     @Input() viewType: any;
     @Input() instances: any[];
     @Output() fnShowCreateModal =  new EventEmitter<any>();
-    @Output() fnShowSuspendModal =  new EventEmitter<any>();
-    visibilityState: String;
-    showAnalyticsModal: boolean;
+    @Output() fnShowAnalyticsModal =  new EventEmitter<any>();
     public getMetricObj: any;
     public columns: any;
     public values: any;
 
     constructor(private _instance: InstanceService, private _location: Location) {
-        this.visibilityState = 'hidden';
-        this.showAnalyticsModal = false;
         this.getMetricObj = {
             'instance-id': '',
             'metrics-type': '',
@@ -53,19 +41,6 @@ export class SingleInstanceComponent implements OnInit {
         if (this.instance) {
             this.fnGetMetric();
         }
-    }
-
-    fadeInFadeOut() {
-        if (this.visibilityState === 'hidden') {
-            this.visibilityState = 'shown';
-        } else {
-            this.visibilityState = 'hidden';
-        }
-    }
-
-    showSuspendModal(e) {
-        e.preventDefault();
-        this.fnShowSuspendModal.next();
     }
 
     showCreateModal(e) {
@@ -157,17 +132,15 @@ export class SingleInstanceComponent implements OnInit {
         this.chart = chart(this.chartTarget.nativeElement, options);
     }
 
-    populateChart() {
+    populateChart(e) {
+        e.stopPropagation();
+        e.preventDefault();
         window.scroll(0, 0);
         if (!this._location.path().includes('dashboard')) {
-            this.showAnalyticsModal = true;
+            this.fnShowAnalyticsModal.next();
         }
         setTimeout(() => {
             this._instance.selectedInstanceAnalytics.next(this.instance['instance-id']);
         }, 0);
-    }
-
-    fnHideAnalyticsModal() {
-        this.showAnalyticsModal = false;
     }
 }

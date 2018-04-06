@@ -30,6 +30,7 @@ interface Instance {
 export class CreateUpdateInstanceComponent implements OnInit {
     instanceObj: Instance;
     @Output() fnHideModal = new EventEmitter<any>();
+    @Output() fnShowSuspendModal =  new EventEmitter<any>();
     @Input() editInstanceObject;
     validatorType: string;
     validateReferer: string[];
@@ -75,6 +76,12 @@ export class CreateUpdateInstanceComponent implements OnInit {
             }, 0);
         }
     }
+
+    showSuspendModal(e) {
+        e.preventDefault();
+        this.fnShowSuspendModal.next();
+    }
+
 
     fnCreateInstanceClick(instanceObject: Instance, myForm) {
         const validateReferer = _.filter(this.validateReferer, ref => !!ref);

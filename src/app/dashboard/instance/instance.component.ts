@@ -19,6 +19,7 @@ export class InstanceComponent implements OnInit {
     sortType: string;
     searchText: string;
     viewType: string;
+    showAnalyticsModal: boolean;
 
     constructor(private _instance: InstanceService, private titleService: Title) {
         this.showInstanceCreateModal = false;
@@ -27,6 +28,7 @@ export class InstanceComponent implements OnInit {
         this.sortType = 'asc';
         this.searchText = '';
         this.viewType = 'grid';
+        this.showAnalyticsModal = false;
     }
 
     ngOnInit() {
@@ -102,6 +104,14 @@ export class InstanceComponent implements OnInit {
         e.stopPropagation();
         e.preventDefault();
         this.viewType = viewType;
+    }
+
+    fnShowAnalyticsModal() {
+        this.showAnalyticsModal = true;
+    }
+
+    fnHideAnalyticsModal() {
+        this.showAnalyticsModal = false;
     }
 
 }
