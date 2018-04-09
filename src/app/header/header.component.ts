@@ -12,11 +12,13 @@ import {Location} from '@angular/common';
 export class HeaderComponent implements OnInit {
     isLoggedIn: boolean;
     currentPath: string;
+    isMobileView: boolean;
 
     constructor(private _auth: AuthService, private _toastr: ToastrService, private _router: Router,
                 private _location: Location) {
         this.isLoggedIn = this._auth.fnIsLoggedIn();
         this.currentPath = '';
+        this.isMobileView = false;
     }
 
     ngOnInit() {
@@ -40,5 +42,10 @@ export class HeaderComponent implements OnInit {
         setTimeout(() => {
             this.currentPath = this._location.path();
         });
+        this.fnToggleNav();
+    }
+
+    fnToggleNav() {
+        this.isMobileView = !this.isMobileView;
     }
 }
