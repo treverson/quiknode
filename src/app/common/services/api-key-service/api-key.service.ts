@@ -11,7 +11,7 @@ export class ApiKeyService {
     fnCreateApiKey(obj) {
         return new Promise((resolve, reject) => {
             this._http
-                .post(Constant.API_URL + '/account/authentication-token', obj)
+                .post(Constant.API_URL + 'account/authentication-token', obj)
                 .subscribe((response: any) => {
                     resolve(response);
                 }, (error) => {
@@ -23,7 +23,7 @@ export class ApiKeyService {
     fnGetApiKeys() {
         return new Promise((resolve, reject) => {
             this._http
-                .get(Constant.API_URL + '/account/authentication-tokens')
+                .get(Constant.API_URL + 'account/authentication-tokens')
                 .subscribe((response: any) => {
                     resolve(response);
                 }, (error) => {
