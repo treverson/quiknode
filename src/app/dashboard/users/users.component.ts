@@ -20,6 +20,7 @@ export class UsersComponent implements OnInit {
     sortType: string;
     searchText: string;
     viewType: string;
+    isLoading: boolean;
 
     constructor(private _user: UserService, private titleService: Title) {
         this.showUserCreateModal = false;
@@ -36,6 +37,7 @@ export class UsersComponent implements OnInit {
     }
 
     fnGetUsers() {
+        this.isLoading = true
         this._user.fnGetUsers().then((response: any) => {
             if (response && !_.isEmpty(response.users)) {
                 this.users = _.map(response.users, user => {
@@ -44,6 +46,7 @@ export class UsersComponent implements OnInit {
                 });
                 this.originalUsers = _.clone(this.users);
                 this.fnOnSearchTextChange();
+                this.isLoading = false;
             }
         });
     }

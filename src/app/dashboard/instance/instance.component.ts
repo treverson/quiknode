@@ -20,6 +20,7 @@ export class InstanceComponent implements OnInit {
     searchText: string;
     viewType: string;
     showAnalyticsModal: boolean;
+    isLoading: boolean;
 
     constructor(private _instance: InstanceService, private titleService: Title) {
         this.showInstanceCreateModal = false;
@@ -37,6 +38,7 @@ export class InstanceComponent implements OnInit {
     }
 
     fnGetInstances() {
+        this.isLoading = true;
         this._instance.fnGetInstances().then((response: any) => {
             if (response && !_.isEmpty(response.instances)) {
                 this.instances = _.map(response.instances, instance => {
@@ -46,6 +48,7 @@ export class InstanceComponent implements OnInit {
                 this.originalInstances = _.clone(this.instances);
                 this._instance.instances.next(this.instances);
                 this.fnOnSearchTextChange();
+                this.isLoading = false;
             }
         });
     }

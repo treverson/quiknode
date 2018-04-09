@@ -5,3 +5,12 @@
 .p-0 {
     padding: 0px;
 }
+
+.loader {
+    height: 100px;
+}
+.chart {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+}

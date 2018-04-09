@@ -51,6 +51,9 @@
                 </app-single-instance>
             </div>
         </div>
+        <div class="chart" *ngIf="isLoading">
+            <img src="assets/images/loader.gif" class="loader">
+        </div>
     </div>
 </div>
 <app-modal-wrapper [showModal]="showInstanceCreateModal"

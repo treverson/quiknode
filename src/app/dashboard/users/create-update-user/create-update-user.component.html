@@ -11,7 +11,7 @@
         </div>
     </button>
     <button href="#" title="Delete permanently" class="button icon-btn mr-10 w-inline-block"
-       (click)="showDeleteModal($event)">
+            (click)="fnShowDeleteModal($event)">
         <div class="w-row">
             <div class="w-col w-col-3">
                 <div class="icon"></div>
@@ -136,8 +136,8 @@
         </div>
         <div class="w-row container-row">
             <div class="w-col w-col-6 p-r-10 p-l-10">
-                <h4 class="modal-header">user&#x27;s instances</h4>
-                <select name="field-3" class="w-select">
+                <h4 class="modal-header">Assign API Key</h4>
+                <select id="field-3" name="field-3" class="w-select">
                     <option value="">Select one...</option>
                     <option value="First">First Choice</option>
                     <option value="Second">Second Choice</option>
