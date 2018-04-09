@@ -7,6 +7,7 @@ import {NotAuthenticateGuard} from './common/services/auth-service/not.authentic
 import {MainComponent} from './main/main.component';
 import {UsersComponent} from './dashboard/users/users.component';
 import {InstanceComponent} from './dashboard/instance/instance.component';
+import {SecurityComponent} from './security/security.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -22,6 +23,7 @@ const routes: Routes = [
             {path: 'dashboard', component: DashboardComponent},
             {path: 'users', component: UsersComponent},
             {path: 'instances', component: InstanceComponent},
+            {path: 'security', component: SecurityComponent},
         ]
     }
 ];

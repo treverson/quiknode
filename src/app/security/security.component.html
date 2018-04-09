@@ -1,0 +1,41 @@
+<div class="container-box">
+    <h2 class="card-heading">Manage Security</h2>
+    <div data-duration-in="300" data-duration-out="100" class="w-tabs">
+        <div class="tab-menu w-tab-menu">
+            <a data-w-tab="Api Keys" class="tab-link w-inline-block w-tab-link"
+               [ngClass]="selectedTab === 'api-keys' ? 'w--current' : ''"
+                (click)="fnChangeTab('api-keys')"
+            >
+                <div class="w-row">
+                    <div class="w-col w-col-3">
+                        <div class="icon"></div>
+                    </div>
+                    <div class="w-col w-col-9">
+                        <div>api keys</div>
+                    </div>
+                </div>
+            </a>
+            <a data-w-tab="OTP" class="tab-link w-inline-block w-tab-link"
+               [ngClass]="selectedTab === 'otp' ? 'w--current' : ''"
+               (click)="fnChangeTab('otp')"
+            >
+                <div class="w-row">
+                    <div class="w-col w-col-3">
+                        <div class="icon"></div>
+                    </div>
+                    <div class="w-col w-col-9">
+                        <div>one time passwords</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="tabs-content w-tab-content">
+            <div data-w-tab="Api Keys" class="w-tab-pane" [class]="selectedTab === 'api-keys' ? 'w--tab-active' : ''">
+                <app-api-key *ngIf="selectedTab === 'api-keys'"></app-api-key>
+            </div>
+            <div data-w-tab="OTP" class="w-tab-pane" [class]="selectedTab === 'otp' ? 'w--tab-active' : ''">
+                <app-otp *ngIf="selectedTab === 'otp'"></app-otp>
+            </div>
+        </div>
+    </div>
+</div>

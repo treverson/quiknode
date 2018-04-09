@@ -31,6 +31,9 @@ import { MainComponent } from './main/main.component';
 import { MyAccountComponent } from './dashboard/my-account/my-account.component';
 import { AddApiKeyComponent } from './security/api-key/add-api-key/add-api-key.component';
 import { ApiKeyService } from './common/services/api-key-service/api-key.service';
+import { SecurityComponent } from './security/security.component';
+import { OtpComponent } from './security/otp/otp.component';
+import { ApiKeyComponent } from './security/api-key/api-key.component';
 
 @NgModule({
     declarations: [
@@ -50,7 +53,10 @@ import { ApiKeyService } from './common/services/api-key-service/api-key.service
         DeleteUserComponent,
         MainComponent,
         MyAccountComponent,
-        AddApiKeyComponent
+        AddApiKeyComponent,
+        SecurityComponent,
+        OtpComponent,
+        ApiKeyComponent
     ],
     imports: [
         BrowserModule,

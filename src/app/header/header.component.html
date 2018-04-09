@@ -24,7 +24,12 @@
         >
             <span class="icon"><br xmlns="http://www.w3.org/1999/xhtml"></span>Users
         </a>
-        <a href="#" class="nav-link w-nav-link"><span class="icon"></span><br>security</a>
+        <a href="#/security" class="nav-link w-nav-link"
+           (click)="fnChangeRoute()"
+           [ngClass]="currentPath.includes('security') ? 'w--current' : ''"
+        >
+            <span class="icon"></span><br>security
+        </a>
         <a href="#" class="nav-link w-nav-link"><span class="icon"></span><br>Help</a>
         <a href="#" class="nav-link w-nav-link"  *ngIf="isLoggedIn" (click)="fnLogOut()">
             <span class="icon"></span><br>Logout
