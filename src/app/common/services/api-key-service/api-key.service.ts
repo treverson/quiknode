@@ -20,4 +20,16 @@ export class ApiKeyService {
         });
     }
 
+    fnGetApiKeys() {
+        return new Promise((resolve, reject) => {
+            this._http
+                .get(Constant.API_URL + '/account/authentication-tokens')
+                .subscribe((response: any) => {
+                    resolve(response);
+                }, (error) => {
+                    reject(error);
+                });
+        });
+    }
+
 }

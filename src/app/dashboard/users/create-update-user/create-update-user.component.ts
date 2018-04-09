@@ -3,6 +3,7 @@ import {UserService} from '../../../common/services/user-service/user.service';
 import {hashSync} from 'bcryptjs';
 import {ToastrService} from '../../../common/services/toastr.service';
 import * as _ from 'lodash';
+import {ApiKeyService} from '../../../common/services/api-key-service/api-key.service';
 
 @Component({
     selector: 'app-create-update-user',
@@ -14,12 +15,14 @@ export class CreateUpdateUserComponent implements OnInit {
     permissions: any;
     selectedPermissions: any;
     isPasswordMatching: boolean;
+    apiKeys: any;
+    selectedApiKey: string;
     @Input() editUserObject;
     @Output() fnHideModal = new EventEmitter<any>();
     @Output() showDeleteModal = new EventEmitter<any>();
     public emailRegEx: any = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
 
-    constructor(private _user: UserService, private _toastr: ToastrService) {
+    constructor(private _user: UserService, private _toastr: ToastrService, private _api: ApiKeyService) {
         this.userObj = {
             name: '',
             email: '',
@@ -28,6 +31,8 @@ export class CreateUpdateUserComponent implements OnInit {
         };
         this.permissions = [];
         this.selectedPermissions = [];
+        this.apiKeys = [];
+        this.selectedApiKey = '';
     }
 
     ngOnInit() {
@@ -39,6 +44,11 @@ export class CreateUpdateUserComponent implements OnInit {
                     }
                 });
         }
+        this._api.fnGetApiKeys().then(response => {
+            if (response && response['account-authentication-tokens']) {
+                this.apiKeys = response['account-authentication-tokens'];
+            }
+        });
         this._user.fnGetPermissions().then((response) => {
             this.permissions = response['permission'];
         });
