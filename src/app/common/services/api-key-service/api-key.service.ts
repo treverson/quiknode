@@ -4,8 +4,10 @@ import {Constant} from '../../constant';
 
 @Injectable()
 export class ApiKeyService {
+    apiKeyList: any[];
 
     constructor(private _http: HttpClient) {
+        this.apiKeyList = [];
     }
 
     fnCreateApiKey(obj) {
@@ -25,11 +27,18 @@ export class ApiKeyService {
             this._http
                 .get(Constant.API_URL + 'account/authentication-tokens')
                 .subscribe((response: any) => {
+                    if (response && response['account-authentication-tokens']) {
+                        this.apiKeyList = response['account-authentication-tokens'];
+                    }
                     resolve(response);
                 }, (error) => {
                     reject(error);
                 });
         });
+    }
+
+    getApiKeys() {
+        return this.apiKeyList;
     }
 
 }

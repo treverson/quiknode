@@ -4,8 +4,10 @@ import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class UserService {
+    userList: any[];
 
     constructor(private _http: HttpClient) {
+        this.userList = [];
     }
 
     fnGetUsers() {
@@ -13,6 +15,7 @@ export class UserService {
             this._http
                 .get(Constant.API_URL + 'account/users')
                 .subscribe((response: any) => {
+                    this.userList = response.users;
                     resolve(response);
                 }, (error) => {
                     reject(error);
@@ -102,6 +105,10 @@ export class UserService {
                     reject(error);
                 });
         });
+    }
+
+    fnGetUserList() {
+        return this.userList;
     }
 
 }

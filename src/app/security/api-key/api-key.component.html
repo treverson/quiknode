@@ -41,53 +41,27 @@
             <h6 class="modal-header">description</h6>
         </div>
         <div class="column-6 w-col w-col-3">
-            <h6 class="modal-header">UserS</h6>
+            <h6 class="modal-header">Users</h6>
         </div>
         <div class="w-col w-col-1"></div>
     </div>
-    <div class="w-row">
+    <div class="w-row" *ngFor="let api of apiKeys; let i = index">
         <div class="w-col w-col-3">
-            <h6 class="text">04cf5e00-d8eb-4307-99a1-c81991bb7c93</h6>
+            <h6 class="text">{{api['account-authentication-token-id']}}</h6>
         </div>
         <div class="w-col w-col-3">
             <input type="text" class="w-input" maxlength="256" name="field-5" data-name="Field 5"
-                   placeholder="passws33324245" id="field-5" required="">
+                   placeholder="passws33324245" id="field-5" required="" [(ngModel)]="apiKeys[i]['secret']">
         </div>
         <div class="column-4 w-col w-col-2">
             <textarea id="field-6" name="field-6" placeholder="John&#x27;s main access"
-                      maxlength="5000" class="w-input"></textarea>
+                      maxlength="5000" class="w-input"
+                      [(ngModel)]="apiKeys[i]['description']"
+            ></textarea>
         </div>
         <div class="column-6 w-col w-col-3">
             <select id="field-10" name="field-10" class="w-select">
-                <option value="">John@mail.com</option>
-                <option value="First">First Choice</option>
-                <option value="Second">Second Choice</option>
-                <option value="Third">Third Choice</option>
-            </select>
-        </div>
-        <div class="w-col w-col-1">
-            <a href="#" title="Delete"
-               class="button btn-round btn-m flush-top ml-10 float-right w-button"></a>
-        </div>
-    </div>
-    <div class="w-row">
-        <div class="w-col w-col-3">
-            <h6 class="text">04cf5e00-d8eb-4307-99a1-c81991bb7c93</h6>
-        </div>
-        <div class="w-col w-col-3">
-            <input type="text" class="w-input" maxlength="256" name="field-5" data-name="Field 5"
-                   placeholder="43434234221" id="field-5" required="">
-        </div>
-        <div class="column-4 w-col w-col-2">
-            <textarea id="field-6" name="field-6" placeholder="Secure server"
-                      maxlength="5000" class="w-input"></textarea>
-        </div>
-        <div class="column-6 w-col w-col-3">
-            <select id="field-10" name="field-10" class="w-select">
-                <option value="">bobsemail@mail.com</option>
-                <option value="First">First Choice</option>
-                <option value="Second">Second Choice</option>
-                <option value="Third">Third Choice</option>
+                <option value="" *ngFor="let user of users">{{user.name}}</option>
             </select>
         </div>
         <div class="w-col w-col-1">
