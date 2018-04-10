@@ -19,8 +19,15 @@
 .loader {
     height: 100px;
 }
+
 .chart {
     height: 400px;
     display: flex;
     justify-content: center;
+}
+
+.error-msg {
+    margin: 10px 20px 0px 20px;
+    padding: 10px;
+    text-align: center;
 }

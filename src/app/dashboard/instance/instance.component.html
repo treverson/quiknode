@@ -54,6 +54,9 @@
         <div class="chart" *ngIf="isLoading">
             <img src="assets/images/loader.gif" class="loader">
         </div>
+        <div class="error-msg" *ngIf="isEmpty">
+            <div>Oops! No data found.</div>
+        </div>
     </div>
 </div>
 <app-modal-wrapper [showModal]="showInstanceCreateModal"

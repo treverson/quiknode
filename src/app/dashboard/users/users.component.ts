@@ -21,6 +21,7 @@ export class UsersComponent implements OnInit {
     searchText: string;
     viewType: string;
     isLoading: boolean;
+    isEmpty: boolean;
 
     constructor(private _user: UserService, private titleService: Title) {
         this.showUserCreateModal = false;
@@ -38,17 +39,25 @@ export class UsersComponent implements OnInit {
 
     fnGetUsers() {
         this.isLoading = true
-        this._user.fnGetUsers().then((response: any) => {
-            if (response && !_.isEmpty(response.users)) {
-                this.users = _.map(response.users, user => {
-                    user.created =  moment(user.created).format('MM-DD-YYYY');
-                    return user;
-                });
-                this.originalUsers = _.clone(this.users);
-                this.fnOnSearchTextChange();
+        this._user.fnGetUsers()
+            .then((response: any) => {
+                if (response && !_.isEmpty(response.users)) {
+                    this.users = _.map(response.users, user => {
+                        user.created = moment(user.created).format('MM-DD-YYYY');
+                        return user;
+                    });
+                    this.originalUsers = _.clone(this.users);
+                    this.fnOnSearchTextChange();
+                    this.isEmpty = false;
+                } else {
+                    this.isEmpty = true;
+                }
                 this.isLoading = false;
-            }
-        });
+            })
+            .catch((err) => {
+                this.isEmpty = true;
+                this.isLoading = false;
+            });
     }
 
     fnShowCreateModal(obj) {
@@ -83,7 +92,7 @@ export class UsersComponent implements OnInit {
                 break;
             case 'none':
             default:
-                this.users =  this.originalUsers;
+                this.users = this.originalUsers;
                 break;
         }
     }
@@ -98,7 +107,7 @@ export class UsersComponent implements OnInit {
     fnOnSearchTextChange() {
         this.users = _.filter(this.originalUsers,
             user => user.name.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1 ||
-                user.email.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1);
+            user.email.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1);
         if (this.sortBy !== 'none') {
             this.fnOnSortChange();
         }

@@ -21,6 +21,7 @@ export class InstanceComponent implements OnInit {
     viewType: string;
     showAnalyticsModal: boolean;
     isLoading: boolean;
+    isEmpty: boolean;
 
     constructor(private _instance: InstanceService, private titleService: Title) {
         this.showInstanceCreateModal = false;
@@ -39,18 +40,26 @@ export class InstanceComponent implements OnInit {
 
     fnGetInstances() {
         this.isLoading = true;
-        this._instance.fnGetInstances().then((response: any) => {
-            if (response && !_.isEmpty(response.instances)) {
-                this.instances = _.map(response.instances, instance => {
-                    instance.created =  moment(instance.created).format('MM-DD-YYYY');
-                    return instance;
-                });
-                this.originalInstances = _.clone(this.instances);
-                this._instance.instances.next(this.instances);
-                this.fnOnSearchTextChange();
+        this._instance.fnGetInstances()
+            .then((response: any) => {
+                if (response && !_.isEmpty(response.instances)) {
+                    this.instances = _.map(response.instances, instance => {
+                        instance.created = moment(instance.created).format('MM-DD-YYYY');
+                        return instance;
+                    });
+                    this.originalInstances = _.clone(this.instances);
+                    this._instance.instances.next(this.instances);
+                    this.fnOnSearchTextChange();
+                    this.isEmpty = false;
+                } else {
+                    this.isEmpty = true;
+                }
                 this.isLoading = false;
-            }
-        });
+            })
+            .catch((err) => {
+                this.isLoading = false;
+                this.isEmpty = true;
+            });
     }
 
     fnShowCreateModal(obj) {
@@ -83,7 +92,7 @@ export class InstanceComponent implements OnInit {
                 break;
             case 'none':
             default:
-                this.instances =  this.originalInstances;
+                this.instances = this.originalInstances;
                 break;
         }
     }
@@ -97,7 +106,7 @@ export class InstanceComponent implements OnInit {
 
     fnOnSearchTextChange() {
         this.instances = _.filter(this.originalInstances,
-                instance => instance.name.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1);
+            instance => instance.name.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1);
         if (this.sortBy !== 'none') {
             this.fnOnSortChange();
         }
