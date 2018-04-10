@@ -1,5 +1,5 @@
 <div data-collapse="medium" data-animation="over-left" data-duration="400" id="particles-back" class="navbar w-nav">
-    <div class="menu-button w-nav-button" (click)="fnToggleNav()">
+    <div #menuButton class="menu-button w-nav-button" (click)="fnToggleNav()">
         <div class="w-icon-nav-menu"></div>
     </div>
     <a href="#" class="brand w-clearfix w-nav-brand">
@@ -7,39 +7,44 @@
              srcset="assets/images/quiknode_pro_long-p-500.png 500w, assets/images/quiknode_pro_long.png 561w"
              sizes="166.078125px" class="logo">
     </a>
-    <div [ngClass]="isMobileView ? 'w-nav-overlay display-overlay' : ''">
-        <nav role="navigation" [ngClass]="isMobileView ? 'w-nav-menu w--nav-menu-open' : 'w-nav-menu'">
+    <div [ngClass]="isToggledMenu ? 'w-nav-overlay display-overlay' : ''">
+        <nav role="navigation" class="w-nav-menu" [ngClass]="isToggledMenu ? 'w--nav-menu-open' : ''">
             <a href="#/dashboard"
-               [ngClass]="isMobileView ? 'nav-link w-nav-link w--nav-link-open' : 'nav-link w-nav-link'"
+               class="nav-link w-nav-link"
+               [ngClass]="{'w--nav-link-open': isToggledMenu, 'w--current': currentPath.includes('dashboard')}"
                (click)="fnChangeRoute()"
-               [ngClass]="currentPath.includes('dashboard') ? 'w--current' : ''"
             >
                 <span class="icon"></span><br>Dashboard
             </a>
             <a href="#/instances"
-               [ngClass]="isMobileView ? 'nav-link w-nav-link w--nav-link-open' : 'nav-link w-nav-link'"
+               class="nav-link w-nav-link"
+               [ngClass]="{'w--nav-link-open': isToggledMenu, 'w--current': currentPath.includes('instance')}"
                (click)="fnChangeRoute()"
-               [ngClass]="currentPath.includes('instance') ? 'w--current' : ''"
             >
                 <span class="icon"></span><br>Instances
             </a>
-            <a href="#/users" [ngClass]="isMobileView ? 'nav-link w-nav-link w--nav-link-open' : 'nav-link w-nav-link'"
+            <a href="#/users"
+               class="nav-link w-nav-link"
+               [ngClass]="{'w--nav-link-open': isToggledMenu, 'w--current': currentPath.includes('user')}"
                (click)="fnChangeRoute()"
-               [ngClass]="currentPath.includes('user') ? 'w--current' : ''"
             >
                 <span class="icon"><br xmlns="http://www.w3.org/1999/xhtml"></span>Users
             </a>
             <a href="#/security"
-               [ngClass]="isMobileView ? 'nav-link w-nav-link w--nav-link-open' : 'nav-link w-nav-link'"
+               class="nav-link w-nav-link"
+               [ngClass]="{'w--nav-link-open': isToggledMenu, 'w--current': currentPath.includes('security')}"
                (click)="fnChangeRoute()"
-               [ngClass]="currentPath.includes('security') ? 'w--current' : ''"
             >
                 <span class="icon"></span><br>security
             </a>
-            <a href="#" [ngClass]="isMobileView ? 'nav-link w-nav-link w--nav-link-open' : 'nav-link w-nav-link'"
+            <a href="#"
+               class="nav-link w-nav-link"
+               [ngClass]="isToggledMenu ? 'w--nav-link-open' : ''"
                (click)="fnToggleNav()"><span
                 class="icon"></span><br>Help</a>
-            <a href="#" [ngClass]="isMobileView ? 'nav-link w-nav-link w--nav-link-open' : 'nav-link w-nav-link'"
+            <a href="#"
+               class="nav-link w-nav-link"
+               [ngClass]="isToggledMenu ? 'w--nav-link-open' : ''"
                (click)="fnToggleNav()"
                *ngIf="isLoggedIn" (click)="fnLogOut()">
                 <span class="icon"></span><br>Logout

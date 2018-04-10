@@ -21,11 +21,7 @@ export class ApiKeyComponent implements OnInit {
         this.apiKeys = this._api.getApiKeys();
 
         if (_.isEmpty(this.apiKeys)) {
-            this._api.fnGetApiKeys().then(response => {
-                if (response && response['account-authentication-tokens']) {
-                    this.apiKeys = response['account-authentication-tokens'];
-                }
-            });
+            this.fnGetApiKeys();
         }
         if (_.isEmpty(this.users)) {
             this._user.fnGetUsers().then((response: any) => {
@@ -34,6 +30,14 @@ export class ApiKeyComponent implements OnInit {
                 }
             });
         }
+    }
+
+    fnGetApiKeys() {
+        this._api.fnGetApiKeys().then(response => {
+            if (response && response['account-authentication-tokens']) {
+                this.apiKeys = response['account-authentication-tokens'];
+            }
+        });
     }
 
 }
