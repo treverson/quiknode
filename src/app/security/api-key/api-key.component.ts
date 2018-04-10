@@ -65,4 +65,16 @@ export class ApiKeyComponent implements OnInit {
             });
     }
 
+    fnOnChange(obj, i) {
+        if (obj.hasOwnProperty('secret') && !obj.secret) {
+            delete obj.secret;
+        }
+        if (obj.description) {
+            this._api.fnUpdateApiKey(obj, obj['account-authentication-token-id'])
+                .then(response => {
+                    this.apiKeys[i] = obj;
+                });
+        }
+    }
+
 }

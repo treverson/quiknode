@@ -41,4 +41,16 @@ export class ApiKeyService {
         return this.apiKeyList;
     }
 
+    fnUpdateApiKey(obj, keyId) {
+        return new Promise((resolve, reject) => {
+            this._http
+                .put(Constant.API_URL + `account/authentication-token/${keyId}`, obj)
+                .subscribe((response: any) => {
+                    resolve(response);
+                }, (error) => {
+                    reject(error);
+                });
+        });
+    }
+
 }

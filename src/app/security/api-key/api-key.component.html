@@ -70,11 +70,13 @@
         </div>
         <div class="w-col w-col-3">
             <input type="text" class="w-input" maxlength="256" name="field-5" data-name="Field 5"
+                   (blur)="fnOnChange(apiKeys[i], i)"
                    placeholder="passws33324245" id="field-5" required="" [(ngModel)]="apiKeys[i]['secret']">
         </div>
         <div class="column-4 w-col w-col-2">
             <textarea id="field-6" name="field-6" placeholder="John&#x27;s main access"
                       maxlength="5000" class="w-input"
+                      (blur)="fnOnChange(apiKeys[i], i)"
                       [(ngModel)]="apiKeys[i]['description']"
             ></textarea>
         </div>
