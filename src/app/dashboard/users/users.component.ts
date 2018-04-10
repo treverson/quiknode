@@ -21,7 +21,6 @@ export class UsersComponent implements OnInit {
     searchText: string;
     viewType: string;
     isLoading: boolean;
-    isEmpty: boolean;
 
     constructor(private _user: UserService, private titleService: Title) {
         this.showUserCreateModal = false;
@@ -30,6 +29,7 @@ export class UsersComponent implements OnInit {
         this.sortType = 'asc';
         this.searchText = '';
         this.viewType = 'grid';
+        this.users = [];
     }
 
     ngOnInit() {
@@ -48,14 +48,10 @@ export class UsersComponent implements OnInit {
                     });
                     this.originalUsers = _.clone(this.users);
                     this.fnOnSearchTextChange();
-                    this.isEmpty = false;
-                } else {
-                    this.isEmpty = true;
                 }
                 this.isLoading = false;
             })
             .catch((err) => {
-                this.isEmpty = true;
                 this.isLoading = false;
             });
     }

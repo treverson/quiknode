@@ -21,7 +21,6 @@ export class InstanceComponent implements OnInit {
     viewType: string;
     showAnalyticsModal: boolean;
     isLoading: boolean;
-    isEmpty: boolean;
 
     constructor(private _instance: InstanceService, private titleService: Title) {
         this.showInstanceCreateModal = false;
@@ -31,6 +30,7 @@ export class InstanceComponent implements OnInit {
         this.searchText = '';
         this.viewType = 'grid';
         this.showAnalyticsModal = false;
+        this.instances = [];
     }
 
     ngOnInit() {
@@ -50,15 +50,11 @@ export class InstanceComponent implements OnInit {
                     this.originalInstances = _.clone(this.instances);
                     this._instance.instances.next(this.instances);
                     this.fnOnSearchTextChange();
-                    this.isEmpty = false;
-                } else {
-                    this.isEmpty = true;
                 }
                 this.isLoading = false;
             })
             .catch((err) => {
                 this.isLoading = false;
-                this.isEmpty = true;
             });
     }
 
