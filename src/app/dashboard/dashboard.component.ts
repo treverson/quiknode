@@ -48,4 +48,8 @@ export class DashboardComponent implements OnInit {
             this.showApiKeyModal = true;
         }
     }
+
+    fnNotImplemented(e) {
+        this._instance.fnNotImplemented(e);
+    }
 }

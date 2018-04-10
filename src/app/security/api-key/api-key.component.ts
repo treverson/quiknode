@@ -4,6 +4,7 @@ import {UserService} from '../../common/services/user-service/user.service';
 import * as _ from 'lodash';
 import {ToastrService} from '../../common/services/toastr.service';
 import {AuthService} from '../../common/services/auth-service/auth.service';
+import {InstanceService} from '../../common/services/instance-service/instance.service';
 
 @Component({
     selector: 'app-api-key',
@@ -18,7 +19,7 @@ export class ApiKeyComponent implements OnInit {
     selectedUser: string;
 
     constructor(private _api: ApiKeyService, private _user: UserService, private _toastr: ToastrService,
-                private _auth: AuthService) {
+                private _auth: AuthService, private _instance: InstanceService) {
         this.users = [];
         this.apiKeyObject = {
             secret: '',
@@ -75,6 +76,10 @@ export class ApiKeyComponent implements OnInit {
                     this.apiKeys[i] = obj;
                 });
         }
+    }
+
+    fnNotImplemented(e) {
+        this._instance.fnNotImplemented(e);
     }
 
 }

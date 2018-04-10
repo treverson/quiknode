@@ -39,13 +39,13 @@
             </a>
             <a href="#"
                class="nav-link w-nav-link"
-               [ngClass]="isToggledMenu ? 'w--nav-link-open' : ''"
-               (click)="fnToggleNav()"><span
-                class="icon"></span><br>Help</a>
+               (click)="fnNotImplemented($event)"
+               [ngClass]="isToggledMenu ? 'w--nav-link-open' : ''">
+                <span class="icon"></span><br>Help
+            </a>
             <a href="#"
                class="nav-link w-nav-link"
                [ngClass]="isToggledMenu ? 'w--nav-link-open' : ''"
-               (click)="fnToggleNav()"
                *ngIf="isLoggedIn" (click)="fnLogOut()">
                 <span class="icon"></span><br>Logout
             </a>

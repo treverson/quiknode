@@ -3,6 +3,7 @@ import {AuthService} from '../common/services/auth-service/auth.service';
 import {ToastrService} from '../common/services/toastr.service';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {InstanceService} from '../common/services/instance-service/instance.service';
 
 @Component({
     selector: 'app-header',
@@ -26,7 +27,7 @@ export class HeaderComponent implements OnInit {
     }
 
     constructor(private _auth: AuthService, private _toastr: ToastrService, private _router: Router,
-                private _location: Location) {
+                private _location: Location, private _instance: InstanceService) {
         this.isLoggedIn = this._auth.fnIsLoggedIn();
         this.currentPath = '';
         this.isMobileView = false;
@@ -61,5 +62,9 @@ export class HeaderComponent implements OnInit {
 
     fnToggleNav() {
         this.isToggledMenu = !this.isToggledMenu;
+    }
+
+    fnNotImplemented(e) {
+        this._instance.fnNotImplemented(e);
     }
 }

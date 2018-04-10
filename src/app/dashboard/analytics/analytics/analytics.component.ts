@@ -147,8 +147,4 @@ export class AnalyticsComponent implements OnInit  {
         });
     }
 
-    fnNotImplemented(e) {
-       this._instance.fnNotImplemented(e);
-    }
-
 }
