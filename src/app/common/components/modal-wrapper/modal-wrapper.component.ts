@@ -8,6 +8,7 @@ import * as $ from 'jquery';
 })
 export class ModalWrapperComponent implements OnInit, OnDestroy {
     @Input() showModal: string;
+    @Input() hideClose?: boolean;
     @Output() fnHideModal = new EventEmitter<any>();
     shouldRemoveScrollOff?: boolean;
 

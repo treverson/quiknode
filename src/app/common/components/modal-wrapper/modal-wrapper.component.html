@@ -3,6 +3,7 @@
          [ngClass]="showModal ? 'show' : 'hide'">
         <a href="#"
            title="Close"
+           *ngIf="!hideClose"
            class="button btn-round btn-m float-right close-btn w-button"
            (click)="onHideModal($event)">
             

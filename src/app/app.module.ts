@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserIdleModule } from 'angular-user-idle';
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
@@ -34,6 +35,7 @@ import { ApiKeyService } from './common/services/api-key-service/api-key.service
 import { SecurityComponent } from './security/security.component';
 import { OtpComponent } from './security/otp/otp.component';
 import { ApiKeyComponent } from './security/api-key/api-key.component';
+import { Constant } from './common/constant';
 
 @NgModule({
     declarations: [
@@ -64,6 +66,7 @@ import { ApiKeyComponent } from './security/api-key/api-key.component';
         HttpClientModule,
         FormsModule,
         BrowserAnimationsModule,
+        UserIdleModule.forRoot({idle: Constant.SESSION_IDLE_TIME, timeout: Constant.SESSION_TIME, ping: Constant.IDLE_TIME_PING})
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: InterceptorProvider, multi: true},
