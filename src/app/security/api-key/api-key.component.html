@@ -1,34 +1,53 @@
 <div>
     <h6 class="modal-header section-heading">add new key</h6>
-    <div class="w-row">
-        <div class="w-col w-col-3">
-            <input type="text" class="w-input" maxlength="256" name="field-5"
-                   data-name="Field 5" placeholder="Secret" id="field-5" required="">
-        </div>
-        <div class="w-col w-col-3">
-            <textarea id="field-6" name="field-6" placeholder="Description" maxlength="5000" class="w-input"></textarea>
-        </div>
-        <div class="column-4 w-col w-col-3">
-            <select id="field-10" name="field-10" class="w-select">
-                <option value="">Assign to Users...</option>
-                <option value="First">First Choice</option>
-                <option value="Second">Second Choice</option>
-                <option value="Third">Third Choice</option>
-            </select>
-        </div>
-        <div class="column-6 w-clearfix w-col w-col-3">
-            <a href="#" class="button icon-btn float-right w-inline-block">
-                <div class="w-row">
-                    <div class="w-col w-col-3">
-                        <div class="icon"></div>
-                    </div>
-                    <div class="w-col w-col-9">
-                        <div class="btn-label">Generate</div>
-                    </div>
+    <form #apiForm="ngForm" id="api-form" name="api-form" data-name="Api Key Form">
+        <div class="w-row">
+            <div class="w-col w-col-3">
+                <input type="text" class="w-input" maxlength="256" name="field-5"
+                       data-name="Field 5" placeholder="Secret"
+                       [(ngModel)]="apiKeyObject.secret"
+                       #secret="ngModel"
+                       required="">
+                <div *ngIf="(apiForm.submitted || secret.touched) && !secret.valid">
+                    <small class="text-danger" *ngIf="secret.errors['required']">
+                        Secret is required.
+                    </small>
                 </div>
-            </a>
+            </div>
+            <div class="w-col w-col-3">
+                <textarea name="field-6" placeholder="Description"
+                          [(ngModel)]="apiKeyObject.description"
+                          #description="ngModel"
+                          required=""
+                          maxlength="5000" class="w-input">
+                    </textarea>
+                <div *ngIf="(apiForm.submitted || description.touched) && !description.valid">
+                    <small class="text-danger" *ngIf="description.errors['required']">
+                        Description is required.
+                    </small>
+                </div>
+            </div>
+            <div class="column-4 w-col w-col-3">
+                <select name="field-10" class="w-select" [(ngModel)]="selectedUser">
+                    <option value="{{user['user-id']}}" *ngFor="let user of users">{{user.name}}</option>
+                </select>
+            </div>
+            <div class="column-6 w-clearfix w-col w-col-3">
+                <a href="#" class="button icon-btn float-right w-inline-block"
+                   (click)="apiForm.valid && fnAddApiKey($event, apiKeyObject, apiForm)"
+                >
+                    <div class="w-row">
+                        <div class="w-col w-col-3">
+                            <div class="icon"></div>
+                        </div>
+                        <div class="w-col w-col-9">
+                            <div class="btn-label">Generate</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
+    </form>
     <h6 class="modal-header section-heading">My keys</h6>
     <div class="w-row">
         <div class="w-col w-col-3">

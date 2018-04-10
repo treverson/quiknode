@@ -15,10 +15,11 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {ToastrService} from './services/toastr.service';
 import * as _ from 'lodash';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class InterceptorProvider implements HttpInterceptor {
-    constructor(private _toastr: ToastrService) {
+    constructor(private _toastr: ToastrService, private router: Router) {
 
     }
 
@@ -47,7 +48,9 @@ export class InterceptorProvider implements HttpInterceptor {
                     switch (error.status) {
                         case 401:
                             localStorage.removeItem('AUTH_TOKEN');
+                            localStorage.removeItem('USER_ID');
                             this._toastr.fnWarning(message);
+                            this.router.navigate(['/login']);
                             console.log(error.error);
                             break;
                         case 502:
