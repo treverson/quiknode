@@ -141,4 +141,10 @@ export class CreateUpdateUserComponent implements OnInit {
         e.preventDefault();
         this.showDeleteModal.next(this.userObj);
     }
+
+    fnCloneUser() {
+        this.editUserObject = null;
+        this.userObj.password = '';
+        this.userObj.confirmPassword = '';
+    }
 }

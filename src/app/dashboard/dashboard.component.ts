@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {InstanceService} from '../common/services/instance-service/instance.service';
+import {UserService} from '../common/services/user-service/user.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -13,8 +14,9 @@ export class DashboardComponent implements OnInit {
     showUserCreateModal?: boolean;
     showAccountModal?: boolean;
     showApiKeyModal?: boolean;
+    users: any[];
 
-    constructor(private titleService: Title, private _instance: InstanceService) {
+    constructor(private titleService: Title, private _instance: InstanceService, private _users: UserService) {
         this.showInstanceCreateModal = false;
         this.showUserCreateModal = false;
         this.showAccountModal = false;
@@ -25,6 +27,9 @@ export class DashboardComponent implements OnInit {
         this.titleService.setTitle('New Dashboard');
         this._instance.instances.subscribe((instances) => {
             this.instances = instances;
+        });
+        this._users.fnGetUsers().then((response: any) => {
+            this.users = this._users.userList;
         });
     }
 

@@ -152,4 +152,8 @@ export class CreateUpdateInstanceComponent implements OnInit {
         return index;
     }
 
+    fnCloneInstance() {
+        delete this.instanceObj['instance-id'];
+        this.editInstanceObject = null;
+    }
 }
