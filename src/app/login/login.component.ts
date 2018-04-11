@@ -17,12 +17,14 @@ interface LogIn {
 export class LoginComponent implements OnInit {
 
     logInObject: LogIn;
+    keepLoggedIn: boolean;
 
     constructor(private _auth: AuthService, private _router: Router,  private _toastr: ToastrService, private titleService: Title) {
         this.logInObject = {
             username: '',
             password: '',
         };
+        this.keepLoggedIn = false;
     }
 
     ngOnInit() {
@@ -31,6 +33,7 @@ export class LoginComponent implements OnInit {
 
     // call API on login button
     fnSignIn(signInObj: LogIn, myForm) {
+        signInObj['keepLoggedIn'] = this.keepLoggedIn;
         this._auth.fnSignIn(signInObj)
             .then((response: any) => {
                 this._toastr.fnSuccess('Logged in successfully.');
@@ -41,6 +44,10 @@ export class LoginComponent implements OnInit {
                     this._toastr.fnWarning('Login failed.');
                 }
             });
+    }
+
+    fnCheckChange(e) {
+        this.keepLoggedIn = e.target.checked;
     }
 
 }
