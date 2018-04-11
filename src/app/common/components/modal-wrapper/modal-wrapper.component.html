@@ -1,6 +1,6 @@
 <div class="modal-overlay" [ngClass]="showModal ? 'show' : 'hide'">
     <div id="add_instance" class="modal-content w-clearfix"
-         [ngClass]="showModal ? 'show' : 'hide'">
+         [ngClass]="{'show' : showModal, 'hide' : !showModal, 'small-modal' : hideClose }">
         <a href="#"
            title="Close"
            *ngIf="!hideClose"

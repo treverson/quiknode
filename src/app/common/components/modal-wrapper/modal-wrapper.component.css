@@ -5,3 +5,7 @@
 .hide {
     display: none;
 }
+
+.small-modal {
+    width: 50% !important;
+}

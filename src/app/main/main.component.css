@@ -1,0 +1,6 @@
+.seconds-timer {
+    display: inline-block;
+    width: 20px;
+    font-weight: 600;
+    text-align: center;
+}
