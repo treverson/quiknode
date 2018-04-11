@@ -10,7 +10,7 @@ export class AuthService {
     private keepLoggedIn: boolean;
 
     constructor(private _http: HttpClient) {
-        this.keepLoggedIn = Boolean(localStorage.getItem('KEEP_LOGGED_IN')) || false;
+        this.keepLoggedIn = localStorage.getItem('KEEP_LOGGED_IN') === 'true' || false;
         if (localStorage.getItem('AUTH_TOKEN')) {
             this._token = localStorage.getItem('AUTH_TOKEN');
             this._userId = localStorage.getItem('USER_ID');
