@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {UserIdleService} from 'angular-user-idle';
 import {AuthService} from '../common/services/auth-service/auth.service';
 import {Router} from '@angular/router';
@@ -12,6 +12,11 @@ import {Constant} from '../common/constant';
 export class MainComponent implements OnInit {
     showModal: boolean;
     remainingTime: number;
+    @HostListener('window:beforeunload') onUnload() {
+        if (!this._auth.fnKeepLoggedIn()) {
+            this.fnLogOut();
+        }
+    }
 
     constructor(private userIdle: UserIdleService, private _auth: AuthService, private _router: Router) {
     }

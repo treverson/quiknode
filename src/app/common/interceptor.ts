@@ -16,18 +16,19 @@ import 'rxjs/add/operator/catch';
 import {ToastrService} from './services/toastr.service';
 import * as _ from 'lodash';
 import {Router} from '@angular/router';
+import {AuthService} from './services/auth-service/auth.service';
 
 @Injectable()
 export class InterceptorProvider implements HttpInterceptor {
-    constructor(private _toastr: ToastrService, private router: Router) {
+    constructor(private _toastr: ToastrService, private router: Router, private _auth: AuthService) {
 
     }
 
     public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (localStorage.getItem('AUTH_TOKEN')) {
+        if (this._auth.fnGetToken()) {
             request = request.clone({
                 setHeaders: {
-                    Authorization: `Basic ${localStorage.getItem('AUTH_TOKEN')}`
+                    Authorization: `Basic ${this._auth.fnGetToken()}`
                 }
             });
         }
