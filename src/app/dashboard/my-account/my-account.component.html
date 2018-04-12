@@ -2,13 +2,46 @@
     <h2 class="modal-header">My account</h2>
     <form #accountForm="ngForm" id="account-form" name="account-form" data-name="Account Form">
         <div class="w-container">
+            <div class="centered text">Balance: ETH0.01</div>
+            <div class="centered">
+                <a href="#" class="button icon-btn mr-10 disabled w-inline-block">
+                    <div class="w-row">
+                        <div class="w-col w-col-3 w-col-medium-3">
+                            <div class="icon"></div>
+                        </div>
+                        <div class="w-col w-col-9 w-col-medium-9">
+                            <div class="btn-label">Add funds</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="button icon-btn mr-10 w-inline-block">
+                    <div class="w-row">
+                        <div class="w-col w-col-3 w-col-medium-3 w-col-small-small-stack">
+                            <div class="icon"></div>
+                        </div>
+                        <div class="w-col w-col-9 w-col-medium-9 w-col-small-small-stack">
+                            <div class="btn-label">Generate OTP</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" title="Delete permanently" class="button icon-btn disabled w-inline-block">
+                    <div class="w-row">
+                        <div class="w-col w-col-3 w-col-medium-3">
+                            <div class="icon"></div>
+                        </div>
+                        <div class="w-col w-col-9 w-col-medium-9">
+                            <div class="btn-label">Terminate</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
             <div class="w-row">
-                <div class="w-col w-col-6">
+                <div class="w-clearfix w-col w-col-6">
                     <div class="icon-input w-row">
-                        <div class="w-col w-col-1">
+                        <div class="w-col w-col-1 w-col-small-1 w-col-tiny-1">
                             <div class="icon icon-lg"></div>
                         </div>
-                        <div class="w-col w-col-11">
+                        <div class="w-col w-col-11 w-col-small-11 w-col-tiny-11">
                             <input type="text" class="w-input" maxlength="256" name="field-1" data-name="Field 1"
                                    [(ngModel)]="userObject.name"
                                    #name="ngModel"
@@ -21,10 +54,31 @@
                         </div>
                     </div>
                     <div class="icon-input w-row">
-                        <div class="w-col w-col-1">
+                        <div class="w-col w-col-1 w-col-small-1 w-col-tiny-1">
+                            <div class="icon icon-lg mt10"></div>
+                        </div>
+                        <div class="w-col w-col-11 w-col-small-11 w-col-tiny-11">
+                            <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2"
+                                   placeholder="Password" id="field-2" required="">
+                        </div>
+                    </div>
+                    <a href="#" class="button icon-btn float-right w-inline-block">
+                        <div class="w-row">
+                            <div class="w-col w-col-3 w-col-medium-3">
+                                <div class="icon"></div>
+                            </div>
+                            <div class="w-col w-col-9 w-col-medium-9">
+                                <div class="btn-label">Reset password</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="w-col w-col-6">
+                    <div class="icon-input w-row">
+                        <div class="w-col w-col-1 w-col-small-1 w-col-tiny-1">
                             <div class="icon icon-lg"></div>
                         </div>
-                        <div class="w-col w-col-11">
+                        <div class="w-col w-col-11 w-col-small-11 w-col-tiny-11">
                             <input type="text" class="w-input" maxlength="256" name="field-2"
                                    [(ngModel)]="userObject.email"
                                    #email="ngModel"
@@ -41,28 +95,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="w-clearfix w-col w-col-6">
-                    <a href="#" class="button icon-btn w-inline-block">
-                        <div class="w-row">
-                            <div class="w-col w-col-3">
-                                <div class="icon"></div>
-                            </div>
-                            <div class="w-col w-col-9">
-                                <div class="btn-label">Generate OTP</div>
-                            </div>
+                    <div class="icon-input w-row">
+                        <div class="w-col w-col-1 w-col-small-1 w-col-tiny-1">
+                            <div class="icon icon-lg"></div>
                         </div>
-                    </a>
-                    <a href="#" class="button icon-btn float-right w-inline-block">
-                        <div class="w-row">
-                            <div class="w-col w-col-3">
-                                <div class="icon"></div>
-                            </div>
-                            <div class="w-col w-col-9">
-                                <div class="btn-label">Reset password</div>
-                            </div>
+                        <div class="w-col w-col-11 w-col-small-11 w-col-tiny-11">
+                            <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="mail@usps.com" id="field-2" required="">
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>
