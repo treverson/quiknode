@@ -14,7 +14,15 @@ export class MainComponent implements OnInit {
     remainingTime: number;
     @HostListener('window:beforeunload') onUnload() {
         if (!this._auth.fnKeepLoggedIn()) {
-            this.fnLogOut();
+            // check for Navigation Timing API support
+            if (window.performance) {
+                console.log('window.performance works fine on this browser');
+            }
+            if (performance.navigation.type === 1) {
+                this.fnLogOut();
+            } else {
+                console.log( 'This page is not reloaded');
+            }
         }
     }
 
