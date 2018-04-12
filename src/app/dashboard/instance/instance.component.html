@@ -54,7 +54,7 @@
         <div class="chart" *ngIf="isLoading">
             <img src="assets/images/loader.gif" class="loader">
         </div>
-        <div class="error-msg" *ngIf="instances && instances.length === 0">
+        <div class="error-msg" *ngIf="!isLoading && instances && instances.length === 0">
             <div>Oops! No data found.</div>
         </div>
     </div>

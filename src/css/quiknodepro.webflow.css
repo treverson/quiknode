@@ -214,6 +214,18 @@
   color: #fff;
 }
 
+.button.icon-btn.disabled {
+  opacity: 0.28;
+}
+
+.button.icon-btn.disabled:hover {
+  -webkit-filter: none;
+  filter: none;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+
 .button.centered {
   display: block;
   max-width: 200px;
@@ -683,6 +695,7 @@
 
 .modal-header {
   margin-bottom: 20px;
+  font-size: 1.8rem;
   font-weight: 200;
   text-align: center;
   text-transform: uppercase;
@@ -693,6 +706,10 @@
   font-size: 1.1rem;
   font-weight: 500;
   text-align: left;
+}
+
+.modal-header.subheader {
+  font-size: 1.2rem;
 }
 
 .icon-input {
@@ -796,7 +813,7 @@
   padding: 10px;
 }
 
-.instances-dashboard {
+.card-container {
   padding: 10px 0px;
 }
 
@@ -809,8 +826,8 @@
   left: 0px;
   top: 0px;
   width: 100%;
-  height: 91px;
-  padding-top: 5px;
+  height: auto;
+  padding-top: 0px;
   background-image: -webkit-linear-gradient(45deg, #1eb7e3, #f8fae4 96%);
   background-image: linear-gradient(45deg, #1eb7e3, #f8fae4 96%);
   font-size: 0.7rem;
@@ -1053,6 +1070,7 @@
   min-width: 250px;
   padding-right: 0px;
   padding-left: 0px;
+  border: 1px solid #1eb7e3;
   background-color: #fff;
   color: #1eb7e3;
   font-size: 0.8rem;
@@ -1134,6 +1152,9 @@
   .button.icon-btn.mr-10 {
     min-width: 100px;
   }
+  .card.flex {
+    padding: 10px;
+  }
   .info-row.shadow {
     height: 154px;
     -webkit-box-flex: 0;
@@ -1151,13 +1172,37 @@
     bottom: 6px;
   }
   .icon {
-    font-size: 1rem;
+    font-size: 1.4rem;
+  }
+  .icon.icon-xl {
+    font-size: 2.5rem;
+  }
+  .modal-content {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .modal-header {
+    font-size: 1.5rem;
   }
   .top-pad.right-pad {
     padding-right: 18px;
   }
   .logo {
     top: -13px;
+  }
+  .navbar {
+    height: auto;
+  }
+  .centered.text {
+    font-size: 0.8rem;
+  }
+  .padded-block {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .container-box {
+    padding-right: 5px;
+    padding-left: 5px;
   }
   .menu-button {
     margin-right: 10px;
@@ -1166,9 +1211,148 @@
   }
 }
 
+@media (max-width: 767px) {
+  .button.icon-btn {
+    width: 150px;
+    min-width: 0px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .button.icon-btn.float-right {
+    min-width: 120px;
+  }
+  .card.flex {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  .card.box-view {
+    padding: 5px;
+  }
+  .card.list {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  .card-heading {
+    margin-bottom: 0px;
+    font-size: 1.2rem;
+  }
+  .info-row.list {
+    padding: 5px;
+  }
+  .name-label.bold {
+    font-size: 0.6rem;
+  }
+  .grey-text {
+    font-size: 0.5rem;
+  }
+  .icon {
+    font-size: 1.5rem;
+  }
+  .brand {
+    float: left;
+  }
+  .checkbox-label {
+    font-size: 0.6rem;
+  }
+  .logo {
+    height: 30px;
+    margin-top: 6px;
+    float: none;
+  }
+  .login-container {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .input-field.inline-flat {
+    font-size: 0.7rem;
+  }
+  .padded-block {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  .text-field {
+    font-size: 0.7rem;
+  }
+}
+
 @media (max-width: 479px) {
+  .button.btn-flat.no-border {
+    margin-right: 0px;
+    margin-left: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  .button.btn-round.btn-m.float-right.close-btn {
+    top: -3px;
+    right: -4px;
+  }
+  .button.icon-btn.small {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  .button.icon-btn.mr-10 {
+    width: 115px;
+  }
+  .card.box-view {
+    padding-left: 5px;
+  }
+  .card.list {
+    padding: 5px;
+  }
+  .card-heading {
+    margin-bottom: 5px;
+    font-size: 1rem;
+  }
   .info-row.shadow {
-    width: 100%;
+    width: 48%;
+    margin-right: 5px;
+  }
+  .info-row.list {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .grey-text {
+    overflow: hidden;
+  }
+  .icon.icon-xl {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .btn-label {
+    font-size: 0.55rem;
+  }
+  .modal-content {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .modal-header {
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+  }
+  .modal-header.section-heading {
+    font-size: 0.8rem;
+  }
+  .input-field.inline.mr-10 {
+    margin-right: 5px;
+  }
+  .small-text {
+    font-size: 0.6rem;
+  }
+  .centered {
+    font-size: 0.5rem;
+    line-height: 1.2rem;
+  }
+  .centered.text {
+    font-size: 0.7rem;
+  }
+  .med-img.centered {
+    max-width: 60px;
+  }
+  .paragraph-2 {
+    font-size: 0.7rem;
+    line-height: 0.9rem;
   }
 }
 

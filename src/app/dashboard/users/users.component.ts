@@ -38,7 +38,7 @@ export class UsersComponent implements OnInit {
     }
 
     fnGetUsers() {
-        this.isLoading = true
+        this.isLoading = true;
         this._user.fnGetUsers()
             .then((response: any) => {
                 if (response && !_.isEmpty(response.users)) {

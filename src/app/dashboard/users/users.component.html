@@ -38,7 +38,7 @@
                (ngModelChange)="fnOnSearchTextChange()">
     </div>
     <div class="users-dashboard">
-        <div class="card " [ngClass]="viewType === 'grid' ? 'flex' : 'list'">
+        <div class="card " [ngClass]="viewType === 'grid' ? 'flex' : 'list'" *ngIf="!isLoading">
             <div class="info-row " [ngClass]="viewType === 'grid' ? 'shadow p-0' : 'list'"
                  *ngFor="let user of users; let i = index">
                 <app-single-user [user]="user"
@@ -51,7 +51,7 @@
         <div class="chart" *ngIf="isLoading">
             <img src="assets/images/loader.gif" class="loader">
         </div>
-        <div class="error-msg" *ngIf="users && users.length === 0">
+        <div class="error-msg" *ngIf="!isLoading && users && users.length === 0">
             <div>Oops! No data found.</div>
         </div>
     </div>
