@@ -2,7 +2,7 @@
 <form #apiForm="ngForm" id="api-form" name="api-form" data-name="Api Key Form">
     <div>
         <div class="w-row">
-            <div class="w-col w-col-3">
+            <div class="w-col w-col-4">
                 <input type="text" class="w-input" maxlength="256" name="field-5"
                        data-name="Field 5" placeholder="Secret"
                        [(ngModel)]="apiKeyObject.secret"
@@ -14,7 +14,7 @@
                     </small>
                 </div>
             </div>
-            <div class="w-col w-col-3">
+            <div class="w-col w-col-4">
                 <textarea id="field-6" name="field-6" placeholder="Description"
                           [(ngModel)]="apiKeyObject.description"
                           #description="ngModel"
@@ -27,8 +27,8 @@
                     </small>
                 </div>
             </div>
-            <div class="column-4 w-col w-col-3">
-                <a href="#" class="button icon-btn w-inline-block"
+            <div class="column-4 w-clearfix w-col w-col-4">
+                <a href="#" class="button icon-btn w-inline-block float-right"
                    *ngIf="!apiKey"
                    (click)="apiForm.valid && fnAddApiKey($event, apiKeyObject)"
                 >
@@ -42,14 +42,6 @@
                     </div>
                 </a>
                 <h6 class="text" *ngIf="apiKey">{{apiKey}}</h6>
-            </div>
-            <div class="column-6 w-col w-col-3">
-                <select id="field-10" name="field-10" class="w-select">
-                    <option value="">Assign to User...</option>
-                    <option value="First">First Choice</option>
-                    <option value="Second">Second Choice</option>
-                    <option value="Third">Third Choice</option>
-                </select>
             </div>
         </div>
     </div>
