@@ -5,3 +5,7 @@
 .backdrop-scroll-off {
     overflow: hidden;
 }
+
+.w-select[disabled] {
+    opacity: 0.28;
+}

@@ -7,7 +7,3 @@
     align-items: center;
     justify-content: center;
 }
-
-.w-select[disabled] {
-    opacity: 0.28;
-}
