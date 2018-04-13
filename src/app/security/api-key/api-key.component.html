@@ -33,8 +33,9 @@
                 </select>
             </div>
             <div class="column-6 w-clearfix w-col w-col-3">
-                <a href="#" class="button icon-btn float-right w-inline-block"
-                   (click)="apiForm.valid && fnAddApiKey($event, apiKeyObject, apiForm)"
+                <button class="button icon-btn float-right w-inline-block"
+                        [ladda]="isLoading"
+                        (click)="apiForm.valid && fnAddApiKey($event, apiKeyObject, apiForm)"
                 >
                     <div class="w-row">
                         <div class="w-col w-col-3">
@@ -44,7 +45,7 @@
                             <div class="btn-label">Generate</div>
                         </div>
                     </div>
-                </a>
+                </button>
             </div>
         </div>
     </form>

@@ -9,6 +9,7 @@ import {ToastrService} from '../../common/services/toastr.service';
 })
 export class MyAccountComponent implements OnInit {
     userObject: any;
+    isLoading: boolean;
     @Output() fnHideModal = new EventEmitter<any>();
     public emailRegEx: any = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
 
@@ -17,6 +18,7 @@ export class MyAccountComponent implements OnInit {
             name: '',
             email: ''
         };
+        this.isLoading = false;
     }
 
     ngOnInit() {
@@ -29,11 +31,15 @@ export class MyAccountComponent implements OnInit {
     fnSaveAccount(e, userObject) {
         e.preventDefault();
         e.stopPropagation();
+        this.isLoading = true;
         this._user.fnUpdateUser(userObject, userObject['user-id'])
             .then(response => {
+                this.isLoading = false;
                 this.fnHideModal.next();
                 this._toastr.fnSuccess('Account updated successfully.');
-            });
+            }).catch(error => {
+                this.isLoading = false;
+        });
     }
 
 }

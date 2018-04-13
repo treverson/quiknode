@@ -28,7 +28,8 @@
                 </div>
             </div>
             <div class="column-4 w-clearfix w-col w-col-4">
-                <a href="#" class="button icon-btn w-inline-block float-right"
+                <button class="button icon-btn w-inline-block float-right"
+                   [ladda]="isLoading"
                    *ngIf="!apiKey"
                    (click)="apiForm.valid && fnAddApiKey($event, apiKeyObject)"
                 >
@@ -40,7 +41,7 @@
                             <div class="btn-label">Generate</div>
                         </div>
                     </div>
-                </a>
+                </button>
                 <h6 class="text" *ngIf="apiKey">{{apiKey}}</h6>
             </div>
         </div>

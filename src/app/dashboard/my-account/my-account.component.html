@@ -106,7 +106,8 @@
                 </div>
             </div>
         </div>
-        <a href="#" class="button icon-btn float-right mt10 w-inline-block"
+        <button class="button icon-btn float-right mt10 w-inline-block"
+           [ladda]="isLoading"
            (click)="accountForm.valid && this.fnSaveAccount($event, userObject)">
             <div class="w-row">
                 <div class="w-col w-col-3">
@@ -116,6 +117,6 @@
                     <div class="btn-label">SAVE </div>
                 </div>
             </div>
-        </a>
+        </button>
     </form>
 </div>

@@ -159,6 +159,7 @@
         </div>
     </div>
     <button href="#" class="button icon-btn save-btn float-right w-inline-block"
+            [ladda]="isLoading"
             (click)="(userForm.valid && isPasswordMatching) && fnCreateUserClick(userObj, userForm)"
     >
         <div class="w-row">

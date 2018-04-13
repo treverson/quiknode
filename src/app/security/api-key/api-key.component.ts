@@ -17,6 +17,7 @@ export class ApiKeyComponent implements OnInit {
     apiKeyObject: any;
     currentUser: string;
     selectedUser: string;
+    isLoading: boolean;
 
     constructor(private _api: ApiKeyService, private _user: UserService, private _toastr: ToastrService,
                 private _auth: AuthService, private _instance: InstanceService) {
@@ -27,6 +28,7 @@ export class ApiKeyComponent implements OnInit {
         };
         this.currentUser = this._auth.fnGetUserId();
         this.selectedUser = _.clone(this.currentUser);
+        this.isLoading = false;
     }
 
     ngOnInit() {
@@ -58,12 +60,16 @@ export class ApiKeyComponent implements OnInit {
     fnAddApiKey(e, apiKeyObject, form) {
         e.preventDefault();
         e.stopPropagation();
+        this.isLoading = true;
         this._api.fnCreateApiKey(apiKeyObject)
             .then(response => {
+                this.isLoading = true;
                 this._toastr.fnSuccess('Api key created successfully.');
                 this.fnGetApiKeys();
                 form.resetForm();
-            });
+            }).catch(err => {
+                this.isLoading = false;
+        });
     }
 
     fnOnChange(obj, i) {

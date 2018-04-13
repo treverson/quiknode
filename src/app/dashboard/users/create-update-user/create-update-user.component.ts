@@ -17,6 +17,7 @@ export class CreateUpdateUserComponent implements OnInit {
     isPasswordMatching: boolean;
     apiKeys: any;
     selectedApiKey: string;
+    isLoading: boolean;
     @Input() editUserObject;
     @Output() fnHideModal = new EventEmitter<any>();
     @Output() showDeleteModal = new EventEmitter<any>();
@@ -33,6 +34,7 @@ export class CreateUpdateUserComponent implements OnInit {
         this.selectedPermissions = [];
         this.apiKeys = [];
         this.selectedApiKey = '';
+        this.isLoading = false;
     }
 
     ngOnInit() {
@@ -78,16 +80,19 @@ export class CreateUpdateUserComponent implements OnInit {
         if (this.userObj.password !== 'PASSWORD') {
             userObject.password = hashedPassword;
         }
+        this.isLoading = true;
         if (this.editUserObject) {
                 this._user.fnUpdateUser(userObject, this.editUserObject['user-id'])
                 .then((response: any) => {
                     this._user.fnUpdateUserPermissions(permissionObject, this.editUserObject['user-id'])
                         .then(res => {
+                            this.isLoading = false;
                             this._toastr.fnSuccess('User updated successfully.');
                         });
                     this.fnHideModal.next(true);
                 })
                 .catch((err) => {
+                    this.isLoading = false;
                     if (err.status !== 401 && err.status !== 502 && err.status !== 404) {
                         this._toastr.fnWarning('User update failed.');
                     }
@@ -95,11 +100,13 @@ export class CreateUpdateUserComponent implements OnInit {
         } else {
              this._user.fnCreateUser(userObject)
                  .then((response: any) => {
+                     this.isLoading = false;
                      this._toastr.fnSuccess('User created successfully.');
                      this.fnHideModal.next(true);
                      this._user.fnUpdateUserPermissions(permissionObject, response['user-id']);
                  })
                  .catch((err) => {
+                     this.isLoading = false;
                      if (err.status !== 401 && err.status !== 502 && err.status !== 404) {
                          this._toastr.fnWarning('User creation failed.');
                      }

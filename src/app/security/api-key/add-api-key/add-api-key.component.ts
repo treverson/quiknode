@@ -10,6 +10,7 @@ import {ToastrService} from '../../../common/services/toastr.service';
 export class AddApiKeyComponent implements OnInit {
     apiKeyObject: any;
     apiKey?: string;
+    isLoading?: boolean;
     @Output() fnHideModal = new EventEmitter<any>();
 
     constructor(private _apiKey: ApiKeyService, private _toastr: ToastrService) {
@@ -18,6 +19,7 @@ export class AddApiKeyComponent implements OnInit {
             description: ''
         };
         this.apiKey = '';
+        this.isLoading = false;
     }
 
     ngOnInit() {
@@ -26,13 +28,17 @@ export class AddApiKeyComponent implements OnInit {
     fnAddApiKey(e, apiKeyObject) {
         e.preventDefault();
         e.stopPropagation();
+        this.isLoading = true;
         this._apiKey.fnCreateApiKey(apiKeyObject)
             .then(response => {
                 if (response && response['account-authentication-token-id']) {
                     this.apiKey = response['account-authentication-token-id'];
                 }
+                this.isLoading = false;
                 this._toastr.fnSuccess('Api key created successfully.');
-            });
+            }).catch(error => {
+                this.isLoading = false;
+        });
     }
 
     fnCloseModal = (e) => {

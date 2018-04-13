@@ -10,6 +10,7 @@
     opacity: 0.28;
 }
 
-.ladda-button[disabled] {
+.ladda-button[disabled], .ladda-button[disabled]:hover {
     cursor: not-allowed !important;
+    background: #1eb7e3 !important;
 }
