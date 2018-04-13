@@ -4,6 +4,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserIdleModule } from 'angular-user-idle';
+import { LaddaModule } from 'angular2-ladda';
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
@@ -66,7 +67,11 @@ import { Constant } from './common/constant';
         HttpClientModule,
         FormsModule,
         BrowserAnimationsModule,
-        UserIdleModule.forRoot({idle: Constant.SESSION_IDLE_TIME, timeout: Constant.SESSION_TIME, ping: Constant.IDLE_TIME_PING})
+        UserIdleModule.forRoot({idle: Constant.SESSION_IDLE_TIME, timeout: Constant.SESSION_TIME, ping: Constant.IDLE_TIME_PING}),
+        LaddaModule.forRoot({
+            style: 'slide-left',
+            spinnerSize: 30,
+        }),
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: InterceptorProvider, multi: true},

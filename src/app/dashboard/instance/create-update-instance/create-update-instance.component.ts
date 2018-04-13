@@ -35,6 +35,7 @@ export class CreateUpdateInstanceComponent implements OnInit {
     validatorType: string;
     validateReferer: string[];
     validateToken: string;
+    isLoading: boolean;
     constructor(private _instance: InstanceService, private _toastr: ToastrService) {
         this.instanceObj = {
             name: '',
@@ -50,6 +51,7 @@ export class CreateUpdateInstanceComponent implements OnInit {
         this.validatorType = 'validateToken';
         this.validateReferer = [''];
         this.validateToken = '';
+        this.isLoading = false;
     }
 
     ngOnInit() {
@@ -103,22 +105,27 @@ export class CreateUpdateInstanceComponent implements OnInit {
 
         // update instance
         if (this.editInstanceObject) {
+            this.isLoading = true;
             this._instance.fnUpdateInstance(instanceObject)
                 .then((response: any) => {
                     this._toastr.fnSuccess('Instance updated successfully.');
+                    this.isLoading = false;
                     this.fnHideModal.next();
                 })
                 .catch(() => {
+                    this.isLoading = false;
                     this._toastr.fnWarning('Update instance failed.');
                 });
         } else {
-            // create instance
+            this.isLoading = true;
             this._instance.fnCreateInstance(instanceObject)
                 .then((response: any) => {
+                    this.isLoading = false;
                     this._toastr.fnSuccess('Instance created successfully.');
                     this.fnHideModal.next(true);
                 })
                 .catch((err) => {
+                    this.isLoading = false;
                     if (err.status !== 401 && err.status !== 502) {
                         this._toastr.fnWarning('Instance creation failed.');
                     }

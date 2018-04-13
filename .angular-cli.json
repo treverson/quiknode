@@ -20,9 +20,13 @@
             "prefix": "app",
             "styles": [
                 "../node_modules/toastr/build/toastr.min.css",
+                "../node_modules/ladda/dist/ladda.min.css",
                 "styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+                "../node_modules/ladda/dist/spin.min.js",
+                "../node_modules/ladda/dist/ladda.min.js"
+            ],
             "environmentSource": "environments/environment.ts",
             "environments": {
                 "dev": "environments/environment.ts",

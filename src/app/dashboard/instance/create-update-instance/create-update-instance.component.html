@@ -112,7 +112,8 @@
         </div>
     </div>
     <button class="button icon-btn save-btn float-right w-inline-block"
-       (click)="instanceForm.valid  && fnCreateInstanceClick(instanceObj, instanceForm)"
+            [ladda]="isLoading"
+            (click)="instanceForm.valid  && fnCreateInstanceClick(instanceObj, instanceForm)"
     >
         <div class="w-row" *ngIf="!editInstanceObject">
             <div class="w-col w-col-3">
