@@ -28,6 +28,11 @@ export class AnalyticsComponent implements OnInit  {
     }
 
     ngOnInit() {
+        Highcharts.setOptions({
+            global: {
+                useUTC: false,
+            },
+        });
         this.metricList = [
             'http-requests',
             'websocket',
@@ -62,6 +67,10 @@ export class AnalyticsComponent implements OnInit  {
         if (!values) {
             dataValues = [[new Date().getTime(), 0]];
         }
+        dataValues = _.map(dataValues, itemArray => {
+            itemArray[0] = itemArray[0] * 1000;
+            return itemArray;
+        });
         const options: Highcharts.Options = {
             chart: {
                 zoomType: 'x'
