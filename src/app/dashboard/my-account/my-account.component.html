@@ -1,6 +1,8 @@
 <div>
     <h2 class="modal-header">My account</h2>
-    <form #accountForm="ngForm" id="account-form" name="account-form" data-name="Account Form">
+    <form #accountForm="ngForm" id="account-form" name="account-form" data-name="Account Form"
+    (ngSubmit)="accountForm.valid && this.fnSaveAccount($event, userObject)"
+    >
         <div class="w-container">
             <div class="centered text">Balance: ETH0.01</div>
             <div class="centered">
@@ -107,8 +109,9 @@
             </div>
         </div>
         <button class="button icon-btn float-right mt10 w-inline-block"
-           [ladda]="isLoading"
-           (click)="accountForm.valid && this.fnSaveAccount($event, userObject)">
+                [ladda]="isLoading"
+                type="submit"
+        >
             <div class="w-row">
                 <div class="w-col w-col-3">
                     <div class="icon"></div>

@@ -1,5 +1,7 @@
 <h2 class="modal-header">{{editInstanceObject ? "edit " : "create "}}instance</h2>
-<form #instanceForm="ngForm" id="instance-form" name="instance-form" data-name="Instance Form">
+<form #instanceForm="ngForm" id="instance-form" name="instance-form" data-name="Instance Form"
+      (ngSubmit)="instanceForm.valid  && fnCreateInstanceClick(instanceObj, instanceForm)"
+>
     <div class="centered" *ngIf="editInstanceObject">
         <button title="Temporarily turn off" class="button icon-btn mr-10 w-inline-block"
            (click)="showSuspendModal($event)">
@@ -113,7 +115,7 @@
     </div>
     <button class="button icon-btn save-btn float-right w-inline-block"
             [ladda]="isLoading"
-            (click)="instanceForm.valid  && fnCreateInstanceClick(instanceObj, instanceForm)"
+            type="submit"
     >
         <div class="w-row" *ngIf="!editInstanceObject">
             <div class="w-col w-col-3">

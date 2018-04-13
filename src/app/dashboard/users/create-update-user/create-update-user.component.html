@@ -43,7 +43,9 @@
         </div>
     </button>
 </div>
-<form #userForm="ngForm" id="user-form" name="user-form" data-name="User Form">
+<form #userForm="ngForm" id="user-form" name="user-form" data-name="User Form"
+      (ngSubmit)="(userForm.valid && isPasswordMatching) && fnCreateUserClick(userObj, userForm)"
+>
     <div class="w-container">
         <div class="btm10 w-row container-row">
             <div class="w-col w-col-6 p-r-10 p-l-10">
@@ -160,7 +162,7 @@
     </div>
     <button href="#" class="button icon-btn save-btn float-right w-inline-block"
             [ladda]="isLoading"
-            (click)="(userForm.valid && isPasswordMatching) && fnCreateUserClick(userObj, userForm)"
+            type="submit"
     >
         <div class="w-row">
             <div class="w-col w-col-3">
