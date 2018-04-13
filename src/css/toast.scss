@@ -1,15 +1,7 @@
 .toast-position {
     right: 0;
-    top: 100px;
+    top: 0;
 
-}
-
-@media (max-width: 768px) {
-    .toast-position {
-        right: 12px;
-        top: 12px;
-
-    }
 }
 
 #toast-container {
@@ -24,5 +16,5 @@
     -webkit-box-shadow: none;
 }
 #toast-container > div {
-    opacity:1;
+    opacity: 1;
 }
