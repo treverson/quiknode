@@ -63,7 +63,9 @@
                 <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6">
                 </div>
                 <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6">
-                    <button type="submit" class="button float-right w-inline-block">
+                    <button type="submit" class="button float-right w-inline-block"
+                            [ladda]="isLoading"
+                    >
                         <div class="w-row">
                             <div class="w-col w-col-3 w-col-small-3 w-col-tiny-3">
                                 <div class="icon"></div>

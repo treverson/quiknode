@@ -14,3 +14,7 @@
     cursor: not-allowed !important;
     background: #1eb7e3 !important;
 }
+
+.ladda-button[data-style=slide-left][data-loading] .ladda-label {
+    left: -125%;
+}
