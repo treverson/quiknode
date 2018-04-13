@@ -48,6 +48,8 @@ export class AnalyticsComponent implements OnInit  {
                 this.selectedInstance = this.instanceList[0]['instance-id'];
                 this._instance.instances.next(this.instanceList);
                 this.fnGetMetric();
+            }).catch(err => {
+                this.fnDisplayMetrics(null, null);
             });
         }
 
@@ -64,13 +66,13 @@ export class AnalyticsComponent implements OnInit  {
 
     fnDisplayMetrics(columns, values) {
         let dataValues = values;
-        if (!values) {
-            dataValues = [[new Date().getTime(), 0]];
-        }
         dataValues = _.map(dataValues, itemArray => {
             itemArray[0] = itemArray[0] * 1000;
             return itemArray;
         });
+        if (!values) {
+            dataValues = [[new Date().getTime(), 0]];
+        }
         const options: Highcharts.Options = {
             chart: {
                 zoomType: 'x'
@@ -152,6 +154,7 @@ export class AnalyticsComponent implements OnInit  {
                 this.fnDisplayMetrics(response.columns, response.values);
             }, 0);
         }).catch((error) => {
+            this.fnDisplayMetrics(null, null);
             this.isLoading = false;
         });
     }
