@@ -154,8 +154,10 @@ export class AnalyticsComponent implements OnInit  {
                 this.fnDisplayMetrics(response.columns, response.values);
             }, 0);
         }).catch((error) => {
-            this.fnDisplayMetrics(null, null);
             this.isLoading = false;
+            setTimeout(() => {
+                this.fnDisplayMetrics(null, null);
+            }, 0);
         });
     }
 
