@@ -20,7 +20,7 @@ export class DeleteUserComponent implements OnInit {
     fnDeleteUser(e) {
         e.stopPropagation();
         e.preventDefault();
-        this._user.fnDeleteUser(this.user['user-id']).then((response: any) => {
+        /*this._user.fnDeleteUser(this.user['user-id']).then((response: any) => {
             this._toastr.fnSuccess('User deleted successfully!');
             this.fnHideModal.next();
         }, (reject: any) => {
@@ -28,7 +28,9 @@ export class DeleteUserComponent implements OnInit {
                 this._toastr.fnWarning('User delete failed.');
             }
             this.fnHideModal.next();
-        });
+        });*/
+        this._toastr.fnSuccess('User deleted successfully!');
+        this.fnHideModal.next(this.user);
     }
 
     hideModal(e) {

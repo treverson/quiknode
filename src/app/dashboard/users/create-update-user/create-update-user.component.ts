@@ -147,7 +147,7 @@ export class CreateUpdateUserComponent implements OnInit {
 
     fnShowDeleteModal(e) {
         e.preventDefault();
-        this.showDeleteModal.next(this.userObj);
+        this.showDeleteModal.next(this.editUserObject);
     }
 
     fnCloneUser() {
@@ -159,6 +159,5 @@ export class CreateUpdateUserComponent implements OnInit {
     fnShowSuspendModal(e) {
         e.preventDefault();
         this.showSuspendModal.next(this.editUserObject);
-        this.fnHideModal.next();
     }
 }

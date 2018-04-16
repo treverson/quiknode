@@ -77,7 +77,12 @@ export class UsersComponent implements OnInit {
         this.showDeleteModal = true;
     }
 
-    fnHideDeleteModal() {
+    fnHideDeleteModal(user) {
+        if (user) {
+            const deleteIndex = _.findIndex(this.users, item => item['user-id'] === user['user-id']);
+            this.users.splice(deleteIndex, 1);
+        }
+        this.fnHideCreateModal(null);
         this.deleteUser = null;
         this.showDeleteModal = false;
     }
@@ -135,6 +140,7 @@ export class UsersComponent implements OnInit {
             }
         }
         this.showSuspendModal = false;
+        this.showUserCreateModal = false;
     }
 
 }
