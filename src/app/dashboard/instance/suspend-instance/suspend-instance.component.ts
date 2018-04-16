@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {InstanceService} from '../../../common/services/instance-service/instance.service';
 import {ToastrService} from '../../../common/services/toastr.service';
 
@@ -9,6 +9,7 @@ import {ToastrService} from '../../../common/services/toastr.service';
 })
 export class SuspendInstanceComponent implements OnInit {
     @Output() fnHideModal = new EventEmitter<any>();
+    @Input() suspendInstance: any;
 
     constructor(private _instance: InstanceService, private _toastr: ToastrService) {
     }
@@ -19,12 +20,22 @@ export class SuspendInstanceComponent implements OnInit {
     fnSuspendInstance(e) {
         e.stopPropagation();
         e.preventDefault();
-        this._instance.fnSuspendInstance().then((response: any) => {
+       /* this._instance.fnSuspendInstance().then((response: any) => {
             this._toastr.fnSuccess('Instance suspended successfully!');
             this.fnHideModal.next();
         }, (reject: any) => {
             this.fnHideModal.next();
-        });
+        });*/
+       setTimeout(() => {
+           let message = '';
+           if (this.suspendInstance.suspended) {
+               message = 'Instance enabled successfully.';
+           } else {
+               message = 'Instance suspended successfully.';
+           }
+           this._toastr.fnSuccess(message);
+           this.fnHideModal.next(this.suspendInstance);
+       }, 1000);
     }
 
     hideModal(e) {

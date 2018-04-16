@@ -40,7 +40,7 @@
     <div class="instances-dashboard">
         <div class="card" [ngClass]="viewType === 'grid' ? 'box-view' : 'list'">
             <div class="info-row"
-                 [ngClass]="viewType === 'grid' ? 'shadow p-0' : 'list'"
+                 [ngClass]="{'shadow p-0': viewType === 'grid', 'list': viewType !== 'grid', 'disabled': ins.suspended}"
                  *ngFor="let ins of instances; let i = index">
                 <app-single-instance [instance]="ins"
                                      (fnShowCreateModal)="fnShowCreateModal($event)"
@@ -70,7 +70,9 @@
 <app-modal-wrapper [showModal]="showSuspendModal"
                    *ngIf="showSuspendModal"
                    (fnHideModal)="fnHideSuspendModal($event)">
-    <app-suspend-instance (fnHideModal)="fnHideSuspendModal($event)"></app-suspend-instance>
+    <app-suspend-instance (fnHideModal)="fnHideSuspendModal($event)"
+                          [suspendInstance]="suspendInstance">
+    </app-suspend-instance>
 </app-modal-wrapper>
 
 <app-modal-wrapper [showModal]="showAnalyticsModal"

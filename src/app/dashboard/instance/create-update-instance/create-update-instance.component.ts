@@ -81,7 +81,8 @@ export class CreateUpdateInstanceComponent implements OnInit {
 
     showSuspendModal(e) {
         e.preventDefault();
-        this.fnShowSuspendModal.next();
+        this.fnShowSuspendModal.next(this.editInstanceObject);
+        this.fnHideModal.next();
     }
 
 

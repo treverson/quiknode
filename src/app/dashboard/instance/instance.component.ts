@@ -21,6 +21,7 @@ export class InstanceComponent implements OnInit {
     viewType: string;
     showAnalyticsModal: boolean;
     isLoading: boolean;
+    suspendInstance: any;
 
     constructor(private _instance: InstanceService, private titleService: Title) {
         this.showInstanceCreateModal = false;
@@ -31,6 +32,7 @@ export class InstanceComponent implements OnInit {
         this.viewType = 'grid';
         this.showAnalyticsModal = false;
         this.instances = [];
+        this.suspendInstance = {};
     }
 
     ngOnInit() {
@@ -70,11 +72,20 @@ export class InstanceComponent implements OnInit {
         this.showInstanceCreateModal = false;
     }
 
-    fnShowSuspendModal() {
+    fnShowSuspendModal(instance) {
+        this.suspendInstance = instance;
         this.showSuspendModal = true;
     }
 
-    fnHideSuspendModal() {
+    fnHideSuspendModal(instance) {
+        if (instance) {
+            const suspendedIndex = _.findIndex(this.instances, ins => ins['instance-id'] === instance['instance-id']);
+            if (this.instances[suspendedIndex]['suspended']) {
+                this.instances[suspendedIndex]['suspended'] = false;
+            } else {
+                this.instances[suspendedIndex]['suspended'] = true;
+            }
+        }
         this.showSuspendModal = false;
     }
 

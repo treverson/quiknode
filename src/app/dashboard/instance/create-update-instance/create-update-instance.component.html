@@ -3,14 +3,15 @@
       (ngSubmit)="instanceForm.valid  && fnCreateInstanceClick(instanceObj, instanceForm)"
 >
     <div class="centered" *ngIf="editInstanceObject">
-        <button title="Temporarily turn off" class="button icon-btn mr-10 w-inline-block"
+        <button title="{{editInstanceObject.suspended ? 'Turn On' : 'Temporarily turn off' }}"
+                class="button icon-btn mr-10 w-inline-block"
            (click)="showSuspendModal($event)">
             <div class="w-row">
                 <div class="w-col w-col-3">
                     <div class="icon"></div>
                 </div>
                 <div class="w-col w-col-9">
-                    <div class="btn-label">suspend</div>
+                    <div class="btn-label">{{editInstanceObject.suspended ? 'Enable' : 'Suspend' }}</div>
                 </div>
             </div>
         </button>
