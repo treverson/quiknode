@@ -8,6 +8,7 @@ import {MainComponent} from './main/main.component';
 import {UsersComponent} from './dashboard/users/users.component';
 import {InstanceComponent} from './dashboard/instance/instance.component';
 import {SecurityComponent} from './security/security.component';
+import {TestComponent} from './test/test.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -24,6 +25,7 @@ const routes: Routes = [
             {path: 'users', component: UsersComponent},
             {path: 'instances', component: InstanceComponent},
             {path: 'security', component: SecurityComponent},
+            {path: 'test', component: TestComponent},
         ]
     }
 ];

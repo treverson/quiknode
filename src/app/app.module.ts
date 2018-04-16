@@ -37,6 +37,7 @@ import { SecurityComponent } from './security/security.component';
 import { OtpComponent } from './security/otp/otp.component';
 import { ApiKeyComponent } from './security/api-key/api-key.component';
 import { Constant } from './common/constant';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
     declarations: [
@@ -59,7 +60,8 @@ import { Constant } from './common/constant';
         AddApiKeyComponent,
         SecurityComponent,
         OtpComponent,
-        ApiKeyComponent
+        ApiKeyComponent,
+        TestComponent
     ],
     imports: [
         BrowserModule,
