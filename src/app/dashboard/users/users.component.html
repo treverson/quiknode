@@ -39,7 +39,8 @@
     </div>
     <div class="users-dashboard">
         <div class="card " [ngClass]="viewType === 'grid' ? 'flex' : 'list'" *ngIf="!isLoading">
-            <div class="info-row " [ngClass]="viewType === 'grid' ? 'shadow p-0' : 'list'"
+            <div class="info-row "
+                 [ngClass]="{'shadow p-0': viewType === 'grid', 'list': viewType !== 'grid', 'disabled': user.suspended}"
                  *ngFor="let user of users; let i = index">
                 <app-single-user [user]="user"
                                  (fnShowUserModal)="fnShowCreateModal($event)"
@@ -59,7 +60,9 @@
 <app-modal-wrapper [showModal]="showUserCreateModal"
                    *ngIf="showUserCreateModal"
                    (fnHideModal)="fnHideCreateModal($event)">
-    <app-create-update-user (showDeleteModal)="fnShowDeleteModal($event)" (fnHideModal)="fnHideCreateModal($event)"
+    <app-create-update-user (showDeleteModal)="fnShowDeleteModal($event)"
+                            (showSuspendModal)="fnShowSuspendModal($event)"
+                            (fnHideModal)="fnHideCreateModal($event)"
                             [editUserObject]="userObject">
     </app-create-update-user>
 </app-modal-wrapper>
@@ -68,4 +71,12 @@
                    *ngIf="showDeleteModal"
                    (fnHideModal)="fnHideDeleteModal($event)">
     <app-delete-user (fnHideModal)="fnHideDeleteModal($event)" [user]="deleteUser"></app-delete-user>
+</app-modal-wrapper>
+
+<app-modal-wrapper [showModal]="showSuspendModal"
+                   *ngIf="showSuspendModal"
+                   (fnHideModal)="fnHideSuspendModal($event)">
+    <app-suspend-user (fnHideModal)="fnHideSuspendModal($event)"
+                          [suspendUser]="suspendUser">
+    </app-suspend-user>
 </app-modal-wrapper>

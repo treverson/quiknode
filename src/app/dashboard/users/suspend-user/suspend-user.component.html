@@ -1,0 +1,34 @@
+<h2 class="modal-header">{{suspendUser.suspended ? "enable " : "suspend "}} user?</h2>
+<div class="w-container">
+    <div class="w-row">
+        <div class="w-col w-col-1 w-col-small-1">
+            <div class="icon icon-xl"></div>
+        </div>
+        <div class="w-col w-col-11 w-col-small-11">
+            <p *ngIf="!suspendUser.suspended">This action will suspend ALL of this user&#x27;s credentials until re-activated. <br>Are you sure you want to continue?</p>
+            <p *ngIf="suspendUser.suspended">This action will enable this user.</p>
+        </div>
+    </div>
+</div>
+<div class="action-btns">
+    <a href="#" class="button icon-btn save-btn float-right w-inline-block" (click)="fnSuspendUser($event)">
+        <div class="w-row">
+            <div class="w-col w-col-3">
+                <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+                <div class="btn-label">CONTINUE</div>
+            </div>
+        </div>
+    </a>
+    <a href="#" class="button icon-btn mr-10 float-right w-inline-block" (click)="hideModal($event)">
+        <div class="w-row">
+            <div class="w-col w-col-3">
+                <div class="icon"></div>
+            </div>
+            <div class="w-col w-col-9">
+                <div class="btn-label">CANCEL</div>
+            </div>
+        </div>
+    </a>
+</div>

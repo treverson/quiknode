@@ -21,6 +21,7 @@ export class CreateUpdateUserComponent implements OnInit {
     @Input() editUserObject;
     @Output() fnHideModal = new EventEmitter<any>();
     @Output() showDeleteModal = new EventEmitter<any>();
+    @Output() showSuspendModal = new EventEmitter<any>();
     public emailRegEx: any = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
 
     constructor(private _user: UserService, private _toastr: ToastrService, private _api: ApiKeyService) {
@@ -153,5 +154,11 @@ export class CreateUpdateUserComponent implements OnInit {
         this.editUserObject = null;
         this.userObj.password = '';
         this.userObj.confirmPassword = '';
+    }
+
+    fnShowSuspendModal(e) {
+        e.preventDefault();
+        this.showSuspendModal.next(this.editUserObject);
+        this.fnHideModal.next();
     }
 }

@@ -82,8 +82,6 @@ export class TestComponent implements OnInit {
                 };
                 this._instance.fnCreateInstance(instanceObject).then(response => {
                     this.successCalls.successCallsInstance = this.successCalls.successCallsInstance + 1;
-                    console.log("i ===> ", i)
-                    console.log("this.numberOfCalls.numberOfInstanceCalls ===> ", this.numberOfCalls.numberOfInstanceCalls)
                     if (i === this.numberOfCalls.numberOfInstanceCalls) {
                         this.successCalls.successCallsInstance = 0;
                     }

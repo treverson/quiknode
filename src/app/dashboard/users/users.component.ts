@@ -21,6 +21,8 @@ export class UsersComponent implements OnInit {
     searchText: string;
     viewType: string;
     isLoading: boolean;
+    suspendUser: any;
+    showSuspendModal: boolean;
 
     constructor(private _user: UserService, private titleService: Title) {
         this.showUserCreateModal = false;
@@ -30,6 +32,8 @@ export class UsersComponent implements OnInit {
         this.searchText = '';
         this.viewType = 'grid';
         this.users = [];
+        this.showSuspendModal = false;
+        this.suspendUser = {};
     }
 
     ngOnInit() {
@@ -114,6 +118,23 @@ export class UsersComponent implements OnInit {
         e.stopPropagation();
         e.preventDefault();
         this.viewType = viewType;
+    }
+
+    fnShowSuspendModal(user) {
+        this.suspendUser = user;
+        this.showSuspendModal = true;
+    }
+
+    fnHideSuspendModal(user) {
+        if (user) {
+            const suspendedIndex = _.findIndex(this.users, item => item['user-id'] === user['user-id']);
+            if (this.users[suspendedIndex]['suspended']) {
+                this.users[suspendedIndex]['suspended'] = false;
+            } else {
+                this.users[suspendedIndex]['suspended'] = true;
+            }
+        }
+        this.showSuspendModal = false;
     }
 
 }

@@ -1,12 +1,15 @@
 <h2 class="modal-header">{{editUserObject ? "edit " : "add "}}user</h2>
 <div class="centered" *ngIf="editUserObject">
-    <button href="#" title="Temporarily disable" class="button icon-btn mr-10 w-inline-block">
+    <button href="#"
+            title="{{editUserObject.suspended ? 'Enable' : 'Temporarily disable' }}"
+            class="button icon-btn mr-10 w-inline-block"
+            (click)="fnShowSuspendModal($event)">
         <div class="w-row">
             <div class="w-col w-col-3">
                 <div class="icon"></div>
             </div>
             <div class="w-col w-col-9">
-                <div class="btn-label">suspend</div>
+                <div class="btn-label">{{editUserObject.suspended ? 'Enable' : 'Suspend' }}</div>
             </div>
         </div>
     </button>
