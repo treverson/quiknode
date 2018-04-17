@@ -13,6 +13,7 @@ export class TestComponent implements OnInit {
     numberOfCalls?: any;
     successCalls?: any;
     instanceList?: any;
+    userList?: any;
     name?: string;
     instanceName?: string;
     selectedInstance?: string;
@@ -28,14 +29,19 @@ export class TestComponent implements OnInit {
             successCallsUser: 0,
             successCallsInstance: 0,
             successUpdateInstanceCalls: 0,
+            successUpdateUserCalls: 0,
         };
         this.name = '';
         this.instanceName = '';
+        this.userList = [];
     }
 
     ngOnInit() {
         this._instance.fnGetInstances().then((response: any) => {
             this.instanceList = response.instances;
+        });
+        this._user.fnGetUsers().then((response: any) => {
+            this.userList = response.users;
         });
     }
 
@@ -110,8 +116,20 @@ export class TestComponent implements OnInit {
         _.map(this.instanceList, (instance, i) => {
             this._instance.fnUpdateInstance(instance).then(response => {
                 this.successCalls.successUpdateInstanceCalls = this.successCalls.successUpdateInstanceCalls + 1;
-                if (i === this.numberOfCalls) {
+                if (i === this.instanceList.length) {
                     this.successCalls.successUpdateInstanceCalls = 0;
+                }
+            });
+        });
+    }
+
+    fnCallUpdateUsers(e) {
+        this.successCalls.successUpdateUserCalls = 0;
+        _.map(this.userList, (user, i) => {
+            this._user.fnUpdateUser(user, user['user-id']).then(response => {
+                this.successCalls.successUpdateUserCalls = this.successCalls.successUpdateUserCalls + 1;
+                if (i === this.userList.length) {
+                    this.successCalls.successUpdateUserCalls = 0;
                 }
             });
         });

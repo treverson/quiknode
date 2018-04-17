@@ -116,7 +116,7 @@
         <div class="w-row">
             <div class="column-6 w-clearfix w-col w-col-4">
                 <button class="button icon-btn w-inline-block"
-                        (click)="fnCallUpdateInstances($event)"
+                        (click)="instanceList && instanceList.length && fnCallUpdateInstances($event)"
                 >
                     <div class="w-row">
                         <div class="w-col w-col-12">
@@ -127,6 +127,24 @@
             </div>
             <div class="w-col w-col-3" *ngIf="instanceList && instanceList.length">
                 <span>Successful : {{successCalls.successUpdateInstanceCalls}}</span>
+            </div>
+        </div>
+    </form>
+    <form #metricsForm="ngForm" id="user-update-form" name="api-form" data-name="Api Key Form">
+        <div class="w-row">
+            <div class="column-6 w-clearfix w-col w-col-4">
+                <button class="button icon-btn w-inline-block"
+                        (click)="userList && userList.length && fnCallUpdateUsers($event)"
+                >
+                    <div class="w-row">
+                        <div class="w-col w-col-12">
+                            <div class="btn-label">Update users</div>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="w-col w-col-3" *ngIf="userList && userList.length">
+                <span>Successful : {{successCalls.successUpdateUserCalls}}</span>
             </div>
         </div>
     </form>
