@@ -1,13 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Constant} from '../../constant';
 import {HttpClient} from '@angular/common/http';
+import * as _ from 'lodash';
 
 @Injectable()
 export class UserService {
     userList: any[];
+    private suspendedUsers: any;
 
     constructor(private _http: HttpClient) {
         this.userList = [];
+        this.suspendedUsers = String(localStorage.getItem('SUSPENDED_USERS')).split(',') || [];
     }
 
     fnGetUsers() {
@@ -15,6 +18,12 @@ export class UserService {
             this._http
                 .get(Constant.API_URL + 'account/users')
                 .subscribe((response: any) => {
+                    _.map(response.users, user => {
+                        if (_.findIndex(this.suspendedUsers, userId => userId === user['user-id']) > -1) {
+                            user.suspended = true;
+                        }
+                        return user;
+                    });
                     this.userList = response.users;
                     resolve(response);
                 }, (error) => {
@@ -109,6 +118,16 @@ export class UserService {
 
     fnGetUserList() {
         return this.userList;
+    }
+
+    fnSuspendUser(user) {
+        const suspendedIndex = _.findIndex(this.suspendedUsers, item => item === user['user-id']);
+        if (user.suspended) {
+            this.suspendedUsers.splice(suspendedIndex, 1);
+        } else {
+            this.suspendedUsers.push(user['user-id']);
+        }
+        localStorage.setItem('SUSPENDED_USERS', this.suspendedUsers);
     }
 
 }

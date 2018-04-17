@@ -132,6 +132,7 @@ export class UsersComponent implements OnInit {
 
     fnHideSuspendModal(user) {
         if (user) {
+            this._user.fnSuspendUser(user);
             const suspendedIndex = _.findIndex(this.users, item => item['user-id'] === user['user-id']);
             if (this.users[suspendedIndex]['suspended']) {
                 this.users[suspendedIndex]['suspended'] = false;

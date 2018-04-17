@@ -20,7 +20,7 @@ export class InstanceService {
                 .subscribe((response: any) => {
                     if (response.instances) {
                         _.map(response.instances, ins => {
-                            if (_.findIndex(this.suspendedInstances, instance => instance['instance-id'] === ins['instance-id']) > -1) {
+                            if (_.findIndex(this.suspendedInstances, instance => instance === ins['instance-id']) > -1) {
                                 ins.suspended = true;
                             }
                             return ins;
