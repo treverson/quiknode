@@ -25,12 +25,17 @@ export class InterceptorProvider implements HttpInterceptor {
     }
 
     public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (this._auth.fnGetToken()) {
+        if (this._auth.fnGetToken() && !request.headers.has('InterceptorSkipHeader')) {
             request = request.clone({
                 setHeaders: {
                     Authorization: `Basic ${this._auth.fnGetToken()}`
                 }
             });
+        } else {
+            if (request.headers.has('InterceptorSkipHeader')) {
+                const headers = request.headers.delete('InterceptorSkipHeader');
+                return next.handle(request.clone({ headers }));
+            }
         }
         return next.handle(request)
             .do((event: HttpEvent<any>) => {

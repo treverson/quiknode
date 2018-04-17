@@ -20,10 +20,7 @@
                         (click)="numberOfCalls.numberOfUsersCall && name && fnCreateUsers($event)"
                 >
                     <div class="w-row">
-                        <div class="w-col w-col-3">
-                            <div class="icon"></div>
-                        </div>
-                        <div class="w-col w-col-9">
+                        <div class="w-col w-col-12">
                             <div class="btn-label">Create Users</div>
                         </div>
                     </div>
@@ -55,10 +52,7 @@
                         (click)="numberOfCalls.numberOfInstanceCalls && instanceName && fnCreateInstances($event)"
                 >
                     <div class="w-row">
-                        <div class="w-col w-col-3">
-                            <div class="icon"></div>
-                        </div>
-                        <div class="w-col w-col-9">
+                        <div class="w-col w-col-12">
                             <div class="btn-label">Create Instances</div>
                         </div>
                     </div>
@@ -69,6 +63,37 @@
             </div>
         </div>
     </form>
+    <form #apiForm="ngForm" id="traffic-form" name="api-form" data-name="Instance Form">
+        <div class="w-row">
+            <div class="w-col w-col-3">
+                <input type="text" class="w-input" maxlength="256" name="field-5"
+                       data-name="Field 5" placeholder="Number Of Calls"
+                       [(ngModel)]="numberOfCalls.numberOfTrafficCalls"
+                       #secret="ngModel"
+                       required="">
+            </div>
+            <div class="w-col w-col-3">
+                <select id="Select-instance" name="Select-instance" data-name="Select instance"
+                        class="w-select" [(ngModel)]="selectedInstance">
+                    <option value="First" *ngFor="let instance of instanceList; let i = index"
+                            [value]="instance['name']">
+                        {{instance.name}}
+                    </option>
+                </select>
+            </div>
+            <div class="column-6 w-clearfix w-col w-col-3">
+                <button class="button icon-btn w-inline-block float-right"
+                        (click)="numberOfCalls.numberOfTrafficCalls && fnCreateTraffic($event)"
+                >
+                    <div class="w-row">
+                        <div class="w-col w-col-12">
+                            <div class="btn-label">Create Traffic</div>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </form>
     <form #metricsForm="ngForm" id="metrics-form" name="api-form" data-name="Api Key Form">
         <div class="w-row">
             <div class="column-6 w-clearfix w-col w-col-4">
@@ -76,10 +101,7 @@
                         (click)="fnCallGetMetrics($event)"
                 >
                     <div class="w-row">
-                        <div class="w-col w-col-3">
-                            <div class="icon"></div>
-                        </div>
-                        <div class="w-col w-col-9">
+                        <div class="w-col w-col-12">
                             <div class="btn-label">Get Metrics for all instances</div>
                         </div>
                     </div>
@@ -87,6 +109,24 @@
             </div>
             <div class="w-col w-col-3" *ngIf="instanceList && instanceList.length">
                 <span>Successful : {{successCalls.successCalls}}</span>
+            </div>
+        </div>
+    </form>
+    <form #metricsForm="ngForm" id="instance-update-form" name="api-form" data-name="Api Key Form">
+        <div class="w-row">
+            <div class="column-6 w-clearfix w-col w-col-4">
+                <button class="button icon-btn w-inline-block"
+                        (click)="fnCallUpdateInstances($event)"
+                >
+                    <div class="w-row">
+                        <div class="w-col w-col-12">
+                            <div class="btn-label">Update instances</div>
+                        </div>
+                    </div>
+                </button>
+            </div>
+            <div class="w-col w-col-3" *ngIf="instanceList && instanceList.length">
+                <span>Successful : {{successCalls.successUpdateInstanceCalls}}</span>
             </div>
         </div>
     </form>

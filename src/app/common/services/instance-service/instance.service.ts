@@ -1,5 +1,5 @@
 import {Injectable, EventEmitter} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Constant} from '../../constant';
 
 @Injectable()
@@ -74,5 +74,24 @@ export class InstanceService {
         e.stopPropagation();
         e.preventDefault();
         alert('Not yet implemented!');
+    }
+
+    fnCreateTraffic(instance) {
+        const obj = {
+            'method': 'eth_blockNumber',
+            'params': [],
+            'id': 1,
+            'jsonrpc': '2.0'
+        };
+        return new Promise((resolve, reject) => {
+            const headers = new HttpHeaders().set('InterceptorSkipHeader', '');
+            this._http
+                .post(`https://${instance}.quiknode.pro/`, obj, {headers})
+                .subscribe((response: any) => {
+                    resolve(response);
+                }, (error) => {
+                    reject(error);
+                });
+        });
     }
 }

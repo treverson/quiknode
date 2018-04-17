@@ -15,16 +15,19 @@ export class TestComponent implements OnInit {
     instanceList?: any;
     name?: string;
     instanceName?: string;
+    selectedInstance?: string;
 
     constructor(private _instance: InstanceService, private _user: UserService) {
         this.numberOfCalls = {
             numberOfUsersCall: 0,
             numberOfInstanceCalls: 0,
+            numberOfTrafficCalls: 0,
         };
         this.successCalls = {
             successCalls: 0,
             successCallsUser: 0,
-            successCallsInstance: 0
+            successCallsInstance: 0,
+            successUpdateInstanceCalls: 0,
         };
         this.name = '';
         this.instanceName = '';
@@ -92,5 +95,27 @@ export class TestComponent implements OnInit {
             }
         }
     }
+
+    fnCreateTraffic(e) {
+        if (this.numberOfCalls.numberOfTrafficCalls > 0) {
+            for (let i = 1; i <= this.numberOfCalls.numberOfTrafficCalls; i++) {
+                this._instance.fnCreateTraffic(this.selectedInstance).then(response => {
+                });
+            }
+        }
+    }
+
+    fnCallUpdateInstances(e) {
+        this.successCalls.successUpdateInstanceCalls = 0;
+        _.map(this.instanceList, (instance, i) => {
+            this._instance.fnUpdateInstance(instance).then(response => {
+                this.successCalls.successUpdateInstanceCalls = this.successCalls.successUpdateInstanceCalls + 1;
+                if (i === this.numberOfCalls) {
+                    this.successCalls.successUpdateInstanceCalls = 0;
+                }
+            });
+        });
+    }
+
 
 }

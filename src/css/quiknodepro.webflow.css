@@ -235,6 +235,8 @@
 }
 
 .button.microchart {
+  width: 100%;
+  height: 40px;
   margin-top: 0px;
   margin-bottom: 0px;
   padding: 0px;
@@ -352,7 +354,7 @@
   position: relative;
   display: block;
   overflow: hidden;
-  width: 30%;
+  width: 100%;
   height: 200px;
   max-width: 220px;
   margin-right: 15px;
@@ -721,8 +723,12 @@
 }
 
 .checkbox-field {
+  display: block;
   width: 20px;
   height: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  float: none;
 }
 
 .checkbox-label {
@@ -939,6 +945,16 @@
   color: #1eb7e3;
 }
 
+.text-link.inline {
+  display: inline-block;
+  width: auto;
+  margin-right: 10px;
+}
+
+.text-link.inline.ml-10 {
+  margin-left: 10px;
+}
+
 .centered {
   display: block;
   margin-right: auto;
@@ -1145,6 +1161,41 @@
   margin-top: 40px;
 }
 
+.field-label {
+  display: none;
+}
+
+.top-row {
+  padding-top: 20px;
+  padding-left: 20px;
+  border-top: 2px solid #4d4d4d;
+}
+
+.div-block {
+  padding-right: 20px;
+}
+
+.column-7 {
+  padding-left: 0px;
+}
+
+.row-checkbox {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.row-checkbox.boxed {
+  padding-top: 0px;
+  padding-left: 0px;
+}
+
+.row-checkbox.users-check {
+  padding-top: 10px;
+}
+
 @media (max-width: 991px) {
   .button {
     font-size: 0.6rem;
@@ -1273,6 +1324,18 @@
   .text-field {
     font-size: 0.7rem;
   }
+  .row-checkbox {
+    padding-left: 0px;
+  }
+  .row-checkbox.users-check {
+    padding-left: 0px;
+  }
+  .column-8 {
+    padding-left: 0px;
+  }
+  .column-9 {
+    padding-left: 0px;
+  }
 }
 
 @media (max-width: 479px) {
@@ -1334,6 +1397,10 @@
   .modal-header.section-heading {
     font-size: 0.8rem;
   }
+  .checkbox-field {
+    position: relative;
+    left: -9px;
+  }
   .input-field.inline.mr-10 {
     margin-right: 5px;
   }
@@ -1353,6 +1420,15 @@
   .paragraph-2 {
     font-size: 0.7rem;
     line-height: 0.9rem;
+  }
+  .row-checkbox.users-check {
+    position: relative;
+    right: 9px;
+    padding-right: 5px;
+    padding-left: 0px;
+  }
+  .column-8 {
+    padding-left: 0px;
   }
 }
 
