@@ -1,13 +1,16 @@
 import {Injectable, EventEmitter} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Constant} from '../../constant';
+import * as _ from 'lodash';
 
 @Injectable()
 export class InstanceService {
     public instances: EventEmitter<any> = new EventEmitter();
     public selectedInstanceAnalytics: EventEmitter<any> = new EventEmitter();
+    private suspendedInstances: any;
 
     constructor(private _http: HttpClient) {
+        this.suspendedInstances = String(localStorage.getItem('SUSPENDED_INSTANCES')).split(',') || [];
     }
 
     fnGetInstances() {
@@ -15,6 +18,14 @@ export class InstanceService {
             this._http
                 .get(Constant.API_URL + 'account/instances')
                 .subscribe((response: any) => {
+                    if (response.instances) {
+                        _.map(response.instances, ins => {
+                            if (_.findIndex(this.suspendedInstances, instance => instance['instance-id'] === ins['instance-id']) > -1) {
+                                ins.suspended = true;
+                            }
+                            return ins;
+                        });
+                    }
                     resolve(response);
                 }, (error) => {
                     reject(error);
@@ -46,8 +57,15 @@ export class InstanceService {
         });
     }
 
-    fnSuspendInstance() {
-        return new Promise((resolve, reject) => {
+    fnSuspendInstance(instance) {
+        const suspendedIndex = _.findIndex(this.suspendedInstances, ins => ins === instance['instance-id']);
+        if (instance.suspended) {
+            this.suspendedInstances.splice(suspendedIndex, 1);
+        } else {
+            this.suspendedInstances.push(instance['instance-id']);
+        }
+        localStorage.setItem('SUSPENDED_INSTANCES', this.suspendedInstances);
+        /*return new Promise((resolve, reject) => {
             this._http
                 .delete(Constant.API_URL + '')
                 .subscribe((response: any) => {
@@ -55,7 +73,7 @@ export class InstanceService {
                 }, (error) => {
                     reject(error);
                 });
-        });
+        });*/
     }
 
     fnGetMetric(obj: any) {

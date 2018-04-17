@@ -79,6 +79,7 @@ export class InstanceComponent implements OnInit {
 
     fnHideSuspendModal(instance) {
         if (instance) {
+            this._instance.fnSuspendInstance(instance);
             const suspendedIndex = _.findIndex(this.instances, ins => ins['instance-id'] === instance['instance-id']);
             if (this.instances[suspendedIndex]['suspended']) {
                 this.instances[suspendedIndex]['suspended'] = false;
