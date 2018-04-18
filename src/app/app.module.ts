@@ -40,6 +40,7 @@ import { Constant } from './common/constant';
 import { TestComponent } from './test/test.component';
 import { SuspendUserComponent } from './dashboard/users/suspend-user/suspend-user.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ResetPasswordComponent } from './dashboard/users/reset-password/reset-password.component';
 
 @NgModule({
     declarations: [
@@ -64,7 +65,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
         OtpComponent,
         ApiKeyComponent,
         TestComponent,
-        SuspendUserComponent
+        SuspendUserComponent,
+        ResetPasswordComponent
     ],
     imports: [
         BrowserModule,

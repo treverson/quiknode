@@ -64,7 +64,7 @@
                                    placeholder="Password" id="field-2" required="">
                         </div>
                     </div>
-                    <a href="#" class="button icon-btn float-right w-inline-block">
+                    <a href="#" class="button icon-btn float-right w-inline-block" (click)="fnShowResetPasswordModal($event)">
                         <div class="w-row">
                             <div class="w-col w-col-3 w-col-medium-3">
                                 <div class="icon"></div>
@@ -123,3 +123,11 @@
         </button>
     </form>
 </div>
+
+<app-modal-wrapper [showModal]="showResetPasswordModal"
+                   *ngIf="showResetPasswordModal"
+                   (fnHideModal)="fnHideResetPasswordModal()">
+    <app-reset-password (fnHideModal)="fnHideResetPasswordModal()"
+                        [editUserObject]="userObject">
+    </app-reset-password>
+</app-modal-wrapper>

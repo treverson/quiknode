@@ -128,7 +128,7 @@
                         Passwords do not match.
                     </small>
                 </div>
-                <button class="button icon-btn float-left w-inline-block" *ngIf="editUserObject">
+                <button class="button icon-btn float-left w-inline-block" *ngIf="editUserObject" (click)="fnShowResetPasswordModal($event)">
                     <div class="w-row">
                         <div class="w-col w-col-3">
                             <div class="icon"></div>
@@ -163,7 +163,7 @@
             </div>
         </div>
     </div>
-    <button href="#" class="button icon-btn save-btn float-right w-inline-block"
+    <button class="button icon-btn save-btn float-right w-inline-block"
             [ladda]="isLoading"
             type="submit"
     >

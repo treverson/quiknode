@@ -24,6 +24,7 @@ export class UsersComponent implements OnInit {
     suspendUser: any;
     showSuspendModal: boolean;
     page = 1;
+    showResetPasswordModal: boolean;
 
     constructor(private _user: UserService, private titleService: Title) {
         this.showUserCreateModal = false;
@@ -143,6 +144,15 @@ export class UsersComponent implements OnInit {
         }
         this.showSuspendModal = false;
         this.showUserCreateModal = false;
+    }
+
+    fnShowResetPasswordModal(user) {
+        this.userObject = user;
+        this.showResetPasswordModal = true;
+    }
+
+    fnHideResetPasswordModal () {
+        this.showResetPasswordModal = false;
     }
 
 }

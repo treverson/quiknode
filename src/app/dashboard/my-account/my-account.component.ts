@@ -10,6 +10,7 @@ import {ToastrService} from '../../common/services/toastr.service';
 export class MyAccountComponent implements OnInit {
     userObject: any;
     isLoading: boolean;
+    showResetPasswordModal: boolean;
     @Output() fnHideModal = new EventEmitter<any>();
     public emailRegEx: any = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
 
@@ -40,6 +41,15 @@ export class MyAccountComponent implements OnInit {
             }).catch(error => {
                 this.isLoading = false;
         });
+    }
+
+    fnShowResetPasswordModal(e) {
+        e.preventDefault();
+        this.showResetPasswordModal = true;
+    }
+
+    fnHideResetPasswordModal () {
+        this.showResetPasswordModal = false;
     }
 
 }
