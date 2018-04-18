@@ -1,5 +1,11 @@
 .main {
     height: 100%;
+    font-family: Montserrat, sans-serif !important;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: Montserrat, sans-serif !important;
+    line-height: unset !important;
 }
 
 .backdrop-scroll-off {
@@ -30,4 +36,12 @@
 
 .text-center {
     text-align: center;
+}
+
+.p-l-0 {
+    padding-left: 0 !important;
+}
+
+.inline-block {
+    display: inline-block !important;
 }

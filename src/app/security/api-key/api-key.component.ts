@@ -18,6 +18,7 @@ export class ApiKeyComponent implements OnInit {
     currentUser: string;
     selectedUser: string;
     isLoading: boolean;
+    page = 1;
 
     constructor(private _api: ApiKeyService, private _user: UserService, private _toastr: ToastrService,
                 private _auth: AuthService, private _instance: InstanceService) {

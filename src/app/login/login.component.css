@@ -12,3 +12,7 @@ small.text-danger {
 .login--form {
     margin: 0;
 }
+
+.checkbox-label {
+    top: -5px !important;
+}

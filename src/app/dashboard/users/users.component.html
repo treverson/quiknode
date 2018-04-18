@@ -55,7 +55,7 @@
         <div class="error-msg" *ngIf="!isLoading && users && users.length === 0">
             <div>Oops! No data found.</div>
         </div>
-        <div class="text-center">
+        <div class="text-center" *ngIf="!isLoading && users && users.length">
             <pagination-controls (pageChange)="page = $event"></pagination-controls>
         </div>
     </div>

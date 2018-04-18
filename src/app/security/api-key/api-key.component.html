@@ -65,7 +65,7 @@
         </div>
         <div class="w-col w-col-1"></div>
     </div>
-    <div class="w-row" *ngFor="let api of apiKeys; let i = index">
+    <div class="w-row" *ngFor="let api of apiKeys | paginate: { itemsPerPage: 10, currentPage: page}; let i = index">
         <div class="w-col w-col-3">
             <h6 class="text">{{api['account-authentication-token-id']}}</h6>
         </div>
@@ -91,5 +91,8 @@
                (click)="fnNotImplemented($event)"
                class="button btn-round btn-m flush-top ml-10 float-right w-button"></a>
         </div>
+    </div>
+    <div class="text-center" *ngIf="apiKeys && apiKeys.length">
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
     </div>
 </div>
