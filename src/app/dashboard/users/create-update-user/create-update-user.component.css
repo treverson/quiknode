@@ -14,3 +14,7 @@
 small.text-danger {
     color: #dc3545;
 }
+
+.checkbox-label {
+    top: -5px;
+}
