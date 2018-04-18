@@ -61,7 +61,7 @@
                         </div>
                         <div class="w-col w-col-11 w-col-small-11 w-col-tiny-11">
                             <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2"
-                                   placeholder="Password" id="field-2" required="">
+                                   placeholder="Password" id="field-3" required="">
                         </div>
                     </div>
                     <a href="#" class="button icon-btn float-right w-inline-block" (click)="fnShowResetPasswordModal($event)">
@@ -85,7 +85,7 @@
                                    [(ngModel)]="userObject.email"
                                    #email="ngModel"
                                    [pattern]="emailRegEx"
-                                   data-name="Field 2" placeholder="mail@usps.com" id="field-2"
+                                   data-name="Field 2" placeholder="mail@usps.com" id="mail1"
                                    required="">
                             <div *ngIf="(accountForm.submitted || email.touched) && !email.valid">
                                 <small class="text-danger" *ngIf="email.errors['required']">

@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserService} from '../../../common/services/user-service/user.service';
 import {hashSync} from 'bcryptjs';
 import {ToastrService} from '../../../common/services/toastr.service';
+import {AuthService} from '../../../common/services/auth-service/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-reset-password',
@@ -15,7 +17,8 @@ export class ResetPasswordComponent implements OnInit {
     isPasswordMatching: boolean;
     isLoading: boolean;
 
-    constructor(private _user: UserService, private _toastr: ToastrService) {
+    constructor(private _user: UserService, private _toastr: ToastrService, private _auth: AuthService,
+                private _router: Router) {
         this.userObj = {
             password: '',
             confirmPassword: '',
@@ -42,6 +45,12 @@ export class ResetPasswordComponent implements OnInit {
                 this._toastr.fnSuccess('Password successfully reset!');
                 this.fnHideModal.next(true);
                 this.isLoading = false;
+                if (this._auth.fnGetUserId() === this.editUserObject['user-id']) {
+                    this._auth.fnSignOut()
+                        .then(res => {
+                            this._router.navigate(['/login']);
+                        });
+                }
             })
             .catch((err) => {
                 if (err.status !== 401 && err.status !== 502 && err.status !== 404) {
