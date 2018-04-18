@@ -39,6 +39,7 @@ import { ApiKeyComponent } from './security/api-key/api-key.component';
 import { Constant } from './common/constant';
 import { TestComponent } from './test/test.component';
 import { SuspendUserComponent } from './dashboard/users/suspend-user/suspend-user.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
     declarations: [
@@ -76,6 +77,7 @@ import { SuspendUserComponent } from './dashboard/users/suspend-user/suspend-use
             style: 'slide-left',
             spinnerSize: 30,
         }),
+        NgxPaginationModule
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: InterceptorProvider, multi: true},

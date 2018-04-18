@@ -22,6 +22,7 @@ export class InstanceComponent implements OnInit {
     showAnalyticsModal: boolean;
     isLoading: boolean;
     suspendInstance: any;
+    page = 1;
 
     constructor(private _instance: InstanceService, private titleService: Title) {
         this.showInstanceCreateModal = false;
@@ -65,9 +66,15 @@ export class InstanceComponent implements OnInit {
         this.showInstanceCreateModal = true;
     }
 
-    fnHideCreateModal(created?: boolean) {
-        if (created) {
+    fnHideCreateModal(obj) {
+        if (obj && obj.created) {
             this.fnGetInstances();
+        }
+        if (obj && obj.instanceObject) {
+            const findIndex = _.findIndex(this.instances, ins => ins['instance-id'] === obj.instanceObject['instance-id']);
+            const findOriginalIndex = _.findIndex(this.originalInstances, ins => ins['instance-id'] === obj.instanceObject['instance-id']);
+            this.instances[findIndex] = obj.instanceObject;
+            this.originalInstances[findOriginalIndex] = obj.instanceObject;
         }
         this.showInstanceCreateModal = false;
     }

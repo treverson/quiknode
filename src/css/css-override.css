@@ -18,3 +18,16 @@
 .ladda-button[data-style=slide-left][data-loading] .ladda-label {
     left: -125%;
 }
+
+.ngx-pagination li {
+    border: 1px solid #dee2e6;
+    margin: 0 !important;
+}
+
+.ngx-pagination .current {
+    border: 1px solid #2199e8;
+}
+
+.text-center {
+    text-align: center;
+}

@@ -79,6 +79,7 @@ export class ApiKeyComponent implements OnInit {
         if (obj.description) {
             this._api.fnUpdateApiKey(obj, obj['account-authentication-token-id'])
                 .then(response => {
+                    this._toastr.fnSuccess('Api key updated successfully.');
                     this.apiKeys[i] = obj;
                 });
         }

@@ -23,6 +23,7 @@ export class UsersComponent implements OnInit {
     isLoading: boolean;
     suspendUser: any;
     showSuspendModal: boolean;
+    page = 1;
 
     constructor(private _user: UserService, private titleService: Title) {
         this.showUserCreateModal = false;

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Constant} from '../../constant';
+import * as _ from 'lodash';
 
 @Injectable()
 export class ApiKeyService {
@@ -29,6 +30,8 @@ export class ApiKeyService {
                 .subscribe((response: any) => {
                     if (response && response['account-authentication-tokens']) {
                         this.apiKeyList = response['account-authentication-tokens'];
+                        this.apiKeyList = _.orderBy(this.apiKeyList, ['created'], ['desc']);
+                        response['account-authentication-tokens'] = this.apiKeyList;
                     }
                     resolve(response);
                 }, (error) => {

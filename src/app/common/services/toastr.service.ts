@@ -9,7 +9,7 @@ export class ToastrService {
             'closeButton': false,
             'debug': false,
             'newestOnTop': false,
-            'progressBar': true,
+            'progressBar': false,
             'positionClass': 'toast-position',
             'preventDuplicates': true,
             'onclick': null,

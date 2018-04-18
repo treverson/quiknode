@@ -111,7 +111,10 @@ export class CreateUpdateInstanceComponent implements OnInit {
                 .then((response: any) => {
                     this._toastr.fnSuccess('Instance updated successfully.');
                     this.isLoading = false;
-                    this.fnHideModal.next();
+                    this.fnHideModal.next({
+                        instanceObject,
+                        created: false
+                    });
                 })
                 .catch(() => {
                     this.isLoading = false;
@@ -123,7 +126,10 @@ export class CreateUpdateInstanceComponent implements OnInit {
                 .then((response: any) => {
                     this.isLoading = false;
                     this._toastr.fnSuccess('Instance created successfully.');
-                    this.fnHideModal.next(true);
+                    this.fnHideModal.next({
+                        instanceObject,
+                        created: false
+                    });
                 })
                 .catch((err) => {
                     this.isLoading = false;

@@ -41,7 +41,7 @@
         <div class="card " [ngClass]="viewType === 'grid' ? 'flex' : 'list'" *ngIf="!isLoading">
             <div class="info-row "
                  [ngClass]="{'shadow p-0': viewType === 'grid', 'list': viewType !== 'grid', 'disabled': user.suspended}"
-                 *ngFor="let user of users; let i = index">
+                 *ngFor="let user of users | paginate: { itemsPerPage: 12, currentPage: page }">
                 <app-single-user [user]="user"
                                  (fnShowUserModal)="fnShowCreateModal($event)"
                                  [viewType]="viewType"
@@ -54,6 +54,9 @@
         </div>
         <div class="error-msg" *ngIf="!isLoading && users && users.length === 0">
             <div>Oops! No data found.</div>
+        </div>
+        <div class="text-center">
+            <pagination-controls (pageChange)="page = $event"></pagination-controls>
         </div>
     </div>
 </div>

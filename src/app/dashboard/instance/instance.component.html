@@ -41,7 +41,7 @@
         <div class="card" [ngClass]="viewType === 'grid' ? 'box-view' : 'list'">
             <div class="info-row"
                  [ngClass]="{'shadow p-0': viewType === 'grid', 'list': viewType !== 'grid', 'disabled': ins.suspended}"
-                 *ngFor="let ins of instances; let i = index">
+                 *ngFor="let ins of instances | paginate: { itemsPerPage: 12, currentPage: page }">
                 <app-single-instance [instance]="ins"
                                      (fnShowCreateModal)="fnShowCreateModal($event)"
                                      (fnShowAnalyticsModal)="fnShowAnalyticsModal($event)"
@@ -56,6 +56,9 @@
         </div>
         <div class="error-msg" *ngIf="!isLoading && instances && instances.length === 0">
             <div>Oops! No data found.</div>
+        </div>
+        <div class="text-center">
+            <pagination-controls (pageChange)="page = $event"></pagination-controls>
         </div>
     </div>
 </div>
