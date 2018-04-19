@@ -62,7 +62,7 @@ export class InstanceComponent implements OnInit {
                 }
                 this.isLoading = false;
             })
-            .catch((err) => {
+            .catch(() => {
                 this.isLoading = false;
             });
     }
@@ -168,20 +168,20 @@ export class InstanceComponent implements OnInit {
         const startIndex = endIndex - 12;
         this.instancesOnPage = this.instances.slice(startIndex, endIndex);
         if (!this.allSelected) {
-            _.map(this.instancesOnPage, user => {
-                const instanceIndex = _.findIndex(this.selectedInstances, instanceId => instanceId === user['instance-id']);
+            _.map(this.instancesOnPage, instance => {
+                const instanceIndex = _.findIndex(this.selectedInstances, instanceId => instanceId === instance['instance-id']);
                 if (instanceIndex === -1) {
-                    this.selectedInstances.push(user['instance-id']);
+                    this.selectedInstances.push(instance['instance-id']);
                 }
-                return user;
+                return instance;
             });
         } else {
-            _.map(this.instancesOnPage, user => {
-                const instanceIndex = _.findIndex(this.selectedInstances, userId => userId === user['instance-id']);
+            _.map(this.instancesOnPage, instance => {
+                const instanceIndex = _.findIndex(this.selectedInstances, instanceId => instanceId === instance['instance-id']);
                 if (instanceIndex > -1) {
                     this.selectedInstances.splice(instanceIndex, 1);
                 }
-                return user;
+                return instance;
             });
         }
         this.allSelected = this.isAllSelected();
@@ -213,19 +213,19 @@ export class InstanceComponent implements OnInit {
         } else if (action === 'suspend') {
             _.forEach(this.selectedInstances, instanceId => {
                 const foundInstance = _.find(this.instances, instance => instanceId === instance['instance-id']);
-                this.suspendEnableUser(foundInstance, true);
+                this.suspendEnableInstance(foundInstance, true);
             });
         } else if (action === 'enable') {
             _.forEach(this.selectedInstances, instanceId => {
                 const foundInstance = _.find(this.instances, instance => instanceId === instance['instance-id']);
-                this.suspendEnableUser(foundInstance, false);
+                this.suspendEnableInstance(foundInstance, false);
             });
         } else if (action === 'delete') {
 
         }
     }
 
-    suspendEnableUser(instance, suspend) {
+    suspendEnableInstance(instance, suspend) {
         if (instance) {
             this._instance.fnSuspendEnableInstance(instance, suspend);
             const suspendedIndex = _.findIndex(this.instances, item => item['instance-id'] === instance['instance-id']);
