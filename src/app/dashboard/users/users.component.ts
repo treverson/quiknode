@@ -25,6 +25,9 @@ export class UsersComponent implements OnInit {
     showSuspendModal: boolean;
     page = 1;
     showResetPasswordModal: boolean;
+    selectedUsers?: any;
+    usersOnPage?: any;
+    allSelected?: boolean;
 
     constructor(private _user: UserService, private titleService: Title) {
         this.showUserCreateModal = false;
@@ -36,6 +39,9 @@ export class UsersComponent implements OnInit {
         this.users = [];
         this.showSuspendModal = false;
         this.suspendUser = {};
+        this.selectedUsers = [];
+        this.usersOnPage = [];
+        this.allSelected = false;
     }
 
     ngOnInit() {
@@ -153,6 +159,92 @@ export class UsersComponent implements OnInit {
 
     fnHideResetPasswordModal () {
         this.showResetPasswordModal = false;
+    }
+
+    updateCheckedOptions(userId, e) {
+        if (e.target.checked) {
+            const userIndex = _.findIndex(this.selectedUsers, user => user === userId);
+            if (userIndex === -1) {
+                this.selectedUsers.push(userId);
+            }
+        } else {
+            const userIndex = _.findIndex(this.selectedUsers, user => user === userId);
+            if (userIndex > -1) {
+                this.selectedUsers.splice(userIndex, 1);
+            }
+        }
+        this.allSelected = this.isAllSelected();
+    }
+
+    selectAll(e) {
+        e.preventDefault();
+        const endIndex = (this.page * 12);
+        const startIndex = endIndex - 12;
+        this.usersOnPage = this.users.slice(startIndex, endIndex);
+        if (!this.allSelected) {
+            _.map(this.usersOnPage, user => {
+                const userIndex = _.findIndex(this.selectedUsers, userId => userId === user['user-id']);
+                if (userIndex === -1) {
+                    this.selectedUsers.push(user['user-id']);
+                }
+                return user;
+            });
+        } else {
+            _.map(this.usersOnPage, user => {
+                const userIndex = _.findIndex(this.selectedUsers, userId => userId === user['user-id']);
+                if (userIndex > -1) {
+                    this.selectedUsers.splice(userIndex, 1);
+                }
+                return user;
+            });
+        }
+        this.allSelected = this.isAllSelected();
+    }
+
+    fnOnPageChange(page) {
+        this.page = page;
+        const endIndex = (page * 12);
+        const startIndex = endIndex - 12;
+        this.usersOnPage = this.users.slice(startIndex, endIndex);
+        this.allSelected = this.isAllSelected();
+    }
+
+    isAllSelected() {
+        let selected = true;
+        _.forEach(this.usersOnPage, user => {
+            if (_.isEmpty(this.selectedUsers) || this.selectedUsers.indexOf(user['user-id']) === -1) {
+                selected = false;
+                return false;
+            }
+        });
+        return selected;
+    }
+
+    onChangeAction(e) {
+        const action = e.target.value;
+        if (action === 'clone') {
+
+        } else if (action === 'suspend') {
+            _.forEach(this.selectedUsers, userId => {
+                const foundUser = _.find(this.users, user => userId === user['user-id']);
+                this.suspendEnableUser(foundUser, true);
+            });
+        } else if (action === 'enable') {
+            _.forEach(this.selectedUsers, userId => {
+                const foundUser = _.find(this.users, user => userId === user['user-id']);
+                this.suspendEnableUser(foundUser, false);
+            });
+        } else if (action === 'delete') {
+
+        }
+    }
+
+    suspendEnableUser(user, suspend) {
+        if (user) {
+            this._user.fnSuspendEnableUser(user, suspend);
+            const suspendedIndex = _.findIndex(this.users, item => item['user-id'] === user['user-id']);
+            this.users[suspendedIndex]['suspended'] = suspend;
+        }
     }
 
 }

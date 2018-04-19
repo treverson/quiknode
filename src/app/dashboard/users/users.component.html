@@ -33,20 +33,68 @@
            (click)="fnOnSortTypeChange($event, 'asc')">
             <div data-targe="my_account" class="icon"></div>
         </a>
-        <input type="text" class="w-input" maxlength="256" name="field-8" data-name="Field 8"
-               placeholder="Search Users" id="field-8" [(ngModel)]="searchText"
-               (ngModelChange)="fnOnSearchTextChange()">
+        <div class="w-row">
+            <div class="column-7 w-col w-col-6">
+                <input type="text" class="text-field w-input" maxlength="256" name="field-8" data-name="Field 8"
+                       placeholder="Search Users" id="searchInput" required=""
+                       [(ngModel)]="searchText"
+                       (ngModelChange)="fnOnSearchTextChange()">
+            </div>
+            <div class="column-9 w-col w-col-6">
+                <select id="field-10" name="field-10" class="input-field inline w-select"
+                        *ngIf="selectedUsers.length && viewType !== 'grid'"
+                        (change)="onChangeAction($event)"
+                >
+                    <option value="none">Bulk Actions...</option>
+                    <option value="delete">Delete Selected</option>
+                    <option value="suspend">Suspend Selected</option>
+                    <option value="enable">Enable Selected</option>
+                    <!--<option value="clone">Clone Selected</option>-->
+                </select>
+                <a href="#" class="text-link inline ml-10"
+                   *ngIf="!allSelected && viewType !== 'grid'"
+                   (click)="selectAll($event)">Select All</a>
+                <a href="#" class="text-link inline ml-10"
+                   *ngIf="allSelected && viewType !== 'grid'"
+                   (click)="selectAll($event)">Unselect All</a>
+            </div>
+        </div>
     </div>
     <div class="users-dashboard">
-        <div class="card " [ngClass]="viewType === 'grid' ? 'flex' : 'list'" *ngIf="!isLoading">
-            <div class="info-row "
-                 [ngClass]="{'shadow p-0': viewType === 'grid', 'list': viewType !== 'grid', 'disabled': user.suspended}"
+        <div class="card flex" *ngIf="!isLoading && viewType === 'grid'">
+            <div class="info-row shadow p-0"
+                 [ngClass]="{'disabled': user.suspended}"
                  *ngFor="let user of users | paginate: { itemsPerPage: 12, currentPage: page }">
                 <app-single-user [user]="user"
                                  (fnShowUserModal)="fnShowCreateModal($event)"
                                  [viewType]="viewType"
                 >
                 </app-single-user>
+            </div>
+        </div>
+        <div class="card list" *ngIf="!isLoading && viewType !== 'grid'">
+            <div class="w-row"
+                 [ngClass]="{'disabled': user.suspended}"
+                 *ngFor="let user of users | paginate: { itemsPerPage: 12, currentPage: page }">
+                <div class="w-col w-col-1 w-col-medium-1 w-col-tiny-1 w-col-small-1">
+                    <div class="row-checkbox users-check w-checkbox">
+                        <input type="checkbox" id="checkbox-9" name="checkbox-9" data-name="Checkbox 9"
+                               [checked]="selectedUsers.indexOf(user['user-id']) > -1"
+                               (change)="updateCheckedOptions(user['user-id'], $event)"
+                               class="checkbox-field w-checkbox-input">
+                        <label for="checkbox-9" class="field-label w-form-label">Checkbox 9</label>
+                    </div>
+                </div>
+                <div class="w-col w-col-11 w-col-medium-11 w-col-tiny-11 w-col-small-11">
+                    <div class="info-row list"
+                         [ngClass]="{'disabled': user.suspended}">
+                        <app-single-user [user]="user"
+                                         (fnShowUserModal)="fnShowCreateModal($event)"
+                                         [viewType]="viewType"
+                        >
+                        </app-single-user>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="chart" *ngIf="isLoading">
@@ -56,7 +104,7 @@
             <div>Oops! No data found.</div>
         </div>
         <div class="text-center" *ngIf="!isLoading && users && users.length">
-            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+            <pagination-controls (pageChange)="fnOnPageChange($event)"></pagination-controls>
         </div>
     </div>
 </div>

@@ -34,13 +34,28 @@
            (click)="fnOnSortTypeChange($event, 'asc')">
             <div data-targe="my_account" class="icon"></div>
         </a>
-        <input type="text" class="w-input" maxlength="256" name="field-8" data-name="Field 8"
-               placeholder="Search Instances" id="field-8" [(ngModel)]="searchText" (ngModelChange)="fnOnSearchTextChange()">
+        <div class="w-row">
+            <div class="column-7 w-col w-col-6">
+                <input type="text" class="text-field w-input" maxlength="256" name="field-8" data-name="Field 8"
+                       placeholder="Search Instances" id="searchInput" required=""
+                       [(ngModel)]="searchText"
+                       (ngModelChange)="fnOnSearchTextChange()">
+            </div>
+            <div class="column-9 w-col w-col-6">
+                <select id="field-10" name="field-10" class="input-field inline w-select">
+                    <option value="">Bulk Actions...</option>
+                    <option value="First">Delete Selected</option>
+                    <option value="Second">Suspend Selected</option>
+                    <option value="Third">Clone Selected</option>
+                </select>
+                <a href="#" class="text-link inline ml-10">Select All</a>
+            </div>
+        </div>
     </div>
     <div class="instances-dashboard">
-        <div class="card" [ngClass]="viewType === 'grid' ? 'box-view' : 'list'">
-            <div class="info-row"
-                 [ngClass]="{'shadow p-0': viewType === 'grid', 'list': viewType !== 'grid', 'disabled': ins.suspended}"
+        <div class="card box-view"  *ngIf="!isLoading && viewType === 'grid'">
+            <div class="info-row shadow p-0"
+                 [ngClass]="{'disabled': ins.suspended}"
                  *ngFor="let ins of instances | paginate: { itemsPerPage: 12, currentPage: page }">
                 <app-single-instance [instance]="ins"
                                      (fnShowCreateModal)="fnShowCreateModal($event)"
@@ -49,6 +64,30 @@
                                      [viewType]="viewType"
                 >
                 </app-single-instance>
+            </div>
+        </div>
+        <div class="card list" *ngIf="!isLoading && viewType !== 'grid'">
+            <div class="w-row"
+                 [ngClass]="{'disabled': ins.suspended}"
+                 *ngFor="let ins of instances | paginate: { itemsPerPage: 12, currentPage: page }">
+                <div class="w-col w-col-1 w-col-medium-1 w-col-tiny-1 w-col-small-1">
+                    <div class="row-checkbox users-check w-checkbox">
+                        <input type="checkbox" id="checkbox-9" name="checkbox-9" data-name="Checkbox 9"
+                               class="checkbox-field w-checkbox-input">
+                        <label for="checkbox-9" class="field-label w-form-label">Checkbox 9</label>
+                    </div>
+                </div>
+                <div class="w-col w-col-11 w-col-medium-11 w-col-tiny-11 w-col-small-11">
+                    <div class="info-row list">
+                        <app-single-instance [instance]="ins"
+                                             (fnShowCreateModal)="fnShowCreateModal($event)"
+                                             (fnShowAnalyticsModal)="fnShowAnalyticsModal($event)"
+                                             [instances]="instances"
+                                             [viewType]="viewType"
+                        >
+                        </app-single-instance>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="chart" *ngIf="isLoading">
