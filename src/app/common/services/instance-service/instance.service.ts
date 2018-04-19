@@ -61,7 +61,7 @@ export class InstanceService {
         const suspendedIndex = _.findIndex(this.suspendedInstances, ins => ins === instance['instance-id']);
         if (instance.suspended) {
             this.suspendedInstances.splice(suspendedIndex, 1);
-        } else {
+        } else if (suspendedIndex === -1) {
             this.suspendedInstances.push(instance['instance-id']);
         }
         localStorage.setItem('SUSPENDED_INSTANCES', this.suspendedInstances);
@@ -74,6 +74,16 @@ export class InstanceService {
                     reject(error);
                 });
         });*/
+    }
+
+    fnSuspendEnableInstance(instance, suspend) {
+        const suspendedIndex = _.findIndex(this.suspendedInstances, ins => ins === instance['instance-id']);
+        if (!suspend) {
+            this.suspendedInstances.splice(suspendedIndex, 1);
+        } else if (suspendedIndex === -1) {
+            this.suspendedInstances.push(instance['instance-id']);
+        }
+        localStorage.setItem('SUSPENDED_INSTANCES', this.suspendedInstances);
     }
 
     fnGetMetric(obj: any) {

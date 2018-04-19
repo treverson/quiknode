@@ -124,7 +124,7 @@ export class UserService {
         const suspendedIndex = _.findIndex(this.suspendedUsers, item => item === user['user-id']);
         if (user.suspended) {
             this.suspendedUsers.splice(suspendedIndex, 1);
-        } else {
+        } else if (suspendedIndex === -1) {
             this.suspendedUsers.push(user['user-id']);
         }
         localStorage.setItem('SUSPENDED_USERS', this.suspendedUsers);
@@ -134,7 +134,7 @@ export class UserService {
         const suspendedIndex = _.findIndex(this.suspendedUsers, item => item === user['user-id']);
         if (!suspend) {
             this.suspendedUsers.splice(suspendedIndex, 1);
-        } else if (suspendedIndex > -1) {
+        } else if (suspendedIndex === -1) {
             this.suspendedUsers.push(user['user-id']);
         }
         localStorage.setItem('SUSPENDED_USERS', this.suspendedUsers);

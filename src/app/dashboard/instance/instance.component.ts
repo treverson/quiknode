@@ -23,6 +23,9 @@ export class InstanceComponent implements OnInit {
     isLoading: boolean;
     suspendInstance: any;
     page = 1;
+    selectedInstances?: any;
+    instancesOnPage?: any;
+    allSelected?: boolean;
 
     constructor(private _instance: InstanceService, private titleService: Title) {
         this.showInstanceCreateModal = false;
@@ -34,6 +37,9 @@ export class InstanceComponent implements OnInit {
         this.showAnalyticsModal = false;
         this.instances = [];
         this.suspendInstance = {};
+        this.selectedInstances = [];
+        this.instancesOnPage = [];
+        this.allSelected = false;
     }
 
     ngOnInit() {
@@ -139,6 +145,92 @@ export class InstanceComponent implements OnInit {
 
     fnHideAnalyticsModal() {
         this.showAnalyticsModal = false;
+    }
+
+    updateCheckedOptions(instanceId, e) {
+        if (e.target.checked) {
+            const instanceIndex = _.findIndex(this.selectedInstances, ins => ins === instanceId);
+            if (instanceIndex === -1) {
+                this.selectedInstances.push(instanceId);
+            }
+        } else {
+            const instanceIndex = _.findIndex(this.selectedInstances, ins => ins === instanceId);
+            if (instanceIndex > -1) {
+                this.selectedInstances.splice(instanceIndex, 1);
+            }
+        }
+        this.allSelected = this.isAllSelected();
+    }
+
+    selectAll(e) {
+        e.preventDefault();
+        const endIndex = (this.page * 12);
+        const startIndex = endIndex - 12;
+        this.instancesOnPage = this.instances.slice(startIndex, endIndex);
+        if (!this.allSelected) {
+            _.map(this.instancesOnPage, user => {
+                const instanceIndex = _.findIndex(this.selectedInstances, instanceId => instanceId === user['instance-id']);
+                if (instanceIndex === -1) {
+                    this.selectedInstances.push(user['instance-id']);
+                }
+                return user;
+            });
+        } else {
+            _.map(this.instancesOnPage, user => {
+                const instanceIndex = _.findIndex(this.selectedInstances, userId => userId === user['instance-id']);
+                if (instanceIndex > -1) {
+                    this.selectedInstances.splice(instanceIndex, 1);
+                }
+                return user;
+            });
+        }
+        this.allSelected = this.isAllSelected();
+    }
+
+    fnOnPageChange(page) {
+        this.page = page;
+        const endIndex = (page * 12);
+        const startIndex = endIndex - 12;
+        this.instancesOnPage = this.instances.slice(startIndex, endIndex);
+        this.allSelected = this.isAllSelected();
+    }
+
+    isAllSelected() {
+        let selected = true;
+        _.forEach(this.instancesOnPage, instance => {
+            if (_.isEmpty(this.selectedInstances) || this.selectedInstances.indexOf(instance['instance-id']) === -1) {
+                selected = false;
+                return false;
+            }
+        });
+        return selected;
+    }
+
+    onChangeAction(e) {
+        const action = e.target.value;
+        if (action === 'clone') {
+
+        } else if (action === 'suspend') {
+            _.forEach(this.selectedInstances, instanceId => {
+                const foundInstance = _.find(this.instances, instance => instanceId === instance['instance-id']);
+                this.suspendEnableUser(foundInstance, true);
+            });
+        } else if (action === 'enable') {
+            _.forEach(this.selectedInstances, instanceId => {
+                const foundInstance = _.find(this.instances, instance => instanceId === instance['instance-id']);
+                this.suspendEnableUser(foundInstance, false);
+            });
+        } else if (action === 'delete') {
+
+        }
+    }
+
+    suspendEnableUser(instance, suspend) {
+        if (instance) {
+            this._instance.fnSuspendEnableInstance(instance, suspend);
+            const suspendedIndex = _.findIndex(this.instances, item => item['instance-id'] === instance['instance-id']);
+            this.instances[suspendedIndex]['suspended'] = suspend;
+        }
     }
 
 }

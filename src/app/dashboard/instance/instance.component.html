@@ -42,13 +42,22 @@
                        (ngModelChange)="fnOnSearchTextChange()">
             </div>
             <div class="column-9 w-col w-col-6">
-                <select id="field-10" name="field-10" class="input-field inline w-select">
-                    <option value="">Bulk Actions...</option>
-                    <option value="First">Delete Selected</option>
-                    <option value="Second">Suspend Selected</option>
-                    <option value="Third">Clone Selected</option>
+                <select id="field-10" name="field-10" class="input-field inline w-select"
+                        *ngIf="selectedInstances.length && viewType !== 'grid'"
+                        (change)="onChangeAction($event)"
+                >
+                    <option value="none">Bulk Actions...</option>
+                    <option value="delete">Delete Selected</option>
+                    <option value="suspend">Suspend Selected</option>
+                    <option value="enable">Enable Selected</option>
+                    <!--<option value="clone">Clone Selected</option>-->
                 </select>
-                <a href="#" class="text-link inline ml-10">Select All</a>
+                <a href="#" class="text-link inline ml-10"
+                   *ngIf="!allSelected && viewType !== 'grid'"
+                   (click)="selectAll($event)">Select All</a>
+                <a href="#" class="text-link inline ml-10"
+                   *ngIf="allSelected && viewType !== 'grid'"
+                   (click)="selectAll($event)">Unselect All</a>
             </div>
         </div>
     </div>
@@ -73,6 +82,8 @@
                 <div class="w-col w-col-1 w-col-medium-1 w-col-tiny-1 w-col-small-1">
                     <div class="row-checkbox users-check w-checkbox">
                         <input type="checkbox" id="checkbox-9" name="checkbox-9" data-name="Checkbox 9"
+                               [checked]="selectedInstances.indexOf(ins['instance-id']) > -1"
+                               (change)="updateCheckedOptions(ins['instance-id'], $event)"
                                class="checkbox-field w-checkbox-input">
                         <label for="checkbox-9" class="field-label w-form-label">Checkbox 9</label>
                     </div>
@@ -97,7 +108,7 @@
             <div>Oops! No data found.</div>
         </div>
         <div class="text-center" *ngIf="!isLoading && instances && instances.length">
-            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+            <pagination-controls (pageChange)="fnOnPageChange($event)"></pagination-controls>
         </div>
     </div>
 </div>
