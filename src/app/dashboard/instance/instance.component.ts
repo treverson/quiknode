@@ -24,7 +24,6 @@ export class InstanceComponent implements OnInit {
     suspendInstance: any;
     page = 1;
     selectedInstances?: any;
-    instancesOnPage?: any;
     allSelected?: boolean;
 
     constructor(private _instance: InstanceService, private titleService: Title) {
@@ -38,7 +37,6 @@ export class InstanceComponent implements OnInit {
         this.instances = [];
         this.suspendInstance = {};
         this.selectedInstances = [];
-        this.instancesOnPage = [];
         this.allSelected = false;
     }
 
@@ -164,11 +162,8 @@ export class InstanceComponent implements OnInit {
 
     selectAll(e) {
         e.preventDefault();
-        const endIndex = (this.page * 12);
-        const startIndex = endIndex - 12;
-        this.instancesOnPage = this.instances.slice(startIndex, endIndex);
         if (!this.allSelected) {
-            _.map(this.instancesOnPage, instance => {
+            _.map(this.instances, instance => {
                 const instanceIndex = _.findIndex(this.selectedInstances, instanceId => instanceId === instance['instance-id']);
                 if (instanceIndex === -1) {
                     this.selectedInstances.push(instance['instance-id']);
@@ -176,7 +171,7 @@ export class InstanceComponent implements OnInit {
                 return instance;
             });
         } else {
-            _.map(this.instancesOnPage, instance => {
+            _.map(this.instances, instance => {
                 const instanceIndex = _.findIndex(this.selectedInstances, instanceId => instanceId === instance['instance-id']);
                 if (instanceIndex > -1) {
                     this.selectedInstances.splice(instanceIndex, 1);
@@ -189,15 +184,12 @@ export class InstanceComponent implements OnInit {
 
     fnOnPageChange(page) {
         this.page = page;
-        const endIndex = (page * 12);
-        const startIndex = endIndex - 12;
-        this.instancesOnPage = this.instances.slice(startIndex, endIndex);
         this.allSelected = this.isAllSelected();
     }
 
     isAllSelected() {
         let selected = true;
-        _.forEach(this.instancesOnPage, instance => {
+        _.forEach(this.instances, instance => {
             if (_.isEmpty(this.selectedInstances) || this.selectedInstances.indexOf(instance['instance-id']) === -1) {
                 selected = false;
                 return false;

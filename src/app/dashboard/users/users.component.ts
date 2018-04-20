@@ -178,11 +178,8 @@ export class UsersComponent implements OnInit {
 
     selectAll(e) {
         e.preventDefault();
-        const endIndex = (this.page * 12);
-        const startIndex = endIndex - 12;
-        this.usersOnPage = this.users.slice(startIndex, endIndex);
         if (!this.allSelected) {
-            _.map(this.usersOnPage, user => {
+            _.map(this.users, user => {
                 const userIndex = _.findIndex(this.selectedUsers, userId => userId === user['user-id']);
                 if (userIndex === -1) {
                     this.selectedUsers.push(user['user-id']);
@@ -190,7 +187,7 @@ export class UsersComponent implements OnInit {
                 return user;
             });
         } else {
-            _.map(this.usersOnPage, user => {
+            _.map(this.users, user => {
                 const userIndex = _.findIndex(this.selectedUsers, userId => userId === user['user-id']);
                 if (userIndex > -1) {
                     this.selectedUsers.splice(userIndex, 1);
@@ -203,15 +200,12 @@ export class UsersComponent implements OnInit {
 
     fnOnPageChange(page) {
         this.page = page;
-        const endIndex = (page * 12);
-        const startIndex = endIndex - 12;
-        this.usersOnPage = this.users.slice(startIndex, endIndex);
         this.allSelected = this.isAllSelected();
     }
 
     isAllSelected() {
         let selected = true;
-        _.forEach(this.usersOnPage, user => {
+        _.forEach(this.users, user => {
             if (_.isEmpty(this.selectedUsers) || this.selectedUsers.indexOf(user['user-id']) === -1) {
                 selected = false;
                 return false;
