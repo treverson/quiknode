@@ -10,13 +10,7 @@ interface Instance {
     configuration?: {
         validators: {
             http: {
-                request?: [
-                        {
-                            type?: string;
-                            referers?: string[];
-                            permitNullReferer?: boolean;
-                            token?: string;
-                        }]
+                request?: any;
             }
         }
     };
@@ -88,22 +82,21 @@ export class CreateUpdateInstanceComponent implements OnInit {
 
     fnCreateInstanceClick(instanceObject: Instance, myForm) {
         const validateReferer = _.filter(this.validateReferer, ref => !!ref);
-        if (this.validatorType  === 'validateToken' && this.validateToken) {
-            instanceObject.configuration.validators.http.request = [
-                {
-                    token: this.validateToken,
-                    type: `validateToken`
-                }
-            ];
-        } else if (this.validatorType === 'validateReferer' && !_.isEmpty(validateReferer)) {
-            instanceObject.configuration.validators.http.request = [
-                {
-                    referers: validateReferer,
-                    type: `validateReferer`
-                }
-            ];
+        if (!instanceObject.configuration.validators.http.request) {
+            instanceObject.configuration.validators.http.request = [];
         }
-
+        if (this.validateToken) {
+            instanceObject.configuration.validators.http.request.push({
+                token: this.validateToken,
+                type: `validateToken`
+            });
+        }
+        if (!_.isEmpty(validateReferer)) {
+            instanceObject.configuration.validators.http.request.push({
+                referers: validateReferer,
+                type: `validateReferer`
+            });
+        }
         // update instance
         if (this.editInstanceObject) {
             this.isLoading = true;
