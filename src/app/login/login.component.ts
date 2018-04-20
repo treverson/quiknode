@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
     logInObject: LogIn;
     keepLoggedIn: boolean;
     isLoading: boolean;
+    successCalls: number;
 
     constructor(private _auth: AuthService, private _router: Router,  private _toastr: ToastrService, private titleService: Title) {
         this.logInObject = {
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
         };
         this.keepLoggedIn = true;
         this.isLoading = false;
+        this.successCalls = 0;
     }
 
     ngOnInit() {
@@ -37,16 +39,25 @@ export class LoginComponent implements OnInit {
     fnSignIn(signInObj: LogIn, myForm) {
         signInObj['keepLoggedIn'] = this.keepLoggedIn;
         this.isLoading = true;
-        this._auth.fnSignIn(signInObj)
+        this._auth.fnSignIn(signInObj, this.successCalls)
             .then((response: any) => {
-                this.isLoading = false;
-                this._toastr.fnSuccess('Logged in successfully.');
-                this._router.navigate(['dashboard']);
+                this.successCalls = this.successCalls + 1;
+                if (this.successCalls === 2) {
+                    this.isLoading = false;
+                    this._toastr.fnSuccess('Logged in successfully.');
+                    this._router.navigate(['dashboard']);
+                } else if (this.successCalls < 2) {
+                    this.fnSignIn(signInObj, myForm);
+                }
             })
             .catch((error) => {
                 this.isLoading = false;
-                if (error.status !== 401 && error.status !== 502) {
-                    this._toastr.fnWarning('Login failed.');
+                if (error.status !== 401) {
+                    if (this.successCalls === 1) {
+                        this._toastr.fnWarning('We are experiencing technical difficulties. Please try again later');
+                    } else {
+                        this._toastr.fnWarning('Login failed.');
+                    }
                 }
             });
     }

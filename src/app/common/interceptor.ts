@@ -56,10 +56,24 @@ export class InterceptorProvider implements HttpInterceptor {
                             localStorage.removeItem('AUTH_TOKEN');
                             localStorage.removeItem('USER_ID');
                             this._toastr.fnWarning(message);
+                            this._auth.fnSignOut();
                             this.router.navigate(['/login']);
                             console.log(error.error);
                             break;
                         case 502:
+                            // sign out user in case of server down issues.
+                            if (error.error.code === 'ECONNRESET' || error.error.code === 'ECONNREFUSED' ||
+                                error.error.code === 'ESOCKETTIMEDOUT') {
+                                if (request.url.indexOf('session') === -1) {
+                                    this._toastr.fnWarning('We are experiencing technical difficulties. You will be logged out now');
+                                    this._auth.fnSignOut();
+                                    this.router.navigate(['/login']);
+                                }
+                            } else {
+                                this._toastr.fnWarning(message);
+                                console.log(error.error);
+                            }
+                            break;
                         case 404:
                             this._toastr.fnWarning(message);
                             console.log(error.error);

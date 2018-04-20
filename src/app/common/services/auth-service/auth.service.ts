@@ -35,7 +35,7 @@ export class AuthService {
      * User sign in.
      * @param {object} obj
      * */
-    fnSignIn(obj: any) {
+    fnSignIn(obj: any, success: number) {
         return new Promise((resolve, reject) => {
             const basicAuth = btoa(`${obj.username}:${obj.password}`);
             const requestObj = {
@@ -45,7 +45,7 @@ export class AuthService {
             this._http
                 .post(environment.api + 'api/v1/session', requestObj)
                 .subscribe((response: any) => {
-                    if (response && response.secret) {
+                    if (response && response.secret && success === 1) {
                         const currentUserId = response['user-id'];
                         localStorage.setItem('AUTH_TOKEN', basicAuth);
                         localStorage.setItem('USER_ID', currentUserId);
