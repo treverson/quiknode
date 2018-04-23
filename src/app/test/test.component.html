@@ -75,7 +75,7 @@
             <div class="w-col w-col-3">
                 <select id="Select-instance" name="Select-instance" data-name="Select instance"
                         class="w-select" [(ngModel)]="selectedInstance">
-                    <option value="First" *ngFor="let instance of instanceList; let i = index"
+                    <option *ngFor="let instance of instanceList; let i = index"
                             [value]="instance['name']">
                         {{instance.name}}
                     </option>
