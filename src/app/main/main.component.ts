@@ -3,6 +3,9 @@ import {UserIdleService} from 'angular-user-idle';
 import {AuthService} from '../common/services/auth-service/auth.service';
 import {Router} from '@angular/router';
 import {Constant} from '../common/constant';
+import {InstanceService} from '../common/services/instance-service/instance.service';
+import {Observable} from 'rxjs';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'app-main',
@@ -21,12 +24,12 @@ export class MainComponent implements OnInit {
             if (performance.navigation.type === 1) {
                 this.fnLogOut();
             } else {
-                console.log( 'This page is not reloaded');
+                console.log('This page is not reloaded');
             }
         }
     }
 
-    constructor(private userIdle: UserIdleService, private _auth: AuthService, private _router: Router) {
+    constructor(private userIdle: UserIdleService, private _auth: AuthService, private _router: Router, private _instance: InstanceService) {
     }
 
     ngOnInit() {
@@ -38,6 +41,7 @@ export class MainComponent implements OnInit {
 
         // Start watch when time is up.
         this.userIdle.onTimeout().subscribe(() => this.fnLogOut());
+        this.fnGetInstances ();
     }
 
     fnShowModal(count) {
@@ -70,5 +74,21 @@ export class MainComponent implements OnInit {
 
     restart() {
         this.userIdle.resetTimer();
+    }
+
+    fnGetInstances () {
+        this._instance.fnGetInstances().then((response: any) => {
+            Observable.interval(1000 * 10).subscribe(x => {
+                _.forEach(response.instances, instance => {
+                    this.fnCreateTraffic (instance['name']);
+                });
+            });
+        });
+    }
+
+    fnCreateTraffic (instance) {
+        this._instance.fnCreateTraffic(instance).then(response => {
+        }).catch(err => {
+        });
     }
 }
