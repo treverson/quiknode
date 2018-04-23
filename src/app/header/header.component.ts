@@ -67,4 +67,8 @@ export class HeaderComponent implements OnInit {
     fnNotImplemented(e) {
         this._instance.fnNotImplemented(e);
     }
+
+    fnHasUserPermission() {
+        return this._auth.fnHasUserListPermission();
+    }
 }

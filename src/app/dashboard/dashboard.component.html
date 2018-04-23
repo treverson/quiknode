@@ -15,7 +15,7 @@
                 <div class="icon-btn-label">instances</div>
                 <div class="btn-bubble">{{instances && instances.length || 0}}</div>
             </a>
-            <a href="#/users" class="button icon-btn mr-10 w-inline-block">
+            <a href="#/users" class="button icon-btn mr-10 w-inline-block" *ngIf="fnHasUserPermission()">
                 <div class="icon"></div>
                 <div class="icon-btn-label">users</div>
                 <div class="btn-bubble">{{users && users.length || 0}}</div>

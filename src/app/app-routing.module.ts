@@ -22,7 +22,7 @@ const routes: Routes = [
         canActivate: [AuthenticateGuard],
         children: [
             {path: 'dashboard', component: DashboardComponent},
-            {path: 'users', component: UsersComponent},
+            {path: 'users', component: UsersComponent, canActivate: [AuthenticateGuard]},
             {path: 'instances', component: InstanceComponent},
             {path: 'security', component: SecurityComponent},
             {path: 'test', component: TestComponent},

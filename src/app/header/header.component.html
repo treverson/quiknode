@@ -25,6 +25,7 @@
             </a>
             <a href="#/users"
                class="nav-link w-nav-link"
+               *ngIf="fnHasUserPermission()"
                [ngClass]="{'w--nav-link-open': isToggledMenu, 'w--current': currentPath.includes('user')}"
                (click)="fnChangeRoute()"
             >

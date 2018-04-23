@@ -24,7 +24,6 @@ export class UsersComponent implements OnInit {
     suspendUser: any;
     showSuspendModal: boolean;
     page = 1;
-    showResetPasswordModal: boolean;
     selectedUsers?: any;
     usersOnPage?: any;
     allSelected?: boolean;
@@ -150,15 +149,6 @@ export class UsersComponent implements OnInit {
         }
         this.showSuspendModal = false;
         this.showUserCreateModal = false;
-    }
-
-    fnShowResetPasswordModal(user) {
-        this.userObject = user;
-        this.showResetPasswordModal = true;
-    }
-
-    fnHideResetPasswordModal () {
-        this.showResetPasswordModal = false;
     }
 
     updateCheckedOptions(userId, e) {

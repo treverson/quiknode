@@ -6,6 +6,7 @@ import {Constant} from '../common/constant';
 import {InstanceService} from '../common/services/instance-service/instance.service';
 import {Observable} from 'rxjs';
 import * as _ from 'lodash';
+import {UserService} from '../common/services/user-service/user.service';
 
 @Component({
     selector: 'app-main',
@@ -29,7 +30,8 @@ export class MainComponent implements OnInit {
         }
     }
 
-    constructor(private userIdle: UserIdleService, private _auth: AuthService, private _router: Router, private _instance: InstanceService) {
+    constructor(private userIdle: UserIdleService, private _auth: AuthService, private _router: Router,
+                private _instance: InstanceService, private _user: UserService) {
     }
 
     ngOnInit() {
@@ -41,6 +43,18 @@ export class MainComponent implements OnInit {
 
         // Start watch when time is up.
         this.userIdle.onTimeout().subscribe(() => this.fnLogOut());
+        this._user.fnGetPermissions()
+            .then((res: any) => {
+                this._user.fnGetUserPermissions(this._auth.fnGetUserId())
+                    .then(resPermission => {
+                        const findPer = _.find(res.permission, per => per['name'] === 'user:list');
+                        if (findPer &&
+                            _.findIndex(resPermission['user-permissions'], per =>
+                                per['permission-id'] === findPer['permission-id']) > -1) {
+                                this._auth.fnSetUserListPermission(true);
+                        }
+                    });
+            });
         this.fnGetInstances ();
     }
 

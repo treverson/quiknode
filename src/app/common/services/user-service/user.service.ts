@@ -6,10 +6,14 @@ import * as _ from 'lodash';
 @Injectable()
 export class UserService {
     userList: any[];
+    userPermissionList: any[];
+    permissionList: any[];
     private suspendedUsers: any;
 
     constructor(private _http: HttpClient) {
         this.userList = [];
+        this.userPermissionList = [];
+        this.permissionList = [];
         this.suspendedUsers = String(localStorage.getItem('SUSPENDED_USERS')).split(',') || [];
     }
 
@@ -61,6 +65,9 @@ export class UserService {
             this._http
                 .get(Constant.API_URL + 'account/permissions')
                 .subscribe((response: any) => {
+                    if (response && response.permission) {
+                        this.permissionList = response.permission;
+                    }
                     resolve(response);
                 }, (error) => {
                     reject(error);
@@ -73,6 +80,9 @@ export class UserService {
             this._http
                 .get(Constant.API_URL + `account/user/${userId}/permissions`)
                 .subscribe((response: any) => {
+                    if (response && response['user-permissions']) {
+                        this.userPermissionList = response['user-permissions'];
+                    }
                     resolve(response);
                 }, (error) => {
                     reject(error);

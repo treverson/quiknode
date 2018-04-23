@@ -8,6 +8,7 @@ export class AuthService {
     private _token: any;
     private _userId: string;
     private keepLoggedIn: boolean;
+    private hasUserListPermission: boolean;
 
     constructor(private _http: HttpClient) {
         this.keepLoggedIn = localStorage.getItem('KEEP_LOGGED_IN') === 'true' || false;
@@ -15,6 +16,7 @@ export class AuthService {
             this._token = localStorage.getItem('AUTH_TOKEN');
             this._userId = localStorage.getItem('USER_ID');
         }
+        this.hasUserListPermission = false;
     }
 
     /**
@@ -70,6 +72,7 @@ export class AuthService {
             localStorage.removeItem('USER_ID');
             localStorage.removeItem('KEEP_LOGGED_IN');
             resolve();
+            this.hasUserListPermission = false;
         });
     }
 
@@ -84,4 +87,11 @@ export class AuthService {
         return this.keepLoggedIn;
     }
 
+    fnSetUserListPermission(hasPermission) {
+        this.hasUserListPermission = hasPermission;
+    }
+
+    fnHasUserListPermission() {
+        return this.hasUserListPermission;
+    }
 }

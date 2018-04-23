@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {InstanceService} from '../common/services/instance-service/instance.service';
 import {UserService} from '../common/services/user-service/user.service';
+import {AuthService} from '../common/services/auth-service/auth.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -16,7 +17,8 @@ export class DashboardComponent implements OnInit {
     showApiKeyModal?: boolean;
     users: any[];
 
-    constructor(private titleService: Title, private _instance: InstanceService, private _users: UserService) {
+    constructor(private titleService: Title, private _instance: InstanceService, private _users: UserService,
+                private _auth: AuthService) {
         this.showInstanceCreateModal = false;
         this.showUserCreateModal = false;
         this.showAccountModal = false;
@@ -56,5 +58,9 @@ export class DashboardComponent implements OnInit {
 
     fnNotImplemented(e) {
         this._instance.fnNotImplemented(e);
+    }
+
+    fnHasUserPermission() {
+        return this._auth.fnHasUserListPermission();
     }
 }

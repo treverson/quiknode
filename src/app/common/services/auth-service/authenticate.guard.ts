@@ -20,21 +20,19 @@ export class AuthenticateGuard implements CanActivate {
      */
     private fnCheckAuthenticate(url: string): boolean {
         if (this._auth.fnGetToken()) {
+            // Redirect users to dashboard if doesn't have user permission
+
+            if (url.indexOf('user') > -1 && !this._auth.fnHasUserListPermission()) {
+                this._router.navigate(['/dashboard']);
+            }
             if (url.indexOf('login') > -1 || url === '/') {
                 this._router.navigate(['/dashboard']);
             }
             return true;
         } else {
-            this.fnDeleteData();
+            this._auth.fnSignOut();
             this._router.navigate(['/login']);
             return false;
         }
-    }
-
-    /**
-     * Delete all storage data
-     */
-    private fnDeleteData() {
-        localStorage.removeItem('AUTH_TOKEN');
     }
 }
