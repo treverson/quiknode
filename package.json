@@ -26,6 +26,7 @@
     "angular-user-idle": "^1.1.0",
     "angular2-ladda": "^1.2.3",
     "bcryptjs": "^2.4.3",
+    "cartoon-avatar": "^1.0.2",
     "concurrently": "^3.5.1",
     "core-js": "^2.4.1",
     "express": "^4.16.3",
