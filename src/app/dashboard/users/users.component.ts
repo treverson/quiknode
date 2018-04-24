@@ -27,6 +27,7 @@ export class UsersComponent implements OnInit {
     selectedUsers?: any;
     usersOnPage?: any;
     allSelected?: boolean;
+    permissions: any;
 
     constructor(private _user: UserService, private titleService: Title) {
         this.showUserCreateModal = false;
@@ -41,11 +42,13 @@ export class UsersComponent implements OnInit {
         this.selectedUsers = [];
         this.usersOnPage = [];
         this.allSelected = false;
+        this.permissions = [];
     }
 
     ngOnInit() {
         this.fnGetUsers();
         this.titleService.setTitle('Users');
+        this.permissions = this._user.permissionList;
     }
 
     fnGetUsers() {

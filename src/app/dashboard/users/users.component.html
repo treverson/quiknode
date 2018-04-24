@@ -114,7 +114,9 @@
     <app-create-update-user (showDeleteModal)="fnShowDeleteModal($event)"
                             (showSuspendModal)="fnShowSuspendModal($event)"
                             (fnHideModal)="fnHideCreateModal($event)"
-                            [editUserObject]="userObject">
+                            [editUserObject]="userObject"
+                            [permissions]="permissions"
+    >
     </app-create-update-user>
 </app-modal-wrapper>
 

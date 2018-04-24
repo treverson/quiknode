@@ -103,10 +103,9 @@ export class TestComponent implements OnInit {
     }
 
     fnCreateTraffic(e) {
-        const instance = _.find(this.instanceList, ins => ins['name'] === this.selectedInstance);
         if (this.numberOfCalls.numberOfTrafficCalls > 0) {
             for (let i = 1; i <= this.numberOfCalls.numberOfTrafficCalls; i++) {
-                this._instance.fnCreateTraffic(instance).then(response => {
+                this._instance.fnCreateTraffic(this.selectedInstance).then(response => {
                 });
             }
         }

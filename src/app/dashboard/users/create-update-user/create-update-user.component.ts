@@ -12,12 +12,12 @@ import {ApiKeyService} from '../../../common/services/api-key-service/api-key.se
 })
 export class CreateUpdateUserComponent implements OnInit {
     userObj: any;
-    permissions: any;
     selectedPermissions: any;
     isPasswordMatching: boolean;
     apiKeys: any;
     selectedApiKey: string;
     isLoading: boolean;
+    @Input() permissions: any;
     @Input() editUserObject;
     @Output() fnHideModal = new EventEmitter<any>();
     @Output() showDeleteModal = new EventEmitter<any>();
@@ -31,7 +31,6 @@ export class CreateUpdateUserComponent implements OnInit {
             password: '',
             confirmPassword: '',
         };
-        this.permissions = [];
         this.selectedPermissions = [];
         this.apiKeys = [];
         this.selectedApiKey = '';
@@ -51,9 +50,6 @@ export class CreateUpdateUserComponent implements OnInit {
             if (response && response['account-authentication-tokens']) {
                 this.apiKeys = response['account-authentication-tokens'];
             }
-        });
-        this._user.fnGetPermissions().then((response) => {
-            this.permissions = response['permission'];
         });
         if (this.editUserObject) {
             setTimeout(() => {
