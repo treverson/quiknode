@@ -34,6 +34,7 @@
                 <div class="icon-btn-label">new instance</div>
             </a>
             <a href="#" data-target="add_user" class="button icon-btn mr-10 w-inline-block"
+               *ngIf="fnHasUserPermission()"
                (click)="fnShowCreateModal($event, 'user')"
             >
                 <div class="icon"></div>

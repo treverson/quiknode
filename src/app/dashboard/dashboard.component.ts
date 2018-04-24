@@ -30,9 +30,11 @@ export class DashboardComponent implements OnInit {
         this._instance.instances.subscribe((instances) => {
             this.instances = instances;
         });
-        this._users.fnGetUsers().then((response: any) => {
-            this.users = this._users.userList;
-        });
+        if (this.fnHasUserPermission()) {
+            this._users.fnGetUsers().then((response: any) => {
+                this.users = this._users.userList;
+            });
+        }
     }
 
     fnHideCreateModal() {
