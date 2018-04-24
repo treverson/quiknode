@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserService} from '../../../common/services/user-service/user.service';
 import * as _ from 'lodash';
+import * as toonavatar from 'cartoon-avatar';
 
 @Component({
     selector: 'app-single-user',
@@ -13,6 +14,7 @@ export class SingleUserComponent implements OnInit {
     permissions: any;
     @Output() fnShowUserModal =  new EventEmitter<any>();
     isAdmin: boolean;
+    url: string;
 
     constructor(private _user: UserService) {
         this.isAdmin = false;
@@ -20,6 +22,7 @@ export class SingleUserComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.url = toonavatar.generate_avatar({'gender': 'male'});
         this.permissions = this._user.permissionList;
         if (this.user) {
             this._user.fnGetUserPermissions(this.user['user-id'])
