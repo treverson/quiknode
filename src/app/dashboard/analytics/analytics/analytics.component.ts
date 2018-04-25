@@ -23,6 +23,8 @@ export class AnalyticsComponent implements OnInit  {
     public selectedInstance: any;
     public isLoading: boolean;
     public isDarkMode: boolean;
+    public columns: any;
+    public values: any;
 
     constructor(private _instance: InstanceService, private _auth: AuthService) {
         this.metricList = [];
@@ -32,10 +34,10 @@ export class AnalyticsComponent implements OnInit  {
 
     ngOnInit() {
         this.isDarkMode = this._auth.fnGetIsDarkUiMode();
-        Highcharts.setOptions({
-            global: {
-                useUTC: false,
-            },
+        this.fnSetHighChartOption(this.isDarkMode);
+        this._auth.uiModeChange.subscribe((isDarkMode) => {
+            this.isDarkMode = isDarkMode;
+            this.fnSetHighChartOption(isDarkMode);
         });
         this.metricList = [
             'http-requests',
@@ -66,6 +68,49 @@ export class AnalyticsComponent implements OnInit  {
                 this.fnGetMetric();
             }
         });
+    }
+
+    fnSetHighChartOption(isDarkMode) {
+        Highcharts.setOptions({});
+        if (isDarkMode) {
+            Highcharts.setOptions({
+                global: {
+                    useUTC: false,
+                },
+                chart: {
+                    backgroundColor: {
+                        linearGradient: [0, 0, 500, 500],
+                        stops: [
+                            [0, 'rgb(0, 0, 0)'],
+                            [1, 'rgb(1, 1, 0)']
+                        ]
+                    },
+                    borderWidth: 0,
+                    plotBackgroundColor: 'rgba(1, 1, 1, .9)',
+                    plotShadow: true,
+                    plotBorderWidth: 0
+                }
+            });
+        } else {
+            Highcharts.setOptions({
+                global: {
+                    useUTC: false,
+                },
+                chart: {
+                    backgroundColor: null,
+                    borderWidth: 0,
+                    plotBackgroundColor: null,
+                    plotShadow: false,
+                    plotBorderWidth: 0
+                }
+            });
+        }
+        if (this.chart) {
+            this.chart.destroy();
+            setTimeout(() => {
+                this.fnDisplayMetrics(this.columns, this.values);
+            }, 1000);
+        }
     }
 
     fnDisplayMetrics(columns, values) {
@@ -154,6 +199,8 @@ export class AnalyticsComponent implements OnInit  {
         };
         this._instance.fnGetMetric(getMetricObj).then((response: any) => {
             this.isLoading = false;
+            this.columns = response.columns;
+            this.values = response.values;
             setTimeout(() => {
                 this.fnDisplayMetrics(response.columns, response.values);
             }, 0);
