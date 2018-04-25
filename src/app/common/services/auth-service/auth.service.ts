@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 
@@ -9,6 +9,8 @@ export class AuthService {
     private _userId: string;
     private keepLoggedIn: boolean;
     private hasUserListPermission: boolean;
+    private isDarkUIMode: boolean;
+    public uiModeChange: EventEmitter<any> = new EventEmitter();
 
     constructor(private _http: HttpClient) {
         this.keepLoggedIn = localStorage.getItem('KEEP_LOGGED_IN') === 'true' || false;
@@ -17,6 +19,7 @@ export class AuthService {
             this._userId = localStorage.getItem('USER_ID');
         }
         this.hasUserListPermission = false;
+        this.isDarkUIMode = localStorage.getItem('UI_MODE') === 'true' || false;
     }
 
     /**
@@ -93,5 +96,15 @@ export class AuthService {
 
     fnHasUserListPermission() {
         return this.hasUserListPermission;
+    }
+
+    fnToggleUIMode() {
+        this.isDarkUIMode = !this.isDarkUIMode;
+        this.uiModeChange.next(this.isDarkUIMode);
+        localStorage.setItem('UI_MODE', String(this.isDarkUIMode));
+    }
+
+    fnGetIsDarkUiMode() {
+        return this.isDarkUIMode;
     }
 }

@@ -18,6 +18,7 @@ export class ApiKeyComponent implements OnInit {
     currentUser: string;
     selectedUser: string;
     isLoading: boolean;
+    isDarkMode: boolean;
     page = 1;
 
     constructor(private _api: ApiKeyService, private _user: UserService, private _toastr: ToastrService,
@@ -30,10 +31,12 @@ export class ApiKeyComponent implements OnInit {
         this.currentUser = this._auth.fnGetUserId();
         this.selectedUser = _.clone(this.currentUser);
         this.isLoading = false;
+        this.isDarkMode = this._auth.fnGetIsDarkUiMode();
     }
 
     ngOnInit() {
         this.currentUser = this._auth.fnGetUserId();
+        this.isDarkMode = this._auth.fnGetIsDarkUiMode();
         this.selectedUser = _.clone(this.currentUser);
         this.users = this._user.fnGetUserList();
         this.apiKeys = this._api.getApiKeys();

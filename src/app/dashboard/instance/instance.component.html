@@ -15,7 +15,9 @@
            (click)="changeView($event, 'list')">
             <div data-targe="my_account" class="icon"></div>
         </a>
-        <select id="field-7" name="field-7" class="input-field inline-flat w-select"
+        <select id="field-7" name="field-7"
+                [ngClass]="{'dark': isDarkMode}"
+                class="input-field inline-flat w-select"
                 [(ngModel)]="sortBy"
                 (ngModelChange)="fnOnSortChange()"
         >
@@ -37,12 +39,14 @@
         <div class="w-row">
             <div class="column-7 w-col w-col-6">
                 <input type="text" class="text-field w-input" maxlength="256" name="field-8" data-name="Field 8"
+                       [ngClass]="{'dark': isDarkMode}"
                        placeholder="Search Instances" id="searchInput" required=""
                        [(ngModel)]="searchText"
                        (ngModelChange)="fnOnSearchTextChange()">
             </div>
             <div class="column-9 w-col w-col-6">
                 <select id="field-10" name="field-10" class="input-field inline w-select"
+                        [ngClass]="{'dark': isDarkMode}"
                         *ngIf="selectedInstances.length && viewType !== 'grid'"
                         (change)="onChangeAction($event)"
                 >
@@ -64,7 +68,7 @@
     <div class="instances-dashboard">
         <div class="card box-view"  *ngIf="!isLoading && viewType === 'grid'">
             <div class="info-row shadow p-0"
-                 [ngClass]="{'disabled': ins.suspended}"
+                 [ngClass]="{'disabled': ins.suspended, 'dark': isDarkMode}"
                  *ngFor="let ins of instances | paginate: { itemsPerPage: 12, currentPage: page }">
                 <app-single-instance [instance]="ins"
                                      (fnShowCreateModal)="fnShowCreateModal($event)"
@@ -89,7 +93,7 @@
                     </div>
                 </div>
                 <div class="w-col w-col-11 w-col-medium-11 w-col-tiny-11 w-col-small-11">
-                    <div class="info-row list">
+                    <div class="info-row list" [ngClass]="{'dark': isDarkMode}">
                         <app-single-instance [instance]="ins"
                                              (fnShowCreateModal)="fnShowCreateModal($event)"
                                              (fnShowAnalyticsModal)="fnShowAnalyticsModal($event)"

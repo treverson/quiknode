@@ -4,6 +4,7 @@
         <div class="w-row">
             <div class="w-col w-col-4">
                 <input type="text" class="w-input" maxlength="256" name="field-5"
+                       [ngClass]="{'dark': isDarkMode}"
                        data-name="Field 5" placeholder="Secret"
                        [(ngModel)]="apiKeyObject.secret"
                        #secret="ngModel"
@@ -20,6 +21,7 @@
                           [(ngModel)]="apiKeyObject.description"
                           #description="ngModel"
                           required=""
+                          [ngClass]="{'dark': isDarkMode}"
                           maxlength="5000" class="w-input">
                     </textarea>
                 <div *ngIf="(apiForm.submitted || description.touched) && !description.valid">
@@ -63,6 +65,7 @@
         <div class="w-col w-col-4">
             <textarea id="field-6" name="field-6" placeholder="John&#x27;s main access"
                       maxlength="5000" class="w-input"
+                      [ngClass]="{'dark': isDarkMode}"
                       (blur)="fnOnChange(apiKeys[i], i)"
                       [(ngModel)]="apiKeys[i]['description']"
             ></textarea>

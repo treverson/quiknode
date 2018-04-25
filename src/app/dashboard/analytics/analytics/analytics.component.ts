@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 import { chart } from 'highcharts';
 import * as Highcharts from 'highcharts';
 import * as HC_exporting from 'highcharts/modules/exporting';
+import {AuthService} from '../../../common/services/auth-service/auth.service';
 HC_exporting(Highcharts);
 
 @Component({
@@ -21,13 +22,16 @@ export class AnalyticsComponent implements OnInit  {
     public selectedMetric: string;
     public selectedInstance: any;
     public isLoading: boolean;
+    public isDarkMode: boolean;
 
-    constructor(private _instance: InstanceService) {
+    constructor(private _instance: InstanceService, private _auth: AuthService) {
         this.metricList = [];
         this.instanceList = [];
+        this.isDarkMode = this._auth.fnGetIsDarkUiMode();
     }
 
     ngOnInit() {
+        this.isDarkMode = this._auth.fnGetIsDarkUiMode();
         Highcharts.setOptions({
             global: {
                 useUTC: false,

@@ -3,6 +3,7 @@
     <div class="container-box w-row" *ngIf="!instances">
         <div class="column-2 w-col w-col-4 w-col-small-4">
             <select id="Select-instance" name="Select-instance" data-name="Select instance"
+                    [ngClass]="{'dark': isDarkMode}"
                     class="w-select" [(ngModel)]="selectedInstance" (change)="fnGetMetric()">
                 <!-- <option value="">Instance ...</option>-->
                 <option value="First" *ngFor="let instance of instanceList; let i =index"
@@ -13,13 +14,14 @@
         </div>
         <div class="w-col w-col-4 w-col-small-4">
             <select id="select-metric-2" name="select-metric" data-name="select-metric"
+                    [ngClass]="{'dark': isDarkMode}"
                     class="w-select" [(ngModel)]="selectedMetric" (change)="fnGetMetric()">
                 <!-- <option value="">Metric ...</option>-->
                 <option value="" *ngFor="let metric of metricList" [value]="metric">{{metric}}</option>
             </select>
         </div>
         <div class="column-3 w-col w-col-4 w-col-small-4">
-            <select id="field" name="field" class="w-select" disabled>
+            <select id="field" name="field" class="w-select" disabled [ngClass]="{'dark': isDarkMode}">
                 <option value="">Period</option>
                 <option value="First">First Choice</option>
                 <option value="Second">Second Choice</option>
@@ -31,11 +33,13 @@
     <div class="centered" *ngIf="instances && instances.length">
         <select id="select-metric" name="select-metric" data-name="Select Metric"
                 class="input-field inline mr-10 w-select"
+                [ngClass]="{'dark': isDarkMode}"
                 [(ngModel)]="selectedMetric" (change)="fnGetMetric()"
         >
             <option value="" *ngFor="let metric of metricList" [value]="metric">{{metric}}</option>
         </select>
-        <select id="field-9" name="field-9" data-name="Field 9" class="input-field inline w-select" disabled>
+        <select id="field-9" name="field-9" data-name="Field 9" class="input-field inline w-select" disabled
+                [ngClass]="{'dark': isDarkMode}">
             <option value="">Period</option>
             <option value="First">First Choice</option>
             <option value="Second">Second Choice</option>

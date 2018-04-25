@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import {UserService} from '../../common/services/user-service/user.service';
 import * as _ from 'lodash';
 import {Title} from '@angular/platform-browser';
+import {AuthService} from '../../common/services/auth-service/auth.service';
 
 @Component({
     selector: 'app-users',
@@ -27,9 +28,10 @@ export class UsersComponent implements OnInit {
     selectedUsers?: any;
     usersOnPage?: any;
     allSelected?: boolean;
+    isDarkMode?: boolean;
     permissions: any;
 
-    constructor(private _user: UserService, private titleService: Title) {
+    constructor(private _user: UserService, private titleService: Title, private _auth: AuthService) {
         this.showUserCreateModal = false;
         this.showDeleteModal = false;
         this.sortBy = 'none';
@@ -43,12 +45,17 @@ export class UsersComponent implements OnInit {
         this.usersOnPage = [];
         this.allSelected = false;
         this.permissions = [];
+        this.isDarkMode = this._auth.fnGetIsDarkUiMode();
     }
 
     ngOnInit() {
         this.fnGetUsers();
         this.titleService.setTitle('Users');
         this.permissions = this._user.permissionList;
+        this.isDarkMode = this._auth.fnGetIsDarkUiMode();
+        this._auth.uiModeChange.subscribe((isDarkMode) => {
+            this.isDarkMode = isDarkMode;
+        });
     }
 
     fnGetUsers() {

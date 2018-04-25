@@ -17,6 +17,7 @@
         <select id="field-7" name="field-7" class="input-field inline-flat w-select"
                 [(ngModel)]="sortBy"
                 (ngModelChange)="fnOnSortChange()"
+                [ngClass]="{'dark': isDarkMode}"
         >
             <option value="none">Sort By...</option>
             <option value="date">Creation Date</option>
@@ -36,6 +37,7 @@
         <div class="w-row">
             <div class="column-7 w-col w-col-6">
                 <input type="text" class="text-field w-input" maxlength="256" name="field-8" data-name="Field 8"
+                       [ngClass]="{'dark': isDarkMode}"
                        placeholder="Search Users" id="searchInput" required=""
                        [(ngModel)]="searchText"
                        (ngModelChange)="fnOnSearchTextChange()">
@@ -63,7 +65,7 @@
     <div class="users-dashboard">
         <div class="card flex" *ngIf="!isLoading && viewType === 'grid'">
             <div class="info-row shadow p-0"
-                 [ngClass]="{'disabled': user.suspended}"
+                 [ngClass]="{'disabled': user.suspended, 'dark': isDarkMode}"
                  *ngFor="let user of users | paginate: { itemsPerPage: 12, currentPage: page }">
                 <app-single-user [user]="user"
                                  (fnShowUserModal)="fnShowCreateModal($event)"
@@ -87,7 +89,7 @@
                 </div>
                 <div class="w-col w-col-11 w-col-medium-11 w-col-tiny-11 w-col-small-11">
                     <div class="info-row list"
-                         [ngClass]="{'disabled': user.suspended}">
+                         [ngClass]="{'disabled': user.suspended, 'dark': isDarkMode}">
                         <app-single-user [user]="user"
                                          (fnShowUserModal)="fnShowCreateModal($event)"
                                          [viewType]="viewType"

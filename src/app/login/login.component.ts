@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../common/services/auth-service/auth.service';
 import {Router} from '@angular/router';
 import {ToastrService} from '../common/services/toastr.service';
 import {Title} from '@angular/platform-browser';
+import * as $ from 'jquery';
 
 interface LogIn {
     username: string;
@@ -14,7 +15,7 @@ interface LogIn {
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
     logInObject: LogIn;
     keepLoggedIn: boolean;
@@ -33,6 +34,9 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.titleService.setTitle('Login');
+        if (this._auth.fnGetIsDarkUiMode()) {
+            $('html').addClass('login');
+        }
     }
 
     // call API on login button
@@ -66,4 +70,7 @@ export class LoginComponent implements OnInit {
         this.keepLoggedIn = e.target.checked;
     }
 
+    ngOnDestroy() {
+        $('html').removeClass('backdrop-scroll-off');
+    }
 }

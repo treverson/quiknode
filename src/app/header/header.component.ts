@@ -4,6 +4,8 @@ import {ToastrService} from '../common/services/toastr.service';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {InstanceService} from '../common/services/instance-service/instance.service';
+declare var particlesJS: any;
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-header',
@@ -16,6 +18,7 @@ export class HeaderComponent implements OnInit {
     currentPath: string;
     isToggledMenu: boolean;
     isMobileView: boolean;
+    isDarkMode?: boolean;
     @HostListener('window:resize') onResize() {
         // guard against resize before view is rendered
         if (this.menuButton) {
@@ -32,15 +35,22 @@ export class HeaderComponent implements OnInit {
         this.currentPath = '';
         this.isMobileView = false;
         this.isToggledMenu = false;
+        this.isDarkMode = this._auth.fnGetIsDarkUiMode();
     }
 
     ngOnInit() {
         this.currentPath = this._location.path();
+        this.isDarkMode = this._auth.fnGetIsDarkUiMode();
         this._router.events.subscribe(path => {
             if (path && path['url']) {
                 this.currentPath = this._router.url;
             }
         });
+        setTimeout(() => {
+            if (document.getElementById('particles-back')) {
+                particlesJS.load('particles-back', '/assets/particles.json', null);
+            }
+        }, 0);
     }
 
     fnLogOut() {
@@ -70,5 +80,10 @@ export class HeaderComponent implements OnInit {
 
     fnHasUserPermission() {
         return this._auth.fnHasUserListPermission();
+    }
+
+    fnToggleUiMode(e) {
+        e.preventDefault();
+        this._auth.fnToggleUIMode();
     }
 }

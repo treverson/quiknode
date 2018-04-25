@@ -7,6 +7,7 @@ import {InstanceService} from '../common/services/instance-service/instance.serv
 import {Observable} from 'rxjs';
 import * as _ from 'lodash';
 import {UserService} from '../common/services/user-service/user.service';
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-main',
@@ -56,6 +57,20 @@ export class MainComponent implements OnInit {
                     });
             });
         this.fnGetInstances ();
+
+        if (this._auth.fnGetIsDarkUiMode()) {
+            $('body, .info-row, input,.input-field, .modal-overlay, .modal-content, .text-field, textarea, select, option, .navbar, .nav-link').addClass('dark');
+        } else {
+            $('body, .info-row, input,.input-field, .modal-overlay, .modal-content, .text-field, textarea, select, option, .navbar, .nav-link').removeClass('dark');
+        }
+
+        this._auth.uiModeChange.subscribe((isDarkMode) => {
+            if (isDarkMode) {
+                $('body, .info-row, input,.input-field, .modal-overlay, .modal-content, .text-field, textarea, select, option, .navbar, .nav-link').addClass('dark');
+            } else {
+                $('body, .info-row, input,.input-field, .modal-overlay, .modal-content, .text-field, textarea, select, option, .navbar, .nav-link').removeClass('dark');
+            }
+        });
     }
 
     fnShowModal(count) {
@@ -92,9 +107,11 @@ export class MainComponent implements OnInit {
 
     fnGetInstances () {
         this._instance.fnGetInstances().then((response: any) => {
-            Observable.interval(1000 * 10).subscribe(x => {
+            Observable.interval(1000 * 30).startWith(0).subscribe(x => {
                 _.forEach(response.instances, instance => {
-                    this.fnCreateTraffic (instance['name']);
+                    setTimeout(() => {
+                        this.fnCreateTraffic (instance['name']);
+                    }, 1000);
                 });
             });
         });

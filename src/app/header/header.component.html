@@ -25,8 +25,8 @@
             </a>
             <a href="#/users"
                class="nav-link w-nav-link"
-               *ngIf="fnHasUserPermission()"
-               [ngClass]="{'w--nav-link-open': isToggledMenu, 'w--current': currentPath.includes('user')}"
+               [ngClass]="{'w--nav-link-open': isToggledMenu, 'dark': isDarkMode,
+                    'w--current': currentPath.includes('user'), 'hide': fnHasUserPermission()}"
                (click)="fnChangeRoute()"
             >
                 <span class="icon"><br xmlns="http://www.w3.org/1999/xhtml"></span>Users
@@ -44,9 +44,14 @@
                [ngClass]="isToggledMenu ? 'w--nav-link-open' : ''">
                 <span class="icon"></span><br>Help
             </a>
+            <a href="#" class="nav-link mode-switch w-nav-link"
+                (click)="fnToggleUiMode($event)"
+            >
+                <span class="icon"></span><br>UI MODE
+            </a>
             <a href="#"
                class="nav-link w-nav-link"
-               [ngClass]="isToggledMenu ? 'w--nav-link-open' : ''"
+               [ngClass]="{'w--nav-link-open': isToggledMenu, 'dark': isDarkMode}"
                *ngIf="isLoggedIn" (click)="fnLogOut()">
                 <span class="icon"></span><br>Logout
             </a>

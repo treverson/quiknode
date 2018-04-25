@@ -42,24 +42,17 @@
 
             <div class="w-row">
                 <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6">
-                    <div class="checkbox w-checkbox p-l-0">
-                        <input type="checkbox" data-name="Checkbox 8"
+                    <div class="w-checkbox">
+                        <input type="checkbox"
                                [value]="keepLoggedIn"
                                name="keepLoggedIn"
                                id="keepLoggedIn"
                                [checked]="keepLoggedIn"
                                (change)="fnCheckChange($event)"
-                               class="checkbox-field w-checkbox-input inline-block">
-                        <label class="checkbox-label w-form-label" for="keepLoggedIn">
-                            Keep me signed in
-                        </label>
+                               data-name="Checkbox" class="w-checkbox-input">
+                        <label for="keepLoggedIn" class="label w-form-label">Keep me signed in</label>
                     </div>
-                </div>
-                <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6">
-                    <a href="#" class="text-link">Forgot Password?</a>
-                </div>
-            </div>
-            <div class="w-row">
+                    <a href="#" class="text-link">Forgot Password?</a></div>
                 <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6">
                 </div>
                 <div class="w-col w-col-6 w-col-small-6 w-col-tiny-6">

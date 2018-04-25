@@ -3,6 +3,7 @@ import {InstanceService} from '../../common/services/instance-service/instance.s
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import {Title} from '@angular/platform-browser';
+import {AuthService} from '../../common/services/auth-service/auth.service';
 
 @Component({
     selector: 'app-instance',
@@ -25,8 +26,9 @@ export class InstanceComponent implements OnInit {
     page = 1;
     selectedInstances?: any;
     allSelected?: boolean;
+    isDarkMode?: boolean;
 
-    constructor(private _instance: InstanceService, private titleService: Title) {
+    constructor(private _instance: InstanceService, private titleService: Title, private _auth: AuthService) {
         this.showInstanceCreateModal = false;
         this.showSuspendModal = false;
         this.sortBy = 'none';
@@ -38,9 +40,14 @@ export class InstanceComponent implements OnInit {
         this.suspendInstance = {};
         this.selectedInstances = [];
         this.allSelected = false;
+        this.isDarkMode = this._auth.fnGetIsDarkUiMode();
     }
 
     ngOnInit() {
+        this.isDarkMode = this._auth.fnGetIsDarkUiMode();
+        this._auth.uiModeChange.subscribe((isDarkMode) => {
+            this.isDarkMode = isDarkMode;
+        });
         this.fnGetInstances();
         this.titleService.setTitle('Instances');
     }
