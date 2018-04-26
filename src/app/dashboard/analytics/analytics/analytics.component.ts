@@ -80,7 +80,6 @@ export class AnalyticsComponent implements OnInit  {
     }
 
     fnDisplayMetrics(columns, values) {
-        console.log('values ', values)
         let dataValues = _.cloneDeep(values);
         dataValues = _.map(dataValues, itemArray => {
             itemArray[0] = itemArray[0] * 1000;
@@ -93,26 +92,9 @@ export class AnalyticsComponent implements OnInit  {
             chart: {
                 zoomType: 'x'
             },
-            /*title: {
-                text: columns ? columns[1] : this.selectedMetric + ' inbound data'
-            },*/
             subtitle: {
                 text: document.ontouchstart === undefined ?
                     'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
-            },
-            xAxis: {
-                type: 'datetime',
-                labels: {
-                    formatter: function () {
-                        return Highcharts.dateFormat('%b\'%d', this.value);
-                    }
-                },
-                tickPixelInterval: 200
-            },
-            yAxis: {
-                title: {
-                    text: 'Kb'
-                }
             },
             legend: {
                 enabled: false
@@ -200,6 +182,7 @@ export class AnalyticsComponent implements OnInit  {
                     }
                 },
                 title: {
+                    text: 'Kb',
                     style: {
                         color: '#fff',
                     }
@@ -248,6 +231,7 @@ export class AnalyticsComponent implements OnInit  {
                         }
                     },
                     title: {
+                        text: 'Kb',
                         style: {
                             color: null,
                         }
