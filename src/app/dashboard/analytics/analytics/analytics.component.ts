@@ -88,9 +88,29 @@ export class AnalyticsComponent implements OnInit  {
         if (!values) {
             dataValues = [[new Date().getTime(), 0]];
         }
-        let options: Highcharts.Options = {
+        const options: Highcharts.Options = {
             chart: {
-                zoomType: 'x'
+                zoomType: 'x',
+                backgroundColor: this.isDarkMode ?
+                    {
+                        linearGradient: [0, 0, 500, 500],
+                        stops: [
+                            [0, 'rgb(0, 0, 0)'],
+                            [1, 'rgb(1, 1, 0)']
+                        ]
+                    } : null,
+                borderWidth: 0,
+                plotShadow: this.isDarkMode,
+                plotBorderWidth: 0,
+                style: {
+                    color: this.isDarkMode ? '#fff' : null,
+                }
+            },
+            title: {
+                style: {
+                    color: this.isDarkMode ? '#fff' : null,
+                },
+                text: columns ? columns[1] : this.selectedMetric + ' inbound data'
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
@@ -101,6 +121,36 @@ export class AnalyticsComponent implements OnInit  {
             },
             exporting: {
                 enabled: true
+            },
+            xAxis: {
+                type: 'datetime',
+                labels: {
+                    formatter: function () {
+                        return Highcharts.dateFormat('%b\'%d', this.value);
+                    },
+                    style: {
+                        color: this.isDarkMode ? '#fff' : null,
+                    }
+                },
+                tickPixelInterval: 200,
+                title: {
+                    style: {
+                        color: this.isDarkMode ? '#fff' : null,
+                    }
+                }
+            },
+            yAxis: {
+                labels: {
+                    style: {
+                        color: this.isDarkMode ? '#fff' : null,
+                    }
+                },
+                title: {
+                    text: 'Kb',
+                    style: {
+                        color: this.isDarkMode ? '#fff' : null,
+                    }
+                }
             },
             plotOptions: {
                 area: {
@@ -134,111 +184,6 @@ export class AnalyticsComponent implements OnInit  {
                 data: dataValues
             }]
         };
-
-        if (this.isDarkMode) {
-            options = _.assign({}, options, {chart: {
-                backgroundColor: {
-                    linearGradient: [0, 0, 500, 500],
-                        stops: [
-                        [0, 'rgb(0, 0, 0)'],
-                        [1, 'rgb(1, 1, 0)']
-                    ]
-                },
-                borderWidth: 0,
-                    // plotBackgroundColor: 'rgba(1, 1, 1, .9)',
-                    plotShadow: true,
-                    plotBorderWidth: 0,
-                    style: {
-                    color: '#fff'
-                }
-            },
-            title: {
-                style: {
-                    color: '#fff',
-                },
-                text: columns ? columns[1] : this.selectedMetric + ' inbound data'
-            },
-            xAxis: {
-                type: 'datetime',
-                    labels: {
-                    formatter: function () {
-                        return Highcharts.dateFormat('%b\'%d', this.value);
-                    },
-                    style: {
-                        color: '#fff',
-                    }
-                },
-                tickPixelInterval: 200,
-                    title: {
-                    style: {
-                        color: '#fff',
-                    }
-                }
-            },
-            yAxis: {
-                labels: {
-                    style: {
-                        color: '#fff',
-                    }
-                },
-                title: {
-                    text: 'Kb',
-                    style: {
-                        color: '#fff',
-                    }
-                }
-            }});
-        } else {
-            options = _.assign({}, options,
-                {
-                    chart: {
-                        backgroundColor: null,
-                        borderWidth: 0,
-                        plotBackgroundColor: null,
-                        plotShadow: false,
-                        plotBorderWidth: 0,
-                        style: {
-                        color: null,
-                     }
-                },
-                title: {
-                    style: {
-                        color: null,
-                    },
-                    text: columns ? columns[1] : this.selectedMetric + ' inbound data'
-                },
-                xAxis: {
-                    type: 'datetime',
-                        labels: {
-                        formatter: function () {
-                            return Highcharts.dateFormat('%b\'%d', this.value);
-                        },
-                        style: {
-                            color: null,
-                        }
-                    },
-                    tickPixelInterval: 200,
-                        title: {
-                        style: {
-                            color: null,
-                        }
-                    }
-                },
-                yAxis: {
-                    labels: {
-                        style: {
-                            color: null,
-                        }
-                    },
-                    title: {
-                        text: 'Kb',
-                        style: {
-                            color: null,
-                        }
-                    }
-                }
-            });
-        }
 
         if (this.chartTarget) {
             this.chart = chart(this.chartTarget.nativeElement, options);
