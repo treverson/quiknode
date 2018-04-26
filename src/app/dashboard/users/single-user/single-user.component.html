@@ -1,6 +1,11 @@
 <div class="p-20" *ngIf="viewType === 'grid'"
      (click)="showUserModal($event)">
-    <img src={{url}} alt="assets/images/Optimus_Prime_Helmet.png" class="userpic">
+    <img src={{url}}
+         alt="assets/images/Optimus_Prime_Helmet.png"
+         onerror="this.src='assets/images/Optimus_Prime_Helmet.png'"
+         class="userpic"
+
+    >
     <div class="name-label bold">{{user.name}}</div>
     <div class="small-pill" *ngIf="isAdmin">
         <div class="text-block">admin</div>
@@ -12,7 +17,9 @@
 <div class="w-row" *ngIf="viewType === 'list'"
      (click)="showUserModal($event)">
     <div class="w-col w-col-1">
-        <img src={{url}} class="userpic inline" alt="assets/images/Optimus_Prime_Helmet.png">
+        <img src={{url}} class="userpic inline"
+             onerror="this.src='assets/images/Optimus_Prime_Helmet.png'"
+             alt="assets/images/Optimus_Prime_Helmet.png">
 
         <div class="small-pill" *ngIf="isAdmin">
             <div class="text-block">admin</div>
