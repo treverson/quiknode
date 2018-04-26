@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var request = require('request');
 var app = express();
+var _ = require('lodash');
 app.set('port', (process.env.PORT || 3000));
 app.use('/', express.static(path.join(__dirname, 'dist')));
 app.all("/api/*", function (req, res) {
@@ -55,20 +56,32 @@ function createTraffic() {
                     if (configuration && configuration.validators &&
                         configuration.validators.http && configuration.validators.http.request) {
                         if (configuration.validators.http.request) {
-                            console.log('Validatore...', configuration.validators.http.request[0].type);
-                            const validateToken = configuration.validators.http.request.type;
-                            console.log('Validatore...1');
+                            // console.log('Validatore...', configuration.validators.http.request[0].type);
+                            const validateToken = _.find(configuration.validators.http.request, function(req) {
+                                return req.type === 'validateToken'
+                            });
+                            console.log('Validatore...10', validateToken);
+                            const validateReferer = _.find(configuration.validators.http.request, function(req){
+                                return req.type === 'validateReferer';
+                            });
+                            /* if (validateReferer) {
+                             console.log('validateReferer ', validateReferer.referers[0])
+                             headers  = new HttpHeaders().set('InterceptorSkipHeader', '').set('X-Alt-Referer', validateReferer.referers[0]);
+                             }*/
+                            console.log('Validatore...1', validateReferer);
                             if (validateToken) {
                                 headers  = {'Authorization': validateToken.token,
                                     "Content-Type": "application/json"};
                             }
+                            if (validateReferer && validateReferer.referers) {
+                                headers  = {'X-Alt-Referer': validateReferer.referers[0],
+                                    "Content-Type": "application/json"};
+                            }
                         }
                     }
-                    console.log('request URL...', "https://" + reBody[i]['name'] + ".quiknode.pro/");
                     request.post({ url: "https://" + reBody[i]['name'] + ".quiknode.pro/", json: obj, headers: headers, timeout: 10000 },
                         function optionalCallback(err, httpResponse, body) {
                             console.log("err ", err);
-                            console.log("body ", body);
                             count = count + 1;
                             console.log('Count..',count, "/", reBody.length);
                             if (count >= reBody.length) {

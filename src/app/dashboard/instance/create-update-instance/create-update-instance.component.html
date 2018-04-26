@@ -72,8 +72,8 @@
                 <select id="field-3" name="field-3" class="w-select" [(ngModel)]="validatorType"
                         [ngClass]="{'dark': isDarkMode}"
                 >
-                    <option value="validateToken" [ngClass]="{'dark': isDarkMode}">Validate Token</option>
-                    <option value="validateReferer" [ngClass]="{'dark': isDarkMode}">Validate Referer</option>
+                    <option value="validateToken">Validate Token</option>
+                    <option value="validateReferer">Validate Referer</option>
                 </select>
                 <div class="input-block" *ngIf="validatorType === 'validateReferer'">
                     <label class="name-label">http request referer</label>

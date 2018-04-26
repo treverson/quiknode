@@ -1,7 +1,7 @@
 <h6 class="modal-header section-heading">generate new One time password</h6>
 <div class="w-row">
     <div class="w-col w-col-4 w-col-small-4 w-col-tiny-tiny-stack">
-        <select id="field-3" name="field-3" class="w-select">
+        <select id="field-3" name="field-3" class="w-select" [ngClass]="{'dark': isDarkMode}">
             <option value="">Select User...</option>
             <option value="First">First Choice</option>
             <option value="Second">Second Choice</option>

@@ -34,10 +34,19 @@ export class AnalyticsComponent implements OnInit  {
 
     ngOnInit() {
         this.isDarkMode = this._auth.fnGetIsDarkUiMode();
-        this.fnSetHighChartOption(this.isDarkMode);
+        Highcharts.setOptions({
+            global: {
+                useUTC: false,
+            },
+        });
         this._auth.uiModeChange.subscribe((isDarkMode) => {
             this.isDarkMode = isDarkMode;
-            this.fnSetHighChartOption(isDarkMode);
+            if (this.chart) {
+                this.chart.destroy();
+                setTimeout(() => {
+                    this.fnDisplayMetrics(this.columns, this.values);
+                }, 1000);
+            }
         });
         this.metricList = [
             'http-requests',
@@ -70,125 +79,9 @@ export class AnalyticsComponent implements OnInit  {
         });
     }
 
-    fnSetHighChartOption(isDarkMode) {
-        Highcharts.setOptions({});
-        if (isDarkMode) {
-            Highcharts.setOptions({
-                global: {
-                    useUTC: false,
-                },
-                chart: {
-                    backgroundColor: {
-                        linearGradient: [0, 0, 500, 500],
-                        stops: [
-                            [0, 'rgb(0, 0, 0)'],
-                            [1, 'rgb(1, 1, 0)']
-                        ]
-                    },
-                    borderWidth: 0,
-                    // plotBackgroundColor: 'rgba(1, 1, 1, .9)',
-                    plotShadow: true,
-                    plotBorderWidth: 0,
-                    style: {
-                        color: '#fff'
-                    }
-                },
-                title: {
-                    style: {
-                        color: '#fff',
-                    }
-                },
-                xAxis: {
-                    type: 'datetime',
-                    labels: {
-                        formatter: function () {
-                            return Highcharts.dateFormat('%b\'%d', this.value);
-                        },
-                        style: {
-                            color: '#fff',
-                        }
-                    },
-                    tickPixelInterval: 200,
-                    title: {
-                        style: {
-                            color: '#fff',
-                        }
-                    }
-                },
-                yAxis: {
-                    labels: {
-                        style: {
-                            color: '#fff',
-                        }
-                    },
-                    title: {
-                        style: {
-                            color: '#fff',
-                        }
-                    }
-                },
-            });
-        } else {
-            Highcharts.setOptions({
-                global: {
-                    useUTC: false,
-                },
-                chart: {
-                    backgroundColor: null,
-                    borderWidth: 0,
-                    plotBackgroundColor: null,
-                    plotShadow: false,
-                    plotBorderWidth: 0,
-                    style: {
-                        color: null,
-                    }
-                },
-                title: {
-                    style: {
-                        color: null,
-                    }
-                },
-                xAxis: {
-                    type: 'datetime',
-                    labels: {
-                        formatter: function () {
-                            return Highcharts.dateFormat('%b\'%d', this.value);
-                        },
-                        style: {
-                            color: null,
-                        }
-                    },
-                    tickPixelInterval: 200,
-                    title: {
-                        style: {
-                            color: null,
-                        }
-                    }
-                },
-                yAxis: {
-                    labels: {
-                        style: {
-                            color: null,
-                        }
-                    },
-                    title: {
-                        style: {
-                            color: null,
-                        }
-                    }
-                },
-            });
-        }
-        if (this.chart) {
-            this.chart.destroy();
-            setTimeout(() => {
-                this.fnDisplayMetrics(this.columns, this.values);
-            }, 1000);
-        }
-    }
-
     fnDisplayMetrics(columns, values) {
-        let dataValues = values;
+        console.log('values ', values)
+        let dataValues = _.cloneDeep(values);
         dataValues = _.map(dataValues, itemArray => {
             itemArray[0] = itemArray[0] * 1000;
             return itemArray;
@@ -196,13 +89,13 @@ export class AnalyticsComponent implements OnInit  {
         if (!values) {
             dataValues = [[new Date().getTime(), 0]];
         }
-        const options: Highcharts.Options = {
+        let options: Highcharts.Options = {
             chart: {
                 zoomType: 'x'
             },
-            title: {
+            /*title: {
                 text: columns ? columns[1] : this.selectedMetric + ' inbound data'
-            },
+            },*/
             subtitle: {
                 text: document.ontouchstart === undefined ?
                     'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
@@ -259,6 +152,109 @@ export class AnalyticsComponent implements OnInit  {
                 data: dataValues
             }]
         };
+
+        if (this.isDarkMode) {
+            options = _.assign({}, options, {chart: {
+                backgroundColor: {
+                    linearGradient: [0, 0, 500, 500],
+                        stops: [
+                        [0, 'rgb(0, 0, 0)'],
+                        [1, 'rgb(1, 1, 0)']
+                    ]
+                },
+                borderWidth: 0,
+                    // plotBackgroundColor: 'rgba(1, 1, 1, .9)',
+                    plotShadow: true,
+                    plotBorderWidth: 0,
+                    style: {
+                    color: '#fff'
+                }
+            },
+            title: {
+                style: {
+                    color: '#fff',
+                },
+                text: columns ? columns[1] : this.selectedMetric + ' inbound data'
+            },
+            xAxis: {
+                type: 'datetime',
+                    labels: {
+                    formatter: function () {
+                        return Highcharts.dateFormat('%b\'%d', this.value);
+                    },
+                    style: {
+                        color: '#fff',
+                    }
+                },
+                tickPixelInterval: 200,
+                    title: {
+                    style: {
+                        color: '#fff',
+                    }
+                }
+            },
+            yAxis: {
+                labels: {
+                    style: {
+                        color: '#fff',
+                    }
+                },
+                title: {
+                    style: {
+                        color: '#fff',
+                    }
+                }
+            }});
+        } else {
+            options = _.assign({}, options,
+                {
+                    chart: {
+                        backgroundColor: null,
+                        borderWidth: 0,
+                        plotBackgroundColor: null,
+                        plotShadow: false,
+                        plotBorderWidth: 0,
+                        style: {
+                        color: null,
+                     }
+                },
+                title: {
+                    style: {
+                        color: null,
+                    },
+                    text: columns ? columns[1] : this.selectedMetric + ' inbound data'
+                },
+                xAxis: {
+                    type: 'datetime',
+                        labels: {
+                        formatter: function () {
+                            return Highcharts.dateFormat('%b\'%d', this.value);
+                        },
+                        style: {
+                            color: null,
+                        }
+                    },
+                    tickPixelInterval: 200,
+                        title: {
+                        style: {
+                            color: null,
+                        }
+                    }
+                },
+                yAxis: {
+                    labels: {
+                        style: {
+                            color: null,
+                        }
+                    },
+                    title: {
+                        style: {
+                            color: null,
+                        }
+                    }
+                }
+            });
+        }
 
         if (this.chartTarget) {
             this.chart = chart(this.chartTarget.nativeElement, options);

@@ -138,8 +138,8 @@
             <div class="w-col w-col-6 p-r-10 p-l-10">
                 <h4 class="modal-header subheader">Assign API Key</h4>
                 <select id="field-3" name="field-3" class="w-select" [(ngModel)]="selectedApiKey" disabled>
-                    <option value="" [ngClass]="{'dark': isDarkMode}">Select one...</option>
-                    <option *ngFor="let key of apiKeys" [ngClass]="{'dark': isDarkMode}">{{key['account-authentication-token-id']}}</option>
+                    <option value="">Select one...</option>
+                    <option *ngFor="let key of apiKeys">{{key['account-authentication-token-id']}}</option>
                 </select>
             </div>
             <div class="w-col w-col-6 p-r-10 p-l-10">
