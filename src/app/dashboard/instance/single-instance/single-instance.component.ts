@@ -4,6 +4,7 @@ import * as HCs from 'highcharts';
 import {chart} from 'highcharts';
 import {InstanceService} from '../../../common/services/instance-service/instance.service';
 import {Location} from '@angular/common';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'app-single-instance',
@@ -63,6 +64,9 @@ export class SingleInstanceComponent implements OnInit {
     }
 
     fnDisplayMetrics(columns, values) {
+        if (values.length > 100) {
+            values = _.takeRight(values, 10);
+        }
         const options: HCs.Options = {
             chart: {
                 zoomType: 'x'

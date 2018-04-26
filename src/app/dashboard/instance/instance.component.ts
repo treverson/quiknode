@@ -31,8 +31,8 @@ export class InstanceComponent implements OnInit {
     constructor(private _instance: InstanceService, private titleService: Title, private _auth: AuthService) {
         this.showInstanceCreateModal = false;
         this.showSuspendModal = false;
-        this.sortBy = 'none';
-        this.sortType = 'asc';
+        this.sortBy = 'date';
+        this.sortType = 'desc';
         this.searchText = '';
         this.viewType = 'grid';
         this.showAnalyticsModal = false;

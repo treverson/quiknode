@@ -3,6 +3,7 @@ import {InstanceService} from '../../../common/services/instance-service/instanc
 import {ToastrService} from '../../../common/services/toastr.service';
 import * as _ from 'lodash';
 import {AuthService} from '../../../common/services/auth-service/auth.service';
+import {Router} from '@angular/router';
 
 interface Instance {
     name?: string;
@@ -27,13 +28,16 @@ export class CreateUpdateInstanceComponent implements OnInit {
     @Output() fnHideModal = new EventEmitter<any>();
     @Output() fnShowSuspendModal =  new EventEmitter<any>();
     @Input() editInstanceObject;
+    @Input() instances;
     validatorType: string;
     validateReferer: string[];
     validateToken: string;
     isLoading: boolean;
     isDarkMode: boolean;
+    cloneInstance: string;
 
-    constructor(private _instance: InstanceService, private _toastr: ToastrService, private _auth: AuthService) {
+    constructor(private _instance: InstanceService, private _toastr: ToastrService, private _auth: AuthService,
+                private _router: Router) {
         this.instanceObj = {
             name: '',
             description: '',
@@ -50,6 +54,7 @@ export class CreateUpdateInstanceComponent implements OnInit {
         this.validateToken = '';
         this.isLoading = false;
         this.isDarkMode = this._auth.fnGetIsDarkUiMode();
+        this.cloneInstance = '';
     }
 
     ngOnInit() {
@@ -119,22 +124,29 @@ export class CreateUpdateInstanceComponent implements OnInit {
                     this._toastr.fnWarning('Update instance failed.');
                 });
         } else {
-            this.isLoading = true;
-            this._instance.fnCreateInstance(instanceObject)
-                .then((response: any) => {
-                    this.isLoading = false;
-                    this._toastr.fnSuccess('Instance created successfully.');
-                    this.fnHideModal.next({
-                        instanceObject,
-                        created: false
+            if (this.cloneInstance && (this.cloneInstance === instanceObject['name']) ||
+                _.findIndex(this.instances, ins => ins['name'] === instanceObject['name']) > -1) {
+                this._toastr.fnWarning('Please choose a unique name for new instance.');
+            } else {
+                this.isLoading = true;
+                this._instance.fnCreateInstance(instanceObject)
+                    .then((response: any) => {
+                        this.isLoading = false;
+                        this._toastr.fnSuccess('Instance created successfully.');
+                        this.fnHideModal.next({
+                            instanceObject,
+                            created: true
+                        });
+                        this.cloneInstance = '';
+                        this._router.navigate(['/instances']);
+                    })
+                    .catch((err) => {
+                        this.isLoading = false;
+                        if (err.status !== 401 && err.status !== 502) {
+                            this._toastr.fnWarning('Instance creation failed.');
+                        }
                     });
-                })
-                .catch((err) => {
-                    this.isLoading = false;
-                    if (err.status !== 401 && err.status !== 502) {
-                        this._toastr.fnWarning('Instance creation failed.');
-                    }
-                });
+            }
         }
     }
 
@@ -166,6 +178,7 @@ export class CreateUpdateInstanceComponent implements OnInit {
 
     fnCloneInstance() {
         delete this.instanceObj['instance-id'];
+        this.cloneInstance = this.instanceObj['name'];
         this.editInstanceObject = null;
     }
 }

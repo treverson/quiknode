@@ -121,6 +121,7 @@
                    (fnHideModal)="fnHideCreateModal($event)">
     <app-create-update-instance [editInstanceObject]="instanceObject" (fnHideModal)="fnHideCreateModal($event)"
                                 (fnShowSuspendModal)="fnShowSuspendModal($event)"
+                                [instances]="instances"
     >
     </app-create-update-instance>
 </app-modal-wrapper>

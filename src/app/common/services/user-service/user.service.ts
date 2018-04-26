@@ -28,7 +28,8 @@ export class UserService {
                         }
                         return user;
                     });
-                    this.userList = response.users;
+                    this.userList = _.orderBy(response.users, ['created'], ['desc']);
+                    response.users = this.userList;
                     resolve(response);
                 }, (error) => {
                     reject(error);

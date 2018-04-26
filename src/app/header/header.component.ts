@@ -41,6 +41,9 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {
         this.currentPath = this._location.path();
         this.isDarkMode = this._auth.fnGetIsDarkUiMode();
+        this._auth.uiModeChange.subscribe((isDarkMode) => {
+            this.isDarkMode = isDarkMode;
+        });
         this._router.events.subscribe(path => {
             if (path && path['url']) {
                 this.currentPath = this._router.url;

@@ -67,7 +67,7 @@ export class ApiKeyComponent implements OnInit {
         this.isLoading = true;
         this._api.fnCreateApiKey(apiKeyObject)
             .then(response => {
-                this.isLoading = true;
+                this.isLoading = false;
                 this._toastr.fnSuccess('Api key created successfully.');
                 this.fnGetApiKeys();
                 form.resetForm();

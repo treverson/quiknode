@@ -34,8 +34,8 @@ export class UsersComponent implements OnInit {
     constructor(private _user: UserService, private titleService: Title, private _auth: AuthService) {
         this.showUserCreateModal = false;
         this.showDeleteModal = false;
-        this.sortBy = 'none';
-        this.sortType = 'asc';
+        this.sortBy = 'date';
+        this.sortType = 'desc';
         this.searchText = '';
         this.viewType = 'grid';
         this.users = [];

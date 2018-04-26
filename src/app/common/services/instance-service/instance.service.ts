@@ -25,6 +25,7 @@ export class InstanceService {
                             }
                             return ins;
                         });
+                        response.instances = _.orderBy(response.instances, ['created'], ['desc']);
                     }
                     resolve(response);
                 }, (error) => {

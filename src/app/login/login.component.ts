@@ -34,11 +34,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.titleService.setTitle('Login');
-        if (this._auth.fnGetIsDarkUiMode() && !$('body').hasClass('login')) {
+        if (this._auth.fnGetIsDarkUiMode()) {
             $('body').addClass('login');
         }
         this._auth.uiModeChange.subscribe((isDarkMode) => {
-            if (isDarkMode && !$('body').hasClass('login')) {
+            if (isDarkMode) {
                 $('body').addClass('login');
             } else {
                 $('body').removeClass('login');
