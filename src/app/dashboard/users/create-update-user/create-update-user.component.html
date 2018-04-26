@@ -60,6 +60,7 @@
                         <input type="text" class="w-input" maxlength="256" name="field-2"
                                [(ngModel)]="userObj.name"
                                #name="ngModel"
+                               [ngClass]="{'dark': isDarkMode}"
                                data-name="Name" placeholder="Name" required="">
                         <div *ngIf="(userForm.submitted || name.touched) && !name.valid">
                             <small class="text-danger" *ngIf="name.errors['required']">
@@ -75,6 +76,7 @@
                     <div class="w-col w-col-11 w-col-small-11 w-col-tiny-11">
                         <input type="text" class="w-input" maxlength="256" name="field-2"
                                [(ngModel)]="userObj.email"
+                               [ngClass]="{'dark': isDarkMode}"
                                #email="ngModel"
                                [pattern]="emailRegEx"
                                data-name="Email" placeholder="example@gmail.com" required="">
@@ -97,6 +99,7 @@
                     <div class="w-col w-col-11 w-col-small-11">
                         <input type="password" class="w-input" maxlength="256" name="password"
                                [(ngModel)]="userObj.password"
+                               [ngClass]="{'dark': isDarkMode}"
                                #password="ngModel"
                                (ngModelChange)="fnValidatePassword()"
                                data-name="Password" placeholder="Password" required="">
@@ -113,6 +116,7 @@
                     </div>
                     <div class="w-col w-col-11 w-col-small-11 w-col-tiny-11">
                         <input type="password" class="w-input" maxlength="256" name="confirmPassword"
+                               [ngClass]="{'dark': isDarkMode}"
                                [(ngModel)]="userObj.confirmPassword"
                                #confirmPassword="ngModel"
                                (ngModelChange)="fnValidatePassword()"
@@ -134,8 +138,8 @@
             <div class="w-col w-col-6 p-r-10 p-l-10">
                 <h4 class="modal-header subheader">Assign API Key</h4>
                 <select id="field-3" name="field-3" class="w-select" [(ngModel)]="selectedApiKey" disabled>
-                    <option value="">Select one...</option>
-                    <option *ngFor="let key of apiKeys">{{key['account-authentication-token-id']}}</option>
+                    <option value="" [ngClass]="{'dark': isDarkMode}">Select one...</option>
+                    <option *ngFor="let key of apiKeys" [ngClass]="{'dark': isDarkMode}">{{key['account-authentication-token-id']}}</option>
                 </select>
             </div>
             <div class="w-col w-col-6 p-r-10 p-l-10">
@@ -147,6 +151,7 @@
                            id="permission-id[i]"
                            [checked]="fnCheckPermission(per)"
                            (change)="fnUpdateSelectedPermissions($event)"
+                           [ngClass]="{'dark': isDarkMode}"
                            class="checkbox-field w-checkbox-input inline-block">
                     <label class="checkbox-label w-form-label" for="permission-id[i]">{{per.name}}</label>
                 </div>

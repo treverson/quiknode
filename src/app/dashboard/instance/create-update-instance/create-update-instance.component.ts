@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {InstanceService} from '../../../common/services/instance-service/instance.service';
 import {ToastrService} from '../../../common/services/toastr.service';
 import * as _ from 'lodash';
+import {AuthService} from '../../../common/services/auth-service/auth.service';
 
 interface Instance {
     name?: string;
@@ -30,7 +31,9 @@ export class CreateUpdateInstanceComponent implements OnInit {
     validateReferer: string[];
     validateToken: string;
     isLoading: boolean;
-    constructor(private _instance: InstanceService, private _toastr: ToastrService) {
+    isDarkMode: boolean;
+
+    constructor(private _instance: InstanceService, private _toastr: ToastrService, private _auth: AuthService) {
         this.instanceObj = {
             name: '',
             description: '',
@@ -46,9 +49,11 @@ export class CreateUpdateInstanceComponent implements OnInit {
         this.validateReferer = [''];
         this.validateToken = '';
         this.isLoading = false;
+        this.isDarkMode = this._auth.fnGetIsDarkUiMode();
     }
 
     ngOnInit() {
+        this.isDarkMode = this._auth.fnGetIsDarkUiMode();
         if (this.editInstanceObject) {
             setTimeout(() => {
                 const { name, configuration } = this.editInstanceObject;

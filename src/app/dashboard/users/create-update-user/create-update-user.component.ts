@@ -4,6 +4,7 @@ import {hashSync} from 'bcryptjs';
 import {ToastrService} from '../../../common/services/toastr.service';
 import * as _ from 'lodash';
 import {ApiKeyService} from '../../../common/services/api-key-service/api-key.service';
+import {AuthService} from '../../../common/services/auth-service/auth.service';
 
 @Component({
     selector: 'app-create-update-user',
@@ -17,6 +18,7 @@ export class CreateUpdateUserComponent implements OnInit {
     apiKeys: any;
     selectedApiKey: string;
     isLoading: boolean;
+    isDarkMode: boolean;
     @Input() permissions: any;
     @Input() editUserObject;
     @Output() fnHideModal = new EventEmitter<any>();
@@ -24,7 +26,7 @@ export class CreateUpdateUserComponent implements OnInit {
     @Output() showSuspendModal = new EventEmitter<any>();
     public emailRegEx: any = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$');
 
-    constructor(private _user: UserService, private _toastr: ToastrService, private _api: ApiKeyService) {
+    constructor(private _user: UserService, private _toastr: ToastrService, private _api: ApiKeyService, private _auth: AuthService) {
         this.userObj = {
             name: '',
             email: '',
@@ -35,9 +37,11 @@ export class CreateUpdateUserComponent implements OnInit {
         this.apiKeys = [];
         this.selectedApiKey = '';
         this.isLoading = false;
+        this.isDarkMode = this._auth.fnGetIsDarkUiMode();
     }
 
     ngOnInit() {
+        this.isDarkMode = this._auth.fnGetIsDarkUiMode();
         if (this.editUserObject) {
             this._user.fnGetUserPermissions(this.editUserObject['user-id'])
                 .then(res => {

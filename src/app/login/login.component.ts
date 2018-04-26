@@ -34,9 +34,16 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.titleService.setTitle('Login');
-        if (this._auth.fnGetIsDarkUiMode()) {
-            $('html').addClass('login');
+        if (this._auth.fnGetIsDarkUiMode() && !$('body').hasClass('login')) {
+            $('body').addClass('login');
         }
+        this._auth.uiModeChange.subscribe((isDarkMode) => {
+            if (isDarkMode && !$('body').hasClass('login')) {
+                $('body').addClass('login');
+            } else {
+                $('body').removeClass('login');
+            }
+        });
     }
 
     // call API on login button
@@ -71,6 +78,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        $('html').removeClass('backdrop-scroll-off');
+        $('body').removeClass('login');
     }
 }

@@ -47,12 +47,17 @@
 }
 
 select.dark,
-option.dark,
 input.dark,
 textarea.dark {
     background: none !important;
     color: #66D1F2 !important;
     border-color: #66D1F2 !important;
+}
+option.dark,
+select option.dark {
+    color: #66D1F2 !important;
+    border-color: #66D1F2 !important;
+    background-color: #4D4D4D;
 }
 canvas {
     top: 0 !important;
@@ -62,4 +67,7 @@ canvas {
 }
 .nav-link {
     z-index: 999;
+}
+.dark .highcharts-background {
+    fill:  rgba(255, 255, 255, 0.0);
 }

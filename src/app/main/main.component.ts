@@ -56,7 +56,7 @@ export class MainComponent implements OnInit {
                         }
                     });
             });
-        this.fnGetInstances ();
+        // this.fnGetInstances ();
 
         if (this._auth.fnGetIsDarkUiMode()) {
             $('body, .info-row, input,.input-field, .modal-overlay, .modal-content, .text-field, textarea, select, option, .navbar, .nav-link').addClass('dark');

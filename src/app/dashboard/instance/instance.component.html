@@ -21,9 +21,9 @@
                 [(ngModel)]="sortBy"
                 (ngModelChange)="fnOnSortChange()"
         >
-            <option value="none">Sort By...</option>
-            <option value="date">Creation Date</option>
-            <option value="name">Name</option>
+            <option value="none" [ngClass]="{'dark': isDarkMode}">Sort By...</option>
+            <option value="date" [ngClass]="{'dark': isDarkMode}">Creation Date</option>
+            <option value="name" [ngClass]="{'dark': isDarkMode}">Name</option>
         </select>
         <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
            *ngIf="this.sortType === 'asc' && this.sortBy !== 'none'"
@@ -50,10 +50,10 @@
                         *ngIf="selectedInstances.length && viewType !== 'grid'"
                         (change)="onChangeAction($event)"
                 >
-                    <option value="none">Bulk Actions...</option>
-                    <option value="delete">Delete Selected</option>
-                    <option value="suspend">Suspend Selected</option>
-                    <option value="enable">Enable Selected</option>
+                    <option value="none" [ngClass]="{'dark': isDarkMode}">Bulk Actions...</option>
+                    <option value="delete" [ngClass]="{'dark': isDarkMode}">Delete Selected</option>
+                    <option value="suspend" [ngClass]="{'dark': isDarkMode}">Suspend Selected</option>
+                    <option value="enable" [ngClass]="{'dark': isDarkMode}">Enable Selected</option>
                     <!--<option value="clone">Clone Selected</option>-->
                 </select>
                 <a href="#" class="text-link inline ml-10"

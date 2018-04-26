@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ApiKeyService} from '../../../common/services/api-key-service/api-key.service';
 import {ToastrService} from '../../../common/services/toastr.service';
 import * as _ from 'lodash';
+import {AuthService} from '../../../common/services/auth-service/auth.service';
 
 @Component({
     selector: 'app-add-api-key',
@@ -13,9 +14,10 @@ export class AddApiKeyComponent implements OnInit {
     apiKeys: any;
     apiKey?: string;
     isLoading?: boolean;
+    isDarkMode?: boolean;
     @Output() fnHideModal = new EventEmitter<any>();
 
-    constructor(private _apiKey: ApiKeyService, private _toastr: ToastrService) {
+    constructor(private _apiKey: ApiKeyService, private _toastr: ToastrService, private _auth: AuthService) {
         this.apiKeyObject = {
             secret: '',
             description: ''
@@ -23,9 +25,11 @@ export class AddApiKeyComponent implements OnInit {
         this.apiKey = '';
         this.isLoading = false;
         this.apiKeys = [];
+        this.isDarkMode = this._auth.fnGetIsDarkUiMode();
     }
 
     ngOnInit() {
+        this.isDarkMode = this._auth.fnGetIsDarkUiMode();
         this.apiKeys = this._apiKey.getApiKeys();
     }
 

@@ -7,6 +7,7 @@
                        data-name="Field 5" placeholder="Secret"
                        [(ngModel)]="apiKeyObject.secret"
                        #secret="ngModel"
+                       [ngClass]="{'dark': isDarkMode}"
                        id="field-5" required="">
                 <div *ngIf="(apiForm.submitted || secret.touched) && !secret.valid">
                     <small class="text-danger" *ngIf="secret.errors['required']">
@@ -21,6 +22,7 @@
                 <textarea id="field-6" name="field-6" placeholder="Description"
                           [(ngModel)]="apiKeyObject.description"
                           #description="ngModel"
+                          [ngClass]="{'dark': isDarkMode}"
                           required=""
                           maxlength="5000" class="w-input">
                 </textarea>

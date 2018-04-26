@@ -86,10 +86,47 @@ export class AnalyticsComponent implements OnInit  {
                         ]
                     },
                     borderWidth: 0,
-                    plotBackgroundColor: 'rgba(1, 1, 1, .9)',
+                    // plotBackgroundColor: 'rgba(1, 1, 1, .9)',
                     plotShadow: true,
-                    plotBorderWidth: 0
-                }
+                    plotBorderWidth: 0,
+                    style: {
+                        color: '#fff'
+                    }
+                },
+                title: {
+                    style: {
+                        color: '#fff',
+                    }
+                },
+                xAxis: {
+                    type: 'datetime',
+                    labels: {
+                        formatter: function () {
+                            return Highcharts.dateFormat('%b\'%d', this.value);
+                        },
+                        style: {
+                            color: '#fff',
+                        }
+                    },
+                    tickPixelInterval: 200,
+                    title: {
+                        style: {
+                            color: '#fff',
+                        }
+                    }
+                },
+                yAxis: {
+                    labels: {
+                        style: {
+                            color: '#fff',
+                        }
+                    },
+                    title: {
+                        style: {
+                            color: '#fff',
+                        }
+                    }
+                },
             });
         } else {
             Highcharts.setOptions({
@@ -101,8 +138,45 @@ export class AnalyticsComponent implements OnInit  {
                     borderWidth: 0,
                     plotBackgroundColor: null,
                     plotShadow: false,
-                    plotBorderWidth: 0
-                }
+                    plotBorderWidth: 0,
+                    style: {
+                        color: null,
+                    }
+                },
+                title: {
+                    style: {
+                        color: null,
+                    }
+                },
+                xAxis: {
+                    type: 'datetime',
+                    labels: {
+                        formatter: function () {
+                            return Highcharts.dateFormat('%b\'%d', this.value);
+                        },
+                        style: {
+                            color: null,
+                        }
+                    },
+                    tickPixelInterval: 200,
+                    title: {
+                        style: {
+                            color: null,
+                        }
+                    }
+                },
+                yAxis: {
+                    labels: {
+                        style: {
+                            color: null,
+                        }
+                    },
+                    title: {
+                        style: {
+                            color: null,
+                        }
+                    }
+                },
             });
         }
         if (this.chart) {

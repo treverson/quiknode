@@ -47,6 +47,7 @@
                             <input type="text" class="w-input" maxlength="256" name="field-1" data-name="Field 1"
                                    [(ngModel)]="userObject.name"
                                    #name="ngModel"
+                                   [ngClass]="{'dark': isDarkMode}"
                                    placeholder="Newman" id="field-1" required="">
                             <div *ngIf="(accountForm.submitted || name.touched) && !name.valid">
                                 <small class="text-danger" *ngIf="name.errors['required']">
@@ -61,6 +62,7 @@
                         </div>
                         <div class="w-col w-col-11 w-col-small-11 w-col-tiny-11">
                             <input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2"
+                                   [ngClass]="{'dark': isDarkMode}"
                                    placeholder="Password" id="field-3" required="">
                         </div>
                     </div>
@@ -86,6 +88,7 @@
                                    #email="ngModel"
                                    [pattern]="emailRegEx"
                                    data-name="Field 2" placeholder="mail@usps.com" id="mail1"
+                                   [ngClass]="{'dark': isDarkMode}"
                                    required="">
                             <div *ngIf="(accountForm.submitted || email.touched) && !email.valid">
                                 <small class="text-danger" *ngIf="email.errors['required']">
