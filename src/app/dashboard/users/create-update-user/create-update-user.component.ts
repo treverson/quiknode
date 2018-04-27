@@ -20,8 +20,10 @@ export class CreateUpdateUserComponent implements OnInit {
     selectedApiKey: string;
     isLoading: boolean;
     isDarkMode: boolean;
+    cloneUser: string;
     @Input() permissions: any;
     @Input() editUserObject;
+    @Input() users;
     @Output() fnHideModal = new EventEmitter<any>();
     @Output() showDeleteModal = new EventEmitter<any>();
     @Output() showSuspendModal = new EventEmitter<any>();
@@ -40,6 +42,7 @@ export class CreateUpdateUserComponent implements OnInit {
         this.selectedApiKey = '';
         this.isLoading = false;
         this.isDarkMode = this._auth.fnGetIsDarkUiMode();
+        this.cloneUser = '';
     }
 
     ngOnInit() {
@@ -83,8 +86,8 @@ export class CreateUpdateUserComponent implements OnInit {
         if (this.userObj.password !== 'PASSWORD') {
             userObject.password = hashedPassword;
         }
-        this.isLoading = true;
         if (this.editUserObject) {
+            this.isLoading = true;
                 this._user.fnUpdateUser(userObject, this.editUserObject['user-id'])
                 .then((response: any) => {
                     this._user.fnUpdateUserPermissions(permissionObject, this.editUserObject['user-id'])
@@ -101,20 +104,27 @@ export class CreateUpdateUserComponent implements OnInit {
                     }
             });
         } else {
-             this._user.fnCreateUser(userObject)
-                 .then((response: any) => {
-                     this.isLoading = false;
-                     this._toastr.fnSuccess('User created successfully.');
-                     this.fnHideModal.next(true);
-                     this._user.fnUpdateUserPermissions(permissionObject, response['user-id']);
-                     this._router.navigate(['/users']);
-                 })
-                 .catch((err) => {
-                     this.isLoading = false;
-                     if (err.status !== 401 && err.status !== 502 && err.status !== 404) {
-                         this._toastr.fnWarning('User creation failed.');
-                     }
-             });
+            if (this.cloneUser && (this.cloneUser === userObject['email']) ||
+                _.findIndex(this.users, ins => ins['email'] === userObject['email']) > -1) {
+                this._toastr.fnWarning('This user already exists.');
+            } else {
+                this.isLoading = true;
+                this._user.fnCreateUser(userObject)
+                    .then((response: any) => {
+                        this.isLoading = false;
+                        this._toastr.fnSuccess('User created successfully.');
+                        this.fnHideModal.next(true);
+                        this.cloneUser = '';
+                        this._user.fnUpdateUserPermissions(permissionObject, response['user-id']);
+                        this._router.navigate(['/users']);
+                    })
+                    .catch((err) => {
+                        this.isLoading = false;
+                        if (err.status !== 401 && err.status !== 502 && err.status !== 404) {
+                            this._toastr.fnWarning('User creation failed.');
+                        }
+                    });
+            }
         }
 
     }
@@ -155,6 +165,7 @@ export class CreateUpdateUserComponent implements OnInit {
 
     fnCloneUser() {
         this.editUserObject = null;
+        this.cloneUser = this.userObj['name'];
         this.userObj.password = '';
         this.userObj.confirmPassword = '';
     }

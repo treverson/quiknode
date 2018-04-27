@@ -123,7 +123,10 @@
 <app-modal-wrapper [showModal]="showUserCreateModal"
                    *ngIf="showUserCreateModal"
                    (fnHideModal)="fnHideCreateModal($event)">
-    <app-create-update-user (fnHideModal)="fnHideCreateModal($event)" [permissions]="_users.permissionList">
+    <app-create-update-user (fnHideModal)="fnHideCreateModal($event)"
+                            [permissions]="_users.permissionList"
+                            [users]="users"
+    >
     </app-create-update-user>
 </app-modal-wrapper>
 
