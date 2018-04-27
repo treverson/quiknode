@@ -26,7 +26,7 @@
             <a href="#/users"
                class="nav-link w-nav-link"
                [ngClass]="{'w--nav-link-open': isToggledMenu, 'dark': isDarkMode,
-                    'w--current': currentPath.includes('user'), 'hide': fnHasUserPermission()}"
+                    'w--current': currentPath.includes('user'), 'hide': !fnHasUserPermission()}"
                (click)="fnChangeRoute()"
             >
                 <span class="icon"><br xmlns="http://www.w3.org/1999/xhtml"></span>Users

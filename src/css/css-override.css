@@ -71,3 +71,18 @@ canvas {
 .dark .highcharts-background {
     fill:  rgba(255, 255, 255, 0.0);
 }
+.dark .ngx-pagination a {
+    color: #2199e8;
+}
+
+.dark .ngx-pagination li {
+    border-color: #2199e8;
+}
+
+.dark .stat-block {
+    color: #66D1F2
+}
+
+.hide {
+    display: none !important;
+}

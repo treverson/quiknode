@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
     showApiKeyModal?: boolean;
     users: any[];
 
-    constructor(private titleService: Title, private _instance: InstanceService, private _users: UserService,
+    constructor(private titleService: Title, private _instance: InstanceService, public _users: UserService,
                 private _auth: AuthService) {
         this.showInstanceCreateModal = false;
         this.showUserCreateModal = false;

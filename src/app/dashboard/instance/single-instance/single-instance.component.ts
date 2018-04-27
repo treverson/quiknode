@@ -5,6 +5,7 @@ import {chart} from 'highcharts';
 import {InstanceService} from '../../../common/services/instance-service/instance.service';
 import {Location} from '@angular/common';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-single-instance',
@@ -30,16 +31,19 @@ export class SingleInstanceComponent implements OnInit {
     public getMetricObj: any;
     public columns: any;
     public values: any;
+    public created: any;
 
     constructor(private _instance: InstanceService, private _location: Location) {
         this.getMetricObj = {
             'instance-id': '',
             'metrics-type': '',
         };
+        this.created = this.instance ? moment(this.instance.created).format('MM-DD-YYYY') : '';
     }
 
     ngOnInit() {
         if (this.instance) {
+            this.created = moment(this.instance.created).format('MM-DD-YYYY');
             this.fnGetMetric();
         }
     }
@@ -65,7 +69,7 @@ export class SingleInstanceComponent implements OnInit {
 
     fnDisplayMetrics(columns, values) {
         if (values.length > 100) {
-            values = _.takeRight(values, 10);
+            values = _.takeRight(values, 20);
         }
         const options: HCs.Options = {
             chart: {
@@ -124,6 +128,11 @@ export class SingleInstanceComponent implements OnInit {
             plotOptions: {
                 series: {
                     lineWidth: 2
+                },
+                spline: {
+                    marker: {
+                        enabled: false,
+                    }
                 }
             },
             series: [{

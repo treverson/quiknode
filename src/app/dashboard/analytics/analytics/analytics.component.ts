@@ -126,7 +126,7 @@ export class AnalyticsComponent implements OnInit  {
                 type: 'datetime',
                 labels: {
                     formatter: function () {
-                        return Highcharts.dateFormat('%b\'%d', this.value);
+                        return Highcharts.dateFormat('%H:%M:%S', this.value);
                     },
                     style: {
                         color: this.isDarkMode ? '#fff' : null,

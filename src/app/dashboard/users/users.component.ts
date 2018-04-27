@@ -63,10 +63,6 @@ export class UsersComponent implements OnInit {
         this._user.fnGetUsers()
             .then((response: any) => {
                 if (response && !_.isEmpty(response.users)) {
-                    this.users = _.map(response.users, user => {
-                        user.created = moment(user.created).format('MM-DD-YYYY');
-                        return user;
-                    });
                     this.originalUsers = _.clone(this.users);
                     this.fnOnSearchTextChange();
                 }
