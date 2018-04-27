@@ -3,6 +3,7 @@ import {Title} from '@angular/platform-browser';
 import {InstanceService} from '../common/services/instance-service/instance.service';
 import {UserService} from '../common/services/user-service/user.service';
 import {AuthService} from '../common/services/auth-service/auth.service';
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-dashboard',
@@ -26,6 +27,7 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
+        $('body').removeClass('login');
         this.titleService.setTitle('New Dashboard');
         this._instance.instances.subscribe((instances) => {
             this.instances = instances;
