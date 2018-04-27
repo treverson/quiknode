@@ -48,10 +48,14 @@
                     <div class="w-col w-col-11 w-col-small-11 w-col-tiny-11">
                         <input type="text" class="w-input" maxlength="256" name="field-2" #name="ngModel"
                                [ngClass]="{'dark': isDarkMode}"
+                               [pattern]="regexp"
                                data-name="Field 2" placeholder="Name" required="" [(ngModel)]="instanceObj.name">
                         <div *ngIf="(instanceForm.submitted || name.touched) && !name.valid">
                             <small class="text-danger" *ngIf="name.errors['required']">
                                 Name is required.
+                            </small>
+                            <small class="text-danger" *ngIf="name.errors['pattern']">
+                                Space is not allowed in instance name.
                             </small>
                         </div>
                     </div>

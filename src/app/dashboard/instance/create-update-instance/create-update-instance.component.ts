@@ -35,6 +35,7 @@ export class CreateUpdateInstanceComponent implements OnInit {
     isLoading: boolean;
     isDarkMode: boolean;
     cloneInstance: string;
+    regexp: any = /^\S*$/;
 
     constructor(private _instance: InstanceService, private _toastr: ToastrService, private _auth: AuthService,
                 private _router: Router) {
