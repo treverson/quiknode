@@ -56,6 +56,7 @@ export class InstanceComponent implements OnInit {
         this._instance.fnGetInstances()
             .then((response: any) => {
                 if (response && !_.isEmpty(response.instances)) {
+                    this.instances = response.instances;
                     this.originalInstances = _.clone(this.instances);
                     this._instance.instances.next(this.instances);
                     this.fnOnSearchTextChange();

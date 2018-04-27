@@ -63,6 +63,7 @@ export class UsersComponent implements OnInit {
         this._user.fnGetUsers()
             .then((response: any) => {
                 if (response && !_.isEmpty(response.users)) {
+                    this.users = response.users;
                     this.originalUsers = _.clone(this.users);
                     this.fnOnSearchTextChange();
                 }
