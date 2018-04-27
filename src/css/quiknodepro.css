@@ -30,7 +30,7 @@
     background-image: linear-gradient(180deg, rgba(77, 77, 77, .96), #0f4352);
     color: #1eb7e3;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: fixed !important;
 }
 
 .main.login {
