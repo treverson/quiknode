@@ -49,6 +49,7 @@ export class InstanceComponent implements OnInit {
         });
         this.fnGetInstances();
         this.titleService.setTitle('Instances');
+        window.scroll(0, 0);
     }
 
     fnGetInstances() {

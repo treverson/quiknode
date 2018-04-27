@@ -49,6 +49,7 @@ export class UsersComponent implements OnInit {
     }
 
     ngOnInit() {
+        window.scroll(0,0);
         this.fnGetUsers();
         this.titleService.setTitle('Users');
         this.permissions = this._user.permissionList;
