@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Constant} from '../../constant';
 import * as _ from 'lodash';
@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 @Injectable()
 export class ApiKeyService {
     apiKeyList: any[];
+    public changedApiKeys: EventEmitter<any> = new EventEmitter();
 
     constructor(private _http: HttpClient) {
         this.apiKeyList = [];
@@ -17,6 +18,7 @@ export class ApiKeyService {
                 .post(Constant.API_URL + 'account/authentication-token', obj)
                 .subscribe((response: any) => {
                     resolve(response);
+                    this.fnGetApiKeys();
                 }, (error) => {
                     reject(error);
                 });
@@ -33,6 +35,7 @@ export class ApiKeyService {
                         this.apiKeyList = _.orderBy(this.apiKeyList, ['created'], ['desc']);
                         response['account-authentication-tokens'] = this.apiKeyList;
                     }
+                    this.changedApiKeys.next(this.apiKeyList);
                     resolve(response);
                 }, (error) => {
                     reject(error);

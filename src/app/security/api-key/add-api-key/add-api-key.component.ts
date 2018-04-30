@@ -3,6 +3,7 @@ import {ApiKeyService} from '../../../common/services/api-key-service/api-key.se
 import {ToastrService} from '../../../common/services/toastr.service';
 import * as _ from 'lodash';
 import {AuthService} from '../../../common/services/auth-service/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-add-api-key',
@@ -17,7 +18,7 @@ export class AddApiKeyComponent implements OnInit {
     isDarkMode?: boolean;
     @Output() fnHideModal = new EventEmitter<any>();
 
-    constructor(private _apiKey: ApiKeyService, private _toastr: ToastrService, private _auth: AuthService) {
+    constructor(private _apiKey: ApiKeyService, private _toastr: ToastrService, private _auth: AuthService, private _router: Router) {
         this.apiKeyObject = {
             secret: '',
             description: ''
@@ -46,6 +47,8 @@ export class AddApiKeyComponent implements OnInit {
                     this._apiKey.fnGetApiKeys();
                 }
                 this.isLoading = false;
+                this.fnHideModal.next();
+                this._router.navigate(['/security']);
                 this._toastr.fnSuccess('Api key created successfully.');
             }).catch(error => {
                 this.isLoading = false;

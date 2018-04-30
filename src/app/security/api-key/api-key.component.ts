@@ -58,6 +58,9 @@ export class ApiKeyComponent implements OnInit {
                 this.isLoadingKeys = false;
             });
         }
+        this._api.changedApiKeys.subscribe((newApiKeys) => {
+            this.apiKeys = newApiKeys;
+        });
     }
 
     fnGetApiKeys() {
@@ -76,7 +79,6 @@ export class ApiKeyComponent implements OnInit {
             .then(response => {
                 this.isLoading = false;
                 this._toastr.fnSuccess('Api key created successfully.');
-                this.fnGetApiKeys();
                 form.resetForm();
             }).catch(err => {
                 this.isLoading = false;
