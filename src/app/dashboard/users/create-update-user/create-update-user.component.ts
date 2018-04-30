@@ -95,7 +95,11 @@ export class CreateUpdateUserComponent implements OnInit {
                             this.isLoading = false;
                             this._toastr.fnSuccess('User updated successfully.');
                         });
-                    this.fnHideModal.next(true);
+                    const editUser = {
+                        created: false,
+                        userObject: response
+                    };
+                    this.fnHideModal.next(editUser);
                 })
                 .catch((err) => {
                     this.isLoading = false;
@@ -113,7 +117,10 @@ export class CreateUpdateUserComponent implements OnInit {
                     .then((response: any) => {
                         this.isLoading = false;
                         this._toastr.fnSuccess('User created successfully.');
-                        this.fnHideModal.next(true);
+                        const addUser = {
+                            created: true
+                        };
+                        this.fnHideModal.next(addUser);
                         this.cloneUser = '';
                         this._user.fnUpdateUserPermissions(permissionObject, response['user-id']);
                         this._router.navigate(['/users']);

@@ -80,9 +80,15 @@ export class UsersComponent implements OnInit {
         this.showUserCreateModal = true;
     }
 
-    fnHideCreateModal(created) {
-        if (created) {
+    fnHideCreateModal(obj) {
+        if (obj && obj.created) {
             this.fnGetUsers();
+        }
+        if (obj && obj.userObject) {
+            const findIndex = _.findIndex(this.users, user => user['user-id'] === obj.userObject['user-id']);
+            const findOriginalIndex = _.findIndex(this.originalUsers, user => user['user-id'] === obj.userObject['user-id']);
+            this.users[findIndex] = obj.userObject;
+            this.originalUsers[findOriginalIndex] = obj.userObject;
         }
         this.showUserCreateModal = false;
     }
