@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Title} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-security',
@@ -8,11 +9,13 @@ import {Component, OnInit} from '@angular/core';
 export class SecurityComponent implements OnInit {
     selectedTab: string;
 
-    constructor() {
+    constructor(private titleService: Title) {
         this.selectedTab = 'api-keys';
     }
 
     ngOnInit() {
+        window.scroll(0, 0);
+        this.titleService.setTitle('Security');
     }
 
     fnChangeTab(tab) {

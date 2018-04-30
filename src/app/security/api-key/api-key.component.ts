@@ -18,12 +18,14 @@ export class ApiKeyComponent implements OnInit {
     currentUser: string;
     selectedUser: string;
     isLoading: boolean;
+    isLoadingKeys?: boolean;
     isDarkMode: boolean;
     page = 1;
 
     constructor(private _api: ApiKeyService, private _user: UserService, private _toastr: ToastrService,
                 private _auth: AuthService, private _instance: InstanceService) {
         this.users = [];
+        this.apiKeys = [];
         this.apiKeyObject = {
             secret: '',
             description: ''
@@ -31,6 +33,7 @@ export class ApiKeyComponent implements OnInit {
         this.currentUser = this._auth.fnGetUserId();
         this.selectedUser = _.clone(this.currentUser);
         this.isLoading = false;
+        this.isLoadingKeys = false;
         this.isDarkMode = this._auth.fnGetIsDarkUiMode();
     }
 
@@ -45,10 +48,14 @@ export class ApiKeyComponent implements OnInit {
             this.fnGetApiKeys();
         }
         if (_.isEmpty(this.users)) {
+            this.isLoadingKeys = true;
             this._user.fnGetUsers().then((response: any) => {
+                this.isLoadingKeys = false;
                 if (response && !_.isEmpty(response.users)) {
                     this.users = response.users;
                 }
+            }).catch(() => {
+                this.isLoadingKeys = false;
             });
         }
     }

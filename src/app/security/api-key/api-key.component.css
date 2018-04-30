@@ -1,3 +1,14 @@
 small.text-danger {
     color: #dc3545;
 }
+
+.loader {
+    height: 100px;
+}
+
+.chart {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
