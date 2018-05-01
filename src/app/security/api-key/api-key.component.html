@@ -14,7 +14,7 @@
                         Secret is required.
                     </small>
                 </div>
-                <div class="fine-print">Make sure to store the Secret value somewhere immediately, it will not be shown again!</div>
+                <div class="fine-print"><span class="icon small-icon-adj"></span>Make sure to store the Secret value somewhere immediately, it will not be shown again!</div>
             </div>
             <div class="w-col w-col-4">
                 <textarea name="field-6" placeholder="Description"
@@ -30,9 +30,9 @@
                     </small>
                 </div>
             </div>
-            <div class="column-4 w-clearfix w-col w-col-4">
-                <button class="button icon-btn float-right w-inline-block"
-                        [ladda]="isLoading"
+            <div class="column-4 w-col w-col-4">
+                <button class="button icon-btn w-inline-block"
+                        [ladda]="isLoading"  title="Generate new key"
                         (click)="apiForm.valid && fnAddApiKey($event, apiKeyObject, apiForm)"
                 >
                     <div class="w-row">
@@ -62,7 +62,7 @@
         <div class="w-row"
              *ngFor="let api of apiKeys | paginate: { itemsPerPage: 10, currentPage: page}; let i = index">
             <div class="w-col w-col-4">
-                <h6 class="text">{{api['account-authentication-token-id']}}</h6>
+                <h6 class="text centered">{{api['account-authentication-token-id']}}</h6>
             </div>
             <div class="w-col w-col-4">
                 <textarea id="field-6" name="field-6" placeholder="John&#x27;s main access"
