@@ -229,4 +229,9 @@ export class InstanceComponent implements OnInit {
         }
     }
 
+    fnClearResults(e) {
+        e.preventDefault();
+        this.searchText ='';
+        this.fnOnSearchTextChange();
+    }
 }
