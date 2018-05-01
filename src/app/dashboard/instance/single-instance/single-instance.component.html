@@ -9,14 +9,14 @@
 </div>
 
 <div class="row-2 w-row"  *ngIf="viewType === 'list'" (click)="showCreateModal($event)">
-    <div class="w-col w-col-7">
+    <div class="w-col w-col-5">
         <div class="name-label bold">{{instance.name}}</div>
         <div class="grey-text">Used for testing purposes. Do not suspend.</div>
         <div class="stat-block">
             <p>Online since: {{created}}</p>
         </div>
     </div>
-    <div class="w-col w-col-5">
+    <div class="w-col w-col-7">
         <div id="chart1" class="microchart list" #chartTarget1 (click)="populateChart($event)"></div>
         <!--<img src="assets/images/mini-chart.JPG" data-target="show_metrics" title="Display Analytics"
              (click)="populateChart()"

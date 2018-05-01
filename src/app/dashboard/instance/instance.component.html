@@ -1,72 +1,82 @@
 <div class="container-box">
     <div class="padded-block">
         <h2 class="card-heading">Instances</h2>
-        <button href="#" data-target="add_instance" class="button icon-btn small w-inline-block"
-                (click)="fnShowCreateModal(null)">
-            <div class="icon"></div>
-        </button>
-        <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
-           *ngIf="viewType === 'list'"
-           (click)="changeView($event, 'grid')">
-            <div data-targe="my_account" class="icon"></div>
-        </a>
-        <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
-           *ngIf="viewType === 'grid'"
-           (click)="changeView($event, 'list')">
-            <div data-targe="my_account" class="icon"></div>
-        </a>
-        <select id="field-7" name="field-7"
-                [ngClass]="{'dark': isDarkMode}"
-                class="input-field inline-flat w-select"
-                [(ngModel)]="sortBy"
-                (ngModelChange)="fnOnSortChange()"
-        >
-            <option value="none">Sort By...</option>
-            <option value="date">Creation Date</option>
-            <option value="name">Name</option>
-        </select>
-        <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
-           *ngIf="this.sortType === 'asc' && this.sortBy !== 'none'"
-           (click)="fnOnSortTypeChange($event, 'desc')"
-        >
-            <div data-targe="my_account" class="icon"></div>
-        </a>
-        <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
-           *ngIf="this.sortType === 'desc' && this.sortBy !== 'none'"
-           (click)="fnOnSortTypeChange($event, 'asc')">
-            <div data-targe="my_account" class="icon"></div>
-        </a>
         <div class="w-row">
-            <div class="column-7 w-col w-col-6">
-                <input type="text" class="text-field w-input" maxlength="256" name="field-8" data-name="Field 8"
-                       [ngClass]="{'dark': isDarkMode}"
-                       placeholder="Search Instances" id="searchInput" required=""
-                       [(ngModel)]="searchText"
-                       (ngModelChange)="fnOnSearchTextChange()">
-            </div>
-            <div class="column-9 w-col w-col-6">
-                <select id="field-10" name="field-10" class="input-field inline w-select"
+            <div class="nopad w-col w-col-6">
+                <button href="#" data-target="add_instance" class="button icon-btn small w-inline-block"
+                        title="New instance" (click)="fnShowCreateModal(null)">
+                    <div class="icon"></div>
+                </button>
+                <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
+                   *ngIf="viewType === 'list'" title="Toggle view mode"
+                   (click)="changeView($event, 'grid')">
+                    <div data-targe="my_account" class="icon"></div>
+                </a>
+                <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
+                   *ngIf="viewType === 'grid'" title="Toggle view mode"
+                   (click)="changeView($event, 'list')">
+                    <div data-targe="my_account" class="icon"></div>
+                </a>
+                <select id="field-7" name="field-7"
                         [ngClass]="{'dark': isDarkMode}"
-                        *ngIf="selectedInstances.length && viewType !== 'grid'"
-                        (change)="onChangeAction($event)"
+                        class="input-field inline-flat w-select"
+                        [(ngModel)]="sortBy" title="Sort Instances"
+                        (ngModelChange)="fnOnSortChange()"
                 >
-                    <option value="none">Bulk Actions...</option>
-                    <option value="delete">Delete Selected</option>
-                    <option value="suspend">Suspend Selected</option>
-                    <option value="enable">Enable Selected</option>
-                    <!--<option value="clone">Clone Selected</option>-->
+                    <option value="none">Sort By...</option>
+                    <option value="date">Creation Date</option>
+                    <option value="name">Name</option>
                 </select>
-                <a href="#" class="text-link inline ml-10"
-                   *ngIf="!allSelected && viewType !== 'grid'"
-                   (click)="selectAll($event)">Select All</a>
-                <a href="#" class="text-link inline ml-10"
-                   *ngIf="allSelected && viewType !== 'grid'"
-                   (click)="selectAll($event)">Unselect All</a>
+                <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
+                   *ngIf="this.sortType === 'asc' && this.sortBy !== 'none'"
+                   (click)="fnOnSortTypeChange($event, 'desc')" title="Sort Order"
+                >
+                    <div data-targe="my_account" class="icon"></div>
+                </a>
+                <a href="#" data-target="my_account" class="button btn-flat no-border w-inline-block"
+                   *ngIf="this.sortType === 'desc' && this.sortBy !== 'none'" title="Sort Order"
+                   (click)="fnOnSortTypeChange($event, 'asc')">
+                    <div data-targe="my_account" class="icon"></div>
+                </a>
+            </div>
+            <div class="column-10 w-col w-col-6">
+                <div class="search-div">
+                    <a href="#" data-target="my_account" title="Sort Order" class="button btn-flat no-border input-icon w-inline-block">
+                        <div data-targe="my_account" class="icon"></div>
+                    </a>
+                    <input type="text" class="input-field inline max75 search-field w-input" maxlength="256" name="field-8" data-name="Field 8"
+                           [ngClass]="{'dark': isDarkMode}"
+                           placeholder="Search Instances" id="searchInput" required=""
+                           [(ngModel)]="searchText"
+                           (ngModelChange)="fnOnSearchTextChange()">
+                    <a href="#" data-target="my_account" title="Clear results" class="button btn-flat no-border clear-input w-inline-block">
+                        <div data-targe="my_account" class="icon"></div>
+                    </a>
+                </div>
             </div>
         </div>
+        <div class="bulk-actions">
+            <select id="field-10" title="Actions on selected" name="field-10" class="input-field inline-flat w-select"
+                    [ngClass]="{'dark': isDarkMode}"
+                    *ngIf="selectedInstances.length && viewType !== 'grid'"
+                    (change)="onChangeAction($event)"
+            >
+                <option value="none">Bulk Actions...</option>
+                <option value="delete">Delete Selected</option>
+                <option value="suspend">Suspend Selected</option>
+                <option value="enable">Enable Selected</option>
+                <!--<option value="clone">Clone Selected</option>-->
+            </select>
+            <a href="#" class="text-link inline ml-10 select-all"
+               *ngIf="!allSelected && viewType !== 'grid'" title="Toggle all instances"
+               (click)="selectAll($event)">Select All</a>
+            <a href="#" class="text-link inline ml-10 select-all"
+               *ngIf="allSelected && viewType !== 'grid'" title="Toggle all instances"
+               (click)="selectAll($event)">Unselect All</a>
+        </div>
     </div>
-    <div class="instances-dashboard">
-        <div class="card box-view"  *ngIf="!isLoading && viewType === 'grid'">
+    <div class="card-container">
+        <div class="card flex"  *ngIf="!isLoading && viewType === 'grid'">
             <div class="info-row shadow p-0"
                  [ngClass]="{'disabled': ins.suspended, 'dark': isDarkMode}"
                  *ngFor="let ins of instances | paginate: { itemsPerPage: 12, currentPage: page }">
@@ -83,8 +93,8 @@
             <div class="w-row"
                  [ngClass]="{'disabled': ins.suspended}"
                  *ngFor="let ins of instances | paginate: { itemsPerPage: 12, currentPage: page }">
-                <div class="w-col w-col-1 w-col-medium-1 w-col-tiny-1 w-col-small-1">
-                    <div class="row-checkbox users-check w-checkbox">
+                <div class="w-col w-col-1 w-col-small-1 w-col-tiny-1">
+                    <div class="row-checkbox w-checkbox">
                         <input type="checkbox" id="checkbox-9" name="checkbox-9" data-name="Checkbox 9"
                                [checked]="selectedInstances.indexOf(ins['instance-id']) > -1"
                                (change)="updateCheckedOptions(ins['instance-id'], $event)"
@@ -92,7 +102,7 @@
                         <label for="checkbox-9" class="field-label w-form-label">Checkbox 9</label>
                     </div>
                 </div>
-                <div class="w-col w-col-11 w-col-medium-11 w-col-tiny-11 w-col-small-11">
+                <div class="w-col w-col-11 w-col-small-11 w-col-tiny-11">
                     <div class="info-row list" [ngClass]="{'dark': isDarkMode}">
                         <app-single-instance [instance]="ins"
                                              (fnShowCreateModal)="fnShowCreateModal($event)"
