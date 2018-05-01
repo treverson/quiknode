@@ -5,7 +5,6 @@
         <p>Online since: {{created}}</p>
     </div>
     <div id="chart1" class="microchart" #chartTarget1 (click)="populateChart($event)"></div>
-    <!--<img src="assets/images/mini-chart.JPG" class="button microchart" (click)="populateChart()">-->
 </div>
 
 <div class="row-2 w-row"  *ngIf="viewType === 'list'" (click)="showCreateModal($event)">
@@ -18,8 +17,5 @@
     </div>
     <div class="w-col w-col-7">
         <div id="chart1" class="microchart list" #chartTarget1 (click)="populateChart($event)"></div>
-        <!--<img src="assets/images/mini-chart.JPG" data-target="show_metrics" title="Display Analytics"
-             (click)="populateChart()"
-             class="button microchart list">-->
     </div>
 </div>

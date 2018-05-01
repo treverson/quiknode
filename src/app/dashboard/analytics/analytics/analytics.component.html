@@ -6,7 +6,6 @@
             <select id="Select-instance" name="Select-instance" data-name="Select instance"
                     [ngClass]="{'dark': isDarkMode}"
                     class="w-select" [(ngModel)]="selectedInstance" (change)="fnGetMetric()">
-                <!-- <option value="">Instance ...</option>-->
                 <option value="First" *ngFor="let instance of instanceList; let i =index"
                         [value]="instance['instance-id']">
                     {{instance.name}}
@@ -17,7 +16,6 @@
             <select id="select-metric-2" name="select-metric" data-name="select-metric"
                     [ngClass]="{'dark': isDarkMode}"
                     class="w-select" [(ngModel)]="selectedMetric" (change)="fnGetMetric()">
-                <!-- <option value="">Metric ...</option>-->
                 <option value="" *ngFor="let metric of metricList" [value]="metric">{{metric}}</option>
             </select>
         </div>

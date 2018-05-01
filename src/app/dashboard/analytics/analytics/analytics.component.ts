@@ -79,6 +79,7 @@ export class AnalyticsComponent implements OnInit  {
         });
     }
 
+    // Render HighChart
     fnDisplayMetrics(columns, values) {
         let dataValues = _.cloneDeep(values);
         dataValues = _.map(dataValues, itemArray => {
@@ -190,6 +191,7 @@ export class AnalyticsComponent implements OnInit  {
         }
     }
 
+    // Get list of metrics
     fnGetMetric() {
         this.isLoading = true;
         const getMetricObj = {

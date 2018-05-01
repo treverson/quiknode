@@ -21,7 +21,6 @@ export class AuthenticateGuard implements CanActivate {
     private fnCheckAuthenticate(url: string): boolean {
         if (this._auth.fnGetToken()) {
             // Redirect users to dashboard if doesn't have user permission
-
             if (url.indexOf('user') > -1 && !this._auth.fnHasUserListPermission()) {
                 this._router.navigate(['/dashboard']);
             }

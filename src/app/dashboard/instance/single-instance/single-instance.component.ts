@@ -67,6 +67,7 @@ export class SingleInstanceComponent implements OnInit {
         });
     }
 
+    // Render HighChart
     fnDisplayMetrics(columns, values) {
         if (values.length > 100) {
             values = _.takeRight(values, 20);

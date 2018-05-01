@@ -52,6 +52,7 @@ export class InstanceComponent implements OnInit {
         window.scroll(0, 0);
     }
 
+    // Get list of Instances
     fnGetInstances() {
         this.isLoading = true;
         this._instance.fnGetInstances()

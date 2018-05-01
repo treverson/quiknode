@@ -79,7 +79,6 @@ export class MainComponent implements OnInit {
     }
 
     fnLogOut() {
-        console.log('Time is up!');
         this._auth.fnSignOut()
             .then(() => {
                 this._router.navigate(['/']);

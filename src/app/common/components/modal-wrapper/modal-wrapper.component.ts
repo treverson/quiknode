@@ -24,12 +24,10 @@ export class ModalWrapperComponent implements OnInit, OnDestroy {
         if (!$('html').hasClass('backdrop-scroll-off')) {
             $('html').addClass('backdrop-scroll-off');
         }
-
         this.isDarkMode = this._auth.fnGetIsDarkUiMode();
         this._auth.uiModeChange.subscribe((isDarkMode) => {
             this.isDarkMode = isDarkMode;
         });
-
     }
 
     onHideModal(e) {

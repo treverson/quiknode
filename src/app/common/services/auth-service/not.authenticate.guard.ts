@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class NotAuthenticateGuard implements CanActivate {
@@ -13,11 +12,9 @@ export class NotAuthenticateGuard implements CanActivate {
     }
 
     fnCheckAuthenticate(url: string): boolean {
-
         if (!localStorage.getItem('AUTH_TOKEN')) {
             return true;
         }
-
         this.router.navigate(['/dashboard']);
         return false;
     }

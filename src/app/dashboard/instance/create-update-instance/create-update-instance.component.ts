@@ -108,7 +108,7 @@ export class CreateUpdateInstanceComponent implements OnInit {
                 type: `validateReferer`
             });
         }
-        // update instance
+        // Create update instance
         if (this.editInstanceObject) {
             this.isLoading = true;
             this._instance.fnUpdateInstance(instanceObject)
