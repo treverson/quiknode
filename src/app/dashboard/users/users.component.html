@@ -40,7 +40,7 @@
             </div>
             <div class="column-10 w-col w-col-6">
                 <div class="search-div">
-                    <a href="#" data-target="my_account" title="Search Users" class="button btn-flat no-border input-icon w-inline-block">
+                    <a data-target="my_account" title="Search Users" class="button btn-flat no-border input-icon w-inline-block">
                         <div data-targe="my_account" class="icon"></div>
                     </a>
                     <input type="text" class="input-field inline max75 search-field w-input" maxlength="256" name="field-8" data-name="Field 8"
@@ -48,7 +48,8 @@
                            placeholder="Search Users" id="searchInput" required=""
                            [(ngModel)]="searchText"
                            (ngModelChange)="fnOnSearchTextChange()">
-                    <a href="#" data-target="my_account" title="Clear results" class="button btn-flat no-border clear-input w-inline-block">
+                    <a href="" data-target="my_account" title="Clear results" class="button btn-flat no-border clear-input w-inline-block"
+                    (click)="fnClearResults($event)">
                         <div data-targe="my_account" class="icon"></div>
                     </a>
                 </div>

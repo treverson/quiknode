@@ -245,4 +245,10 @@ export class UsersComponent implements OnInit {
         }
     }
 
+    fnClearResults(e) {
+        e.preventDefault();
+        this.searchText = '';
+        this.fnOnSearchTextChange();
+    }
+
 }
