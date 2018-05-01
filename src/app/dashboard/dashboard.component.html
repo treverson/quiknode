@@ -3,50 +3,50 @@
     <div class="mb-40 w-row">
         <div class="w-col w-col-6">
             <h2 data-target="my-account" class="card-heading">Manage</h2>
-            <a href="#" data-target="my_account" class="button icon-btn mr-10 w-inline-block"
+            <a href="#" data-target="my_account" title="Account information" class="button icon-btn mr-10 w-inline-block"
                 (click)="fnShowCreateModal($event, 'account')"
             >
                 <div class="icon"></div>
                 <div class="icon-btn-label">my account</div>
                 <div class="btn-bubble">ETH0.01</div>
             </a>
-            <a href="#/instances" class="button icon-btn mr-10 w-inline-block">
+            <a href="#/instances" title="Manage instances" class="button icon-btn mr-10 w-inline-block">
                 <div class="icon"></div>
                 <div class="icon-btn-label">instances</div>
                 <div class="btn-bubble">{{instances && instances.length || 0}}</div>
             </a>
-            <a href="#/users" class="button icon-btn mr-10 w-inline-block" *ngIf="fnHasUserPermission()">
+            <a href="#/users"  title="Manage users" class="button icon-btn mr-10 w-inline-block" *ngIf="fnHasUserPermission()">
                 <div class="icon"></div>
                 <div class="icon-btn-label">users</div>
                 <div class="btn-bubble">{{users && users.length || 0}}</div>
             </a>
-            <a href="#/security" class="button icon-btn mr-10 w-inline-block">
+            <a href="#/security" title="Manage security settings" class="button icon-btn mr-10 w-inline-block">
                 <div class="icon"></div>
                 <div class="icon-btn-label">security</div>
             </a>
         </div>
         <div class="w-col w-col-6">
             <h2 data-target="my-account" class="card-heading">Quik Create</h2>
-            <a href="#" data-target="add_instance" class="button icon-btn mr-10 w-inline-block"
+            <a href="#" data-target="add_instance" title="Launch new instance" class="button icon-btn mr-10 w-inline-block"
                (click)="fnShowCreateModal($event, 'instance')"
             >
                 <div class="icon"></div>
                 <div class="icon-btn-label">new instance</div>
             </a>
-            <a href="#" data-target="add_user" class="button icon-btn mr-10 w-inline-block"
+            <a href="#" data-target="add_user" title="Add new user" class="button icon-btn mr-10 w-inline-block"
                *ngIf="fnHasUserPermission()"
                (click)="fnShowCreateModal($event, 'user')"
             >
                 <div class="icon"></div>
                 <div class="icon-btn-label">new user</div>
             </a>
-            <a href="#" data-target="add_api" class="button icon-btn mr-10 w-inline-block"
+            <a href="#" data-target="add_api" title="Create new API key" class="button icon-btn mr-10 w-inline-block"
                (click)="fnShowCreateModal($event, 'apiKey')"
             >
                 <div class="icon"></div>
                 <div class="icon-btn-label">new api key</div>
             </a>
-            <a href="#" data-target="add_otp" class="button icon-btn mr-10 w-inline-block"
+            <a href="#" data-target="add_otp" title="Create new one-time-password" class="button icon-btn mr-10 w-inline-block"
                 (click)="fnNotImplemented($event)"
             >
                 <div class="icon"></div>

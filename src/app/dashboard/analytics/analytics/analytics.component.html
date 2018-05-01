@@ -1,6 +1,7 @@
 <h2 class="modal-header" *ngIf="instances && instances.length">instance metrics</h2>
 <div class="analytics">
-    <div class="container-box w-row" *ngIf="!instances">
+    <h2 data-target="my-account" class="card-heading centered">Metrics</h2>
+    <div class="container-box  max900 w-row" *ngIf="!instances">
         <div class="column-2 w-col w-col-4 w-col-small-4">
             <select id="Select-instance" name="Select-instance" data-name="Select instance"
                     [ngClass]="{'dark': isDarkMode}"
